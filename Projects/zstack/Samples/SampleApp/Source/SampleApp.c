@@ -732,7 +732,6 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 }
 
 
-
 //处理ZDO层传来的信息
 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 {
