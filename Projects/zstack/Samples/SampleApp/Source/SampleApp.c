@@ -145,11 +145,12 @@ aps_Group_t SampleApp_Group;
 uint8 SampleAppPeriodicCounter = 0;
 uint8 SampleAppFlashCounter = 0;
 
-
+uint16 device[32] = {0};
 int group = 0;
 int main_flag = 1;
 int beep_flag = 0;
-
+int flag1 = 0;
+int flag2 = 0;
 int count = 0;
 
 
@@ -241,8 +242,7 @@ void InitT1(void)
 }
 
 
-/****************************************************\
-  
+ 
 
 
 void InitT3(void)
@@ -258,18 +258,17 @@ void InitT3(void)
 __interrupt void T3_ISR(void) 
 { 
     IRCON = 0x00;            //清中断标志, 也可由硬件自动完成 
-//    if(count++ > 5)        //245次中断后LED取反，闪烁一轮（约为0.5 秒时间） 
-//    {                        //经过示波器测量确保精确
-//        count = 0;
-	if(key2_flag ==0)
+    if(count++ > 5)        //245次中断后LED取反，闪烁一轮（约为0.5 秒时间） 
+    {                        //经过示波器测量确保精确
+        count = 0;
+	if(key2_flag == 0)
 		key2_flag = 1;
 	else
 	 	key2_flag = 0;//计数清零          //改变LED1的状态
-//    } 
+    } 
 }
 
 
-\***************************************************/
 
 void beep0(void)
 {
@@ -405,8 +404,6 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
 
         // Received whenever the device changes state in the network
         case ZDO_STATE_CHANGE:
-	  
-	  
 	  
 	  
 	  
@@ -736,6 +733,7 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 
 
 
+
 //处理ZDO层传来的信息
 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 {
@@ -747,7 +745,7 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
   switch ( msgPtr->clusterID ) //判断簇ID
   {
     case Device_annce:
-        osal_memset(buf, 0 , 3);
+        osal_memset(buf, 0 , 10);
         osal_memcpy(buf, msgPtr->asdu, 10); //复制数据到缓冲区中
 	nwk_addr = buf[1]*0x100 + buf[0];
 	HalLcdWriteStringValue("DevAnnce:", nwk_addr, 16, 4);
