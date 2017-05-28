@@ -149,9 +149,13 @@ uint16 device[32] = {0};
 int group = 0;
 int main_flag = 1;
 int beep_flag = 0;
-int flag1 = 0;
-int flag2 = 0;
+int time_flag = 0;
+int distance_flag = 0;
 int count = 0;
+
+
+
+int times = 0;
 
 
 
@@ -165,15 +169,12 @@ void SampleApp_SendFlashMessage( uint16 flashTime ,uint16 data);
 
 
 void InitT1(void);
+void InitT3(void);
+__interrupt void T3_ISR(void);
 void beep0(void);
 void beep1(void);
 void beep2(void);
 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr );
-
-//void InitT3(void);
-//#pragma vector = T3_VECTOR
-//__interrupt void T3_ISR(void); 
-
 
 
 
@@ -241,10 +242,6 @@ void InitT1(void)
   
 }
 
-
- 
-
-
 void InitT3(void)
 {     
     T3CTL |= 0x08 ;          //开溢出中断     
@@ -257,14 +254,25 @@ void InitT3(void)
 #pragma vector = T3_VECTOR 
 __interrupt void T3_ISR(void) 
 { 
+  
+  
     IRCON = 0x00;            //清中断标志, 也可由硬件自动完成 
-    if(count++ > 5)        //245次中断后LED取反，闪烁一轮（约为0.5 秒时间） 
+    if(count++ > 2)          //245次中断后LED取反，闪烁一轮（约为0.5 秒时间） 
     {                        //经过示波器测量确保精确
-        count = 0;
-	if(key2_flag == 0)
-		key2_flag = 1;
+        count = 0;          //计数清零          //改变LED1的状态
+	
+	if(main_flag != 2)
+	  return;
+	if(time_flag == 0)
+	{
+		time_flag = 1;
+		beep1();
+	}
 	else
-	 	key2_flag = 0;//计数清零          //改变LED1的状态
+	{
+	 	time_flag = 0;
+		beep0();
+	}
     } 
 }
 
@@ -357,7 +365,7 @@ void SampleApp_Init( uint8 task_id )
   
   
   InitT1();
-//  InitT3();
+  InitT3();
   
 }
 
@@ -659,9 +667,11 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 	if(main_flag == 0)                	//model 0
 	{
 	  	beep0();
+		
 	}
 	else if(main_flag == 1)
 	{
+	  	
 	  	if(pkt->rssi < -75)
 		{
 		  if(count < 3)
@@ -682,16 +692,7 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 	}
 	else
 	{
-	  	if(beep_flag == 0)
-		{
-			beep1();
-			beep_flag = 1;
-		}
-		else
-		{
-			beep0();
-			beep_flag = 0;
-		}
+	  	
 	}
 	  
 	  
