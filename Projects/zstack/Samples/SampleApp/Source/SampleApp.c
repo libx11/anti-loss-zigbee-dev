@@ -146,7 +146,7 @@ uint8 SampleAppPeriodicCounter = 0;
 uint8 SampleAppFlashCounter = 0;
 
 uint16 device[32] = {0};
-int group = 0;
+int sel_dev = 0;
 int main_flag = 1;
 int beep_flag = 0;
 int time_flag = 0;
@@ -525,43 +525,41 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓĞÓÃµ½£¬ºóÃæÔÙ·ÖÎ
     		
 	//SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 2);
 	  	
-    /**********************************************\
-    	switch(group)
+    	switch(sel_dev)
 	{
 	case 0:
-	  group = 1;
+	  sel_dev = 1;
 	  break;
 	case 1:
-	  group = 2;
+	  sel_dev = 2;
 	  break;
 	case 2:
-	  group = 3;
+	  sel_dev = 3;
 	  break;
 	case 3:
-	  group = 4;
+	  sel_dev = 4;
 	  break;
 	case 4:
-	  group = 5;
+	  sel_dev = 5;
 	  break;
 	case 5:
-	  group = 6;
+	  sel_dev = 6;
 	  break;
 	case 6:
-	  group = 7;
+	  sel_dev = 7;
 	  break;
 	case 7:
-	  group = 8;
+	  sel_dev = 8;
 	  break;
 	case 8:
-	  group = 9;
+	  sel_dev = 9;
 	  break;
 	case 9:
-	  group = 0;
+	  sel_dev = 0;
 	  break;
 	}
+    HalLcdWriteStringValue("sel_dev:", sel_dev, 10, 6);
     
-    
-    \***************************************************/
     
     /* This key sends the Flash Command is sent to Group 1.
      * This device will not receive the Flash Command from this
@@ -608,6 +606,7 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓĞÓÃµ½£¬ºóÃæÔÙ·ÖÎ
 		{
 		  main_flag = 0;
 		}
+		HalLcdWriteStringValue("model:", main_flag, 10, 5);
 	  	
 //	#endif
     
@@ -672,8 +671,8 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 //	if(group != buf[2])
 //	  break;
 	
-	HalLcdWriteStringValue("RSSI:", abs(pkt->rssi), 10, 6);
-	HalLcdWriteStringValue("model:", main_flag, 10, 5);
+	
+	
 //	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 4);
 	
 	
@@ -715,10 +714,12 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       {
 		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
 		period_count = 140;
+		device_num = pkt->cmd.DataLength/2;
+		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
       }
       else
       {
-          HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);                   
+          	HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);                   
       }
       break;
 
@@ -812,13 +813,13 @@ void SampleApp_SendAddrMessage(uint8 dev[], int dev_num)
 //#if defined(ZDO_COORDINATOR)
   
   // µ÷ÓÃAF_DataRequest½«Êı¾İÎŞÏß¹ã²¥³öÈ¥
-  if( AF_DataRequest( &SampleApp_Periodic_DstAddr,//·¢ËÍÄ¿µÄµØÖ·£«¶ËµãµØÖ·ºÍ´«ËÍÄ£Ê½
-                       &SampleApp_epDesc,//Ô´(´ğ¸´»òÈ·ÈÏ)ÖÕ¶ËµÄÃèÊö£¨±ÈÈç²Ù×÷ÏµÍ³ÖĞÈÎÎñIDµÈ£©Ô´EP
+  if( AF_DataRequest( &SampleApp_Periodic_DstAddr,   //·¢ËÍÄ¿µÄµØÖ·£«¶ËµãµØÖ·ºÍ´«ËÍÄ£Ê½
+                       &SampleApp_epDesc,            //Ô´(´ğ¸´»òÈ·ÈÏ)ÖÕ¶ËµÄÃèÊö£¨±ÈÈç²Ù×÷ÏµÍ³ÖĞÈÎÎñIDµÈ£©Ô´EP
                        SAMPLEAPP_PERIODIC_CLUSTERID, //±»ProfileÖ¸¶¨µÄÓĞĞ§µÄ¼¯ÈººÅ
-                       (dev_num+1)*2,       // ·¢ËÍÊı¾İ³¤¶È
-                       dev,// ·¢ËÍÊı¾İ»º³åÇø
-                       &SampleApp_TransID,     // ÈÎÎñIDºÅ
-                       AF_DISCV_ROUTE,      // ÓĞĞ§Î»ÑÚÂëµÄ·¢ËÍÑ¡Ïî
+                       (dev_num+1)*2,                // ·¢ËÍÊı¾İ³¤¶È
+                       dev,                          // ·¢ËÍÊı¾İ»º³åÇø
+                       &SampleApp_TransID,           // ÈÎÎñIDºÅ
+                       AF_DISCV_ROUTE,               // ÓĞĞ§Î»ÑÚÂëµÄ·¢ËÍÑ¡Ïî
                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //´«ËÍÌøÊı£¬Í¨³£ÉèÖÃÎªAF_DEFAULT_RADIUS
   {
   }
@@ -849,7 +850,6 @@ void SampleApp_SendPeriodicMessage( void )
 //#if defined(ZDO_COORDINATOR)
   
   byte SendData[3]="D1";
-  SendData[2] = group;
 
   // µ÷ÓÃAF_DataRequest½«Êı¾İÎŞÏß¹ã²¥³öÈ¥
   if( AF_DataRequest( &SampleApp_Periodic_DstAddr,//·¢ËÍÄ¿µÄµØÖ·£«¶ËµãµØÖ·ºÍ´«ËÍÄ£Ê½
