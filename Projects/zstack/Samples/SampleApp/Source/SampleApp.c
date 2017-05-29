@@ -163,6 +163,9 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys );
 void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pckt );
 void SampleApp_SendPeriodicMessage( void );
 void SampleApp_SendFlashMessage( uint16 flashTime ,uint16 data);
+void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr );
+void SampleApp_SendAddrMessage(uint8 dev[], int dev_num);
+
 
 
 void InitT1(void);
@@ -171,8 +174,6 @@ __interrupt void T3_ISR(void);
 void beep0(void);
 void beep1(void);
 void beep2(void);
-void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr );
-void SampleApp_SendAddrMessage( dev[], dev_num );
 
 
 /*********************************************************************
@@ -259,7 +260,6 @@ __interrupt void T3_ISR(void)
     if(period_count++ > 150)
     {
       	period_count = 0;
-	times = 0;
     }
       
       
@@ -268,7 +268,7 @@ __interrupt void T3_ISR(void)
         count = 0;          //¼ÆÊıÇåÁã          //¸Ä±äLED1µÄ×´Ì¬
 	
 	if(main_flag != 2)
-	  break;
+	  return;
 	else if(time_flag == 0)
 	{
 		time_flag = 1;
@@ -373,6 +373,11 @@ void SampleApp_Init( uint8 task_id )
   InitT1();
   InitT3();
   
+  #if defined(ZDO_COORDINATOR)                      //Ğ­µ÷Æ÷¶ÌµØÖ·Îª0000
+  {
+    device[0] = 0x0000;
+  }
+  #endif
 }
 
 /*********************************************************************
@@ -652,7 +657,7 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓĞÓÃµ½£¬ºóÃæÔÙ·ÖÎ
 //½ÓÊÕÊı¾İ£¬²ÎÊıÎª½ÓÊÕµ½µÄÊı¾İ
 void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 {
-  byte buf[3]; 
+  byte buf[3];
 //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
 
   switch ( pkt->clusterId ) //ÅĞ¶Ï´ØID
@@ -706,6 +711,11 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 	  
 	  
       }
+      else if(buf[0] == 0x00)
+      {
+		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
+		period_count = 140;
+      }
       else
       {
           HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);                   
@@ -756,7 +766,7 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
   {
     case Device_annce:
 
-      	period_count = 140;
+      	period_count = 139;
       	
       
         osal_memset(buf, 0 , 10);
@@ -770,7 +780,7 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 	{
 	  	for(i = 0; i < device_num; i++)
 		{
-		 	if(device[i] == srcAddr.addr.shortAddr)
+		 	if(device[i] == nwk_addr)
 			{
 			  flag = 1;
 			  break;
@@ -778,10 +788,11 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 		}
 		if(flag == 0)
 		{
-	  		device[device_num++] = srcAddr.addr.shortAddr;
-			SampleApp_SendAddrMessage( device, device_num );
+	  		device[++device_num] = nwk_addr;
+			SampleApp_SendAddrMessage( (uint8 *)device, device_num );
 		}
 	}
+	#endif
       
       
 //      flashTime = BUILD_UINT16(pkt->cmd.Data[1], pkt->cmd.Data[2] );
@@ -796,7 +807,7 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 
 
 
-void SampleApp_SendAddrMessage( dev[], dev_num )
+void SampleApp_SendAddrMessage(uint8 dev[], int dev_num)
 {	
 //#if defined(ZDO_COORDINATOR)
   
@@ -804,7 +815,7 @@ void SampleApp_SendAddrMessage( dev[], dev_num )
   if( AF_DataRequest( &SampleApp_Periodic_DstAddr,//·¢ËÍÄ¿µÄµØÖ·£«¶ËµãµØÖ·ºÍ´«ËÍÄ£Ê½
                        &SampleApp_epDesc,//Ô´(´ğ¸´»òÈ·ÈÏ)ÖÕ¶ËµÄÃèÊö£¨±ÈÈç²Ù×÷ÏµÍ³ÖĞÈÎÎñIDµÈ£©Ô´EP
                        SAMPLEAPP_PERIODIC_CLUSTERID, //±»ProfileÖ¸¶¨µÄÓĞĞ§µÄ¼¯ÈººÅ
-                       dev_num*2,       // ·¢ËÍÊı¾İ³¤¶È
+                       (dev_num+1)*2,       // ·¢ËÍÊı¾İ³¤¶È
                        dev,// ·¢ËÍÊı¾İ»º³åÇø
                        &SampleApp_TransID,     // ÈÎÎñIDºÅ
                        AF_DISCV_ROUTE,      // ÓĞĞ§Î»ÑÚÂëµÄ·¢ËÍÑ¡Ïî
