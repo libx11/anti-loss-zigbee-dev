@@ -152,11 +152,8 @@ int beep_flag = 0;
 int time_flag = 0;
 int distance_flag = 0;
 int count = 0;
-
-
-
-int times = 0;
-
+int period_count = 0;
+int device_num = 0;
 
 
 /*********************************************************************
@@ -175,7 +172,7 @@ void beep0(void);
 void beep1(void);
 void beep2(void);
 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr );
-
+void SampleApp_SendAddrMessage( dev[], dev_num );
 
 
 /*********************************************************************
@@ -257,13 +254,22 @@ __interrupt void T3_ISR(void)
   
   
     IRCON = 0x00;            //清中断标志, 也可由硬件自动完成 
+    
+    
+    if(period_count++ > 150)
+    {
+      	period_count = 0;
+	times = 0;
+    }
+      
+      
     if(count++ > 2)          //245次中断后LED取反，闪烁一轮（约为0.5 秒时间） 
     {                        //经过示波器测量确保精确
         count = 0;          //计数清零          //改变LED1的状态
 	
 	if(main_flag != 2)
-	  return;
-	if(time_flag == 0)
+	  break;
+	else if(time_flag == 0)
 	{
 		time_flag = 1;
 		beep1();
@@ -664,6 +670,9 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 	HalLcdWriteStringValue("RSSI:", abs(pkt->rssi), 10, 6);
 	HalLcdWriteStringValue("model:", main_flag, 10, 5);
 //	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 4);
+	
+	
+	
 	if(main_flag == 0)                	//model 0
 	{
 	  	beep0();
@@ -737,6 +746,8 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 {
   
+  int i = 0;
+  char flag = 0;
   uint16 nwk_addr;
   byte buf[10]; 
 //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
@@ -744,11 +755,33 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
   switch ( msgPtr->clusterID ) //判断簇ID
   {
     case Device_annce:
+
+      	period_count = 140;
+      	
+      
         osal_memset(buf, 0 , 10);
         osal_memcpy(buf, msgPtr->asdu, 10); //复制数据到缓冲区中
 	nwk_addr = buf[1]*0x100 + buf[0];
 	HalLcdWriteStringValue("DevAnnce:", nwk_addr, 16, 4);
-      
+	
+	
+	
+      	#if defined(ZDO_COORDINATOR)
+	{
+	  	for(i = 0; i < device_num; i++)
+		{
+		 	if(device[i] == srcAddr.addr.shortAddr)
+			{
+			  flag = 1;
+			  break;
+			}
+		}
+		if(flag == 0)
+		{
+	  		device[device_num++] = srcAddr.addr.shortAddr;
+			SampleApp_SendAddrMessage( device, device_num );
+		}
+	}
       
       
 //      flashTime = BUILD_UINT16(pkt->cmd.Data[1], pkt->cmd.Data[2] );
@@ -763,7 +796,30 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 
 
 
-
+void SampleApp_SendAddrMessage( dev[], dev_num )
+{	
+//#if defined(ZDO_COORDINATOR)
+  
+  // 调用AF_DataRequest将数据无线广播出去
+  if( AF_DataRequest( &SampleApp_Periodic_DstAddr,//发送目的地址＋端点地址和传送模式
+                       &SampleApp_epDesc,//源(答复或确认)终端的描述（比如操作系统中任务ID等）源EP
+                       SAMPLEAPP_PERIODIC_CLUSTERID, //被Profile指定的有效的集群号
+                       dev_num*2,       // 发送数据长度
+                       dev,// 发送数据缓冲区
+                       &SampleApp_TransID,     // 任务ID号
+                       AF_DISCV_ROUTE,      // 有效位掩码的发送选项
+                       AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //传送跳数，通常设置为AF_DEFAULT_RADIUS
+  {
+  }
+  else
+  {
+    HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+    // Error occurred in request to send.
+  }
+//#else
+  
+//#endif
+}
 
 
 
