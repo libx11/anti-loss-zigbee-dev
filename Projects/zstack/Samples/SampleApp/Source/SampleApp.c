@@ -613,12 +613,12 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓĞÓÃµ½£¬ºóÃæÔÙ·ÖÎ
 		else if(main_flag == 1)
 		{
 		  main_flag = 2;
-		  SampleApp_SendBeepMessage(sel_dev, 1);
+		  SampleApp_SendBeepMessage(dst_dev, 1);
 		}
 		else if(main_flag == 2)
 		{
 		  main_flag = 3;
-		  SampleApp_SendBeepMessage(sel_dev, 0);
+		  SampleApp_SendBeepMessage(dst_dev, 0);
 		}
 		else if(main_flag == 3)
 		{
@@ -833,6 +833,7 @@ void SampleApp_SendBeepMessage(uint16 dst, uint8 s)
   SampleApp_Single_DstAddr.addr.shortAddr = dst;
   byte SendData[3] = "BP";
   SendData[2] = s;
+  HalLcdWriteStringValue("beep info:", SampleApp_Single_DstAddr.addr.shortAddr, 16, 4);
   // µ÷ÓÃAF_DataRequest½«Êı¾İÎŞÏß¹ã²¥³öÈ¥
   if( AF_DataRequest( &SampleApp_Single_DstAddr,   //·¢ËÍÄ¿µÄµØÖ·£«¶ËµãµØÖ·ºÍ´«ËÍÄ£Ê½
                        &SampleApp_epDesc,            //Ô´(´ğ¸´»òÈ·ÈÏ)ÖÕ¶ËµÄÃèÊö£¨±ÈÈç²Ù×÷ÏµÍ³ÖĞÈÎÎñIDµÈ£©Ô´EP
