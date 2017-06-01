@@ -97,7 +97,8 @@ uint8 AppTitle[] = "ALD2530 LED"; //Ó¦ÓÃ³ÌÐòÃû³Æ
 const cId_t SampleApp_ClusterList[SAMPLEAPP_MAX_CLUSTERS] =
 {
   SAMPLEAPP_PERIODIC_CLUSTERID,
-  SAMPLEAPP_FLASH_CLUSTERID
+  SAMPLEAPP_FLASH_CLUSTERID,
+  SAMPLEAPP_SINGLE_CLUSTERID
 };
 
 const SimpleDescriptionFormat_t SampleApp_SimpleDesc =
@@ -138,6 +139,7 @@ devStates_t SampleApp_NwkState;
 uint8 SampleApp_TransID;  // This is the unique message ID (counter)
 
 afAddrType_t SampleApp_Periodic_DstAddr;
+afAddrType_t SampleApp_Single_DstAddr;
 afAddrType_t SampleApp_Flash_DstAddr;
 
 aps_Group_t SampleApp_Group;
@@ -154,7 +156,7 @@ int distance_flag = 0;
 int count = 0;
 int period_count = 0;
 int device_num = 0;
-
+uint16 dst_dev = 0x0000;
 
 /*********************************************************************
  * LOCAL FUNCTIONS
@@ -165,6 +167,7 @@ void SampleApp_SendPeriodicMessage( void );
 void SampleApp_SendFlashMessage( uint16 flashTime ,uint16 data);
 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr );
 void SampleApp_SendAddrMessage(uint8 dev[], int dev_num);
+void SampleApp_SendBeepMessage(uint16 dst, uint8 s);
 
 
 
@@ -267,18 +270,17 @@ __interrupt void T3_ISR(void)
     {                        //¾­¹ýÊ¾²¨Æ÷²âÁ¿È·±£¾«È·
         count = 0;          //¼ÆÊýÇåÁã          //¸Ä±äLED1µÄ×´Ì¬
 	
-	if(main_flag != 2)
-	  return;
-	else if(time_flag == 0)
-	{
-		time_flag = 1;
-		beep1();
-	}
-	else
-	{
-	 	time_flag = 0;
-		beep0();
-	}
+	if(beep_flag == 1)
+		if(time_flag == 0)
+		{
+			time_flag = 1;
+			beep1();
+		}
+		else
+		{
+			time_flag = 0;
+			beep0();
+		}
     } 
 }
 
@@ -343,6 +345,10 @@ void SampleApp_Init( uint8 task_id )
   SampleApp_Flash_DstAddr.addrMode = (afAddrMode_t)afAddrGroup; //×éÑ°Ö·
   SampleApp_Flash_DstAddr.endPoint = SAMPLEAPP_ENDPOINT; //Ö¸¶¨¶ËµãºÅ
   SampleApp_Flash_DstAddr.addr.shortAddr = SAMPLEAPP_FLASH_GROUP;//×éºÅ0x0001
+  
+  SampleApp_Single_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
+  SampleApp_Single_DstAddr.endPoint = SAMPLEAPP_ENDPOINT;
+  SampleApp_Single_DstAddr.addr.shortAddr = 0x0000;
 
   // Fill out the endpoint description. ¶¨Òå±¾Éè±¸ÓÃÀ´Í¨ÐÅµÄAPS²ã¶ËµãÃèÊö·û
   SampleApp_epDesc.endPoint = SAMPLEAPP_ENDPOINT; //Ö¸¶¨¶ËµãºÅ
@@ -560,6 +566,12 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓÐÓÃµ½£¬ºóÃæÔÙ·ÖÎ
 	}
     HalLcdWriteStringValue("sel_dev:", sel_dev, 10, 6);
     
+    if(sel_dev < device_num)
+    {
+      	dst_dev = device[sel_dev];
+    }
+       
+    
     
     /* This key sends the Flash Command is sent to Group 1.
      * This device will not receive the Flash Command from this
@@ -593,7 +605,7 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓÐÓÃµ½£¬ºóÃæÔÙ·ÖÎ
 			
 //	#else
 		
-		SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 1);
+//		SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 1);
 		if(main_flag == 0)
 		{
 		  main_flag = 1;
@@ -601,11 +613,18 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓÐÓÃµ½£¬ºóÃæÔÙ·ÖÎ
 		else if(main_flag == 1)
 		{
 		  main_flag = 2;
+		  SampleApp_SendBeepMessage(sel_dev, 1);
 		}
 		else if(main_flag == 2)
 		{
+		  main_flag = 3;
+		  SampleApp_SendBeepMessage(sel_dev, 0);
+		}
+		else if(main_flag == 3)
+		{
 		  main_flag = 0;
 		}
+		
 		HalLcdWriteStringValue("model:", main_flag, 10, 5);
 	  	
 //	#endif
@@ -728,18 +747,6 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       
       if(pkt->cmd.Data[3] == 1)
       {
-	if(main_flag == 0)
-	{
-	  main_flag = 1;
-	}
-	else if(main_flag == 1)
-	{
-	  main_flag = 2;
-	}
-	else if(main_flag == 2)
-	{
-	  main_flag = 0;
-	}
 	
       }
       else if(pkt->cmd.Data[3] == 3)
@@ -747,7 +754,19 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 	
       }
       break;
-    
+      
+    case SAMPLEAPP_SINGLE_CLUSTERID:
+      HalLcdWriteStringValue("beep info:", pkt->srcAddr.addr.shortAddr, 16, 5);
+      osal_memset(buf, 0 , 3);
+      osal_memcpy(buf, pkt->cmd.Data, 3); //¸´ÖÆÊý¾Ýµ½»º³åÇøÖÐ
+      
+      if(buf[0]=='B' && buf[1]=='P') 
+      {
+	if(buf[2] == 1)
+	  beep_flag = 1;
+	else
+	  beep_flag = 0;
+      }
 	
   }
 }
@@ -804,6 +823,35 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
   }
     
   
+}
+
+
+
+void SampleApp_SendBeepMessage(uint16 dst, uint8 s)
+{	
+//#if defined(ZDO_COORDINATOR)
+  SampleApp_Single_DstAddr.addr.shortAddr = dst;
+  byte SendData[3] = "BP";
+  SendData[2] = s;
+  // µ÷ÓÃAF_DataRequest½«Êý¾ÝÎÞÏß¹ã²¥³öÈ¥
+  if( AF_DataRequest( &SampleApp_Single_DstAddr,   //·¢ËÍÄ¿µÄµØÖ·£«¶ËµãµØÖ·ºÍ´«ËÍÄ£Ê½
+                       &SampleApp_epDesc,            //Ô´(´ð¸´»òÈ·ÈÏ)ÖÕ¶ËµÄÃèÊö£¨±ÈÈç²Ù×÷ÏµÍ³ÖÐÈÎÎñIDµÈ£©Ô´EP
+                       SAMPLEAPP_SINGLE_CLUSTERID, //±»ProfileÖ¸¶¨µÄÓÐÐ§µÄ¼¯ÈººÅ
+                       3,                // ·¢ËÍÊý¾Ý³¤¶È
+                       SendData,                          // ·¢ËÍÊý¾Ý»º³åÇø
+                       &SampleApp_TransID,           // ÈÎÎñIDºÅ
+                       AF_DISCV_ROUTE,               // ÓÐÐ§Î»ÑÚÂëµÄ·¢ËÍÑ¡Ïî
+                       AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //´«ËÍÌøÊý£¬Í¨³£ÉèÖÃÎªAF_DEFAULT_RADIUS
+  {
+  }
+  else
+  {
+    HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+    // Error occurred in request to send.
+  }
+//#else
+  
+//#endif
 }
 
 

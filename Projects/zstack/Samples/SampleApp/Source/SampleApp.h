@@ -70,9 +70,10 @@ extern "C"
 #define SAMPLEAPP_DEVICE_VERSION     0
 #define SAMPLEAPP_FLAGS              0
 
-#define SAMPLEAPP_MAX_CLUSTERS       2
+#define SAMPLEAPP_MAX_CLUSTERS       3
 #define SAMPLEAPP_PERIODIC_CLUSTERID 1
 #define SAMPLEAPP_FLASH_CLUSTERID     2
+#define SAMPLEAPP_SINGLE_CLUSTERID     3
 
 // Send Message Timeout
 #define SAMPLEAPP_SEND_PERIODIC_MSG_TIMEOUT    10000     // Every 0.5 seconds
