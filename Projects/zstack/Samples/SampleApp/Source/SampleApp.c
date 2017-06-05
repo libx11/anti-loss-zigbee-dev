@@ -691,8 +691,8 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 //	  break;
 	
 	
-	
-//	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 4);
+	HalLcdWriteStringValue("rssi:", abs(pkt->rssi), 10, 6);
+	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 5);
 	
 	
 	
@@ -732,7 +732,6 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       else if(buf[0] == 0x00)
       {
 		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
-		period_count = 140;
 		device_num = pkt->cmd.DataLength/2;
 		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
       }
@@ -775,6 +774,8 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 //处理ZDO层传来的信息
 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 {
+#if defined(ZDO_COORDINATOR)
+{
   
   int i = 0;
   char flag = 0;
@@ -786,18 +787,12 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
   {
     case Device_annce:
 
-      	period_count = 139;
-      	
-      
         osal_memset(buf, 0 , 10);
         osal_memcpy(buf, msgPtr->asdu, 10); //复制数据到缓冲区中
 	nwk_addr = buf[1]*0x100 + buf[0];
 	HalLcdWriteStringValue("DevAnnce:", nwk_addr, 16, 4);
 	
 	
-	
-      	#if defined(ZDO_COORDINATOR)
-	{
 	  	for(i = 0; i < device_num; i++)
 		{
 		 	if(device[i] == nwk_addr)
@@ -811,8 +806,7 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 	  		device[++device_num] = nwk_addr;
 			SampleApp_SendAddrMessage( (uint8 *)device, device_num );
 		}
-	}
-	#endif
+	
       
       
 //      flashTime = BUILD_UINT16(pkt->cmd.Data[1], pkt->cmd.Data[2] );
@@ -821,7 +815,8 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
       
       
   }
-    
+}
+#endif	
   
 }
 
