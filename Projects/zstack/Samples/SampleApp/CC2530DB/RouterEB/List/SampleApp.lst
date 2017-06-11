@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         05/Jun/2017  20:37:33 #
+# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         11/Jun/2017  21:40:07 #
 # Copyright 2004-2011 IAR Systems AB.                                         #
 #                                                                             #
 #    Core               =  plain                                              #
@@ -665,8 +665,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
     262              
     263              if(period_count++ > 150)
    \   000017   90....       MOV     DPTR,#period_count
-   \   00001A   12....       LCALL   ?Subroutine10
-   \                     ??CrossCallReturnLabel_11:
+   \   00001A   12....       LCALL   ?Subroutine11
+   \                     ??CrossCallReturnLabel_13:
    \   00001D   90....       MOV     DPTR,#period_count
    \   000020   EA           MOV     A,R2
    \   000021   F0           MOVX    @DPTR,A
@@ -695,8 +695,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
     269              if(count++ > 2)          //245次中断后LED取反，闪烁一轮（约为0.5 秒时间） 
    \                     ??T3_ISR_0:
    \   00003A   90....       MOV     DPTR,#count
-   \   00003D   12....       LCALL   ?Subroutine10
-   \                     ??CrossCallReturnLabel_12:
+   \   00003D   12....       LCALL   ?Subroutine11
+   \                     ??CrossCallReturnLabel_14:
    \   000040   90....       MOV     DPTR,#count
    \   000043   EA           MOV     A,R2
    \   000044   F0           MOVX    @DPTR,A
@@ -785,7 +785,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   0000A5                REQUIRE T1CC0L
 
    \                                 In  segment NEAR_CODE, align 1, keep-with-next
-   \                     ?Subroutine10:
+   \                     ?Subroutine11:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
    \   000002   A3           INC     DPTR
@@ -1008,8 +1008,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00008B   7D00         MOV     R5,#0x0
    \   00008D   7A..         MOV     R2,#(SampleApp_Group + 2) & 0xff
    \   00008F   7B..         MOV     R3,#((SampleApp_Group + 2) >> 8) & 0xff
-   \   000091   12....       LCALL   ??Subroutine11_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_15:
+   \   000091   12....       LCALL   ??Subroutine12_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_17:
    \   000094   12....       LCALL   ?DEALLOC_XSTACK8
     369            aps_AddGroup( SAMPLEAPP_ENDPOINT, &SampleApp_Group );//把该组登记添加到APS中
    \   000097                ; Setup parameters for call to function aps_AddGroup
@@ -1055,7 +1055,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   0000BD   02....       LJMP    ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine11_0:
+   \                     ??Subroutine12_0:
    \   000000   12....       LCALL   ??osal_memcpy?relay
    \   000003   7403         MOV     A,#0x3
    \   000005   22           RET
@@ -1322,18 +1322,19 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000005                ; Auto size: 0
    \   000005   EA           MOV     A,R2
    \   000006   FE           MOV     R6,A
-    526            (void)shift;  // Intentionally unreferenced parameter
-    527            
-    528            if ( keys & HAL_KEY_SW_1 )//key2
+    526            
+    527            (void)shift;  // Intentionally unreferenced parameter
+    528            
+    529            if ( keys & HAL_KEY_SW_1 )//key2
    \   000007   A2E0         MOV     C,0xE0 /* A   */.0
    \   000009   4003         JC      $+5
    \   00000B   02....       LJMP    ??SampleApp_HandleKeys_0 & 0xFFFF
-    529            {
-    530              
-    531              		
-    532          	//SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 2);
-    533          	  	
-    534              	switch(sel_dev)
+    530            {
+    531              
+    532              		
+    533          	//SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 2);
+    534          	  	
+    535              	switch(sel_dev)
    \   00000E   90....       MOV     DPTR,#sel_dev
    \   000011   E0           MOVX    A,@DPTR
    \   000012   F5..         MOV     ?V0 + 0,A
@@ -1356,9 +1357,9 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000030   ....         DW        ??SampleApp_HandleKeys_9
    \   000032   ....         DW        ??SampleApp_HandleKeys_10
    \   000034   ....         DW        ??SampleApp_HandleKeys_11
-    535          	{
-    536          	case 0:
-    537          	  sel_dev = 1;
+    536          	{
+    537          	case 0:
+    538          	  sel_dev = 1;
    \                     ??SampleApp_HandleKeys_2:
    \   000036   90....       MOV     DPTR,#sel_dev
    \   000039   7401         MOV     A,#0x1
@@ -1367,65 +1368,65 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00003C   A3           INC     DPTR
    \   00003D   E4           CLR     A
    \   00003E   803E         SJMP    ??SampleApp_HandleKeys_13
-    538          	  break;
-    539          	case 1:
-    540          	  sel_dev = 2;
+    539          	  break;
+    540          	case 1:
+    541          	  sel_dev = 2;
    \                     ??SampleApp_HandleKeys_3:
    \   000040   90....       MOV     DPTR,#sel_dev
    \   000043   7402         MOV     A,#0x2
    \   000045   80F4         SJMP    ??SampleApp_HandleKeys_12
-    541          	  break;
-    542          	case 2:
-    543          	  sel_dev = 3;
+    542          	  break;
+    543          	case 2:
+    544          	  sel_dev = 3;
    \                     ??SampleApp_HandleKeys_4:
    \   000047   90....       MOV     DPTR,#sel_dev
    \   00004A   7403         MOV     A,#0x3
    \   00004C   80ED         SJMP    ??SampleApp_HandleKeys_12
-    544          	  break;
-    545          	case 3:
-    546          	  sel_dev = 4;
+    545          	  break;
+    546          	case 3:
+    547          	  sel_dev = 4;
    \                     ??SampleApp_HandleKeys_5:
    \   00004E   90....       MOV     DPTR,#sel_dev
    \   000051   7404         MOV     A,#0x4
    \   000053   80E6         SJMP    ??SampleApp_HandleKeys_12
-    547          	  break;
-    548          	case 4:
-    549          	  sel_dev = 5;
+    548          	  break;
+    549          	case 4:
+    550          	  sel_dev = 5;
    \                     ??SampleApp_HandleKeys_6:
    \   000055   90....       MOV     DPTR,#sel_dev
    \   000058   7405         MOV     A,#0x5
    \   00005A   80DF         SJMP    ??SampleApp_HandleKeys_12
-    550          	  break;
-    551          	case 5:
-    552          	  sel_dev = 6;
+    551          	  break;
+    552          	case 5:
+    553          	  sel_dev = 6;
    \                     ??SampleApp_HandleKeys_7:
    \   00005C   90....       MOV     DPTR,#sel_dev
    \   00005F   7406         MOV     A,#0x6
    \   000061   80D8         SJMP    ??SampleApp_HandleKeys_12
-    553          	  break;
-    554          	case 6:
-    555          	  sel_dev = 7;
+    554          	  break;
+    555          	case 6:
+    556          	  sel_dev = 7;
    \                     ??SampleApp_HandleKeys_8:
    \   000063   90....       MOV     DPTR,#sel_dev
    \   000066   7407         MOV     A,#0x7
    \   000068   80D1         SJMP    ??SampleApp_HandleKeys_12
-    556          	  break;
-    557          	case 7:
-    558          	  sel_dev = 8;
+    557          	  break;
+    558          	case 7:
+    559          	  sel_dev = 8;
    \                     ??SampleApp_HandleKeys_9:
    \   00006A   90....       MOV     DPTR,#sel_dev
    \   00006D   7408         MOV     A,#0x8
    \   00006F   80CA         SJMP    ??SampleApp_HandleKeys_12
-    559          	  break;
-    560          	case 8:
-    561          	  sel_dev = 9;
+    560          	  break;
+    561          	case 8:
+    562          	  sel_dev = 9;
    \                     ??SampleApp_HandleKeys_10:
    \   000071   90....       MOV     DPTR,#sel_dev
    \   000074   7409         MOV     A,#0x9
    \   000076   80C3         SJMP    ??SampleApp_HandleKeys_12
-    562          	  break;
-    563          	case 9:
-    564          	  sel_dev = 0;
+    563          	  break;
+    564          	case 9:
+    565          	  sel_dev = 0;
    \                     ??SampleApp_HandleKeys_11:
    \   000078   90....       MOV     DPTR,#sel_dev
    \   00007B   E4           CLR     A
@@ -1433,9 +1434,9 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00007D   A3           INC     DPTR
    \                     ??SampleApp_HandleKeys_13:
    \   00007E   F0           MOVX    @DPTR,A
-    565          	  break;
-    566          	}
-    567              HalLcdWriteStringValue("sel_dev:", sel_dev, 10, 6);
+    566          	  break;
+    567          	}
+    568              HalLcdWriteStringValue("sel_dev:", sel_dev, 10, 6);
    \                     ??SampleApp_HandleKeys_1:
    \   00007F                ; Setup parameters for call to function HalLcdWriteStringValue
    \   00007F   75..06       MOV     ?V0 + 0,#0x6
@@ -1447,11 +1448,11 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \                     ??CrossCallReturnLabel_2:
    \   00008F   7A..         MOV     R2,#`?<Constant "sel_dev:">` & 0xff
    \   000091   7B..         MOV     R3,#(`?<Constant "sel_dev:">` >> 8) & 0xff
-   \   000093   12....       LCALL   ??Subroutine13_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_22:
+   \   000093   12....       LCALL   ??Subroutine14_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_24:
    \   000096   12....       LCALL   ?DEALLOC_XSTACK8
-    568              
-    569              if(sel_dev < device_num)
+    569              
+    570              if(sel_dev < device_num)
    \   000099   90....       MOV     DPTR,#device_num
    \   00009C   E0           MOVX    A,@DPTR
    \   00009D   F8           MOV     R0,A
@@ -1469,217 +1470,223 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   0000AD   A2D2         MOV     C,0xD0 /* PSW */.2
    \   0000AF   65D0         XRL     A,PSW
    \   0000B1   33           RLC     A
-   \   0000B2   5023         JNC     ??SampleApp_HandleKeys_0
-    570              {
-    571                	dst_dev = device[sel_dev];
+   \   0000B2   5019         JNC     ??SampleApp_HandleKeys_0
+    571              {
+    572                	dst_dev = device[sel_dev];
    \   0000B4   90....       MOV     DPTR,#sel_dev
-   \   0000B7   12....       LCALL   ??Subroutine12_0 & 0xFFFF
-    572              }
-    573                 
+   \   0000B7   12....       LCALL   ??Subroutine13_0 & 0xFFFF
+    573              }
     574              
     575              
-    576              /* This key sends the Flash Command is sent to Group 1.
-    577               * This device will not receive the Flash Command from this
-    578               * device (even if it belongs to group 1).
-    579               */
-    580              
-    581          	
-    582              
-    583            }
-   \                     ??CrossCallReturnLabel_17:
+    576              
+    577              /* This key sends the Flash Command is sent to Group 1.
+    578               * This device will not receive the Flash Command from this
+    579               * device (even if it belongs to group 1).
+    580               */
+    581              
+    582          	
+    583              
+    584            }
+   \                     ??CrossCallReturnLabel_19:
    \   0000BA   C3           CLR     C
    \   0000BB   33           RLC     A
    \   0000BC   F8           MOV     R0,A
    \   0000BD   E9           MOV     A,R1
-   \   0000BE   33           RLC     A
-   \   0000BF   F9           MOV     R1,A
-   \   0000C0   74..         MOV     A,#device & 0xff
-   \   0000C2   28           ADD     A,R0
-   \   0000C3   F582         MOV     DPL,A
-   \   0000C5   74..         MOV     A,#(device >> 8) & 0xff
-   \   0000C7   39           ADDC    A,R1
-   \   0000C8   F583         MOV     DPH,A
-   \   0000CA   E0           MOVX    A,@DPTR
-   \   0000CB   F8           MOV     R0,A
-   \   0000CC   A3           INC     DPTR
-   \   0000CD   E0           MOVX    A,@DPTR
-   \   0000CE   F9           MOV     R1,A
-   \   0000CF   90....       MOV     DPTR,#dst_dev
-   \   0000D2   E8           MOV     A,R0
-   \   0000D3   F0           MOVX    @DPTR,A
-   \   0000D4   A3           INC     DPTR
-   \   0000D5   E9           MOV     A,R1
-   \   0000D6   F0           MOVX    @DPTR,A
-    584          
-    585            if ( keys & HAL_KEY_SW_6 )//key1
+   \   0000BE   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_9:
+   \   0000C1   F8           MOV     R0,A
+   \   0000C2   A3           INC     DPTR
+   \   0000C3   E0           MOVX    A,@DPTR
+   \   0000C4   F9           MOV     R1,A
+   \   0000C5   90....       MOV     DPTR,#dst_dev
+   \   0000C8   E8           MOV     A,R0
+   \   0000C9   F0           MOVX    @DPTR,A
+   \   0000CA   A3           INC     DPTR
+   \   0000CB   E9           MOV     A,R1
+   \   0000CC   F0           MOVX    @DPTR,A
+    585          
+    586            if ( keys & HAL_KEY_SW_6 )//key1
    \                     ??SampleApp_HandleKeys_0:
-   \   0000D7   EE           MOV     A,R6
-   \   0000D8   A2E5         MOV     C,0xE0 /* A   */.5
-   \   0000DA   5070         JNC     ??SampleApp_HandleKeys_14
-    586            {
-    587              
+   \   0000CD   EE           MOV     A,R6
+   \   0000CE   A2E5         MOV     C,0xE0 /* A   */.5
+   \   0000D0   5070         JNC     ??SampleApp_HandleKeys_14
+    587            {
     588              
-    589          //    	#if defined(ZDO_COORDINATOR) //协调器收到"D1"后,返回"D1"给终端，让终端Led1也闪烁
-    590              
+    589              
+    590          //    	#if defined(ZDO_COORDINATOR) //协调器收到"D1"后,返回"D1"给终端，让终端Led1也闪烁
     591              
-    592              	/**********************************************\
-    593              		
-    594              		if(key_flag == 0)
-    595          		{
-    596          		 InitT1();
-    597          		 flag = 1;
-    598          		}
-    599          		else
-    600          		{
-    601          		  InitT11();
-    602          		  flag = 0;
-    603          		}
-    604              \***************************************************/
-    605          			
-    606          //	#else
-    607          		
-    608          //		SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 1);
-    609          		if(main_flag == 0)
-   \   0000DC   12....       LCALL   ?Subroutine5 & 0xFFFF
-   \                     ??CrossCallReturnLabel_18:
-   \   0000DF   49           ORL     A,R1
-   \   0000E0   90....       MOV     DPTR,#main_flag
-   \   0000E3   7007         JNZ     ??SampleApp_HandleKeys_15
-    610          		{
-    611          		  main_flag = 1;
-   \   0000E5   7401         MOV     A,#0x1
-   \   0000E7   F0           MOVX    @DPTR,A
-   \   0000E8   A3           INC     DPTR
-   \   0000E9   E4           CLR     A
-   \   0000EA   8045         SJMP    ??SampleApp_HandleKeys_16
-    612          		}
-    613          		else if(main_flag == 1)
+    592              
+    593              	/**********************************************\
+    594              		
+    595              		if(key_flag == 0)
+    596          		{
+    597          		 InitT1();
+    598          		 flag = 1;
+    599          		}
+    600          		else
+    601          		{
+    602          		  InitT11();
+    603          		  flag = 0;
+    604          		}
+    605              \***************************************************/
+    606          			
+    607          //	#else
+    608          		
+    609          //		SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 1);
+    610          		if(main_flag == 0)
+   \   0000D2   12....       LCALL   ?Subroutine5 & 0xFFFF
+   \                     ??CrossCallReturnLabel_20:
+   \   0000D5   49           ORL     A,R1
+   \   0000D6   90....       MOV     DPTR,#main_flag
+   \   0000D9   7007         JNZ     ??SampleApp_HandleKeys_15
+    611          		{
+    612          		  main_flag = 1;
+   \   0000DB   7401         MOV     A,#0x1
+   \   0000DD   F0           MOVX    @DPTR,A
+   \   0000DE   A3           INC     DPTR
+   \   0000DF   E4           CLR     A
+   \   0000E0   8045         SJMP    ??SampleApp_HandleKeys_16
+    613          		}
+    614          		else if(main_flag == 1)
    \                     ??SampleApp_HandleKeys_15:
-   \   0000EC   E0           MOVX    A,@DPTR
-   \   0000ED   6401         XRL     A,#0x1
-   \   0000EF   7002         JNZ     ??SampleApp_HandleKeys_17
-   \   0000F1   A3           INC     DPTR
-   \   0000F2   E0           MOVX    A,@DPTR
+   \   0000E2   E0           MOVX    A,@DPTR
+   \   0000E3   6401         XRL     A,#0x1
+   \   0000E5   7002         JNZ     ??SampleApp_HandleKeys_17
+   \   0000E7   A3           INC     DPTR
+   \   0000E8   E0           MOVX    A,@DPTR
    \                     ??SampleApp_HandleKeys_17:
-   \   0000F3   90....       MOV     DPTR,#main_flag
-   \   0000F6   7015         JNZ     ??SampleApp_HandleKeys_18
-    614          		{
-    615          		  main_flag = 2;
-   \   0000F8   7402         MOV     A,#0x2
-   \   0000FA   F0           MOVX    @DPTR,A
-   \   0000FB   A3           INC     DPTR
-   \   0000FC   E4           CLR     A
-   \   0000FD   F0           MOVX    @DPTR,A
-    616          		  SampleApp_SendBeepMessage(dst_dev, 1);
-   \   0000FE                ; Setup parameters for call to function SampleApp_SendBeepMessage
-   \   0000FE   7901         MOV     R1,#0x1
+   \   0000E9   90....       MOV     DPTR,#main_flag
+   \   0000EC   7015         JNZ     ??SampleApp_HandleKeys_18
+    615          		{
+    616          		  main_flag = 2;
+   \   0000EE   7402         MOV     A,#0x2
+   \   0000F0   F0           MOVX    @DPTR,A
+   \   0000F1   A3           INC     DPTR
+   \   0000F2   E4           CLR     A
+   \   0000F3   F0           MOVX    @DPTR,A
+    617          		  SampleApp_SendBeepMessage(dst_dev, 1);
+   \   0000F4                ; Setup parameters for call to function SampleApp_SendBeepMessage
+   \   0000F4   7901         MOV     R1,#0x1
    \                     ??SampleApp_HandleKeys_19:
-   \   000100   90....       MOV     DPTR,#dst_dev
-   \   000103   E0           MOVX    A,@DPTR
-   \   000104   FA           MOV     R2,A
-   \   000105   A3           INC     DPTR
-   \   000106   E0           MOVX    A,@DPTR
-   \   000107   FB           MOV     R3,A
-   \   000108   12....       LCALL   ??SampleApp_SendBeepMessage?relay
-   \   00010B   8025         SJMP    ??SampleApp_HandleKeys_20
-    617          		}
-    618          		else if(main_flag == 2)
+   \   0000F6   90....       MOV     DPTR,#dst_dev
+   \   0000F9   E0           MOVX    A,@DPTR
+   \   0000FA   FA           MOV     R2,A
+   \   0000FB   A3           INC     DPTR
+   \   0000FC   E0           MOVX    A,@DPTR
+   \   0000FD   FB           MOV     R3,A
+   \   0000FE   12....       LCALL   ??SampleApp_SendBeepMessage?relay
+   \   000101   8025         SJMP    ??SampleApp_HandleKeys_20
+    618          		}
+    619          		else if(main_flag == 2)
    \                     ??SampleApp_HandleKeys_18:
-   \   00010D   E0           MOVX    A,@DPTR
-   \   00010E   6402         XRL     A,#0x2
-   \   000110   7002         JNZ     ??SampleApp_HandleKeys_21
-   \   000112   A3           INC     DPTR
-   \   000113   E0           MOVX    A,@DPTR
+   \   000103   E0           MOVX    A,@DPTR
+   \   000104   6402         XRL     A,#0x2
+   \   000106   7002         JNZ     ??SampleApp_HandleKeys_21
+   \   000108   A3           INC     DPTR
+   \   000109   E0           MOVX    A,@DPTR
    \                     ??SampleApp_HandleKeys_21:
-   \   000114   90....       MOV     DPTR,#main_flag
-   \   000117   7009         JNZ     ??SampleApp_HandleKeys_22
-    619          		{
-    620          		  main_flag = 3;
-   \   000119   7403         MOV     A,#0x3
-   \   00011B   F0           MOVX    @DPTR,A
-   \   00011C   A3           INC     DPTR
-   \   00011D   E4           CLR     A
-   \   00011E   F0           MOVX    @DPTR,A
-    621          		  SampleApp_SendBeepMessage(dst_dev, 0);
-   \   00011F                ; Setup parameters for call to function SampleApp_SendBeepMessage
-   \   00011F   F9           MOV     R1,A
-   \   000120   80DE         SJMP    ??SampleApp_HandleKeys_19
-    622          		}
-    623          		else if(main_flag == 3)
+   \   00010A   90....       MOV     DPTR,#main_flag
+   \   00010D   7009         JNZ     ??SampleApp_HandleKeys_22
+    620          		{
+    621          		  main_flag = 3;
+   \   00010F   7403         MOV     A,#0x3
+   \   000111   F0           MOVX    @DPTR,A
+   \   000112   A3           INC     DPTR
+   \   000113   E4           CLR     A
+   \   000114   F0           MOVX    @DPTR,A
+    622          		  SampleApp_SendBeepMessage(dst_dev, 0);
+   \   000115                ; Setup parameters for call to function SampleApp_SendBeepMessage
+   \   000115   F9           MOV     R1,A
+   \   000116   80DE         SJMP    ??SampleApp_HandleKeys_19
+    623          		}
+    624          		else if(main_flag == 3)
    \                     ??SampleApp_HandleKeys_22:
-   \   000122   E0           MOVX    A,@DPTR
-   \   000123   6403         XRL     A,#0x3
-   \   000125   7002         JNZ     ??SampleApp_HandleKeys_23
-   \   000127   A3           INC     DPTR
-   \   000128   E0           MOVX    A,@DPTR
+   \   000118   E0           MOVX    A,@DPTR
+   \   000119   6403         XRL     A,#0x3
+   \   00011B   7002         JNZ     ??SampleApp_HandleKeys_23
+   \   00011D   A3           INC     DPTR
+   \   00011E   E0           MOVX    A,@DPTR
    \                     ??SampleApp_HandleKeys_23:
-   \   000129   7007         JNZ     ??SampleApp_HandleKeys_20
-    624          		{
-    625          		  main_flag = 0;
-   \   00012B   90....       MOV     DPTR,#main_flag
-   \   00012E   E4           CLR     A
-   \   00012F   F0           MOVX    @DPTR,A
-   \   000130   A3           INC     DPTR
+   \   00011F   7007         JNZ     ??SampleApp_HandleKeys_20
+    625          		{
+    626          		  main_flag = 0;
+   \   000121   90....       MOV     DPTR,#main_flag
+   \   000124   E4           CLR     A
+   \   000125   F0           MOVX    @DPTR,A
+   \   000126   A3           INC     DPTR
    \                     ??SampleApp_HandleKeys_16:
-   \   000131   F0           MOVX    @DPTR,A
-    626          		}
-    627          		
-    628          		HalLcdWriteStringValue("model:", main_flag, 10, 5);
+   \   000127   F0           MOVX    @DPTR,A
+    627          		}
+    628          		
+    629          		HalLcdWriteStringValue("model:", main_flag, 10, 5);
    \                     ??SampleApp_HandleKeys_20:
-   \   000132                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   000132   75..05       MOV     ?V0 + 0,#0x5
-   \   000135   78..         MOV     R0,#?V0 + 0
-   \   000137   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   00013A   790A         MOV     R1,#0xa
-   \   00013C   90....       MOV     DPTR,#main_flag
-   \   00013F   12....       LCALL   ?Subroutine4 & 0xFFFF
-    629          	  	
-    630          //	#endif
-    631              
+   \   000128                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   000128   75..05       MOV     ?V0 + 0,#0x5
+   \   00012B   78..         MOV     R0,#?V0 + 0
+   \   00012D   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000130   790A         MOV     R1,#0xa
+   \   000132   90....       MOV     DPTR,#main_flag
+   \   000135   12....       LCALL   ?Subroutine4 & 0xFFFF
+    630          	  	
+    631          //	#endif
     632              
     633              
-    634              /* The Flashr Command is sent to Group 1.
-    635               * This key toggles this device in and out of group 1.
-    636               * If this device doesn't belong to group 1, this application
-    637               * will not receive the Flash command sent to group 1.
-    638               */
-    639              
+    634              
+    635              /* The Flashr Command is sent to Group 1.
+    636               * This key toggles this device in and out of group 1.
+    637               * If this device doesn't belong to group 1, this application
+    638               * will not receive the Flash command sent to group 1.
+    639               */
     640              
-    641              /***************************************************************\
-    642                
-    643              aps_Group_t *grp;
-    644              grp = aps_FindGroup( SAMPLEAPP_ENDPOINT, SAMPLEAPP_FLASH_GROUP );
-    645              if ( grp )
-    646              {
-    647                // Remove from the group
-    648                aps_RemoveGroup( SAMPLEAPP_ENDPOINT, SAMPLEAPP_FLASH_GROUP );
-    649              }
-    650              else
-    651              {
-    652                // Add to the flash group
-    653                aps_AddGroup( SAMPLEAPP_ENDPOINT, &SampleApp_Group );
-    654              }
-    655              \****************************************************************/
-    656              
-    657            }
+    641              
+    642              /***************************************************************\
+    643                
+    644              aps_Group_t *grp;
+    645              grp = aps_FindGroup( SAMPLEAPP_ENDPOINT, SAMPLEAPP_FLASH_GROUP );
+    646              if ( grp )
+    647              {
+    648                // Remove from the group
+    649                aps_RemoveGroup( SAMPLEAPP_ENDPOINT, SAMPLEAPP_FLASH_GROUP );
+    650              }
+    651              else
+    652              {
+    653                // Add to the flash group
+    654                aps_AddGroup( SAMPLEAPP_ENDPOINT, &SampleApp_Group );
+    655              }
+    656              \****************************************************************/
+    657              
+    658            }
    \                     ??CrossCallReturnLabel_3:
-   \   000142   7A..         MOV     R2,#`?<Constant "model:">` & 0xff
-   \   000144   7B..         MOV     R3,#(`?<Constant "model:">` >> 8) & 0xff
-   \   000146   12....       LCALL   ??Subroutine13_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_23:
-   \   000149   12....       LCALL   ?DEALLOC_XSTACK8
-    658          }
+   \   000138   7A..         MOV     R2,#`?<Constant "model:">` & 0xff
+   \   00013A   7B..         MOV     R3,#(`?<Constant "model:">` >> 8) & 0xff
+   \   00013C   12....       LCALL   ??Subroutine14_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_25:
+   \   00013F   12....       LCALL   ?DEALLOC_XSTACK8
+    659          }
    \                     ??SampleApp_HandleKeys_14:
-   \   00014C   02....       LJMP    ??Subroutine16_0 & 0xFFFF
+   \   000142   02....       LJMP    ??Subroutine17_0 & 0xFFFF
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine8:
+   \   000000   33           RLC     A
+   \   000001   F9           MOV     R1,A
+   \   000002   74..         MOV     A,#device & 0xff
+   \   000004   28           ADD     A,R0
+   \   000005   F582         MOV     DPL,A
+   \   000007   74..         MOV     A,#(device >> 8) & 0xff
+   \   000009   39           ADDC    A,R1
+   \   00000A   F583         MOV     DPH,A
+   \   00000C   E0           MOVX    A,@DPTR
+   \   00000D   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine5:
    \   000000   90....       MOV     DPTR,#main_flag
-   \   000003                REQUIRE ??Subroutine12_0
-   \   000003                ; // Fall through to label ??Subroutine12_0
+   \   000003                REQUIRE ??Subroutine13_0
+   \   000003                ; // Fall through to label ??Subroutine13_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine12_0:
+   \                     ??Subroutine13_0:
    \   000000   E0           MOVX    A,@DPTR
    \   000001   F8           MOV     R0,A
    \   000002   A3           INC     DPTR
@@ -1698,37 +1705,37 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine13_0:
+   \                     ??Subroutine14_0:
    \   000000   12....       LCALL   ??HalLcdWriteStringValue?relay
    \   000003   7401         MOV     A,#0x1
    \   000005   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine16_0:
+   \                     ??Subroutine17_0:
    \   000000   7F02         MOV     R7,#0x2
    \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
-    659          
-    660          /*********************************************************************
-    661           * LOCAL FUNCTIONS
-    662           */
-    663          
-    664          /*********************************************************************
-    665           * @fn      SampleApp_MessageMSGCB
-    666           *
-    667           * @brief   Data message processor callback.  This function processes
-    668           *          any incoming data - probably from other devices.  So, based
-    669           *          on cluster ID, perform the intended action.
-    670           *
-    671           * @param   none
-    672           *
-    673           * @return  none
-    674           */
-    675          //接收数据，参数为接收到的数据
+    660          
+    661          /*********************************************************************
+    662           * LOCAL FUNCTIONS
+    663           */
+    664          
+    665          /*********************************************************************
+    666           * @fn      SampleApp_MessageMSGCB
+    667           *
+    668           * @brief   Data message processor callback.  This function processes
+    669           *          any incoming data - probably from other devices.  So, based
+    670           *          on cluster ID, perform the intended action.
+    671           *
+    672           * @param   none
+    673           *
+    674           * @return  none
+    675           */
+    676          //接收数据，参数为接收到的数据
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    676          void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
+    677          void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
    \                     SampleApp_MessageMSGCB:
-    677          {
+    678          {
    \   000000   74F1         MOV     A,#-0xf
    \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 15
@@ -1737,10 +1744,11 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000007   12....       LCALL   ?ALLOC_XSTACK8
    \   00000A   8A..         MOV     ?V0 + 0,R2
    \   00000C   8B..         MOV     ?V0 + 1,R3
-    678            byte buf[3];
-    679          //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
-    680          
-    681            switch ( pkt->clusterId ) //判断簇ID
+    679            char i;
+    680            byte buf[3];
+    681          //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
+    682          
+    683            switch ( pkt->clusterId ) //判断簇ID
    \   00000E   8A82         MOV     DPL,R2
    \   000010   8B83         MOV     DPH,R3
    \   000012   A3           INC     DPTR
@@ -1761,9 +1769,9 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000027   ....         DW        ??SampleApp_MessageMSGCB_1
    \   000029   ....         DW        ??SampleApp_MessageMSGCB_0
    \   00002B   ....         DW        ??SampleApp_MessageMSGCB_2
-    682            {
-    683              case SAMPLEAPP_PERIODIC_CLUSTERID: //收到广播数据
-    684                osal_memset(buf, 0 , 3);
+    684            {
+    685              case SAMPLEAPP_PERIODIC_CLUSTERID: //收到广播数据
+    686                osal_memset(buf, 0 , 3);
    \                     ??SampleApp_MessageMSGCB_1:
    \   00002D                ; Setup parameters for call to function osal_memset
    \   00002D   7C03         MOV     R4,#0x3
@@ -1774,10 +1782,10 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000039   AA82         MOV     R2,DPL
    \   00003B   AB83         MOV     R3,DPH
    \   00003D   12....       LCALL   ??osal_memset?relay
-    685                osal_memcpy(buf, pkt->cmd.Data, 3); //复制数据到缓冲区中
+    687                osal_memcpy(buf, pkt->cmd.Data, 3); //复制数据到缓冲区中
    \   000040                ; Setup parameters for call to function osal_memcpy
-   \   000040   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_9:
+   \   000040   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \                     ??CrossCallReturnLabel_11:
    \   000043   F5..         MOV     ?V0 + 4,A
    \   000045   A3           INC     DPTR
    \   000046   E0           MOVX    A,@DPTR
@@ -1790,10 +1798,10 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000055   EC           MOV     A,R4
    \   000056   12....       LCALL   ?XSTACK_DISP0_8
    \   000059   12....       LCALL   ?Subroutine6 & 0xFFFF
-   \                     ??CrossCallReturnLabel_13:
+   \                     ??CrossCallReturnLabel_15:
    \   00005C   12....       LCALL   ?DEALLOC_XSTACK8
-    686                
-    687                if(buf[0]=='D' && buf[1]=='1')      //判断收到的数据是否为"D1"         
+    688                
+    689                if(buf[0]=='D' && buf[1]=='1')      //判断收到的数据是否为"D1"         
    \   00005F   85..82       MOV     DPL,?XSP + 0
    \   000062   85..83       MOV     DPH,?XSP + 1
    \   000065   E0           MOVX    A,@DPTR
@@ -1806,13 +1814,13 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000073   6431         XRL     A,#0x31
    \   000075   6003         JZ      $+5
    \   000077   02....       LJMP    ??SampleApp_MessageMSGCB_4 & 0xFFFF
-    688                {
-    689          	
-    690          //	if(group != buf[2])
-    691          //	  break;
-    692          	
-    693          	
-    694          	HalLcdWriteStringValue("rssi:", abs(pkt->rssi), 10, 6);
+    690                {
+    691          	
+    692          //	if(group != buf[2])
+    693          //	  break;
+    694          	
+    695          	
+    696          	HalLcdWriteStringValue("rssi:", abs(pkt->rssi), 10, 6);
    \   00007A                ; Setup parameters for call to function HalLcdWriteStringValue
    \   00007A   75..06       MOV     ?V0 + 2,#0x6
    \   00007D   78..         MOV     R0,#?V0 + 2
@@ -1833,10 +1841,10 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000093   F9           MOV     R1,A
    \   000094   7A..         MOV     R2,#`?<Constant "rssi:">` & 0xff
    \   000096   7B..         MOV     R3,#(`?<Constant "rssi:">` >> 8) & 0xff
-   \   000098   12....       LCALL   ??Subroutine13_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_24:
+   \   000098   12....       LCALL   ??Subroutine14_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_26:
    \   00009B   12....       LCALL   ?DEALLOC_XSTACK8
-    695          	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 5);
+    697          	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 5);
    \   00009E                ; Setup parameters for call to function HalLcdWriteStringValue
    \   00009E   75..05       MOV     ?V0 + 2,#0x5
    \   0000A1   78..         MOV     R0,#?V0 + 2
@@ -1854,26 +1862,26 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \                     ??CrossCallReturnLabel_4:
    \   0000B7   7A..         MOV     R2,#`?<Constant "src addr:">` & 0xff
    \   0000B9   7B..         MOV     R3,#(`?<Constant "src addr:">` >> 8) & 0xff
-   \   0000BB   12....       LCALL   ??Subroutine13_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_25:
+   \   0000BB   12....       LCALL   ??Subroutine14_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_27:
    \   0000BE   12....       LCALL   ?DEALLOC_XSTACK8
-    696          	
-    697          	
     698          	
-    699          	if(main_flag == 0)                	//model 0
+    699          	
+    700          	
+    701          	if(main_flag == 0)                	//model 0
    \   0000C1   12....       LCALL   ?Subroutine5 & 0xFFFF
-   \                     ??CrossCallReturnLabel_19:
+   \                     ??CrossCallReturnLabel_21:
    \   0000C4   49           ORL     A,R1
    \   0000C5   7009         JNZ     ??SampleApp_MessageMSGCB_5
-    700          	{
-    701          	  	beep0();
+    702          	{
+    703          	  	beep0();
    \                     ??SampleApp_MessageMSGCB_6:
    \   0000C7   75DB00       MOV     0xdb,#0x0
    \   0000CA   75DA00       MOV     0xda,#0x0
-    702          		
-    703          	}
+    704          		
+    705          	}
    \   0000CD   02....       LJMP    ??SampleApp_MessageMSGCB_0 & 0xFFFF
-    704          	else if(main_flag == 1)
+    706          	else if(main_flag == 1)
    \                     ??SampleApp_MessageMSGCB_5:
    \   0000D0   90....       MOV     DPTR,#main_flag
    \   0000D3   E0           MOVX    A,@DPTR
@@ -1884,9 +1892,9 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \                     ??SampleApp_MessageMSGCB_7:
    \   0000DA   6003         JZ      $+5
    \   0000DC   02....       LJMP    ??SampleApp_MessageMSGCB_0 & 0xFFFF
-    705          	{
-    706          	  	
-    707          	  	if(pkt->rssi < -75)
+    707          	{
+    708          	  	
+    709          	  	if(pkt->rssi < -75)
    \   0000DF   12....       LCALL   ?Subroutine7 & 0xFFFF
    \                     ??CrossCallReturnLabel_8:
    \   0000E2   C3           CLR     C
@@ -1895,8 +1903,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   0000E7   65D0         XRL     A,PSW
    \   0000E9   33           RLC     A
    \   0000EA   502C         JNC     ??SampleApp_MessageMSGCB_8
-    708          		{
-    709          		  if(count < 3)
+    710          		{
+    711          		  if(count < 3)
    \   0000EC   90....       MOV     DPTR,#count
    \   0000EF   C3           CLR     C
    \   0000F0   E0           MOVX    A,@DPTR
@@ -1908,7 +1916,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   0000F9   65D0         XRL     A,PSW
    \   0000FB   33           RLC     A
    \   0000FC   500E         JNC     ??SampleApp_MessageMSGCB_9
-    710          		    	count++;
+    712          		    	count++;
    \   0000FE   90....       MOV     DPTR,#count
    \   000101   E0           MOVX    A,@DPTR
    \   000102   2401         ADD     A,#0x1
@@ -1917,18 +1925,18 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000106   E0           MOVX    A,@DPTR
    \   000107   3400         ADDC    A,#0x0
    \   000109   02....       LJMP    ??SampleApp_MessageMSGCB_10 & 0xFFFF
-    711          		  else
-    712          		  {
-    713          		    	beep1();
+    713          		  else
+    714          		  {
+    715          		    	beep1();
    \                     ??SampleApp_MessageMSGCB_9:
    \   00010C   75DB00       MOV     0xdb,#0x0
    \   00010F   75DAFF       MOV     0xda,#-0x1
-    714          			count = 0;
+    716          			count = 0;
    \   000112   90....       MOV     DPTR,#count
    \   000115   02....       LJMP    ??SampleApp_MessageMSGCB_11 & 0xFFFF
-    715          		  }
-    716          		}
-    717          		else if(pkt->rssi > -55)
+    717          		  }
+    718          		}
+    719          		else if(pkt->rssi > -55)
    \                     ??SampleApp_MessageMSGCB_8:
    \   000118   E0           MOVX    A,@DPTR
    \   000119   C3           CLR     C
@@ -1941,197 +1949,246 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000125   F0           MOVX    @DPTR,A
    \   000126   A3           INC     DPTR
    \   000127   4003         JC      ??SampleApp_MessageMSGCB_12
-    718          		{
-    719          		  	count = 0;
+    720          		{
+    721          		  	count = 0;
    \   000129   F0           MOVX    @DPTR,A
-    720          		  	beep0();
+    722          		  	beep0();
    \   00012A   809B         SJMP    ??SampleApp_MessageMSGCB_6
-    721          		}
-    722          		else
-    723          			count = 0;
+    723          		}
+    724          		else
+    725          			count = 0;
    \                     ??SampleApp_MessageMSGCB_12:
    \   00012C   02....       LJMP    ??SampleApp_MessageMSGCB_10 & 0xFFFF
-    724          	}
-    725          	else
-    726          	{
-    727          	  	
-    728          	}
-    729          	  
-    730          	  
-    731                }
-    732                else if(buf[0] == 0x00)
+    726          	}
+    727          	else
+    728          	{
+    729          	  	
+    730          	}
+    731          	  
+    732          	  
+    733                }
+    734                else if(buf[0] == 0x00)
    \                     ??SampleApp_MessageMSGCB_3:
    \   00012F   E0           MOVX    A,@DPTR
-   \   000130   7055         JNZ     ??SampleApp_MessageMSGCB_4
-    733                {
-    734          		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
-   \   000132   E5..         MOV     A,?V0 + 0
-   \   000134   2420         ADD     A,#0x20
-   \   000136   F8           MOV     R0,A
-   \   000137   E5..         MOV     A,?V0 + 1
-   \   000139   3400         ADDC    A,#0x0
-   \   00013B   F9           MOV     R1,A
-   \   00013C   E8           MOV     A,R0
-   \   00013D   FE           MOV     R6,A
-   \   00013E   E9           MOV     A,R1
-   \   00013F   FF           MOV     R7,A
-   \   000140                ; Setup parameters for call to function osal_memcpy
-   \   000140   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \   000130   6003         JZ      $+5
+   \   000132   02....       LJMP    ??SampleApp_MessageMSGCB_4 & 0xFFFF
+    735                {
+    736          		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
+   \   000135   E5..         MOV     A,?V0 + 0
+   \   000137   2420         ADD     A,#0x20
+   \   000139   F8           MOV     R0,A
+   \   00013A   E5..         MOV     A,?V0 + 1
+   \   00013C   3400         ADDC    A,#0x0
+   \   00013E   F9           MOV     R1,A
+   \   00013F   E8           MOV     A,R0
+   \   000140   FE           MOV     R6,A
+   \   000141   E9           MOV     A,R1
+   \   000142   FF           MOV     R7,A
+   \   000143                ; Setup parameters for call to function osal_memcpy
+   \   000143   12....       LCALL   ?Subroutine3 & 0xFFFF
    \                     ??CrossCallReturnLabel_0:
-   \   000143   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   000146   8E82         MOV     DPL,R6
-   \   000148   8F83         MOV     DPH,R7
-   \   00014A   12....       LCALL   ?Subroutine4 & 0xFFFF
+   \   000146   12....       LCALL   ?PUSH_XSTACK_I_THREE
+   \   000149   8E82         MOV     DPL,R6
+   \   00014B   8F83         MOV     DPH,R7
+   \   00014D   12....       LCALL   ?Subroutine4 & 0xFFFF
    \                     ??CrossCallReturnLabel_5:
-   \   00014D   7A..         MOV     R2,#device & 0xff
-   \   00014F   7B..         MOV     R3,#(device >> 8) & 0xff
-   \   000151   12....       LCALL   ??Subroutine11_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_16:
-   \   000154   12....       LCALL   ?DEALLOC_XSTACK8
-    735          		device_num = pkt->cmd.DataLength/2;
-   \   000157   8E82         MOV     DPL,R6
-   \   000159   8F83         MOV     DPH,R7
-   \   00015B   E0           MOVX    A,@DPTR
-   \   00015C   F8           MOV     R0,A
-   \   00015D   A3           INC     DPTR
+   \   000150   7A..         MOV     R2,#device & 0xff
+   \   000152   7B..         MOV     R3,#(device >> 8) & 0xff
+   \   000154   12....       LCALL   ??Subroutine12_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_18:
+   \   000157   12....       LCALL   ?DEALLOC_XSTACK8
+    737          		device_num = pkt->cmd.DataLength/2;
+   \   00015A   8E82         MOV     DPL,R6
+   \   00015C   8F83         MOV     DPH,R7
    \   00015E   E0           MOVX    A,@DPTR
-   \   00015F   C3           CLR     C
-   \   000160   13           RRC     A
-   \   000161   F9           MOV     R1,A
-   \   000162   E8           MOV     A,R0
+   \   00015F   F8           MOV     R0,A
+   \   000160   A3           INC     DPTR
+   \   000161   E0           MOVX    A,@DPTR
+   \   000162   C3           CLR     C
    \   000163   13           RRC     A
-   \   000164   90....       MOV     DPTR,#device_num
-   \   000167   F0           MOVX    @DPTR,A
-   \   000168   A3           INC     DPTR
-   \   000169   E9           MOV     A,R1
+   \   000164   F9           MOV     R1,A
+   \   000165   E8           MOV     A,R0
+   \   000166   13           RRC     A
+   \   000167   90....       MOV     DPTR,#device_num
    \   00016A   F0           MOVX    @DPTR,A
-    736          		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
-   \   00016B                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   00016B   75..04       MOV     ?V0 + 0,#0x4
-   \   00016E   78..         MOV     R0,#?V0 + 0
-   \   000170   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000173   790A         MOV     R1,#0xa
-   \   000175   90....       MOV     DPTR,#device_num
-   \   000178   12....       LCALL   ?Subroutine4 & 0xFFFF
-    737                }
+   \   00016B   A3           INC     DPTR
+   \   00016C   E9           MOV     A,R1
+   \   00016D   F0           MOVX    @DPTR,A
+    738          		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
+   \   00016E                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   00016E   75..04       MOV     ?V0 + 0,#0x4
+   \   000171   78..         MOV     R0,#?V0 + 0
+   \   000173   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   000176   790A         MOV     R1,#0xa
+   \   000178   90....       MOV     DPTR,#device_num
+   \   00017B   12....       LCALL   ?Subroutine4 & 0xFFFF
    \                     ??CrossCallReturnLabel_6:
-   \   00017B   7A..         MOV     R2,#`?<Constant "dev_num:">` & 0xff
-   \   00017D   7B..         MOV     R3,#(`?<Constant "dev_num:">` >> 8) & 0xff
-   \   00017F   12....       LCALL   ??Subroutine13_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_26:
-   \   000182   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000185   8077         SJMP    ??SampleApp_MessageMSGCB_0
-    738                else
-    739                {
-    740                    	HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);                   
-   \                     ??SampleApp_MessageMSGCB_4:
-   \   000187                ; Setup parameters for call to function HalLedSet
-   \   000187   7A01         MOV     R2,#0x1
-   \   000189   7901         MOV     R1,#0x1
-   \   00018B   12....       LCALL   ??HalLedSet?relay
-   \   00018E   806E         SJMP    ??SampleApp_MessageMSGCB_0
-    741                }
-    742                break;
-    743          
-    744              case SAMPLEAPP_FLASH_CLUSTERID: //收到组播数据
-    745                
-    746                
-    747                if(pkt->cmd.Data[3] == 1)
+   \   00017E   7A..         MOV     R2,#`?<Constant "dev_num:">` & 0xff
+   \   000180   7B..         MOV     R3,#(`?<Constant "dev_num:">` >> 8) & 0xff
+   \   000182   12....       LCALL   ??Subroutine14_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_28:
+   \   000185   12....       LCALL   ?DEALLOC_XSTACK8
+    739          		
+    740          		for(i = 0 ;i < device_num; i++)
+   \   000188   7E00         MOV     R6,#0x0
+   \                     ??SampleApp_MessageMSGCB_13:
+   \   00018A   8E..         MOV     ?V0 + 0,R6
+   \   00018C   90....       MOV     DPTR,#device_num
+   \   00018F   E0           MOVX    A,@DPTR
+   \   000190   F8           MOV     R0,A
+   \   000191   A3           INC     DPTR
+   \   000192   E0           MOVX    A,@DPTR
+   \   000193   F9           MOV     R1,A
+   \   000194   C3           CLR     C
+   \   000195   E5..         MOV     A,?V0 + 0
+   \   000197   98           SUBB    A,R0
+   \   000198   E4           CLR     A
+   \   000199   99           SUBB    A,R1
+   \   00019A   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   00019C   65D0         XRL     A,PSW
+   \   00019E   33           RLC     A
+   \   00019F   4003         JC      $+5
+   \   0001A1   02....       LJMP    ??SampleApp_MessageMSGCB_0 & 0xFFFF
+    741          		{
+    742          		  if(device[i] == NLME_GetShortAddr())
+   \   0001A4                ; Setup parameters for call to function NLME_GetShortAddr
+   \   0001A4   12....       LCALL   ??NLME_GetShortAddr?relay
+   \   0001A7   EE           MOV     A,R6
+   \   0001A8   C3           CLR     C
+   \   0001A9   33           RLC     A
+   \   0001AA   F8           MOV     R0,A
+   \   0001AB   E4           CLR     A
+   \   0001AC   12....       LCALL   ?Subroutine8 & 0xFFFF
+   \                     ??CrossCallReturnLabel_10:
+   \   0001AF   6A           XRL     A,R2
+   \   0001B0   7003         JNZ     ??SampleApp_MessageMSGCB_14
+   \   0001B2   A3           INC     DPTR
+   \   0001B3   E0           MOVX    A,@DPTR
+   \   0001B4   6B           XRL     A,R3
+   \                     ??SampleApp_MessageMSGCB_14:
+   \   0001B5   701A         JNZ     ??SampleApp_MessageMSGCB_15
+    743          		  	HalLcdWriteStringValue("dev_NO.", i, 10, 2);
+   \   0001B7                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   0001B7   75..02       MOV     ?V0 + 0,#0x2
+   \   0001BA   78..         MOV     R0,#?V0 + 0
+   \   0001BC   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   0001BF   790A         MOV     R1,#0xa
+   \   0001C1   8E..         MOV     ?V0 + 0,R6
+   \   0001C3   AC..         MOV     R4,?V0 + 0
+   \   0001C5   7D00         MOV     R5,#0x0
+   \   0001C7   7A..         MOV     R2,#`?<Constant "dev_NO.">` & 0xff
+   \   0001C9   7B..         MOV     R3,#(`?<Constant "dev_NO.">` >> 8) & 0xff
+   \   0001CB   12....       LCALL   ??Subroutine14_0 & 0xFFFF
+    744          		}
+   \                     ??CrossCallReturnLabel_29:
+   \   0001CE   12....       LCALL   ?DEALLOC_XSTACK8
+   \                     ??SampleApp_MessageMSGCB_15:
+   \   0001D1   0E           INC     R6
+   \   0001D2   80B6         SJMP    ??SampleApp_MessageMSGCB_13
+    745            
+    746                }
+    747                else
     748                {
-    749          	
+    749                    	HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);                   
+   \                     ??SampleApp_MessageMSGCB_4:
+   \   0001D4                ; Setup parameters for call to function HalLedSet
+   \   0001D4   7A01         MOV     R2,#0x1
+   \   0001D6   7901         MOV     R1,#0x1
+   \   0001D8   12....       LCALL   ??HalLedSet?relay
+   \   0001DB   806E         SJMP    ??SampleApp_MessageMSGCB_0
     750                }
-    751                else if(pkt->cmd.Data[3] == 3)
-    752                {
-    753          	
-    754                }
+    751                break;
+    752          
+    753              case SAMPLEAPP_FLASH_CLUSTERID: //收到组播数据
+    754                
     755                break;
     756                
     757              case SAMPLEAPP_SINGLE_CLUSTERID:
     758                HalLcdWriteStringValue("beep info:", pkt->srcAddr.addr.shortAddr, 16, 5);
    \                     ??SampleApp_MessageMSGCB_2:
-   \   000190                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   000190   75..05       MOV     ?V0 + 2,#0x5
-   \   000193   78..         MOV     R0,#?V0 + 2
-   \   000195   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   000198   7910         MOV     R1,#0x10
-   \   00019A   8A82         MOV     DPL,R2
-   \   00019C   8B83         MOV     DPH,R3
-   \   00019E   A3           INC     DPTR
-   \   00019F   A3           INC     DPTR
-   \   0001A0   A3           INC     DPTR
-   \   0001A1   A3           INC     DPTR
-   \   0001A2   A3           INC     DPTR
-   \   0001A3   A3           INC     DPTR
-   \   0001A4   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_20:
-   \   0001A7   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0001DD                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   0001DD   75..05       MOV     ?V0 + 2,#0x5
+   \   0001E0   78..         MOV     R0,#?V0 + 2
+   \   0001E2   12....       LCALL   ?PUSH_XSTACK_I_ONE
+   \   0001E5   7910         MOV     R1,#0x10
+   \   0001E7   8A82         MOV     DPL,R2
+   \   0001E9   8B83         MOV     DPH,R3
+   \   0001EB   A3           INC     DPTR
+   \   0001EC   A3           INC     DPTR
+   \   0001ED   A3           INC     DPTR
+   \   0001EE   A3           INC     DPTR
+   \   0001EF   A3           INC     DPTR
+   \   0001F0   A3           INC     DPTR
+   \   0001F1   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_22:
+   \   0001F4   12....       LCALL   ?DEALLOC_XSTACK8
     759                osal_memset(buf, 0 , 3);
-   \   0001AA                ; Setup parameters for call to function osal_memset
-   \   0001AA   7C03         MOV     R4,#0x3
-   \   0001AC   7D00         MOV     R5,#0x0
-   \   0001AE   7900         MOV     R1,#0x0
-   \   0001B0   85..82       MOV     DPL,?XSP + 0
-   \   0001B3   85..83       MOV     DPH,?XSP + 1
-   \   0001B6   AA82         MOV     R2,DPL
-   \   0001B8   AB83         MOV     R3,DPH
-   \   0001BA   12....       LCALL   ??osal_memset?relay
+   \   0001F7                ; Setup parameters for call to function osal_memset
+   \   0001F7   7C03         MOV     R4,#0x3
+   \   0001F9   7D00         MOV     R5,#0x0
+   \   0001FB   7900         MOV     R1,#0x0
+   \   0001FD   85..82       MOV     DPL,?XSP + 0
+   \   000200   85..83       MOV     DPH,?XSP + 1
+   \   000203   AA82         MOV     R2,DPL
+   \   000205   AB83         MOV     R3,DPH
+   \   000207   12....       LCALL   ??osal_memset?relay
     760                osal_memcpy(buf, pkt->cmd.Data, 3); //复制数据到缓冲区中
-   \   0001BD                ; Setup parameters for call to function osal_memcpy
-   \   0001BD   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \   00020A                ; Setup parameters for call to function osal_memcpy
+   \   00020A   12....       LCALL   ?Subroutine3 & 0xFFFF
    \                     ??CrossCallReturnLabel_1:
-   \   0001C0   12....       LCALL   ?PUSH_XSTACK_I_THREE
-   \   0001C3   7C03         MOV     R4,#0x3
-   \   0001C5   7D00         MOV     R5,#0x0
-   \   0001C7   EC           MOV     A,R4
-   \   0001C8   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001CB   12....       LCALL   ?Subroutine6 & 0xFFFF
-   \                     ??CrossCallReturnLabel_14:
-   \   0001CE   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00020D   12....       LCALL   ?PUSH_XSTACK_I_THREE
+   \   000210   7C03         MOV     R4,#0x3
+   \   000212   7D00         MOV     R5,#0x0
+   \   000214   EC           MOV     A,R4
+   \   000215   12....       LCALL   ?XSTACK_DISP0_8
+   \   000218   12....       LCALL   ?Subroutine6 & 0xFFFF
+   \                     ??CrossCallReturnLabel_16:
+   \   00021B   12....       LCALL   ?DEALLOC_XSTACK8
     761                
     762                if(buf[0]=='B' && buf[1]=='P') 
-   \   0001D1   85..82       MOV     DPL,?XSP + 0
-   \   0001D4   85..83       MOV     DPH,?XSP + 1
-   \   0001D7   E0           MOVX    A,@DPTR
-   \   0001D8   6442         XRL     A,#0x42
-   \   0001DA   7022         JNZ     ??SampleApp_MessageMSGCB_0
-   \   0001DC   7401         MOV     A,#0x1
-   \   0001DE   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001E1   E0           MOVX    A,@DPTR
-   \   0001E2   6450         XRL     A,#0x50
-   \   0001E4   7018         JNZ     ??SampleApp_MessageMSGCB_0
+   \   00021E   85..82       MOV     DPL,?XSP + 0
+   \   000221   85..83       MOV     DPH,?XSP + 1
+   \   000224   E0           MOVX    A,@DPTR
+   \   000225   6442         XRL     A,#0x42
+   \   000227   7022         JNZ     ??SampleApp_MessageMSGCB_0
+   \   000229   7401         MOV     A,#0x1
+   \   00022B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00022E   E0           MOVX    A,@DPTR
+   \   00022F   6450         XRL     A,#0x50
+   \   000231   7018         JNZ     ??SampleApp_MessageMSGCB_0
     763                {
     764          	if(buf[2] == 1)
-   \   0001E6   7402         MOV     A,#0x2
-   \   0001E8   12....       LCALL   ?XSTACK_DISP0_8
-   \   0001EB   E0           MOVX    A,@DPTR
-   \   0001EC   6401         XRL     A,#0x1
-   \   0001EE   90....       MOV     DPTR,#beep_flag
-   \   0001F1   7007         JNZ     ??SampleApp_MessageMSGCB_11
+   \   000233   7402         MOV     A,#0x2
+   \   000235   12....       LCALL   ?XSTACK_DISP0_8
+   \   000238   E0           MOVX    A,@DPTR
+   \   000239   6401         XRL     A,#0x1
+   \   00023B   90....       MOV     DPTR,#beep_flag
+   \   00023E   7007         JNZ     ??SampleApp_MessageMSGCB_11
     765          	  beep_flag = 1;
-   \   0001F3   7401         MOV     A,#0x1
-   \   0001F5   F0           MOVX    @DPTR,A
-   \   0001F6   A3           INC     DPTR
-   \   0001F7   E4           CLR     A
-   \   0001F8   8003         SJMP    ??SampleApp_MessageMSGCB_10
+   \   000240   7401         MOV     A,#0x1
+   \   000242   F0           MOVX    @DPTR,A
+   \   000243   A3           INC     DPTR
+   \   000244   E4           CLR     A
+   \   000245   8003         SJMP    ??SampleApp_MessageMSGCB_10
     766          	else
     767          	  beep_flag = 0;
    \                     ??SampleApp_MessageMSGCB_11:
-   \   0001FA   E4           CLR     A
-   \   0001FB   F0           MOVX    @DPTR,A
-   \   0001FC   A3           INC     DPTR
+   \   000247   E4           CLR     A
+   \   000248   F0           MOVX    @DPTR,A
+   \   000249   A3           INC     DPTR
    \                     ??SampleApp_MessageMSGCB_10:
-   \   0001FD   F0           MOVX    @DPTR,A
+   \   00024A   F0           MOVX    @DPTR,A
     768                }
     769          	
     770            }
     771          }
    \                     ??SampleApp_MessageMSGCB_0:
-   \   0001FE   7403         MOV     A,#0x3
-   \   000200   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000203   7F07         MOV     R7,#0x7
-   \   000205   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   000208                REQUIRE T1CC0H
-   \   000208                REQUIRE T1CC0L
+   \   00024B   7403         MOV     A,#0x3
+   \   00024D   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000250   7F07         MOV     R7,#0x7
+   \   000252   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000255                REQUIRE T1CC0H
+   \   000255                REQUIRE T1CC0L
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine7:
@@ -2148,25 +2205,13 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \                     ?Subroutine6:
    \   000000   AA82         MOV     R2,DPL
    \   000002   AB83         MOV     R3,DPH
-   \   000004                REQUIRE ??Subroutine11_0
-   \   000004                ; // Fall through to label ??Subroutine11_0
+   \   000004                REQUIRE ??Subroutine12_0
+   \   000004                ; // Fall through to label ??Subroutine12_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine3:
-   \   000000   E0           MOVX    A,@DPTR
-   \   000001   FC           MOV     R4,A
-   \   000002   A3           INC     DPTR
-   \   000003   E0           MOVX    A,@DPTR
-   \   000004   FD           MOV     R5,A
-   \   000005   7A..         MOV     R2,#`?<Constant "beep info:">` & 0xff
-   \   000007   7B..         MOV     R3,#(`?<Constant "beep info:">` >> 8) & 0xff
-   \   000009                REQUIRE ??Subroutine13_0
-   \   000009                ; // Fall through to label ??Subroutine13_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine2:
-   \   000000   12....       LCALL   ?Subroutine9 & 0xFFFF
-   \                     ??CrossCallReturnLabel_10:
+   \   000000   12....       LCALL   ?Subroutine10 & 0xFFFF
+   \                     ??CrossCallReturnLabel_12:
    \   000003   F5..         MOV     ?V0 + 0,A
    \   000005   A3           INC     DPTR
    \   000006   E0           MOVX    A,@DPTR
@@ -2176,7 +2221,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00000E   22           RET
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine9:
+   \                     ?Subroutine10:
    \   000000   E5..         MOV     A,?V0 + 0
    \   000002   2422         ADD     A,#0x22
    \   000004   F582         MOV     DPL,A
@@ -2185,6 +2230,18 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00000A   F583         MOV     DPH,A
    \   00000C   E0           MOVX    A,@DPTR
    \   00000D   22           RET
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine2:
+   \   000000   E0           MOVX    A,@DPTR
+   \   000001   FC           MOV     R4,A
+   \   000002   A3           INC     DPTR
+   \   000003   E0           MOVX    A,@DPTR
+   \   000004   FD           MOV     R5,A
+   \   000005   7A..         MOV     R2,#`?<Constant "beep info:">` & 0xff
+   \   000007   7B..         MOV     R3,#(`?<Constant "beep info:">` >> 8) & 0xff
+   \   000009                REQUIRE ??Subroutine14_0
+   \   000009                ; // Fall through to label ??Subroutine14_0
     772          
     773          
     774          //处理ZDO层传来的信息
@@ -2198,7 +2255,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
     777          #if defined(ZDO_COORDINATOR)
     778          {
     779            
-    780            int i = 0;
+    780            
     781            char flag = 0;
     782            uint16 nwk_addr;
     783            byte buf[10]; 
@@ -2225,9 +2282,9 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
     804          		if(flag == 0)
     805          		{
     806          	  		device[++device_num] = nwk_addr;
-    807          			SampleApp_SendAddrMessage( (uint8 *)device, device_num );
-    808          		}
-    809          	
+    807          		}
+    808          		
+    809          		SampleApp_SendAddrMessage( (uint8 *)device, device_num );
     810                
     811                
     812          //      flashTime = BUILD_UINT16(pkt->cmd.Data[1], pkt->cmd.Data[2] );
@@ -2238,7 +2295,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
     817            }
     818          }
     819          #endif	
-    820            
+    820          
     821          }
    \   000000   02....       LJMP    ?BRET
     822          
@@ -2284,8 +2341,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000033   12....       LCALL   ?PUSH_XSTACK_I_ONE
    \   000036   7910         MOV     R1,#0x10
    \   000038   90....       MOV     DPTR,#SampleApp_Single_DstAddr
-   \   00003B   12....       LCALL   ?Subroutine3 & 0xFFFF
-   \                     ??CrossCallReturnLabel_21:
+   \   00003B   12....       LCALL   ?Subroutine2 & 0xFFFF
+   \                     ??CrossCallReturnLabel_23:
    \   00003E   12....       LCALL   ?DEALLOC_XSTACK8
     832            // 调用AF_DataRequest将数据无线广播出去
     833            if( AF_DataRequest( &SampleApp_Single_DstAddr,   //发送目的地址＋端点地址和传送模式
@@ -2321,8 +2378,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   000078   7D..         MOV     R5,#(SampleApp_epDesc >> 8) & 0xff
    \   00007A   7A..         MOV     R2,#SampleApp_Single_DstAddr & 0xff
    \   00007C   7B..         MOV     R3,#(SampleApp_Single_DstAddr >> 8) & 0xff
-   \   00007E   12....       LCALL   ??Subroutine14_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_29:
+   \   00007E   12....       LCALL   ??Subroutine15_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_32:
    \   000081   12....       LCALL   ?DEALLOC_XSTACK8
    \   000084   E9           MOV     A,R1
    \   000085   6007         JZ      ??SampleApp_SendBeepMessage_0
@@ -2345,7 +2402,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00008E   02....       LJMP    ?Subroutine1 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine14_0:
+   \                     ??Subroutine15_0:
    \   000000   12....       LCALL   ??AF_DataRequest?relay
    \   000003   7409         MOV     A,#0x9
    \   000005   22           RET
@@ -2353,14 +2410,14 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
    \   000000   7403         MOV     A,#0x3
-   \   000002                REQUIRE ??Subroutine15_0
-   \   000002                ; // Fall through to label ??Subroutine15_0
+   \   000002                REQUIRE ??Subroutine16_0
+   \   000002                ; // Fall through to label ??Subroutine16_0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine15_0:
+   \                     ??Subroutine16_0:
    \   000000   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000003                REQUIRE ??Subroutine16_0
-   \   000003                ; // Fall through to label ??Subroutine16_0
+   \   000003                REQUIRE ??Subroutine17_0
+   \   000003                ; // Fall through to label ??Subroutine17_0
     852          
     853          
     854          
@@ -2415,8 +2472,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00003E   75..00       MOV     ?V0 + 1,#0x0
    \   000041   78..         MOV     R0,#?V0 + 0
    \   000043   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000046   12....       LCALL   ?Subroutine8 & 0xFFFF
-   \                     ??CrossCallReturnLabel_27:
+   \   000046   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_30:
    \   000049   12....       LCALL   ?DEALLOC_XSTACK8
    \   00004C   E9           MOV     A,R1
    \   00004D   6007         JZ      ??SampleApp_SendAddrMessage_0
@@ -2436,17 +2493,17 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
     877          //#endif
     878          }
    \                     ??SampleApp_SendAddrMessage_0:
-   \   000056   02....       LJMP    ??Subroutine16_0 & 0xFFFF
+   \   000056   02....       LJMP    ??Subroutine17_0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine8:
+   \                     ?Subroutine9:
    \   000000   7920         MOV     R1,#0x20
    \   000002   7C..         MOV     R4,#SampleApp_epDesc & 0xff
    \   000004   7D..         MOV     R5,#(SampleApp_epDesc >> 8) & 0xff
    \   000006   7A..         MOV     R2,#SampleApp_Periodic_DstAddr & 0xff
    \   000008   7B..         MOV     R3,#(SampleApp_Periodic_DstAddr >> 8) & 0xff
-   \   00000A                REQUIRE ??Subroutine14_0
-   \   00000A                ; // Fall through to label ??Subroutine14_0
+   \   00000A                REQUIRE ??Subroutine15_0
+   \   00000A                ; // Fall through to label ??Subroutine15_0
     879          
     880          
     881          
@@ -2513,8 +2570,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00004D   75..01       MOV     ?V0 + 0,#0x1
    \   000050   78..         MOV     R0,#?V0 + 0
    \   000052   12....       LCALL   ?PUSH_XSTACK_I_TWO
-   \   000055   12....       LCALL   ?Subroutine8 & 0xFFFF
-   \                     ??CrossCallReturnLabel_28:
+   \   000055   12....       LCALL   ?Subroutine9 & 0xFFFF
+   \                     ??CrossCallReturnLabel_31:
    \   000058   12....       LCALL   ?DEALLOC_XSTACK8
    \   00005B   E9           MOV     A,R1
    \   00005C   6007         JZ      ??SampleApp_SendPeriodicMessage_0
@@ -2616,8 +2673,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \   00006A   7D..         MOV     R5,#(SampleApp_epDesc >> 8) & 0xff
    \   00006C   7A..         MOV     R2,#SampleApp_Flash_DstAddr & 0xff
    \   00006E   7B..         MOV     R3,#(SampleApp_Flash_DstAddr >> 8) & 0xff
-   \   000070   12....       LCALL   ??Subroutine14_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_30:
+   \   000070   12....       LCALL   ??Subroutine15_0 & 0xFFFF
+   \                     ??CrossCallReturnLabel_33:
    \   000073   12....       LCALL   ?DEALLOC_XSTACK8
     943            {
     944            }
@@ -2627,7 +2684,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
     948            }
     949          }
    \   000076   7404         MOV     A,#0x4
-   \   000078   80..         SJMP    ??Subroutine15_0
+   \   000078   80..         SJMP    ??Subroutine16_0
 
    \                                 In  segment INTVEC, offset 0x5b, root
    \                     `??T3_ISR??INTVEC 91`:
@@ -2753,6 +2810,11 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
    \            00      
 
    \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "dev_NO.">`:
+   \   000000   6465765F     DB "dev_NO."
+   \            4E4F2E00
+
+   \                                 In  segment XDATA_ROM_C, align 1
    \                     `?<Constant "beep info:">`:
    \   000000   62656570     DB "beep info:"
    \            20696E66
@@ -2797,6 +2859,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
        -> HalLcdWriteStringValue        0      0     38
        -> HalLcdWriteStringValue        0      0     38
        -> osal_memcpy                   0      0     42
+       -> HalLcdWriteStringValue        0      0     38
+       -> NLME_GetShortAddr             0      0     36
        -> HalLcdWriteStringValue        0      0     38
        -> HalLedSet                     0      0     36
        -> HalLcdWriteStringValue        0      0     38
@@ -2875,33 +2939,34 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
      InitT1                                  65
      InitT3                                  19
      T3_ISR                                 165
-     ?Subroutine10                           14
+     ?Subroutine11                           14
      beep0                                    9
      beep1                                    3
      ?Subroutine0                             6
      beep2                                    5
      SampleApp_Init                         192
-     ??Subroutine11_0                         6
+     ??Subroutine12_0                         6
      SampleApp_ProcessEvent                 167
-     SampleApp_HandleKeys                   335
+     SampleApp_HandleKeys                   325
+     ?Subroutine8                            14
      ?Subroutine5                             3
-     ??Subroutine12_0                         7
+     ??Subroutine13_0                         7
      ?Subroutine4                             6
-     ??Subroutine13_0                         6
-     ??Subroutine16_0                         5
-     SampleApp_MessageMSGCB                 520
+     ??Subroutine14_0                         6
+     ??Subroutine17_0                         5
+     SampleApp_MessageMSGCB                 597
      ?Subroutine7                            14
      ?Subroutine6                             4
-     ?Subroutine3                             9
-     ?Subroutine2                            15
-     ?Subroutine9                            14
+     ?Subroutine3                            15
+     ?Subroutine10                           14
+     ?Subroutine2                             9
      SApp_ProcessMsgCBs                       3
      SampleApp_SendBeepMessage              145
-     ??Subroutine14_0                         6
+     ??Subroutine15_0                         6
      ?Subroutine1                             2
-     ??Subroutine15_0                         3
+     ??Subroutine16_0                         3
      SampleApp_SendAddrMessage               89
-     ?Subroutine8                            10
+     ?Subroutine9                            10
      SampleApp_SendPeriodicMessage          103
      SampleApp_SendFlashMessage             122
      ??T3_ISR??INTVEC 91                      3
@@ -2928,23 +2993,24 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\Sourc
      ?<Constant "rssi:">                      6
      ?<Constant "src addr:">                 10
      ?<Constant "dev_num:">                   9
+     ?<Constant "dev_NO.">                    8
      ?<Constant "beep info:">                11
      ?<Constant "BP">                         3
      ?<Constant "D1">                         3
 
  
- 1 893 bytes in segment BANKED_CODE
+ 1 974 bytes in segment BANKED_CODE
     84 bytes in segment BANK_RELAYS
      3 bytes in segment INTVEC
    179 bytes in segment NEAR_CODE
     14 bytes in segment SFR_AN
     14 bytes in segment XDATA_I
     14 bytes in segment XDATA_ID
-    94 bytes in segment XDATA_ROM_C
+   102 bytes in segment XDATA_ROM_C
    145 bytes in segment XDATA_Z
  
- 2 170 bytes of CODE  memory (+  3 bytes shared)
-    94 bytes of CONST memory
+ 2 251 bytes of CODE  memory (+  3 bytes shared)
+   102 bytes of CONST memory
      0 bytes of DATA  memory (+ 14 bytes shared)
    159 bytes of XDATA memory
 

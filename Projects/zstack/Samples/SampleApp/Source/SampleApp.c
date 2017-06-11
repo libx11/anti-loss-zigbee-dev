@@ -523,6 +523,7 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
  */
 void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓÐÓÃµ½£¬ºóÃæÔÙ·ÖÎö
 {
+  
   (void)shift;  // Intentionally unreferenced parameter
   
   if ( keys & HAL_KEY_SW_1 )//key2
@@ -570,7 +571,7 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓÐÓÃµ½£¬ºóÃæÔÙ·ÖÎ
     {
       	dst_dev = device[sel_dev];
     }
-       
+    
     
     
     /* This key sends the Flash Command is sent to Group 1.
@@ -675,6 +676,7 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //´ËÊµÑéÃ»ÓÐÓÃµ½£¬ºóÃæÔÙ·ÖÎ
 //½ÓÊÕÊý¾Ý£¬²ÎÊýÎª½ÓÊÕµ½µÄÊý¾Ý
 void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 {
+  char i;
   byte buf[3];
 //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
 
@@ -734,6 +736,13 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
 		device_num = pkt->cmd.DataLength/2;
 		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
+		
+		for(i = 0 ;i < device_num; i++)
+		{
+		  if(device[i] == NLME_GetShortAddr())
+		  	HalLcdWriteStringValue("dev_NO.", i, 10, 2);
+		}
+  
       }
       else
       {
@@ -743,15 +752,6 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 
     case SAMPLEAPP_FLASH_CLUSTERID: //ÊÕµ½×é²¥Êý¾Ý
       
-      
-      if(pkt->cmd.Data[3] == 1)
-      {
-	
-      }
-      else if(pkt->cmd.Data[3] == 3)
-      {
-	
-      }
       break;
       
     case SAMPLEAPP_SINGLE_CLUSTERID:
@@ -777,7 +777,7 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 #if defined(ZDO_COORDINATOR)
 {
   
-  int i = 0;
+  
   char flag = 0;
   uint16 nwk_addr;
   byte buf[10]; 
@@ -804,9 +804,9 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 		if(flag == 0)
 		{
 	  		device[++device_num] = nwk_addr;
-			SampleApp_SendAddrMessage( (uint8 *)device, device_num );
 		}
-	
+		
+		SampleApp_SendAddrMessage( (uint8 *)device, device_num );
       
       
 //      flashTime = BUILD_UINT16(pkt->cmd.Data[1], pkt->cmd.Data[2] );
@@ -817,7 +817,7 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
   }
 }
 #endif	
-  
+
 }
 
 
