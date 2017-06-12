@@ -416,7 +416,7 @@ void HalLcdWriteScreen( char *line1, char *line2 )
  *
  * @return  None
  **************************************************************************************************/
-void HalLcdWriteStringValue( char *title, uint16 value, uint8 format, uint8 line )
+void HalLcdWriteStringValue( char *title, uint32 value, uint8 format, uint8 line )
 {
 #if (HAL_LCD == TRUE)
   uint8 tmpLen;

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        17/Apr/2017  20:22:58 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        12/Jun/2017  17:22:34 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -152,6 +152,7 @@
         EXTERN ?BDISPATCH
         EXTERN ?BRET
         EXTERN ?DEALLOC_XSTACK8
+        EXTERN ?PUSH_XSTACK_I_FOUR
         EXTERN ?PUSH_XSTACK_I_ONE
         EXTERN ?US_SWITCH_SPARSE
         EXTERN ?V0
@@ -233,7 +234,7 @@
         PUBLIC nwk_Status
         FUNCTION nwk_Status,0a1203H
         ARGFRAME XSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
+        LOCFRAME XSTACK, 16, STACK
         PUBLIC nwk_UpdateStatistics
         FUNCTION nwk_UpdateStatistics,0203H
         ARGFRAME XSTACK, 0, STACK
@@ -494,7 +495,7 @@ nwk_globals_init    SYMBOL "nwk_globals_init"
         FUNCTION HalLcdWriteStringValue,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
+        ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         EXTERN BuzzerControl
@@ -1716,12 +1717,12 @@ nwk_Status:
         FUNCALL nwk_Status, HalLcdWriteStringValue
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
+        LOCFRAME XSTACK, 16, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
+        ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL nwk_Status, BuzzerControl
@@ -1738,12 +1739,12 @@ nwk_Status:
         FUNCALL nwk_Status, HalLcdWriteStringValue
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
+        LOCFRAME XSTACK, 16, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
+        ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL nwk_Status, HalLcdWriteScreen
@@ -1793,12 +1794,12 @@ nwk_Status:
         FUNCALL nwk_Status, HalLcdWriteStringValue
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
-        LOCFRAME XSTACK, 13, STACK
+        LOCFRAME XSTACK, 16, STACK
         LOCFRAME IOVERLAY, 0, STATIC
         LOCFRAME DOVERLAY, 0, STATIC
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 13, STACK
+        ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         FUNCALL nwk_Status, HalLcdWriteScreen
@@ -2014,18 +2015,21 @@ nwk_Status:
         MOV     R1,#0x0
         MOV     R2,#ZigbeeCoordStr & 0xff
         MOV     R3,#(ZigbeeCoordStr >> 8) & 0xff
-        LCALL   ?Subroutine2 & 0xFFFF
+        LCALL   ??HalLcdWriteString?relay
 //  491         HalLcdWriteStringValue( (char*)NetworkIDStr, statusValue, 16, HAL_LCD_LINE_2 );
-??CrossCallReturnLabel_2:
-        LCALL   ?PUSH_XSTACK_I_ONE
-        CFI CFA_XSP16 add(XSP16, 13)
+        ; Setup parameters for call to function HalLcdWriteStringValue
+        CLR     A
+        MOV     ?V0 + 2,A
+        MOV     ?V0 + 3,A
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_FOUR
+        CFI CFA_XSP16 add(XSP16, 16)
+        MOV     R4,#0x1
         MOV     R1,#0x10
-        MOV     R4,?V0 + 0
-        MOV     R5,?V0 + 1
         MOV     R2,#NetworkIDStr & 0xff
         MOV     R3,#(NetworkIDStr >> 8) & 0xff
         LCALL   ??HalLcdWriteStringValue?relay
-        MOV     A,#0x1
+        MOV     A,#0x4
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 12)
 //  492         BuzzerControl( BUZZER_BLIP );
@@ -2034,7 +2038,7 @@ nwk_Status:
         LCALL   ??BuzzerControl?relay
 //  493       }
 //  494       break;
-        SJMP    ??nwk_Status_8
+        LJMP    ??nwk_Status_8 & 0xFFFF
 //  495 
 //  496     case NWK_STATUS_ROUTER_ADDR:
 //  497       if ( ZSTACK_ROUTER_BUILD )
@@ -2042,17 +2046,19 @@ nwk_Status:
 //  499         HalLcdWriteStringValue( (char*)RouterStr, statusValue, 16, HAL_LCD_LINE_1 );
 ??nwk_Status_3:
         ; Setup parameters for call to function HalLcdWriteStringValue
-        MOV     ?V0 + 2,#0x0
-        MOV     R0,#?V0 + 2
-        LCALL   ?PUSH_XSTACK_I_ONE
-        CFI CFA_XSP16 add(XSP16, 13)
+        CLR     A
+        MOV     ?V0 + 2,A
+        MOV     ?V0 + 3,A
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_FOUR
+        CFI CFA_XSP16 add(XSP16, 16)
+        MOV     R4,#0x0
         MOV     R1,#0x10
         MOV     R2,#RouterStr & 0xff
         MOV     R3,#(RouterStr >> 8) & 0xff
 ??nwk_Status_9:
         LCALL   ??HalLcdWriteStringValue?relay
-??nwk_Status_10:
-        MOV     A,#0x1
+        MOV     A,#0x4
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 12)
 //  500       }
@@ -2066,22 +2072,22 @@ nwk_Status:
 ??nwk_Status_4:
         MOV     A,R4
         ORL     A,?V0 + 1
-        JNZ     ??nwk_Status_11
+        JNZ     ??nwk_Status_10
 //  507           HalLcdWriteScreen( (char*)OrphanRspStr, (char*)SentStr );
         ; Setup parameters for call to function HalLcdWriteScreen
         MOV     R4,#SentStr & 0xff
         MOV     R5,#(SentStr >> 8) & 0xff
-??nwk_Status_12:
+??nwk_Status_11:
         MOV     R2,#OrphanRspStr & 0xff
         MOV     R3,#(OrphanRspStr >> 8) & 0xff
-        SJMP    ??nwk_Status_13
+        SJMP    ??nwk_Status_12
 //  508         else
 //  509           HalLcdWriteScreen( (char*)OrphanRspStr, (char*)FailedStr );
-??nwk_Status_11:
+??nwk_Status_10:
         ; Setup parameters for call to function HalLcdWriteScreen
         MOV     R4,#FailedStr & 0xff
         MOV     R5,#(FailedStr >> 8) & 0xff
-        SJMP    ??nwk_Status_12
+        SJMP    ??nwk_Status_11
 //  510       }
 //  511       break;
 //  512 
@@ -2094,11 +2100,12 @@ nwk_Status:
         MOV     R1,#0x0
         MOV     R2,#AssocRspFailStr & 0xff
         MOV     R3,#(AssocRspFailStr >> 8) & 0xff
+??nwk_Status_13:
+        LCALL   ??HalLcdWriteString?relay
 //  517         HalLcdWriteValue( (uint32)(statusValue), 16, HAL_LCD_LINE_2 );
-//  518       }
-??nwk_Status_14:
-        LCALL   ?Subroutine2 & 0xFFFF
-??CrossCallReturnLabel_3:
+        ; Setup parameters for call to function HalLcdWriteValue
+        MOV     ?V0 + 2,#0x1
+        MOV     R0,#?V0 + 2
         LCALL   ?PUSH_XSTACK_I_ONE
         CFI CFA_XSP16 add(XSP16, 13)
         MOV     R1,#0x10
@@ -2108,9 +2115,12 @@ nwk_Status:
         MOV     R4,A
         MOV     R5,A
         LCALL   ??HalLcdWriteValue?relay
-        SJMP    ??nwk_Status_10
+        MOV     A,#0x1
+        LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 12)
+//  518       }
 //  519       break;
+        SJMP    ??nwk_Status_8
 //  520 
 //  521     case NWK_STATUS_ED_ADDR:
 //  522       if ( ZSTACK_END_DEVICE_BUILD )
@@ -2123,10 +2133,13 @@ nwk_Status:
 //  529             HalLcdWriteStringValue( (char*)ParentStr, statusValue, 16, HAL_LCD_LINE_2 );
 ??nwk_Status_1:
         ; Setup parameters for call to function HalLcdWriteStringValue
-        MOV     ?V0 + 2,#0x1
-        MOV     R0,#?V0 + 2
-        LCALL   ?PUSH_XSTACK_I_ONE
-        CFI CFA_XSP16 add(XSP16, 13)
+        CLR     A
+        MOV     ?V0 + 2,A
+        MOV     ?V0 + 3,A
+        MOV     R0,#?V0 + 0
+        LCALL   ?PUSH_XSTACK_I_FOUR
+        CFI CFA_XSP16 add(XSP16, 16)
+        MOV     R4,#0x1
         MOV     R1,#0x10
         MOV     R2,#ParentStr & 0xff
         MOV     R3,#(ParentStr >> 8) & 0xff
@@ -2142,7 +2155,7 @@ nwk_Status:
         MOV     R5,#(SuccessStr >> 8) & 0xff
         MOV     R2,#AssocCnfStr & 0xff
         MOV     R3,#(AssocCnfStr >> 8) & 0xff
-        SJMP    ??nwk_Status_13
+        SJMP    ??nwk_Status_12
 //  534       break;
 //  535 
 //  536     case NWK_ERROR_ASSOC_CNF_DENIED:
@@ -2152,7 +2165,7 @@ nwk_Status:
         MOV     R1,#0x0
         MOV     R2,#AssocCnfFailStr & 0xff
         MOV     R3,#(AssocCnfFailStr >> 8) & 0xff
-        SJMP    ??nwk_Status_14
+        SJMP    ??nwk_Status_13
 //  538       HalLcdWriteValue( (uint32)(statusValue), 16, HAL_LCD_LINE_2 );
 //  539       break;
 //  540 
@@ -2164,7 +2177,7 @@ nwk_Status:
         MOV     R5,#(ScanFailedStr >> 8) & 0xff
         MOV     R2,#EnergyLevelStr & 0xff
         MOV     R3,#(EnergyLevelStr >> 8) & 0xff
-??nwk_Status_13:
+??nwk_Status_12:
         LCALL   ??HalLcdWriteScreen?relay
 //  543       break;
 //  544   }
@@ -2174,55 +2187,6 @@ nwk_Status:
         MOV     R7,#0x4
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock6
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
-?Subroutine2:
-        CFI Block cfiCond7 Using cfiCommon0
-        CFI NoFunction
-        CFI Conditional ??CrossCallReturnLabel_2
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 12)
-        CFI Block cfiCond8 Using cfiCommon0
-        CFI (cfiCond8) NoFunction
-        CFI (cfiCond8) Conditional ??CrossCallReturnLabel_3
-        CFI (cfiCond8) R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI (cfiCond8) VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI (cfiCond8) V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI (cfiCond8) V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI (cfiCond8) V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI (cfiCond8) V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI (cfiCond8) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI (cfiCond8) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI (cfiCond8) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI (cfiCond8) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI (cfiCond8) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI (cfiCond8) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI (cfiCond8) CFA_SP SP+0
-        CFI (cfiCond8) CFA_XSP16 add(XSP16, 12)
-        CFI Block cfiPicker9 Using cfiCommon1
-        CFI (cfiPicker9) NoFunction
-        CFI (cfiPicker9) Picker
-        LCALL   ??HalLcdWriteString?relay
-        ; Setup parameters for call to function HalLcdWriteStringValue
-        ; Setup parameters for call to function HalLcdWriteValue
-        MOV     ?V0 + 2,#0x1
-        MOV     R0,#?V0 + 2
-        RET
-        CFI EndBlock cfiCond7
-        CFI EndBlock cfiCond8
-        CFI EndBlock cfiPicker9
 //  547 
 //  548 /*********************************************************************
 //  549  * @fn       nwk_UpdateStatistics()
@@ -2237,7 +2201,7 @@ nwk_Status:
         RSEG BANKED_CODE:CODE:NOROOT(0)
 //  557 void nwk_UpdateStatistics( uint8 statisticCode )
 nwk_UpdateStatistics:
-        CFI Block cfiBlock10 Using cfiCommon0
+        CFI Block cfiBlock7 Using cfiCommon0
         CFI Function nwk_UpdateStatistics
         CODE
 //  558 {
@@ -2266,7 +2230,7 @@ nwk_UpdateStatistics:
 //  579 #endif
 //  580 }
         LJMP    ?BRET
-        CFI EndBlock cfiBlock10
+        CFI EndBlock cfiBlock7
 
         RSEG XDATA_ID:CODE:NOROOT(0)
 `?<Initializer for gMIN_TREE_LINK_COST>`:
@@ -2302,7 +2266,7 @@ nwk_UpdateStatistics:
 //  582 /*********************************************************************
 //  583 *********************************************************************/
 // 
-//   488 bytes in segment BANKED_CODE
+//   503 bytes in segment BANKED_CODE
 //    24 bytes in segment BANK_RELAYS
 //    73 bytes in segment CODE_C
 //     1 byte  in segment XDATA_I
@@ -2310,7 +2274,7 @@ nwk_UpdateStatistics:
 //   178 bytes in segment XDATA_ROM_C
 // 1 363 bytes in segment XDATA_Z
 // 
-//   586 bytes of CODE  memory
+//   601 bytes of CODE  memory
 //   178 bytes of CONST memory
 // 1 364 bytes of XDATA memory
 //

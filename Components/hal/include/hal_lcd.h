@@ -120,7 +120,7 @@ extern void HalLcdWriteScreen( char *line1, char *line2 );
 /*
  * Write a string followed by a value to the LCD
  */
-extern void HalLcdWriteStringValue( char *title, uint16 value, uint8 format, uint8 line );
+extern void HalLcdWriteStringValue( char *title, uint32 value, uint8 format, uint8 line );
 
 /*
  * Write a string followed by 2 values to the LCD

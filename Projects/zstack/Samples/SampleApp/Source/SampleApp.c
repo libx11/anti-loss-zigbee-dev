@@ -148,6 +148,8 @@ uint8 SampleAppPeriodicCounter = 0;
 uint8 SampleAppFlashCounter = 0;
 
 uint16 device[32] = {0};
+uint32 long_addr[32] = {0};
+
 int sel_dev = 0;
 int main_flag = 1;
 int beep_flag = 0;
@@ -770,14 +772,13 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
   }
 }
 
-
 //处理ZDO层传来的信息
 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 {
 #if defined(ZDO_COORDINATOR)
 {
-  
-  
+  char i;
+  uint32 l_addr;
   char flag = 0;
   uint16 nwk_addr;
   byte buf[10]; 
@@ -790,20 +791,24 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
         osal_memset(buf, 0 , 10);
         osal_memcpy(buf, msgPtr->asdu, 10); //复制数据到缓冲区中
 	nwk_addr = buf[1]*0x100 + buf[0];
+	l_addr = buf[5]*0x1000000 + buf[4]*0x10000 + buf[3]*0x100 + buf[2];
 	HalLcdWriteStringValue("DevAnnce:", nwk_addr, 16, 4);
+	HalLcdWriteStringValue("l_addr:", l_addr, 16, 3);
 	
 	
 	  	for(i = 0; i < device_num; i++)
 		{
-		 	if(device[i] == nwk_addr)
+		 	if(long_addr[i] == l_addr)
 			{
-			  flag = 1;
-			  break;
+			  	flag = 1;
+				device[i] = nwk_addr;
+			  	break;
 			}
 		}
 		if(flag == 0)
 		{
 	  		device[++device_num] = nwk_addr;
+			long_addr[device_num] = l_addr;
 		}
 		
 		SampleApp_SendAddrMessage( (uint8 *)device, device_num );
@@ -819,7 +824,6 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 #endif	
 
 }
-
 
 
 void SampleApp_SendBeepMessage(uint16 dst, uint8 s)
@@ -849,7 +853,6 @@ void SampleApp_SendBeepMessage(uint16 dst, uint8 s)
   
 //#endif
 }
-
 
 
 void SampleApp_SendAddrMessage(uint8 dev[], int dev_num)
