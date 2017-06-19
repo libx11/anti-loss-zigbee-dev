@@ -567,7 +567,14 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //¥À µ—È√ª”–”√µΩ£¨∫Û√Ê‘Ÿ∑÷Œ
 	  sel_dev = 0;
 	  break;
 	}
+	
+	
+	
+#if defined ( LCD_SUPPORTED )
     HalLcdWriteStringValue("sel_dev:", sel_dev, 10, 6);
+#endif    
+    
+    
     
     if(sel_dev < device_num)
     {
@@ -628,8 +635,11 @@ void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //¥À µ—È√ª”–”√µΩ£¨∫Û√Ê‘Ÿ∑÷Œ
 		  main_flag = 0;
 		}
 		
+		
+	#if defined ( LCD_SUPPORTED )
 		HalLcdWriteStringValue("model:", main_flag, 10, 5);
 	  	
+	#endif
 //	#endif
     
     
@@ -685,6 +695,8 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
   switch ( pkt->clusterId ) //≈–∂œ¥ÿID
   {
     case SAMPLEAPP_PERIODIC_CLUSTERID: // ’µΩπ„≤• ˝æ›
+      if(beep_flag == 1)
+	break;
       osal_memset(buf, 0 , 3);
       osal_memcpy(buf, pkt->cmd.Data, 3); //∏¥÷∆ ˝æ›µΩª∫≥Â«¯÷–
       
@@ -694,10 +706,10 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 //	if(group != buf[2])
 //	  break;
 	
-	
+#if defined ( LCD_SUPPORTED )
 	HalLcdWriteStringValue("rssi:", abs(pkt->rssi), 10, 6);
 	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 5);
-	
+#endif
 	
 	
 	if(main_flag == 0)                	//model 0
@@ -737,12 +749,17 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       {
 		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
 		device_num = pkt->cmd.DataLength/2;
+		
+		#if defined ( LCD_SUPPORTED )
 		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
+		#endif
 		
 		for(i = 0 ;i < device_num; i++)
 		{
 		  if(device[i] == NLME_GetShortAddr())
+		    	#if defined ( LCD_SUPPORTED )
 		  	HalLcdWriteStringValue("dev_NO.", i, 10, 2);
+		  	#endif
 		}
   
       }
@@ -757,7 +774,9 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       break;
       
     case SAMPLEAPP_SINGLE_CLUSTERID:
+      #if defined ( LCD_SUPPORTED )
       HalLcdWriteStringValue("beep info:", pkt->srcAddr.addr.shortAddr, 16, 5);
+      #endif
       osal_memset(buf, 0 , 3);
       osal_memcpy(buf, pkt->cmd.Data, 3); //∏¥÷∆ ˝æ›µΩª∫≥Â«¯÷–
       
@@ -792,8 +811,10 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
         osal_memcpy(buf, msgPtr->asdu, 10); //∏¥÷∆ ˝æ›µΩª∫≥Â«¯÷–
 	nwk_addr = buf[1]*0x100 + buf[0];
 	l_addr = buf[5]*0x1000000 + buf[4]*0x10000 + buf[3]*0x100 + buf[2];
+	#if defined ( LCD_SUPPORTED )
 	HalLcdWriteStringValue("DevAnnce:", nwk_addr, 16, 4);
 	HalLcdWriteStringValue("l_addr:", l_addr, 16, 3);
+	#endif
 	
 	
 	  	for(i = 0; i < device_num; i++)
@@ -832,7 +853,9 @@ void SampleApp_SendBeepMessage(uint16 dst, uint8 s)
   SampleApp_Single_DstAddr.addr.shortAddr = dst;
   byte SendData[3] = "BP";
   SendData[2] = s;
+  #if defined ( LCD_SUPPORTED )
   HalLcdWriteStringValue("beep info:", SampleApp_Single_DstAddr.addr.shortAddr, 16, 4);
+  #endif
   // µ˜”√AF_DataRequestΩ´ ˝æ›Œﬁœﬂπ„≤•≥ˆ»•
   if( AF_DataRequest( &SampleApp_Single_DstAddr,   //∑¢ÀÕƒøµƒµÿ÷∑£´∂Àµ„µÿ÷∑∫Õ¥´ÀÕƒ£ Ω
                        &SampleApp_epDesc,            //‘¥(¥∏¥ªÚ»∑»œ)÷’∂Àµƒ√Ë ˆ£®±»»Á≤Ÿ◊˜œµÕ≥÷–»ŒŒÒIDµ»£©‘¥EP
