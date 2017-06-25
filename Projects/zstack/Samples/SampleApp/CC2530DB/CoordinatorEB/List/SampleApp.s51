@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        19/Jun/2017  20:34:23 /
+// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        25/Jun/2017  22:30:52 /
 // Copyright 2004-2011 IAR Systems AB.                                        /
 //                                                                            /
 //    Core               =  plain                                             /
@@ -1848,51 +1848,50 @@ SampleApp_Init:
         MOV     R1,A
         LCALL   ??ZDO_RegisterForZDOMsg?relay
 //  379   
-//  380   
-//  381   InitT1();
+//  380   InitT1();
         ; Setup parameters for call to function InitT1
         LCALL   ??InitT1?relay
-//  382   InitT3();
+//  381   InitT3();
         ; Setup parameters for call to function InitT3
         LCALL   ??InitT3?relay
-//  383   
-//  384   #if defined(ZDO_COORDINATOR)                      //协调器短地址为0000
-//  385   {
-//  386     device[0] = 0x0000;
+//  382   
+//  383   #if defined(ZDO_COORDINATOR)                      //协调器短地址为0000
+//  384   {
+//  385     device[0] = 0x0000;
         MOV     DPTR,#device
         CLR     A
         MOVX    @DPTR,A
         INC     DPTR
         MOVX    @DPTR,A
-//  387   }
-//  388   #endif
-//  389 }
+//  386   }
+//  387   #endif
+//  388 }
         MOV     R7,#0x3
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock10
-//  390 
-//  391 /*********************************************************************
-//  392  * @fn      SampleApp_ProcessEvent
-//  393  *
-//  394  * @brief   Generic Application Task event processor.  This function
-//  395  *          is called to process all events for the task.  Events
-//  396  *          include timers, messages and any other user defined events.
-//  397  *
-//  398  * @param   task_id  - The OSAL assigned task ID.
-//  399  * @param   events - events to process.  This is a bit map and can
-//  400  *                   contain more than one event.
-//  401  *
-//  402  * @return  none
-//  403  */
-//  404 //用户应用任务的事件处理函数
+//  389 
+//  390 /*********************************************************************
+//  391  * @fn      SampleApp_ProcessEvent
+//  392  *
+//  393  * @brief   Generic Application Task event processor.  This function
+//  394  *          is called to process all events for the task.  Events
+//  395  *          include timers, messages and any other user defined events.
+//  396  *
+//  397  * @param   task_id  - The OSAL assigned task ID.
+//  398  * @param   events - events to process.  This is a bit map and can
+//  399  *                   contain more than one event.
+//  400  *
+//  401  * @return  none
+//  402  */
+//  403 //用户应用任务的事件处理函数
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  405 uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
+//  404 uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
 SampleApp_ProcessEvent:
         CFI Block cfiBlock11 Using cfiCommon0
         CFI Function SampleApp_ProcessEvent
         CODE
-//  406 {
+//  405 {
         FUNCALL SampleApp_ProcessEvent, osal_msg_receive
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2025,65 +2024,73 @@ SampleApp_ProcessEvent:
         MOV     R6,A
         MOV     A,R3
         MOV     R7,A
-//  407   afIncomingMSGPacket_t *MSGpkt;
-//  408   (void)task_id;  // Intentionally unreferenced parameter
-//  409 
-//  410   if ( events & SYS_EVENT_MSG ) //接收系统消息再进行判断
+//  406   afIncomingMSGPacket_t *MSGpkt;
+//  407   (void)task_id;  // Intentionally unreferenced parameter
+//  408 
+//  409   if ( events & SYS_EVENT_MSG ) //接收系统消息再进行判断
         ANL     A,#0x80
         JZ      ??SampleApp_ProcessEvent_0
-//  411   {
-//  412     //接收属于本应用任务SampleApp的消息，以SampleApp_TaskID标记
-//  413     MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( SampleApp_TaskID );
+//  410   {
+//  411     //接收属于本应用任务SampleApp的消息，以SampleApp_TaskID标记
+//  412     MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( SampleApp_TaskID );
         ; Setup parameters for call to function osal_msg_receive
         SJMP    ??SampleApp_ProcessEvent_1
-//  414     while ( MSGpkt )
-//  415     {
-//  416       switch ( MSGpkt->hdr.event )
-//  417       {
-//  418         // Received when a key is pressed
-//  419         case KEY_CHANGE://按键事件
-//  420           SampleApp_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
-//  421           break;
-//  422 
-//  423         // Received when a messages is received (OTA) for this endpoint
-//  424         case AF_INCOMING_MSG_CMD://接收数据事件,调用函数AF_DataRequest()接收数据
-//  425           SampleApp_MessageMSGCB( MSGpkt );//调用回调函数对收到的数据进行处理
-//  426           break;
-//  427 	  
-//  428 	case ZDO_CB_MSG:
-//  429 	  SApp_ProcessMsgCBs( (zdoIncomingMsg_t *)MSGpkt);
-//  430 	  break;
-//  431 
-//  432         // Received whenever the device changes state in the network
-//  433         case ZDO_STATE_CHANGE:
+//  413     while ( MSGpkt )
+//  414     {
+//  415       switch ( MSGpkt->hdr.event )
+//  416       {
+//  417         // Received when a key is pressed
+//  418         case KEY_CHANGE://按键事件
+//  419           SampleApp_HandleKeys( ((keyChange_t *)MSGpkt)->state, ((keyChange_t *)MSGpkt)->keys );
+//  420           break;
+//  421 
+//  422         // Received when a messages is received (OTA) for this endpoint
+//  423         case AF_INCOMING_MSG_CMD://接收数据事件,调用函数AF_DataRequest()接收数据
+//  424           SampleApp_MessageMSGCB( MSGpkt );//调用回调函数对收到的数据进行处理
+//  425           break;
+//  426 	  
+//  427 	case ZDO_CB_MSG:
+//  428 	  SApp_ProcessMsgCBs( (zdoIncomingMsg_t *)MSGpkt);
+//  429 	  break;
+//  430 	  
+//  431 	  
+//  432 	case AF_DATA_CONFIRM_CMD:
+//  433 	  
 //  434 	  
-//  435 	  
+//  435 	  break;
 //  436 	  
-//  437           //只要网络状态发生改变，就通过ZDO_STATE_CHANGE事件通知所有的任务。
-//  438           //同时完成对协调器，路由器，终端的设置
-//  439           SampleApp_NwkState = (devStates_t)(MSGpkt->hdr.status);
+//  437 	  
+//  438 	  
+//  439         // Received whenever the device changes state in the network
+//  440         case ZDO_STATE_CHANGE:
+//  441 	  
+//  442 	  
+//  443 	  
+//  444           //只要网络状态发生改变，就通过ZDO_STATE_CHANGE事件通知所有的任务。
+//  445           //同时完成对协调器，路由器，终端的设置
+//  446           SampleApp_NwkState = (devStates_t)(MSGpkt->hdr.status);
 ??SampleApp_ProcessEvent_2:
         INC     DPTR
         MOVX    A,@DPTR
         MOV     DPTR,#SampleApp_NwkState
         MOVX    @DPTR,A
-//  440 	  
-//  441 	  
-//  442 	 /**********************************************\ 
-//  443 	  
-//  444           if ( (SampleApp_NwkState == DEV_ZB_COORD)//实验中协调器只接收数据所以取消发送事件
-//  445           if ( (SampleApp_NwkState == DEV_ROUTER) || (SampleApp_NwkState == DEV_END_DEVICE) )
-//  446           //{
-//  447             // Start sending the periodic message in a regular interval.
-//  448             //这个定时器只是为发送周期信息开启的，设备启动初始化后从这里开始
-//  449             //触发第一个周期信息的发送，然后周而复始下去
+//  447 	  
+//  448 	  
+//  449 	 /**********************************************\ 
 //  450 	  
-//  451 	  \***************************************************/
-//  452 	  
-//  453 	  
-//  454             osal_start_timerEx( SampleApp_TaskID,
-//  455                               SAMPLEAPP_SEND_PERIODIC_MSG_EVT,
-//  456                               SAMPLEAPP_SEND_PERIODIC_MSG_TIMEOUT );
+//  451           if ( (SampleApp_NwkState == DEV_ZB_COORD)//实验中协调器只接收数据所以取消发送事件
+//  452           if ( (SampleApp_NwkState == DEV_ROUTER) || (SampleApp_NwkState == DEV_END_DEVICE) )
+//  453           //{
+//  454             // Start sending the periodic message in a regular interval.
+//  455             //这个定时器只是为发送周期信息开启的，设备启动初始化后从这里开始
+//  456             //触发第一个周期信息的发送，然后周而复始下去
+//  457 	  
+//  458 	  \***************************************************/
+//  459 	  
+//  460 	  
+//  461             osal_start_timerEx( SampleApp_TaskID,
+//  462                               SAMPLEAPP_SEND_PERIODIC_MSG_EVT,
+//  463                               SAMPLEAPP_SEND_PERIODIC_MSG_TIMEOUT );
         ; Setup parameters for call to function osal_start_timerEx
         MOV     R4,#-0x30
         MOV     R5,#0x7
@@ -2093,36 +2100,36 @@ SampleApp_ProcessEvent:
         MOVX    A,@DPTR
         MOV     R1,A
         LCALL   ??osal_start_timerEx?relay
-//  457           
-//  458 	    
-//  459 	    
-//  460 	   /**********************************************\ 
-//  461 	    
-//  462 	  }  
-//  463           else
-//  464           {
-//  465             // Device is no longer in the network
-//  466           }
-//  467 	    
-//  468 	    \***************************************************/
-//  469 	   
-//  470           break;
-//  471 
-//  472         default:
-//  473           break;
-//  474       }
-//  475 
-//  476       // Release the memory 事件处理完了，释放消息占用的内存
-//  477       osal_msg_deallocate( (uint8 *)MSGpkt );
+//  464           
+//  465 	    
+//  466 	    
+//  467 	   /**********************************************\ 
+//  468 	    
+//  469 	  }  
+//  470           else
+//  471           {
+//  472             // Device is no longer in the network
+//  473           }
+//  474 	    
+//  475 	    \***************************************************/
+//  476 	   
+//  477           break;
+//  478 
+//  479         default:
+//  480           break;
+//  481       }
+//  482 
+//  483       // Release the memory 事件处理完了，释放消息占用的内存
+//  484       osal_msg_deallocate( (uint8 *)MSGpkt );
 ??SampleApp_ProcessEvent_3:
         ; Setup parameters for call to function osal_msg_deallocate
         MOV     R2,?V0 + 0
         MOV     R3,?V0 + 1
         LCALL   ??osal_msg_deallocate?relay
-//  478 
-//  479       // Next - if one is available 指针指向下一个放在缓冲区的待处理的事件，
-//  480       //返回while ( MSGpkt )重新处理事件，直到缓冲区没有等待处理事件为止
-//  481       MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( SampleApp_TaskID );
+//  485 
+//  486       // Next - if one is available 指针指向下一个放在缓冲区的待处理的事件，
+//  487       //返回while ( MSGpkt )重新处理事件，直到缓冲区没有等待处理事件为止
+//  488       MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( SampleApp_TaskID );
         ; Setup parameters for call to function osal_msg_receive
 ??SampleApp_ProcessEvent_1:
         MOV     DPTR,#SampleApp_TaskID
@@ -2173,10 +2180,10 @@ SampleApp_ProcessEvent:
         MOV     R3,?V0 + 1
         LCALL   ??SApp_ProcessMsgCBs?relay
         SJMP    ??SampleApp_ProcessEvent_3
-//  482     }
-//  483 
-//  484     // return unprocessed events 返回未处理的事件
-//  485     return (events ^ SYS_EVENT_MSG);
+//  489     }
+//  490 
+//  491     // return unprocessed events 返回未处理的事件
+//  492     return (events ^ SYS_EVENT_MSG);
 ??SampleApp_ProcessEvent_4:
         MOV     A,R6
         MOV     R2,A
@@ -2185,27 +2192,27 @@ SampleApp_ProcessEvent:
 ??SampleApp_ProcessEvent_8:
         MOV     R3,A
         SJMP    ??SampleApp_ProcessEvent_9
-//  486   }
-//  487 
-//  488   // Send a message out - This event is generated by a timer
-//  489   //  (setup in SampleApp_Init()).
-//  490   if ( events & SAMPLEAPP_SEND_PERIODIC_MSG_EVT )
+//  493   }
+//  494 
+//  495   // Send a message out - This event is generated by a timer
+//  496   //  (setup in SampleApp_Init()).
+//  497   if ( events & SAMPLEAPP_SEND_PERIODIC_MSG_EVT )
 ??SampleApp_ProcessEvent_0:
         MOV     A,R6
         MOV     C,0xE0 /* A   */.0
         JNC     ??SampleApp_ProcessEvent_10
-//  491   {
-//  492     // Send the periodic message 处理周期性事件，
-//  493     //利用SampleApp_SendPeriodicMessage()处理完当前的周期性事件，然后启动定时器
-//  494     //开启下一个周期性事情，这样一种循环下去，也即是上面说的周期性事件了，
-//  495     //可以做为传感器定时采集、上传任务
-//  496     SampleApp_SendPeriodicMessage();
+//  498   {
+//  499     // Send the periodic message 处理周期性事件，
+//  500     //利用SampleApp_SendPeriodicMessage()处理完当前的周期性事件，然后启动定时器
+//  501     //开启下一个周期性事情，这样一种循环下去，也即是上面说的周期性事件了，
+//  502     //可以做为传感器定时采集、上传任务
+//  503     SampleApp_SendPeriodicMessage();
         ; Setup parameters for call to function SampleApp_SendPeriodicMessage
         LCALL   ??SampleApp_SendPeriodicMessage?relay
-//  497 
-//  498     // Setup to send message again in normal period (+ a little jitter)
-//  499     osal_start_timerEx( SampleApp_TaskID, SAMPLEAPP_SEND_PERIODIC_MSG_EVT,
-//  500         (SAMPLEAPP_SEND_PERIODIC_MSG_TIMEOUT + (osal_rand() & 0x00FF)) );
+//  504 
+//  505     // Setup to send message again in normal period (+ a little jitter)
+//  506     osal_start_timerEx( SampleApp_TaskID, SAMPLEAPP_SEND_PERIODIC_MSG_EVT,
+//  507         (SAMPLEAPP_SEND_PERIODIC_MSG_TIMEOUT + (osal_rand() & 0x00FF)) );
         ; Setup parameters for call to function osal_rand
         LCALL   ??osal_rand?relay
         ; Setup parameters for call to function osal_start_timerEx
@@ -2221,18 +2228,18 @@ SampleApp_ProcessEvent:
         MOVX    A,@DPTR
         MOV     R1,A
         LCALL   ??osal_start_timerEx?relay
-//  501 
-//  502     // return unprocessed events 返回未处理的事件
-//  503     return (events ^ SAMPLEAPP_SEND_PERIODIC_MSG_EVT);
+//  508 
+//  509     // return unprocessed events 返回未处理的事件
+//  510     return (events ^ SAMPLEAPP_SEND_PERIODIC_MSG_EVT);
         MOV     A,R6
         XRL     A,#0x1
         MOV     R2,A
         MOV     A,R7
         SJMP    ??SampleApp_ProcessEvent_8
-//  504   }
-//  505 
-//  506   // Discard unknown events
-//  507   return 0;
+//  511   }
+//  512 
+//  513   // Discard unknown events
+//  514   return 0;
 ??SampleApp_ProcessEvent_10:
         MOV     R2,#0x0
         MOV     R3,#0x0
@@ -2240,7 +2247,7 @@ SampleApp_ProcessEvent:
 ??SampleApp_ProcessEvent_9:
         REQUIRE ?Subroutine1
         ; // Fall through to label ?Subroutine1
-//  508 }
+//  515 }
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
 ?Subroutine1:
@@ -2263,31 +2270,31 @@ SampleApp_ProcessEvent:
         MOV     R7,#0x4
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock12
-//  509 
-//  510 
-//  511 /*********************************************************************
-//  512  * Event Generation Functions
-//  513  */
-//  514 /*********************************************************************
-//  515  * @fn      SampleApp_HandleKeys
-//  516  *
-//  517  * @brief   Handles all key events for this device.
-//  518  *
-//  519  * @param   shift - true if in shift/alt.
-//  520  * @param   keys - bit field for key events. Valid entries:
-//  521  *                 HAL_KEY_SW_2
-//  522  *                 HAL_KEY_SW_1
+//  516 
+//  517 
+//  518 /*********************************************************************
+//  519  * Event Generation Functions
+//  520  */
+//  521 /*********************************************************************
+//  522  * @fn      SampleApp_HandleKeys
 //  523  *
-//  524  * @return  none
-//  525  */
+//  524  * @brief   Handles all key events for this device.
+//  525  *
+//  526  * @param   shift - true if in shift/alt.
+//  527  * @param   keys - bit field for key events. Valid entries:
+//  528  *                 HAL_KEY_SW_2
+//  529  *                 HAL_KEY_SW_1
+//  530  *
+//  531  * @return  none
+//  532  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  526 void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //此实验没有用到，后面再分析
+//  533 void SampleApp_HandleKeys( uint8 shift, uint8 keys ) //此实验没有用到，后面再分析
 SampleApp_HandleKeys:
         CFI Block cfiBlock13 Using cfiCommon0
         CFI Function SampleApp_HandleKeys
         CODE
-//  527 {
+//  534 {
         FUNCALL SampleApp_HandleKeys, HalLcdWriteStringValue
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -2352,19 +2359,19 @@ SampleApp_HandleKeys:
         ; Auto size: 0
         MOV     A,R2
         MOV     R6,A
-//  528   
-//  529   (void)shift;  // Intentionally unreferenced parameter
-//  530   
-//  531   if ( keys & HAL_KEY_SW_1 )//key2
+//  535   
+//  536   (void)shift;  // Intentionally unreferenced parameter
+//  537   
+//  538   if ( keys & HAL_KEY_SW_1 )//key2
         MOV     C,0xE0 /* A   */.0
         JC      $+5
         LJMP    ??SampleApp_HandleKeys_0 & 0xFFFF
-//  532   {
-//  533     
-//  534     		
-//  535 	//SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 2);
-//  536 	  	
-//  537     	switch(sel_dev)
+//  539   {
+//  540     
+//  541     		
+//  542 	//SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 2);
+//  543 	  	
+//  544     	switch(sel_dev)
         MOV     DPTR,#sel_dev
         LCALL   ?Subroutine7 & 0xFFFF
 ??CrossCallReturnLabel_6:
@@ -2436,9 +2443,9 @@ SampleApp_HandleKeys:
         DATA16
         DW        ??SampleApp_HandleKeys_11
         CODE
-//  538 	{
-//  539 	case 0:
-//  540 	  sel_dev = 1;
+//  545 	{
+//  546 	case 0:
+//  547 	  sel_dev = 1;
 ??SampleApp_HandleKeys_2:
         MOV     DPTR,#sel_dev
         MOV     A,#0x1
@@ -2447,65 +2454,65 @@ SampleApp_HandleKeys:
         INC     DPTR
         CLR     A
         SJMP    ??SampleApp_HandleKeys_13
-//  541 	  break;
-//  542 	case 1:
-//  543 	  sel_dev = 2;
+//  548 	  break;
+//  549 	case 1:
+//  550 	  sel_dev = 2;
 ??SampleApp_HandleKeys_3:
         MOV     DPTR,#sel_dev
         MOV     A,#0x2
         SJMP    ??SampleApp_HandleKeys_12
-//  544 	  break;
-//  545 	case 2:
-//  546 	  sel_dev = 3;
+//  551 	  break;
+//  552 	case 2:
+//  553 	  sel_dev = 3;
 ??SampleApp_HandleKeys_4:
         MOV     DPTR,#sel_dev
         MOV     A,#0x3
         SJMP    ??SampleApp_HandleKeys_12
-//  547 	  break;
-//  548 	case 3:
-//  549 	  sel_dev = 4;
+//  554 	  break;
+//  555 	case 3:
+//  556 	  sel_dev = 4;
 ??SampleApp_HandleKeys_5:
         MOV     DPTR,#sel_dev
         MOV     A,#0x4
         SJMP    ??SampleApp_HandleKeys_12
-//  550 	  break;
-//  551 	case 4:
-//  552 	  sel_dev = 5;
+//  557 	  break;
+//  558 	case 4:
+//  559 	  sel_dev = 5;
 ??SampleApp_HandleKeys_6:
         MOV     DPTR,#sel_dev
         MOV     A,#0x5
         SJMP    ??SampleApp_HandleKeys_12
-//  553 	  break;
-//  554 	case 5:
-//  555 	  sel_dev = 6;
+//  560 	  break;
+//  561 	case 5:
+//  562 	  sel_dev = 6;
 ??SampleApp_HandleKeys_7:
         MOV     DPTR,#sel_dev
         MOV     A,#0x6
         SJMP    ??SampleApp_HandleKeys_12
-//  556 	  break;
-//  557 	case 6:
-//  558 	  sel_dev = 7;
+//  563 	  break;
+//  564 	case 6:
+//  565 	  sel_dev = 7;
 ??SampleApp_HandleKeys_8:
         MOV     DPTR,#sel_dev
         MOV     A,#0x7
         SJMP    ??SampleApp_HandleKeys_12
-//  559 	  break;
-//  560 	case 7:
-//  561 	  sel_dev = 8;
+//  566 	  break;
+//  567 	case 7:
+//  568 	  sel_dev = 8;
 ??SampleApp_HandleKeys_9:
         MOV     DPTR,#sel_dev
         MOV     A,#0x8
         SJMP    ??SampleApp_HandleKeys_12
-//  562 	  break;
-//  563 	case 8:
-//  564 	  sel_dev = 9;
+//  569 	  break;
+//  570 	case 8:
+//  571 	  sel_dev = 9;
 ??SampleApp_HandleKeys_10:
         MOV     DPTR,#sel_dev
         MOV     A,#0x9
         SJMP    ??SampleApp_HandleKeys_12
-//  565 	  break;
-//  566 	case 9:
-//  567 	  sel_dev = 0;
+//  572 	  break;
+//  573 	case 9:
+//  574 	  sel_dev = 0;
 ??SampleApp_HandleKeys_11:
         MOV     DPTR,#sel_dev
         CLR     A
@@ -2513,13 +2520,13 @@ SampleApp_HandleKeys:
         INC     DPTR
 ??SampleApp_HandleKeys_13:
         MOVX    @DPTR,A
-//  568 	  break;
-//  569 	}
-//  570 	
-//  571 	
-//  572 	
-//  573 #if defined ( LCD_SUPPORTED )
-//  574     HalLcdWriteStringValue("sel_dev:", sel_dev, 10, 6);
+//  575 	  break;
+//  576 	}
+//  577 	
+//  578 	
+//  579 	
+//  580 #if defined ( LCD_SUPPORTED )
+//  581     HalLcdWriteStringValue("sel_dev:", sel_dev, 10, 6);
 ??SampleApp_HandleKeys_1:
         ; Setup parameters for call to function HalLcdWriteStringValue
         MOV     DPTR,#sel_dev
@@ -2535,11 +2542,11 @@ SampleApp_HandleKeys:
 ??CrossCallReturnLabel_49:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 12)
-//  575 #endif    
-//  576     
-//  577     
-//  578     
-//  579     if(sel_dev < device_num)
+//  582 #endif    
+//  583     
+//  584     
+//  585     
+//  586     if(sel_dev < device_num)
         MOV     DPTR,#device_num
         MOVX    A,@DPTR
         MOV     R0,A
@@ -2558,22 +2565,22 @@ SampleApp_HandleKeys:
         XRL     A,PSW
         RLC     A
         JNC     ??SampleApp_HandleKeys_0
-//  580     {
-//  581       	dst_dev = device[sel_dev];
+//  587     {
+//  588       	dst_dev = device[sel_dev];
         MOV     DPTR,#sel_dev
         LCALL   ??Subroutine25_0 & 0xFFFF
-//  582     }
-//  583     
-//  584     
-//  585     
-//  586     /* This key sends the Flash Command is sent to Group 1.
-//  587      * This device will not receive the Flash Command from this
-//  588      * device (even if it belongs to group 1).
-//  589      */
+//  589     }
 //  590     
-//  591 	
+//  591     
 //  592     
-//  593   }
+//  593     /* This key sends the Flash Command is sent to Group 1.
+//  594      * This device will not receive the Flash Command from this
+//  595      * device (even if it belongs to group 1).
+//  596      */
+//  597     
+//  598 	
+//  599     
+//  600   }
 ??CrossCallReturnLabel_36:
         CLR     C
         RLC     A
@@ -2591,50 +2598,50 @@ SampleApp_HandleKeys:
         INC     DPTR
         MOV     A,R1
         MOVX    @DPTR,A
-//  594 
-//  595   if ( keys & HAL_KEY_SW_6 )//key1
+//  601 
+//  602   if ( keys & HAL_KEY_SW_6 )//key1
 ??SampleApp_HandleKeys_0:
         MOV     A,R6
         MOV     C,0xE0 /* A   */.5
         JNC     ??SampleApp_HandleKeys_14
-//  596   {
-//  597     
-//  598     
-//  599 //    	#if defined(ZDO_COORDINATOR) //协调器收到"D1"后,返回"D1"给终端，让终端Led1也闪烁
-//  600     
-//  601     
-//  602     	/**********************************************\ 
-//  603     		
-//  604     		if(key_flag == 0)
-//  605 		{
-//  606 		 InitT1();
-//  607 		 flag = 1;
-//  608 		}
-//  609 		else
-//  610 		{
-//  611 		  InitT11();
-//  612 		  flag = 0;
-//  613 		}
-//  614     \***************************************************/
-//  615 			
-//  616 //	#else
-//  617 		
-//  618 //		SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 1);
-//  619 		if(main_flag == 0)
+//  603   {
+//  604     
+//  605     
+//  606 //    	#if defined(ZDO_COORDINATOR) //协调器收到"D1"后,返回"D1"给终端，让终端Led1也闪烁
+//  607     
+//  608     
+//  609     	/**********************************************\ 
+//  610     		
+//  611     		if(key_flag == 0)
+//  612 		{
+//  613 		 InitT1();
+//  614 		 flag = 1;
+//  615 		}
+//  616 		else
+//  617 		{
+//  618 		  InitT11();
+//  619 		  flag = 0;
+//  620 		}
+//  621     \***************************************************/
+//  622 			
+//  623 //	#else
+//  624 		
+//  625 //		SampleApp_SendFlashMessage( SAMPLEAPP_FLASH_DURATION, 1);
+//  626 		if(main_flag == 0)
         LCALL   ?Subroutine9 & 0xFFFF
 ??CrossCallReturnLabel_37:
         ORL     A,R1
         MOV     DPTR,#main_flag
         JNZ     ??SampleApp_HandleKeys_15
-//  620 		{
-//  621 		  main_flag = 1;
+//  627 		{
+//  628 		  main_flag = 1;
         MOV     A,#0x1
         MOVX    @DPTR,A
         INC     DPTR
         CLR     A
         SJMP    ??SampleApp_HandleKeys_16
-//  622 		}
-//  623 		else if(main_flag == 1)
+//  629 		}
+//  630 		else if(main_flag == 1)
 ??SampleApp_HandleKeys_15:
         MOVX    A,@DPTR
         XRL     A,#0x1
@@ -2644,14 +2651,14 @@ SampleApp_HandleKeys:
 ??SampleApp_HandleKeys_17:
         MOV     DPTR,#main_flag
         JNZ     ??SampleApp_HandleKeys_18
-//  624 		{
-//  625 		  main_flag = 2;
+//  631 		{
+//  632 		  main_flag = 2;
         MOV     A,#0x2
         MOVX    @DPTR,A
         INC     DPTR
         CLR     A
         MOVX    @DPTR,A
-//  626 		  SampleApp_SendBeepMessage(dst_dev, 1);
+//  633 		  SampleApp_SendBeepMessage(dst_dev, 1);
         ; Setup parameters for call to function SampleApp_SendBeepMessage
         MOV     R1,#0x1
 ??SampleApp_HandleKeys_19:
@@ -2663,8 +2670,8 @@ SampleApp_HandleKeys:
         MOV     R3,A
         LCALL   ??SampleApp_SendBeepMessage?relay
         SJMP    ??SampleApp_HandleKeys_20
-//  627 		}
-//  628 		else if(main_flag == 2)
+//  634 		}
+//  635 		else if(main_flag == 2)
 ??SampleApp_HandleKeys_18:
         MOVX    A,@DPTR
         XRL     A,#0x2
@@ -2674,19 +2681,19 @@ SampleApp_HandleKeys:
 ??SampleApp_HandleKeys_21:
         MOV     DPTR,#main_flag
         JNZ     ??SampleApp_HandleKeys_22
-//  629 		{
-//  630 		  main_flag = 3;
+//  636 		{
+//  637 		  main_flag = 3;
         MOV     A,#0x3
         MOVX    @DPTR,A
         INC     DPTR
         CLR     A
         MOVX    @DPTR,A
-//  631 		  SampleApp_SendBeepMessage(dst_dev, 0);
+//  638 		  SampleApp_SendBeepMessage(dst_dev, 0);
         ; Setup parameters for call to function SampleApp_SendBeepMessage
         MOV     R1,A
         SJMP    ??SampleApp_HandleKeys_19
-//  632 		}
-//  633 		else if(main_flag == 3)
+//  639 		}
+//  640 		else if(main_flag == 3)
 ??SampleApp_HandleKeys_22:
         MOVX    A,@DPTR
         XRL     A,#0x3
@@ -2695,53 +2702,53 @@ SampleApp_HandleKeys:
         MOVX    A,@DPTR
 ??SampleApp_HandleKeys_23:
         JNZ     ??SampleApp_HandleKeys_20
-//  634 		{
-//  635 		  main_flag = 0;
+//  641 		{
+//  642 		  main_flag = 0;
         MOV     DPTR,#main_flag
         CLR     A
         MOVX    @DPTR,A
         INC     DPTR
 ??SampleApp_HandleKeys_16:
         MOVX    @DPTR,A
-//  636 		}
-//  637 		
-//  638 		
-//  639 	#if defined ( LCD_SUPPORTED )
-//  640 		HalLcdWriteStringValue("model:", main_flag, 10, 5);
+//  643 		}
+//  644 		
+//  645 		
+//  646 	#if defined ( LCD_SUPPORTED )
+//  647 		HalLcdWriteStringValue("model:", main_flag, 10, 5);
 ??SampleApp_HandleKeys_20:
         ; Setup parameters for call to function HalLcdWriteStringValue
         MOV     DPTR,#main_flag
         LCALL   ?Subroutine5 & 0xFFFF
-//  641 	  	
-//  642 	#endif
-//  643 //	#endif
-//  644     
-//  645     
-//  646     
-//  647     /* The Flashr Command is sent to Group 1.
-//  648      * This key toggles this device in and out of group 1.
-//  649      * If this device doesn't belong to group 1, this application
-//  650      * will not receive the Flash command sent to group 1.
-//  651      */
+//  648 	  	
+//  649 	#endif
+//  650 //	#endif
+//  651     
 //  652     
 //  653     
-//  654     /***************************************************************\ 
-//  655       
-//  656     aps_Group_t *grp;
-//  657     grp = aps_FindGroup( SAMPLEAPP_ENDPOINT, SAMPLEAPP_FLASH_GROUP );
-//  658     if ( grp )
-//  659     {
-//  660       // Remove from the group
-//  661       aps_RemoveGroup( SAMPLEAPP_ENDPOINT, SAMPLEAPP_FLASH_GROUP );
-//  662     }
-//  663     else
-//  664     {
-//  665       // Add to the flash group
-//  666       aps_AddGroup( SAMPLEAPP_ENDPOINT, &SampleApp_Group );
-//  667     }
-//  668     \****************************************************************/
-//  669     
-//  670   }
+//  654     /* The Flashr Command is sent to Group 1.
+//  655      * This key toggles this device in and out of group 1.
+//  656      * If this device doesn't belong to group 1, this application
+//  657      * will not receive the Flash command sent to group 1.
+//  658      */
+//  659     
+//  660     
+//  661     /***************************************************************\ 
+//  662       
+//  663     aps_Group_t *grp;
+//  664     grp = aps_FindGroup( SAMPLEAPP_ENDPOINT, SAMPLEAPP_FLASH_GROUP );
+//  665     if ( grp )
+//  666     {
+//  667       // Remove from the group
+//  668       aps_RemoveGroup( SAMPLEAPP_ENDPOINT, SAMPLEAPP_FLASH_GROUP );
+//  669     }
+//  670     else
+//  671     {
+//  672       // Add to the flash group
+//  673       aps_AddGroup( SAMPLEAPP_ENDPOINT, &SampleApp_Group );
+//  674     }
+//  675     \****************************************************************/
+//  676     
+//  677   }
 ??CrossCallReturnLabel_3:
         LCALL   ?PUSH_XSTACK_I_FOUR
         CFI CFA_XSP16 add(XSP16, 16)
@@ -2753,7 +2760,7 @@ SampleApp_HandleKeys:
 ??CrossCallReturnLabel_50:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 12)
-//  671 }
+//  678 }
 ??SampleApp_HandleKeys_14:
         LJMP    ?Subroutine1 & 0xFFFF
         CFI EndBlock cfiBlock13
@@ -2875,31 +2882,31 @@ SampleApp_HandleKeys:
         CFI EndBlock cfiCond18
         CFI EndBlock cfiCond19
         CFI EndBlock cfiPicker20
-//  672 
-//  673 /*********************************************************************
-//  674  * LOCAL FUNCTIONS
-//  675  */
-//  676 
-//  677 /*********************************************************************
-//  678  * @fn      SampleApp_MessageMSGCB
-//  679  *
-//  680  * @brief   Data message processor callback.  This function processes
-//  681  *          any incoming data - probably from other devices.  So, based
-//  682  *          on cluster ID, perform the intended action.
-//  683  *
-//  684  * @param   none
-//  685  *
-//  686  * @return  none
-//  687  */
-//  688 //接收数据，参数为接收到的数据
+//  679 
+//  680 /*********************************************************************
+//  681  * LOCAL FUNCTIONS
+//  682  */
+//  683 
+//  684 /*********************************************************************
+//  685  * @fn      SampleApp_MessageMSGCB
+//  686  *
+//  687  * @brief   Data message processor callback.  This function processes
+//  688  *          any incoming data - probably from other devices.  So, based
+//  689  *          on cluster ID, perform the intended action.
+//  690  *
+//  691  * @param   none
+//  692  *
+//  693  * @return  none
+//  694  */
+//  695 //接收数据，参数为接收到的数据
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  689 void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
+//  696 void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 SampleApp_MessageMSGCB:
         CFI Block cfiBlock21 Using cfiCommon0
         CFI Function SampleApp_MessageMSGCB
         CODE
-//  690 {
+//  697 {
         FUNCALL SampleApp_MessageMSGCB, osal_memset
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -3071,11 +3078,11 @@ SampleApp_MessageMSGCB:
         MOV     R6,A
         MOV     A,R3
         MOV     R7,A
-//  691   char i;
-//  692   byte buf[3];
-//  693 //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
-//  694 
-//  695   switch ( pkt->clusterId ) //判断簇ID
+//  698   char i;
+//  699   byte buf[3];
+//  700 //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
+//  701 
+//  702   switch ( pkt->clusterId ) //判断簇ID
         MOV     DPL,R6
         MOV     DPH,R7
         INC     DPTR
@@ -3117,9 +3124,9 @@ SampleApp_MessageMSGCB:
         DATA16
         DW        ??SampleApp_MessageMSGCB_2
         CODE
-//  696   {
-//  697     case SAMPLEAPP_PERIODIC_CLUSTERID: //收到广播数据
-//  698       if(beep_flag == 1)
+//  703   {
+//  704     case SAMPLEAPP_PERIODIC_CLUSTERID: //收到广播数据
+//  705       if(beep_flag == 1)
 ??SampleApp_MessageMSGCB_1:
         MOV     DPTR,#beep_flag
         MOVX    A,@DPTR
@@ -3130,8 +3137,8 @@ SampleApp_MessageMSGCB:
 ??SampleApp_MessageMSGCB_3:
         JNZ     $+5
         LJMP    ??SampleApp_MessageMSGCB_0 & 0xFFFF
-//  699 	break;
-//  700       osal_memset(buf, 0 , 3);
+//  706 	break;
+//  707       osal_memset(buf, 0 , 3);
         ; Setup parameters for call to function osal_memset
         MOV     R4,#0x3
         MOV     R5,#0x0
@@ -3141,7 +3148,7 @@ SampleApp_MessageMSGCB:
         MOV     R2,DPL
         MOV     R3,DPH
         LCALL   ??osal_memset?relay
-//  701       osal_memcpy(buf, pkt->cmd.Data, 3); //复制数据到缓冲区中
+//  708       osal_memcpy(buf, pkt->cmd.Data, 3); //复制数据到缓冲区中
         ; Setup parameters for call to function osal_memcpy
         MOV     A,R6
         ADD     A,#0x22
@@ -3157,8 +3164,8 @@ SampleApp_MessageMSGCB:
 ??CrossCallReturnLabel_31:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
-//  702       
-//  703       if(buf[0]=='D' && buf[1]=='1')      //判断收到的数据是否为"D1"         
+//  709       
+//  710       if(buf[0]=='D' && buf[1]=='1')      //判断收到的数据是否为"D1"         
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
         MOVX    A,@DPTR
@@ -3171,13 +3178,13 @@ SampleApp_MessageMSGCB:
         XRL     A,#0x31
         JZ      $+5
         LJMP    ??SampleApp_MessageMSGCB_5 & 0xFFFF
-//  704       {
-//  705 	
-//  706 //	if(group != buf[2])
-//  707 //	  break;
-//  708 	
-//  709 #if defined ( LCD_SUPPORTED )
-//  710 	HalLcdWriteStringValue("rssi:", abs(pkt->rssi), 10, 6);
+//  711       {
+//  712 	
+//  713 //	if(group != buf[2])
+//  714 //	  break;
+//  715 	
+//  716 #if defined ( LCD_SUPPORTED )
+//  717 	HalLcdWriteStringValue("rssi:", abs(pkt->rssi), 10, 6);
         ; Setup parameters for call to function HalLcdWriteStringValue
         ; Setup parameters for call to function abs
         LCALL   ?Subroutine16 & 0xFFFF
@@ -3202,7 +3209,7 @@ SampleApp_MessageMSGCB:
 ??CrossCallReturnLabel_51:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
-//  711 	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 5);
+//  718 	HalLcdWriteStringValue("src addr:", pkt->srcAddr.addr.shortAddr, 16, 5);
         ; Setup parameters for call to function HalLcdWriteStringValue
         LCALL   ?Subroutine4 & 0xFFFF
 ??CrossCallReturnLabel_40:
@@ -3216,23 +3223,23 @@ SampleApp_MessageMSGCB:
 ??CrossCallReturnLabel_52:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
-//  712 #endif
-//  713 	
-//  714 	
-//  715 	if(main_flag == 0)                	//model 0
+//  719 #endif
+//  720 	
+//  721 	
+//  722 	if(main_flag == 0)                	//model 0
         LCALL   ?Subroutine9 & 0xFFFF
 ??CrossCallReturnLabel_38:
         ORL     A,R1
         JNZ     ??SampleApp_MessageMSGCB_6
-//  716 	{
-//  717 	  	beep0();
+//  723 	{
+//  724 	  	beep0();
 ??SampleApp_MessageMSGCB_7:
         MOV     0xdb,#0x0
         MOV     0xda,#0x0
-//  718 		
-//  719 	}
+//  725 		
+//  726 	}
         LJMP    ??SampleApp_MessageMSGCB_0 & 0xFFFF
-//  720 	else if(main_flag == 1)
+//  727 	else if(main_flag == 1)
 ??SampleApp_MessageMSGCB_6:
         MOV     DPTR,#main_flag
         MOVX    A,@DPTR
@@ -3243,19 +3250,19 @@ SampleApp_MessageMSGCB:
 ??SampleApp_MessageMSGCB_8:
         JZ      $+5
         LJMP    ??SampleApp_MessageMSGCB_0 & 0xFFFF
-//  721 	{
-//  722 	  	
-//  723 	  	if(pkt->rssi < -75)
+//  728 	{
+//  729 	  	
+//  730 	  	if(pkt->rssi < -80)
         LCALL   ?Subroutine16 & 0xFFFF
 ??CrossCallReturnLabel_20:
         CLR     C
-        SUBB    A,#-0x4b
+        SUBB    A,#-0x50
         MOV     C,0xD0 /* PSW */.2
         XRL     A,PSW
         RLC     A
         JNC     ??SampleApp_MessageMSGCB_9
-//  724 		{
-//  725 		  if(count < 3)
+//  731 		{
+//  732 		  if(count < 3)
         MOV     DPTR,#count
         CLR     C
         MOVX    A,@DPTR
@@ -3267,27 +3274,27 @@ SampleApp_MessageMSGCB:
         XRL     A,PSW
         RLC     A
         JNC     ??SampleApp_MessageMSGCB_10
-//  726 		    	count++;
+//  733 		    	count++;
         MOV     DPTR,#count
         LCALL   ?Subroutine11 & 0xFFFF
 ??CrossCallReturnLabel_13:
         LJMP    ??SampleApp_MessageMSGCB_11 & 0xFFFF
-//  727 		  else
-//  728 		  {
-//  729 		    	beep1();
+//  734 		  else
+//  735 		  {
+//  736 		    	beep1();
 ??SampleApp_MessageMSGCB_10:
         MOV     0xdb,#0x0
         MOV     0xda,#-0x1
-//  730 			count = 0;
+//  737 			count = 0;
         MOV     DPTR,#count
         LJMP    ??SampleApp_MessageMSGCB_12 & 0xFFFF
-//  731 		  }
-//  732 		}
-//  733 		else if(pkt->rssi > -55)
+//  738 		  }
+//  739 		}
+//  740 		else if(pkt->rssi > -66)
 ??SampleApp_MessageMSGCB_9:
         MOVX    A,@DPTR
         CLR     C
-        SUBB    A,#-0x36
+        SUBB    A,#-0x41
         MOV     C,0xD0 /* PSW */.2
         XRL     A,PSW
         RLC     A
@@ -3296,31 +3303,31 @@ SampleApp_MessageMSGCB:
         MOVX    @DPTR,A
         INC     DPTR
         JC      ??SampleApp_MessageMSGCB_13
-//  734 		{
-//  735 		  	count = 0;
+//  741 		{
+//  742 		  	count = 0;
         MOVX    @DPTR,A
-//  736 		  	beep0();
+//  743 		  	beep0();
         SJMP    ??SampleApp_MessageMSGCB_7
-//  737 		}
-//  738 		else
-//  739 			count = 0;
+//  744 		}
+//  745 		else
+//  746 			count = 0;
 ??SampleApp_MessageMSGCB_13:
         LJMP    ??SampleApp_MessageMSGCB_11 & 0xFFFF
-//  740 	}
-//  741 	else
-//  742 	{
-//  743 	  	
-//  744 	}
-//  745 	  
-//  746 	  
-//  747       }
-//  748       else if(buf[0] == 0x00)
+//  747 	}
+//  748 	else
+//  749 	{
+//  750 	  	
+//  751 	}
+//  752 	  
+//  753 	  
+//  754       }
+//  755       else if(buf[0] == 0x00)
 ??SampleApp_MessageMSGCB_4:
         MOVX    A,@DPTR
         JZ      $+5
         LJMP    ??SampleApp_MessageMSGCB_5 & 0xFFFF
-//  749       {
-//  750 		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
+//  756       {
+//  757 		osal_memcpy(device, pkt->cmd.Data, pkt->cmd.DataLength);
         MOV     A,R6
         ADD     A,#0x20
         MOV     R0,A
@@ -3349,7 +3356,7 @@ SampleApp_MessageMSGCB:
 ??CrossCallReturnLabel_35:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
-//  751 		device_num = pkt->cmd.DataLength/2;
+//  758 		device_num = pkt->cmd.DataLength/2;
         MOV     DPL,?V0 + 0
         MOV     DPH,?V0 + 1
         MOVX    A,@DPTR
@@ -3366,9 +3373,9 @@ SampleApp_MessageMSGCB:
         INC     DPTR
         MOV     A,R1
         LCALL   ?Subroutine3 & 0xFFFF
-//  752 		
-//  753 		#if defined ( LCD_SUPPORTED )
-//  754 		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
+//  759 		
+//  760 		#if defined ( LCD_SUPPORTED )
+//  761 		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
 ??CrossCallReturnLabel_0:
         RLC     A
         SUBB    A,0xE0 /* A   */
@@ -3384,9 +3391,9 @@ SampleApp_MessageMSGCB:
 ??CrossCallReturnLabel_53:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
-//  755 		#endif
-//  756 		
-//  757 		for(i = 0 ;i < device_num; i++)
+//  762 		#endif
+//  763 		
+//  764 		for(i = 0 ;i < device_num; i++)
         MOV     R6,#0x0
 ??SampleApp_MessageMSGCB_14:
         MOV     ?V0 + 0,R6
@@ -3394,8 +3401,8 @@ SampleApp_MessageMSGCB:
 ??CrossCallReturnLabel_4:
         JC      $+5
         LJMP    ??SampleApp_MessageMSGCB_0 & 0xFFFF
-//  758 		{
-//  759 		  if(device[i] == NLME_GetShortAddr())
+//  765 		{
+//  766 		  if(device[i] == NLME_GetShortAddr())
         ; Setup parameters for call to function NLME_GetShortAddr
         LCALL   ??NLME_GetShortAddr?relay
         MOV     A,R6
@@ -3412,8 +3419,8 @@ SampleApp_MessageMSGCB:
         XRL     A,R3
 ??SampleApp_MessageMSGCB_15:
         JNZ     ??SampleApp_MessageMSGCB_16
-//  760 		    	#if defined ( LCD_SUPPORTED )
-//  761 		  	HalLcdWriteStringValue("dev_NO.", i, 10, 2);
+//  767 		    	#if defined ( LCD_SUPPORTED )
+//  768 		  	HalLcdWriteStringValue("dev_NO.", i, 10, 2);
         ; Setup parameters for call to function HalLcdWriteStringValue
         CLR     A
         MOV     ?V0 + 1,A
@@ -3425,35 +3432,35 @@ SampleApp_MessageMSGCB:
         MOV     R2,#`?<Constant "dev_NO.">` & 0xff
         MOV     R3,#(`?<Constant "dev_NO.">` >> 8) & 0xff
         LCALL   ??Subroutine27_0 & 0xFFFF
-//  762 		  	#endif
-//  763 		}
+//  769 		  	#endif
+//  770 		}
 ??CrossCallReturnLabel_54:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
 ??SampleApp_MessageMSGCB_16:
         INC     R6
         SJMP    ??SampleApp_MessageMSGCB_14
-//  764   
-//  765       }
-//  766       else
-//  767       {
-//  768           	HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);                   
+//  771   
+//  772       }
+//  773       else
+//  774       {
+//  775           	HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);                   
 ??SampleApp_MessageMSGCB_5:
         ; Setup parameters for call to function HalLedSet
         MOV     R2,#0x1
         MOV     R1,#0x1
         LCALL   ??HalLedSet?relay
         SJMP    ??SampleApp_MessageMSGCB_0
-//  769       }
-//  770       break;
-//  771 
-//  772     case SAMPLEAPP_FLASH_CLUSTERID: //收到组播数据
-//  773       
-//  774       break;
-//  775       
-//  776     case SAMPLEAPP_SINGLE_CLUSTERID:
-//  777       #if defined ( LCD_SUPPORTED )
-//  778       HalLcdWriteStringValue("beep info:", pkt->srcAddr.addr.shortAddr, 16, 5);
+//  776       }
+//  777       break;
+//  778 
+//  779     case SAMPLEAPP_FLASH_CLUSTERID: //收到组播数据
+//  780       
+//  781       break;
+//  782       
+//  783     case SAMPLEAPP_SINGLE_CLUSTERID:
+//  784       #if defined ( LCD_SUPPORTED )
+//  785       HalLcdWriteStringValue("beep info:", pkt->srcAddr.addr.shortAddr, 16, 5);
 ??SampleApp_MessageMSGCB_2:
         ; Setup parameters for call to function HalLcdWriteStringValue
         LCALL   ?Subroutine4 & 0xFFFF
@@ -3465,8 +3472,8 @@ SampleApp_MessageMSGCB:
 ??CrossCallReturnLabel_47:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
-//  779       #endif
-//  780       osal_memset(buf, 0 , 3);
+//  786       #endif
+//  787       osal_memset(buf, 0 , 3);
         ; Setup parameters for call to function osal_memset
         MOV     R4,#0x3
         MOV     R5,#0x0
@@ -3476,7 +3483,7 @@ SampleApp_MessageMSGCB:
         MOV     R2,DPL
         MOV     R3,DPH
         LCALL   ??osal_memset?relay
-//  781       osal_memcpy(buf, pkt->cmd.Data, 3); //复制数据到缓冲区中
+//  788       osal_memcpy(buf, pkt->cmd.Data, 3); //复制数据到缓冲区中
         ; Setup parameters for call to function osal_memcpy
         LCALL   ?Subroutine18 & 0xFFFF
 ??CrossCallReturnLabel_24:
@@ -3492,8 +3499,8 @@ SampleApp_MessageMSGCB:
 ??CrossCallReturnLabel_32:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 18)
-//  782       
-//  783       if(buf[0]=='B' && buf[1]=='P') 
+//  789       
+//  790       if(buf[0]=='B' && buf[1]=='P') 
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
         MOVX    A,@DPTR
@@ -3504,32 +3511,32 @@ SampleApp_MessageMSGCB:
         MOVX    A,@DPTR
         XRL     A,#0x50
         JNZ     ??SampleApp_MessageMSGCB_0
-//  784       {
-//  785 	if(buf[2] == 1)
+//  791       {
+//  792 	if(buf[2] == 1)
         MOV     A,#0x2
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
         XRL     A,#0x1
         MOV     DPTR,#beep_flag
         JNZ     ??SampleApp_MessageMSGCB_12
-//  786 	  beep_flag = 1;
+//  793 	  beep_flag = 1;
         MOV     A,#0x1
         MOVX    @DPTR,A
         INC     DPTR
         CLR     A
         SJMP    ??SampleApp_MessageMSGCB_11
-//  787 	else
-//  788 	  beep_flag = 0;
+//  794 	else
+//  795 	  beep_flag = 0;
 ??SampleApp_MessageMSGCB_12:
         CLR     A
         MOVX    @DPTR,A
         INC     DPTR
 ??SampleApp_MessageMSGCB_11:
         MOVX    @DPTR,A
-//  789       }
-//  790 	
-//  791   }
-//  792 }
+//  796       }
+//  797 	
+//  798   }
+//  799 }
 ??SampleApp_MessageMSGCB_0:
         MOV     A,#0x3
         LCALL   ?DEALLOC_XSTACK8
@@ -4213,16 +4220,16 @@ SampleApp_MessageMSGCB:
         CFI EndBlock cfiCond56
         CFI EndBlock cfiCond57
         CFI EndBlock cfiPicker58
-//  793 
-//  794 //处理ZDO层传来的信息
+//  800 
+//  801 //处理ZDO层传来的信息
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  795 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
+//  802 void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 SApp_ProcessMsgCBs:
         CFI Block cfiBlock59 Using cfiCommon0
         CFI Function SApp_ProcessMsgCBs
         CODE
-//  796 {
+//  803 {
         FUNCALL SApp_ProcessMsgCBs, osal_memset
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -4307,16 +4314,16 @@ SApp_ProcessMsgCBs:
         MOV     R6,A
         MOV     A,R3
         MOV     R7,A
-//  797 #if defined(ZDO_COORDINATOR)
-//  798 {
-//  799   char i;
-//  800   uint32 l_addr;
-//  801   char flag = 0;
-//  802   uint16 nwk_addr;
-//  803   byte buf[10]; 
-//  804 //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
-//  805 
-//  806   switch ( msgPtr->clusterID ) //判断簇ID
+//  804 #if defined(ZDO_COORDINATOR)
+//  805 {
+//  806   char i;
+//  807   uint32 l_addr;
+//  808   char flag = 0;
+//  809   uint16 nwk_addr;
+//  810   byte buf[10]; 
+//  811 //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
+//  812 
+//  813   switch ( msgPtr->clusterID ) //判断簇ID
         MOV     A,R6
         ADD     A,#0xc
         MOV     DPL,A
@@ -4331,10 +4338,10 @@ SApp_ProcessMsgCBs:
 ??SApp_ProcessMsgCBs_0:
         JZ      $+5
         LJMP    ??SApp_ProcessMsgCBs_1 & 0xFFFF
-//  807   {
-//  808     case Device_annce:
-//  809 
-//  810         osal_memset(buf, 0 , 10);
+//  814   {
+//  815     case Device_annce:
+//  816 
+//  817         osal_memset(buf, 0 , 10);
         ; Setup parameters for call to function osal_memset
         MOV     R4,#0xa
         MOV     R5,#0x0
@@ -4344,7 +4351,7 @@ SApp_ProcessMsgCBs:
         MOV     R2,DPL
         MOV     R3,DPH
         LCALL   ??osal_memset?relay
-//  811         osal_memcpy(buf, msgPtr->asdu, 10); //复制数据到缓冲区中
+//  818         osal_memcpy(buf, msgPtr->asdu, 10); //复制数据到缓冲区中
         ; Setup parameters for call to function osal_memcpy
         MOV     A,R6
         ADD     A,#0x13
@@ -4360,7 +4367,7 @@ SApp_ProcessMsgCBs:
 ??CrossCallReturnLabel_33:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 26)
-//  812 	nwk_addr = buf[1]*0x100 + buf[0];
+//  819 	nwk_addr = buf[1]*0x100 + buf[0];
         MOV     A,#0x1
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
@@ -4371,7 +4378,7 @@ SApp_ProcessMsgCBs:
         MOV     R6,A
         MOV     A,R1
         MOV     R7,A
-//  813 	l_addr = buf[5]*0x1000000 + buf[4]*0x10000 + buf[3]*0x100 + buf[2];
+//  820 	l_addr = buf[5]*0x1000000 + buf[4]*0x10000 + buf[3]*0x100 + buf[2];
         MOV     A,#0x5
         LCALL   ?XSTACK_DISP0_8
         MOVX    A,@DPTR
@@ -4421,8 +4428,8 @@ SApp_ProcessMsgCBs:
         MOV     R0,#?V0 + 4
         MOV     R1,#?V0 + 0
         LCALL   ?L_ADD
-//  814 	#if defined ( LCD_SUPPORTED )
-//  815 	HalLcdWriteStringValue("DevAnnce:", nwk_addr, 16, 4);
+//  821 	#if defined ( LCD_SUPPORTED )
+//  822 	HalLcdWriteStringValue("DevAnnce:", nwk_addr, 16, 4);
         ; Setup parameters for call to function HalLcdWriteStringValue
         MOV     ?V0 + 0,R6
         MOV     ?V0 + 1,R7
@@ -4437,7 +4444,7 @@ SApp_ProcessMsgCBs:
 ??CrossCallReturnLabel_55:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 26)
-//  816 	HalLcdWriteStringValue("l_addr:", l_addr, 16, 3);
+//  823 	HalLcdWriteStringValue("l_addr:", l_addr, 16, 3);
         ; Setup parameters for call to function HalLcdWriteStringValue
         MOV     R0,#?V0 + 4
         LCALL   ?PUSH_XSTACK_I_FOUR
@@ -4450,10 +4457,10 @@ SApp_ProcessMsgCBs:
 ??CrossCallReturnLabel_56:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 26)
-//  817 	#endif
-//  818 	
-//  819 	
-//  820 	  	for(i = 0; i < device_num; i++)
+//  824 	#endif
+//  825 	
+//  826 	
+//  827 	  	for(i = 0; i < device_num; i++)
         MOV     R2,#0x0
         SJMP    ??SApp_ProcessMsgCBs_2
 ??SApp_ProcessMsgCBs_3:
@@ -4463,8 +4470,8 @@ SApp_ProcessMsgCBs:
         LCALL   ?Subroutine6 & 0xFFFF
 ??CrossCallReturnLabel_5:
         JNC     ??SApp_ProcessMsgCBs_4
-//  821 		{
-//  822 		 	if(long_addr[i] == l_addr)
+//  828 		{
+//  829 		 	if(long_addr[i] == l_addr)
         MOV     ?V0 + 1,#0x0
         MOV     A,#0x2
         MOV     R0,#?V0 + 0
@@ -4473,9 +4480,9 @@ SApp_ProcessMsgCBs:
 ??CrossCallReturnLabel_17:
         LCALL   ?L_EQ_X
         JNZ     ??SApp_ProcessMsgCBs_3
-//  823 			{
-//  824 			  	flag = 1;
-//  825 				device[i] = nwk_addr;
+//  830 			{
+//  831 			  	flag = 1;
+//  832 				device[i] = nwk_addr;
         MOV     A,R2
         CLR     C
         RLC     A
@@ -4484,18 +4491,18 @@ SApp_ProcessMsgCBs:
         LCALL   ?Subroutine13 & 0xFFFF
 ??CrossCallReturnLabel_15:
         MOVX    @DPTR,A
-//  826 			  	break;
+//  833 			  	break;
         SJMP    ??SApp_ProcessMsgCBs_5
-//  827 			}
-//  828 		}
-//  829 		if(flag == 0)
-//  830 		{
-//  831 	  		device[++device_num] = nwk_addr;
+//  834 			}
+//  835 		}
+//  836 		if(flag == 0)
+//  837 		{
+//  838 	  		device[++device_num] = nwk_addr;
 ??SApp_ProcessMsgCBs_4:
         MOV     DPTR,#device_num
         LCALL   ?Subroutine11 & 0xFFFF
-//  832 			long_addr[device_num] = l_addr;
-//  833 		}
+//  839 			long_addr[device_num] = l_addr;
+//  840 		}
 ??CrossCallReturnLabel_14:
         MOVX    @DPTR,A
         INC     R0
@@ -4515,26 +4522,26 @@ SApp_ProcessMsgCBs:
         LCALL   ?Subroutine14 & 0xFFFF
 ??CrossCallReturnLabel_18:
         LCALL   ?L_MOV_TO_X
-//  834 		
-//  835 		SampleApp_SendAddrMessage( (uint8 *)device, device_num );
+//  841 		
+//  842 		SampleApp_SendAddrMessage( (uint8 *)device, device_num );
 ??SApp_ProcessMsgCBs_5:
         ; Setup parameters for call to function SampleApp_SendAddrMessage
         MOV     DPTR,#device_num
         LCALL   ?Subroutine10 & 0xFFFF
 ??CrossCallReturnLabel_12:
         LCALL   ??SampleApp_SendAddrMessage?relay
-//  836       
-//  837       
-//  838 //      flashTime = BUILD_UINT16(pkt->cmd.Data[1], pkt->cmd.Data[2] );
-//  839 //      HalLedBlink( HAL_LED_4, 4, 50, (flashTime / 4) );
-//  840         break;
-//  841       
-//  842       
-//  843   }
-//  844 }
-//  845 #endif	
-//  846 
-//  847 }
+//  843       
+//  844       
+//  845 //      flashTime = BUILD_UINT16(pkt->cmd.Data[1], pkt->cmd.Data[2] );
+//  846 //      HalLedBlink( HAL_LED_4, 4, 50, (flashTime / 4) );
+//  847         break;
+//  848       
+//  849       
+//  850   }
+//  851 }
+//  852 #endif	
+//  853 
+//  854 }
 ??SApp_ProcessMsgCBs_1:
         MOV     A,#0xa
         LCALL   ?DEALLOC_XSTACK8
@@ -5572,16 +5579,16 @@ SApp_ProcessMsgCBs:
         CFI EndBlock cfiCond110
         CFI EndBlock cfiCond111
         CFI EndBlock cfiPicker112
-//  848 
-//  849 
+//  855 
+//  856 
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  850 void SampleApp_SendBeepMessage(uint16 dst, uint8 s)
+//  857 void SampleApp_SendBeepMessage(uint16 dst, uint8 s)
 SampleApp_SendBeepMessage:
         CFI Block cfiBlock113 Using cfiCommon0
         CFI Function SampleApp_SendBeepMessage
         CODE
-//  851 {	
+//  858 {	
         FUNCALL SampleApp_SendBeepMessage, HalLcdWriteStringValue
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -5636,15 +5643,15 @@ SampleApp_SendBeepMessage:
         MOV     A,#-0x3
         LCALL   ?ALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 15)
-//  852 //#if defined(ZDO_COORDINATOR)
-//  853   SampleApp_Single_DstAddr.addr.shortAddr = dst;
+//  859 //#if defined(ZDO_COORDINATOR)
+//  860   SampleApp_Single_DstAddr.addr.shortAddr = dst;
         MOV     DPTR,#SampleApp_Single_DstAddr
         MOV     A,R2
         MOVX    @DPTR,A
         INC     DPTR
         MOV     A,R3
         MOVX    @DPTR,A
-//  854   byte SendData[3] = "BP";
+//  861   byte SendData[3] = "BP";
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
         MOV     R4,DPL
@@ -5653,13 +5660,13 @@ SampleApp_SendBeepMessage:
         MOV     DPL,#`?<Constant "BP">` & 0xff
         MOV     A,#0x3
         LCALL   ?MOVE_LONG8_XDATA_XDATA
-//  855   SendData[2] = s;
+//  862   SendData[2] = s;
         MOV     A,#0x2
         LCALL   ?XSTACK_DISP0_8
         MOV     A,R1
         MOVX    @DPTR,A
-//  856   #if defined ( LCD_SUPPORTED )
-//  857   HalLcdWriteStringValue("beep info:", SampleApp_Single_DstAddr.addr.shortAddr, 16, 4);
+//  863   #if defined ( LCD_SUPPORTED )
+//  864   HalLcdWriteStringValue("beep info:", SampleApp_Single_DstAddr.addr.shortAddr, 16, 4);
         ; Setup parameters for call to function HalLcdWriteStringValue
         MOV     DPTR,#SampleApp_Single_DstAddr
         LCALL   ??Subroutine26_0 & 0xFFFF
@@ -5671,16 +5678,16 @@ SampleApp_SendBeepMessage:
 ??CrossCallReturnLabel_48:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 15)
-//  858   #endif
-//  859   // 调用AF_DataRequest将数据无线广播出去
-//  860   if( AF_DataRequest( &SampleApp_Single_DstAddr,   //发送目的地址＋端点地址和传送模式
-//  861                        &SampleApp_epDesc,            //源(答复或确认)终端的描述（比如操作系统中任务ID等）源EP
-//  862                        SAMPLEAPP_SINGLE_CLUSTERID, //被Profile指定的有效的集群号
-//  863                        3,                // 发送数据长度
-//  864                        SendData,                          // 发送数据缓冲区
-//  865                        &SampleApp_TransID,           // 任务ID号
-//  866                        AF_DISCV_ROUTE,               // 有效位掩码的发送选项
-//  867                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //传送跳数，通常设置为AF_DEFAULT_RADIUS
+//  865   #endif
+//  866   // 调用AF_DataRequest将数据无线广播出去
+//  867   if( AF_DataRequest( &SampleApp_Single_DstAddr,   //发送目的地址＋端点地址和传送模式
+//  868                        &SampleApp_epDesc,            //源(答复或确认)终端的描述（比如操作系统中任务ID等）源EP
+//  869                        SAMPLEAPP_SINGLE_CLUSTERID, //被Profile指定的有效的集群号
+//  870                        3,                // 发送数据长度
+//  871                        SendData,                          // 发送数据缓冲区
+//  872                        &SampleApp_TransID,           // 任务ID号
+//  873                        AF_DISCV_ROUTE,               // 有效位掩码的发送选项
+//  874                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //传送跳数，通常设置为AF_DEFAULT_RADIUS
         ; Setup parameters for call to function AF_DataRequest
         MOV     ?V0 + 0,#0x1e
         MOV     R0,#?V0 + 0
@@ -5717,37 +5724,37 @@ SampleApp_SendBeepMessage:
         CFI CFA_XSP16 add(XSP16, 15)
         MOV     A,R1
         JZ      ??SampleApp_SendBeepMessage_0
-//  868   {
-//  869   }
-//  870   else
-//  871   {
-//  872     HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+//  875   {
+//  876   }
+//  877   else
+//  878   {
+//  879     HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
         ; Setup parameters for call to function HalLedSet
         MOV     R2,#0x1
         MOV     R1,#0x1
         LCALL   ??HalLedSet?relay
-//  873     // Error occurred in request to send.
-//  874   }
-//  875 //#else
-//  876   
-//  877 //#endif
-//  878 }
+//  880     // Error occurred in request to send.
+//  881   }
+//  882 //#else
+//  883   
+//  884 //#endif
+//  885 }
 ??SampleApp_SendBeepMessage_0:
         MOV     A,#0x3
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 12)
         LJMP    ?Subroutine1 & 0xFFFF
         CFI EndBlock cfiBlock113
-//  879 
-//  880 
+//  886 
+//  887 
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  881 void SampleApp_SendAddrMessage(uint8 dev[], int dev_num)
+//  888 void SampleApp_SendAddrMessage(uint8 dev[], int dev_num)
 SampleApp_SendAddrMessage:
         CFI Block cfiBlock114 Using cfiCommon0
         CFI Function SampleApp_SendAddrMessage
         CODE
-//  882 {	
+//  889 {	
         FUNCALL SampleApp_SendAddrMessage, AF_DataRequest
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -5786,17 +5793,17 @@ SampleApp_SendAddrMessage:
         CFI CFA_XSP16 add(XSP16, 10)
         ; Saved register size: 10
         ; Auto size: 0
-//  883 //#if defined(ZDO_COORDINATOR)
-//  884   
-//  885   // 调用AF_DataRequest将数据无线广播出去
-//  886   if( AF_DataRequest( &SampleApp_Periodic_DstAddr,   //发送目的地址＋端点地址和传送模式
-//  887                        &SampleApp_epDesc,            //源(答复或确认)终端的描述（比如操作系统中任务ID等）源EP
-//  888                        SAMPLEAPP_PERIODIC_CLUSTERID, //被Profile指定的有效的集群号
-//  889                        (dev_num+1)*2,                // 发送数据长度
-//  890                        dev,                          // 发送数据缓冲区
-//  891                        &SampleApp_TransID,           // 任务ID号
-//  892                        AF_DISCV_ROUTE,               // 有效位掩码的发送选项
-//  893                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //传送跳数，通常设置为AF_DEFAULT_RADIUS
+//  890 //#if defined(ZDO_COORDINATOR)
+//  891   
+//  892   // 调用AF_DataRequest将数据无线广播出去
+//  893   if( AF_DataRequest( &SampleApp_Periodic_DstAddr,   //发送目的地址＋端点地址和传送模式
+//  894                        &SampleApp_epDesc,            //源(答复或确认)终端的描述（比如操作系统中任务ID等）源EP
+//  895                        SAMPLEAPP_PERIODIC_CLUSTERID, //被Profile指定的有效的集群号
+//  896                        (dev_num+1)*2,                // 发送数据长度
+//  897                        dev,                          // 发送数据缓冲区
+//  898                        &SampleApp_TransID,           // 任务ID号
+//  899                        AF_DISCV_ROUTE,               // 有效位掩码的发送选项
+//  900                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //传送跳数，通常设置为AF_DEFAULT_RADIUS
         ; Setup parameters for call to function AF_DataRequest
         MOV     ?V0 + 0,#0x1e
         MOV     R0,#?V0 + 0
@@ -5839,21 +5846,21 @@ SampleApp_SendAddrMessage:
         CFI CFA_XSP16 add(XSP16, 10)
         MOV     A,R1
         JZ      ??SampleApp_SendAddrMessage_0
-//  894   {
-//  895   }
-//  896   else
-//  897   {
-//  898     HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+//  901   {
+//  902   }
+//  903   else
+//  904   {
+//  905     HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
         ; Setup parameters for call to function HalLedSet
         MOV     R2,#0x1
         MOV     R1,#0x1
         LCALL   ??HalLedSet?relay
-//  899     // Error occurred in request to send.
-//  900   }
-//  901 //#else
-//  902   
-//  903 //#endif
-//  904 }
+//  906     // Error occurred in request to send.
+//  907   }
+//  908 //#else
+//  909   
+//  910 //#endif
+//  911 }
 ??SampleApp_SendAddrMessage_0:
         SJMP    ??Subroutine29_0
         CFI EndBlock cfiBlock114
@@ -5979,27 +5986,27 @@ SampleApp_SendAddrMessage:
         CFI EndBlock cfiCond120
         CFI EndBlock cfiCond121
         CFI EndBlock cfiPicker122
-//  905 
-//  906 
-//  907 
-//  908 /*********************************************************************
-//  909  * @fn      SampleApp_SendPeriodicMessage
-//  910  *
-//  911  * @brief   Send the periodic message.
-//  912  *
-//  913  * @param   none
-//  914  *
-//  915  * @return  none
-//  916  */
-//  917 //分析发送周期信息
+//  912 
+//  913 
+//  914 
+//  915 /*********************************************************************
+//  916  * @fn      SampleApp_SendPeriodicMessage
+//  917  *
+//  918  * @brief   Send the periodic message.
+//  919  *
+//  920  * @param   none
+//  921  *
+//  922  * @return  none
+//  923  */
+//  924 //分析发送周期信息
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  918 void SampleApp_SendPeriodicMessage( void )
+//  925 void SampleApp_SendPeriodicMessage( void )
 SampleApp_SendPeriodicMessage:
         CFI Block cfiBlock123 Using cfiCommon0
         CFI Function SampleApp_SendPeriodicMessage
         CODE
-//  919 {	
+//  926 {	
         FUNCALL SampleApp_SendPeriodicMessage, AF_DataRequest
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -6041,9 +6048,9 @@ SampleApp_SendPeriodicMessage:
         MOV     A,#-0x3
         LCALL   ?ALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 13)
-//  920 //#if defined(ZDO_COORDINATOR)
-//  921   
-//  922   byte SendData[3]="D1";
+//  927 //#if defined(ZDO_COORDINATOR)
+//  928   
+//  929   byte SendData[3]="D1";
         MOV     DPL,?XSP + 0
         MOV     DPH,?XSP + 1
         MOV     R4,DPL
@@ -6052,16 +6059,16 @@ SampleApp_SendPeriodicMessage:
         MOV     DPL,#`?<Constant "D1">` & 0xff
         MOV     A,#0x3
         LCALL   ?MOVE_LONG8_XDATA_XDATA
-//  923 
-//  924   // 调用AF_DataRequest将数据无线广播出去
-//  925   if( AF_DataRequest( &SampleApp_Periodic_DstAddr,//发送目的地址＋端点地址和传送模式
-//  926                        &SampleApp_epDesc,//源(答复或确认)终端的描述（比如操作系统中任务ID等）源EP
-//  927                        SAMPLEAPP_PERIODIC_CLUSTERID, //被Profile指定的有效的集群号
-//  928                        3,       // 发送数据长度
-//  929                        SendData,// 发送数据缓冲区
-//  930                        &SampleApp_TransID,     // 任务ID号
-//  931                        AF_DISCV_ROUTE,      // 有效位掩码的发送选项
-//  932                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //传送跳数，通常设置为AF_DEFAULT_RADIUS
+//  930 
+//  931   // 调用AF_DataRequest将数据无线广播出去
+//  932   if( AF_DataRequest( &SampleApp_Periodic_DstAddr,//发送目的地址＋端点地址和传送模式
+//  933                        &SampleApp_epDesc,//源(答复或确认)终端的描述（比如操作系统中任务ID等）源EP
+//  934                        SAMPLEAPP_PERIODIC_CLUSTERID, //被Profile指定的有效的集群号
+//  935                        3,       // 发送数据长度
+//  936                        SendData,// 发送数据缓冲区
+//  937                        &SampleApp_TransID,     // 任务ID号
+//  938                        AF_DISCV_ROUTE,      // 有效位掩码的发送选项
+//  939                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )  //传送跳数，通常设置为AF_DEFAULT_RADIUS
         ; Setup parameters for call to function AF_DataRequest
         MOV     ?V0 + 0,#0x1e
         MOV     R0,#?V0 + 0
@@ -6094,21 +6101,21 @@ SampleApp_SendPeriodicMessage:
         CFI CFA_XSP16 add(XSP16, 13)
         MOV     A,R1
         JZ      ??SampleApp_SendPeriodicMessage_0
-//  933   {
-//  934   }
-//  935   else
-//  936   {
-//  937     HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
+//  940   {
+//  941   }
+//  942   else
+//  943   {
+//  944     HalLedSet(HAL_LED_1, HAL_LED_MODE_ON);
         ; Setup parameters for call to function HalLedSet
         MOV     R2,#0x1
         MOV     R1,#0x1
         LCALL   ??HalLedSet?relay
-//  938     // Error occurred in request to send.
-//  939   }
-//  940 //#else
-//  941   
-//  942 //#endif
-//  943 }
+//  945     // Error occurred in request to send.
+//  946   }
+//  947 //#else
+//  948   
+//  949 //#endif
+//  950 }
 ??SampleApp_SendPeriodicMessage_0:
         MOV     A,#0x3
         CFI EndBlock cfiBlock123
@@ -6156,24 +6163,24 @@ SampleApp_SendPeriodicMessage:
         MOV     R7,#0x2
         LJMP    ?BANKED_LEAVE_XDATA
         CFI EndBlock cfiBlock125
-//  944 
-//  945 /*********************************************************************
-//  946  * @fn      SampleApp_SendFlashMessage
-//  947  *
-//  948  * @brief   Send the flash message to group 1.
-//  949  *
-//  950  * @param   flashTime - in milliseconds
-//  951  *
-//  952  * @return  none
-//  953  */
+//  951 
+//  952 /*********************************************************************
+//  953  * @fn      SampleApp_SendFlashMessage
+//  954  *
+//  955  * @brief   Send the flash message to group 1.
+//  956  *
+//  957  * @param   flashTime - in milliseconds
+//  958  *
+//  959  * @return  none
+//  960  */
 
         RSEG BANKED_CODE:CODE:NOROOT(0)
-//  954 void SampleApp_SendFlashMessage( uint16 flashTime ,uint16 data) //此实验没有用到，后面再分析
+//  961 void SampleApp_SendFlashMessage( uint16 flashTime ,uint16 data) //此实验没有用到，后面再分析
 SampleApp_SendFlashMessage:
         CFI Block cfiBlock126 Using cfiCommon0
         CFI Function SampleApp_SendFlashMessage
         CODE
-//  955 {
+//  962 {
         FUNCALL SampleApp_SendFlashMessage, AF_DataRequest
         LOCFRAME ISTACK, 0, STACK
         LOCFRAME PSTACK, 0, STACK
@@ -6204,8 +6211,8 @@ SampleApp_SendFlashMessage:
         MOV     A,#-0x4
         LCALL   ?ALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 14)
-//  956   uint8 buffer[4];
-//  957   buffer[0] = (uint8)(SampleAppFlashCounter++);
+//  963   uint8 buffer[4];
+//  964   buffer[0] = (uint8)(SampleAppFlashCounter++);
         MOV     DPTR,#SampleAppFlashCounter
         MOVX    A,@DPTR
         MOV     DPL,?XSP + 0
@@ -6215,29 +6222,29 @@ SampleApp_SendFlashMessage:
         MOVX    A,@DPTR
         INC     A
         MOVX    @DPTR,A
-//  958   buffer[1] = data;
+//  965   buffer[1] = data;
         MOV     A,#0x1
         LCALL   ?XSTACK_DISP0_8
         MOV     A,R4
         MOVX    @DPTR,A
-//  959   buffer[2] = data;
+//  966   buffer[2] = data;
         MOV     A,#0x2
         LCALL   ?XSTACK_DISP0_8
         MOV     A,R4
         MOVX    @DPTR,A
-//  960   buffer[3] = data;
+//  967   buffer[3] = data;
         MOV     A,#0x3
         LCALL   ?XSTACK_DISP0_8
         MOV     A,R4
         MOVX    @DPTR,A
-//  961 
-//  962   if ( AF_DataRequest( &SampleApp_Flash_DstAddr, &SampleApp_epDesc,
-//  963                        SAMPLEAPP_FLASH_CLUSTERID,
-//  964                        4,
-//  965                        buffer,
-//  966                        &SampleApp_TransID,
-//  967                        AF_DISCV_ROUTE,
-//  968                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
+//  968 
+//  969   if ( AF_DataRequest( &SampleApp_Flash_DstAddr, &SampleApp_epDesc,
+//  970                        SAMPLEAPP_FLASH_CLUSTERID,
+//  971                        4,
+//  972                        buffer,
+//  973                        &SampleApp_TransID,
+//  974                        AF_DISCV_ROUTE,
+//  975                        AF_DEFAULT_RADIUS ) == afStatus_SUCCESS )
         ; Setup parameters for call to function AF_DataRequest
         MOV     ?V0 + 0,#0x1e
         MOV     R0,#?V0 + 0
@@ -6273,13 +6280,13 @@ SampleApp_SendFlashMessage:
 ??CrossCallReturnLabel_60:
         LCALL   ?DEALLOC_XSTACK8
         CFI CFA_XSP16 add(XSP16, 14)
-//  969   {
-//  970   }
-//  971   else
-//  972   {
-//  973     // Error occurred in request to send.
-//  974   }
-//  975 }
+//  976   {
+//  977   }
+//  978   else
+//  979   {
+//  980     // Error occurred in request to send.
+//  981   }
+//  982 }
         MOV     A,#0x4
         LJMP    ?Subroutine2 & 0xFFFF
         CFI EndBlock cfiBlock126
@@ -6448,9 +6455,9 @@ SampleApp_SendFlashMessage:
         DB "D1"
 
         END
-//  976 
-//  977 /*********************************************************************
-//  978 *********************************************************************/
+//  983 
+//  984 /*********************************************************************
+//  985 *********************************************************************/
 // 
 // 2 383 bytes in segment BANKED_CODE
 //    84 bytes in segment BANK_RELAYS

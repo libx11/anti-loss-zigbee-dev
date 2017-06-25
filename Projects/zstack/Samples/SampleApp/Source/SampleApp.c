@@ -377,7 +377,6 @@ void SampleApp_Init( uint8 task_id )
  // register for end device annce and simple descriptor responses
  ZDO_RegisterForZDOMsg( SampleApp_TaskID, Device_annce );
   
-  
   InitT1();
   InitT3();
   
@@ -428,7 +427,15 @@ uint16 SampleApp_ProcessEvent( uint8 task_id, uint16 events )
 	case ZDO_CB_MSG:
 	  SApp_ProcessMsgCBs( (zdoIncomingMsg_t *)MSGpkt);
 	  break;
-
+	  
+	  
+	case AF_DATA_CONFIRM_CMD:
+	  
+	  
+	  break;
+	  
+	  
+	  
         // Received whenever the device changes state in the network
         case ZDO_STATE_CHANGE:
 	  
@@ -720,7 +727,7 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 	else if(main_flag == 1)
 	{
 	  	
-	  	if(pkt->rssi < -75)
+	  	if(pkt->rssi < -80)
 		{
 		  if(count < 3)
 		    	count++;
@@ -730,7 +737,7 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 			count = 0;
 		  }
 		}
-		else if(pkt->rssi > -55)
+		else if(pkt->rssi > -66)
 		{
 		  	count = 0;
 		  	beep0();
