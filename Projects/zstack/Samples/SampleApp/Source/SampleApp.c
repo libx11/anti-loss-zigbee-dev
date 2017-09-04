@@ -149,6 +149,7 @@ uint8 SampleAppFlashCounter = 0;
 
 uint16 device[32] = {0};
 uint32 long_addr[32] = {0};
+uint8 online[32] = {0};
 
 int sel_dev = 0;
 int main_flag = 1;
@@ -158,6 +159,7 @@ int distance_flag = 0;
 int count = 0;
 int period_count = 0;
 int device_num = 0;
+int freq_count = 0;
 uint16 dst_dev = 0x0000;
 
 /*********************************************************************
@@ -697,6 +699,7 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 {
   char i;
   byte buf[3];
+  
 //  HalLcdWriteStringValue("GROUP:", group, 10, 4);
 
   switch ( pkt->clusterId ) //判断簇ID
@@ -726,7 +729,16 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 	}
 	else if(main_flag == 1)
 	{
-	  	
+	  	for(i = 0; i < device_num;i ++)
+		{
+		  if(pkt->srcAddr.addr.shortAddr == device[i])
+		  {
+		    online[i]++;
+		  }
+		}
+		    
+		    
+		    
 	  	if(pkt->rssi < -80)
 		{
 		  if(count < 3)
@@ -925,9 +937,36 @@ void SampleApp_SendAddrMessage(uint8 dev[], int dev_num)
 void SampleApp_SendPeriodicMessage( void )
 {	
 //#if defined(ZDO_COORDINATOR)
-  
+  uint8 i = 0;
   byte SendData[3]="D1";
-
+  freq_count ++;
+  if(freq_count == 2)
+  {
+    for(i = 1; i < device_num; i++)
+    {
+    	if(online[i] != 2)
+	{
+	    HalLcdWriteStringValue("dev lost:", i, 10, 3);
+	}
+    }
+  
+    freq_count  = 0;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   // 调用AF_DataRequest将数据无线广播出去
   if( AF_DataRequest( &SampleApp_Periodic_DstAddr,//发送目的地址＋端点地址和传送模式
                        &SampleApp_epDesc,//源(答复或确认)终端的描述（比如操作系统中任务ID等）源EP
