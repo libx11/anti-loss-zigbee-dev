@@ -729,7 +729,7 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 	}
 	else if(main_flag == 1)
 	{
-	  	for(i = 0; i < device_num;i ++)
+	  	for(i = 0; i <= device_num;i ++)
 		{
 		  if(pkt->srcAddr.addr.shortAddr == device[i])
 		  {
@@ -770,7 +770,7 @@ void SampleApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 		device_num = pkt->cmd.DataLength/2;
 		
 		#if defined ( LCD_SUPPORTED )
-		HalLcdWriteStringValue("dev_num:", device_num, 10, 4);
+		HalLcdWriteStringValue("total device:", device_num, 10, 4);
 		#endif
 		
 		for(i = 0 ;i < device_num; i++)
@@ -835,8 +835,7 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 	HalLcdWriteStringValue("l_addr:", l_addr, 16, 3);
 	#endif
 	
-	
-	  	for(i = 0; i < device_num; i++)
+	  	for(i = 0; i <= device_num; i++)
 		{
 		 	if(long_addr[i] == l_addr)
 			{
@@ -857,7 +856,6 @@ void SApp_ProcessMsgCBs( zdoIncomingMsg_t *msgPtr )
 //      flashTime = BUILD_UINT16(pkt->cmd.Data[1], pkt->cmd.Data[2] );
 //      HalLedBlink( HAL_LED_4, 4, 50, (flashTime / 4) );
         break;
-      
       
   }
 }
@@ -937,35 +935,25 @@ void SampleApp_SendAddrMessage(uint8 dev[], int dev_num)
 void SampleApp_SendPeriodicMessage( void )
 {	
 //#if defined(ZDO_COORDINATOR)
-  uint8 i = 0;
+  
   byte SendData[3]="D1";
-  freq_count ++;
+  #if defined(ZDO_COORDINATOR)
+  uint8 i = 0;
+  freq_count++;
   if(freq_count == 2)
   {
-    for(i = 1; i < device_num; i++)
+    for(i = 1; i <= device_num; i++)
     {
-    	if(online[i] != 2)
+    	if(online[i] == 0)
 	{
 	    HalLcdWriteStringValue("dev lost:", i, 10, 3);
 	}
+	online[i] = 0;
     }
-  
+    
     freq_count  = 0;
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  #endif
   
   // 调用AF_DataRequest将数据无线广播出去
   if( AF_DataRequest( &SampleApp_Periodic_DstAddr,//发送目的地址＋端点地址和传送模式
