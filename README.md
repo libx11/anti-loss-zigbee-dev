@@ -1,5 +1,7 @@
 # anti-loss-zigbee-dev
-基于zigbee的防丢设备
+A zigbee device based on cc2530 chip
+
+基于cc2530的zigbee防丢设备
 
 使用z-stack协议栈通讯
 
