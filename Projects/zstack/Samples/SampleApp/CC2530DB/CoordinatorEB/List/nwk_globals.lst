@@ -1,135 +1,100 @@
 ###############################################################################
-#                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         12/Jun/2017  17:08:08 #
-# Copyright 2004-2011 IAR Systems AB.                                         #
-#                                                                             #
-#    Core               =  plain                                              #
-#    Code model         =  banked                                             #
-#    Data model         =  large                                              #
-#    Calling convention =  xdata reentrant                                    #
-#    Constant location  =  data_rom                                           #
-#    Dptr setup         =  1,16                                               #
-#    Source file        =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Components\stack\nwk\nwk_globals.c            #
-#    Command line       =  -f "C:\Users\li\Desktop\ZStack-2.5.1a -            #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\Tools\CC2530DB\f8wCoord.cfg" (-DCPU32MHZ    #
-#                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRU #
-#                          E -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8       #
-#                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
-#                          -f "C:\Users\li\Desktop\ZStack-2.5.1a -            #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\Tools\CC2530DB\f8wConfig.cfg" (-DZIGBEEPRO  #
-#                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
-#                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                       #
-#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
-#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
-#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
-#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
-#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
-#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
-#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
-#                          -DNWK_MAX_DATA_RETRIES=2                           #
-#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
-#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
-#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
-#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
-#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
-#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
-#                          -DMAC_MAX_FRAME_SIZE=116                           #
-#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
-#                          __code" -DGENERIC=__generic                        #
-#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
-#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
-#                          -DREJOIN_POLL_RATE=440 "C:\Users\li\Desktop\ZStack #
-#                          -2.5.1a - 副本\Components\stack\nwk\nwk_globals.c" #
-#                           -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D          #
-#                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\List\" -lA "C:\Users\li\Desktop\ZStack #
-#                          -2.5.1a - 副本\Projects\zstack\Samples\SampleApp\C #
-#                          C2530DB\CoordinatorEB\List\" --diag_suppress       #
-#                          Pe001,Pa010 -o "C:\Users\li\Desktop\ZStack-2.5.1a  #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          CoordinatorEB\Obj\" -e --no_code_motion --debug    #
-#                          --core=plain --dptr=16,1 --data_model=large        #
-#                          --code_model=banked --calling_convention=xdata_ree #
-#                          ntrant --place_constants=data_rom                  #
-#                          --nr_virtual_regs 16 -I "C:\Users\li\Desktop\ZStac #
-#                          k-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\ #
-#                          CC2530DB\" -I "C:\Users\li\Desktop\ZStack-2.5.1a   #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          ..\Source\" -I "C:\Users\li\Desktop\ZStack-2.5.1a  #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          ..\..\..\ZMain\TI2530DB\" -I                       #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\include\" -I           #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\target\CC2530EB\" -I   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\include\" -I           #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\high_level\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\" -I   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\single #
-#                          _chip\" -I "C:\Users\li\Desktop\ZStack-2.5.1a -    #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mt\" -I                    #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\osal\include\" -I          #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\services\saddr\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\services\sdata\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\af\" -I              #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\nwk\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sapi\" -I            #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sec\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sys\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\zdo\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\zmac\" -I                  #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\zmac\f8w\" -Ohz            #
-#                          --require_prototypes                               #
-#    List file          =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\List\nwk_globals.lst                   #
-#    Object file        =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\Obj\nwk_globals.r51                    #
-#                                                                             #
-#                                                                             #
+#
+# IAR C/C++ Compiler V10.20.1.5333 for 8051               31/May/2018  15:13:23
+# Copyright 2004-2018 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for 8051
+#
+#    Core               =  plain
+#    Code model         =  banked
+#    Data model         =  large
+#    Calling convention =  xdata reentrant
+#    Constant location  =  data_rom
+#    Dptr setup         =  1,16
+#                          
+#    Source file        =  
+#        E:\anti-lost-dev-code\Components\stack\nwk\nwk_globals.c
+#    Command line       =  
+#        -f C:\Users\libx\AppData\Local\Temp\EW8906.tmp
+#        (E:\anti-lost-dev-code\Components\stack\nwk\nwk_globals.c -D ZTOOL_P1
+#        -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List
+#        -lA
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List
+#        --diag_suppress Pe001,Pa010 -o
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\Obj
+#        -e --debug --core=plain --dptr=16,1 --data_model=large
+#        --code_model=banked --calling_convention=xdata_reentrant
+#        --place_constants=data_rom --nr_virtual_regs 8 -f
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg
+#        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
+#        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
+#        -DZDO_COORDINATOR -DRTR_NWK) -f
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+#        (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+#        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0xFFFF
+#        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+#        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+#        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+#        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+#        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+#        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+#        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+#        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+#        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+#        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+#        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+#        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100
+#        -DREJOIN_POLL_RATE=440) -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\ -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\Source\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ZMain\TI2530DB\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mt\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\osal\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\af\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+#        -Ohz --require_prototypes --no_code_motion)
+#    Locale             =  Chinese (Simplified)_CHN.936
+#    List file          =  
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List\nwk_globals.lst
+#    Object file        =  
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\Obj\nwk_globals.r51
+#
 ###############################################################################
 
-C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
+E:\anti-lost-dev-code\Components\stack\nwk\nwk_globals.c
       1          /**************************************************************************************************
       2            Filename:       nwk_globals.c
       3            Revised:        $Date: 2012-03-07 01:04:58 -0800 (Wed, 07 Mar 2012) $
@@ -798,15 +763,15 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     330          void nwk_globals_init( void )
    \                     nwk_globals_init:
     331          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
+   \   000000   C082         PUSH      DPL
+   \   000002   C083         PUSH      DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 0
     332            AddrMgrInit( NWK_MAX_ADDRESSES );
    \   000004                ; Setup parameters for call to function AddrMgrInit
-   \   000004   7A1A         MOV     R2,#0x1a
-   \   000006   7B00         MOV     R3,#0x0
-   \   000008   12....       LCALL   ??AddrMgrInit?relay
+   \   000004   7A1A         MOV       R2,#0x1a
+   \   000006   7B00         MOV       R3,#0x0
+   \   000008   12....       LCALL     `??AddrMgrInit::?relay`; Banked call to: AddrMgrInit
     333          
     334          #if !defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
     335            if ( ZSTACK_ROUTER_BUILD )
@@ -823,13 +788,13 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     346            {
     347              NLME_InitLinkStatus();
    \   00000B                ; Setup parameters for call to function NLME_InitLinkStatus
-   \   00000B   12....       LCALL   ??NLME_InitLinkStatus?relay
+   \   00000B   12....       LCALL     `??NLME_InitLinkStatus::?relay`; Banked call to: NLME_InitLinkStatus
     348            }
     349          
     350          #if defined ( ZIGBEE_FREQ_AGILITY )
     351            NwkFreqAgilityInit();
    \   00000E                ; Setup parameters for call to function NwkFreqAgilityInit
-   \   00000E   12....       LCALL   ??NwkFreqAgilityInit?relay
+   \   00000E   12....       LCALL     `??NwkFreqAgilityInit::?relay`; Banked call to: NwkFreqAgilityInit
     352          #endif
     353          }
    \   000011                REQUIRE ?Subroutine0
@@ -837,9 +802,9 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
-   \   000000   D083         POP     DPH
-   \   000002   D082         POP     DPL
-   \   000004   02....       LJMP    ?BRET
+   \   000000   D083         POP       DPH
+   \   000002   D082         POP       DPL
+   \   000004   02....       LJMP      ?BRET
     354          
     355          /*********************************************************************
     356           * @fn       NIB_init()
@@ -857,34 +822,34 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     366          void NIB_init()
    \                     NIB_init:
     367          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
+   \   000000   C082         PUSH      DPL
+   \   000002   C083         PUSH      DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 0
     368            _NIB.SequenceNum = LO_UINT16(osal_rand());
    \   000004                ; Setup parameters for call to function osal_rand
-   \   000004   12....       LCALL   ??osal_rand?relay
-   \   000007   EA           MOV     A,R2
-   \   000008   90....       MOV     DPTR,#_NIB
-   \   00000B   F0           MOVX    @DPTR,A
+   \   000004   12....       LCALL     `??osal_rand::?relay`; Banked call to: osal_rand
+   \   000007   EA           MOV       A,R2
+   \   000008   90....       MOV       DPTR,#_NIB
+   \   00000B   F0           MOVX      @DPTR,A
     369          
     370            _NIB.nwkProtocolVersion = ZB_PROT_VERS;
-   \   00000C   90....       MOV     DPTR,#_NIB + 17
-   \   00000F   7402         MOV     A,#0x2
-   \   000011   F0           MOVX    @DPTR,A
+   \   00000C   90....       MOV       DPTR,#_NIB + 17
+   \   00000F   7402         MOV       A,#0x2
+   \   000011   F0           MOVX      @DPTR,A
     371            _NIB.MaxDepth = MAX_NODE_DEPTH;
-   \   000012   90....       MOV     DPTR,#_NIB + 4
-   \   000015   7414         MOV     A,#0x14
-   \   000017   F0           MOVX    @DPTR,A
+   \   000012   90....       MOV       DPTR,#_NIB + 4
+   \   000015   7414         MOV       A,#0x14
+   \   000017   F0           MOVX      @DPTR,A
     372          
     373          #if ( NWK_MODE == NWK_MODE_MESH )
     374            _NIB.beaconOrder = BEACON_ORDER_NO_BEACONS;
-   \   000018   90....       MOV     DPTR,#_NIB + 40
-   \   00001B   740F         MOV     A,#0xf
-   \   00001D   F0           MOVX    @DPTR,A
+   \   000018   90....       MOV       DPTR,#_NIB + 40
+   \   00001B   740F         MOV       A,#0xf
+   \   00001D   F0           MOVX      @DPTR,A
     375            _NIB.superFrameOrder = BEACON_ORDER_NO_BEACONS;
-   \   00001E   A3           INC     DPTR
-   \   00001F   F0           MOVX    @DPTR,A
+   \   00001E   A3           INC       DPTR
+   \   00001F   F0           MOVX      @DPTR,A
     376          #endif
     377          
     378            // BROADCAST SETTINGS:
@@ -896,35 +861,35 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     384            //   Passive Ack Timeout
     385            //     - set to multiples of 100ms
     386            _NIB.BroadcastDeliveryTime = zgBcastDeliveryTime;
-   \   000020   90....       MOV     DPTR,#zgBcastDeliveryTime
-   \   000023   E0           MOVX    A,@DPTR
-   \   000024   90....       MOV     DPTR,#_NIB + 7
-   \   000027   F0           MOVX    @DPTR,A
+   \   000020   90....       MOV       DPTR,#zgBcastDeliveryTime
+   \   000023   E0           MOVX      A,@DPTR
+   \   000024   90....       MOV       DPTR,#_NIB + 7
+   \   000027   F0           MOVX      @DPTR,A
     387            _NIB.PassiveAckTimeout     = zgPassiveAckTimeout;
-   \   000028   90....       MOV     DPTR,#zgPassiveAckTimeout
-   \   00002B   E0           MOVX    A,@DPTR
-   \   00002C   90....       MOV     DPTR,#_NIB + 1
-   \   00002F   F0           MOVX    @DPTR,A
+   \   000028   90....       MOV       DPTR,#zgPassiveAckTimeout
+   \   00002B   E0           MOVX      A,@DPTR
+   \   00002C   90....       MOV       DPTR,#_NIB + 1
+   \   00002F   F0           MOVX      @DPTR,A
     388            _NIB.MaxBroadcastRetries   = zgMaxBcastRetires;
-   \   000030   90....       MOV     DPTR,#zgMaxBcastRetires
-   \   000033   E0           MOVX    A,@DPTR
-   \   000034   90....       MOV     DPTR,#_NIB + 2
-   \   000037   F0           MOVX    @DPTR,A
+   \   000030   90....       MOV       DPTR,#zgMaxBcastRetires
+   \   000033   E0           MOVX      A,@DPTR
+   \   000034   90....       MOV       DPTR,#_NIB + 2
+   \   000037   F0           MOVX      @DPTR,A
     389          
     390            _NIB.ReportConstantCost = 0;
-   \   000038   90....       MOV     DPTR,#_NIB + 8
-   \   00003B   E4           CLR     A
-   \   00003C   F0           MOVX    @DPTR,A
+   \   000038   90....       MOV       DPTR,#_NIB + 8
+   \   00003B   E4           CLR       A
+   \   00003C   F0           MOVX      @DPTR,A
     391            _NIB.RouteDiscRetries = 0;
-   \   00003D   A3           INC     DPTR
-   \   00003E   F0           MOVX    @DPTR,A
+   \   00003D   A3           INC       DPTR
+   \   00003E   F0           MOVX      @DPTR,A
     392            _NIB.SecureAllFrames = USE_NWK_SECURITY;
-   \   00003F   90....       MOV     DPTR,#_NIB + 11
-   \   000042   F0           MOVX    @DPTR,A
+   \   00003F   90....       MOV       DPTR,#_NIB + 11
+   \   000042   F0           MOVX      @DPTR,A
     393            _NIB.nwkAllFresh = NWK_ALL_FRESH;
-   \   000043   90....       MOV     DPTR,#_NIB + 104
-   \   000046   04           INC     A
-   \   000047   F0           MOVX    @DPTR,A
+   \   000043   90....       MOV       DPTR,#_NIB + 104
+   \   000046   04           INC       A
+   \   000047   F0           MOVX      @DPTR,A
     394          
     395            if ( ZG_SECURE_ENABLED )
     396            {
@@ -933,127 +898,127 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     399            else
     400            {
     401              _NIB.SecurityLevel = 0;
-   \   000048   90....       MOV     DPTR,#_NIB + 12
-   \   00004B   E4           CLR     A
-   \   00004C   F0           MOVX    @DPTR,A
+   \   000048   90....       MOV       DPTR,#_NIB + 12
+   \   00004B   E4           CLR       A
+   \   00004C   F0           MOVX      @DPTR,A
     402            }
     403          
     404          #if defined ( ZIGBEEPRO )
     405            _NIB.SymLink = FALSE;
-   \   00004D   A3           INC     DPTR
-   \   00004E   F0           MOVX    @DPTR,A
+   \   00004D   A3           INC       DPTR
+   \   00004E   F0           MOVX      @DPTR,A
     406          #else
     407            _NIB.SymLink = TRUE;
     408          #endif
     409          
     410            _NIB.CapabilityFlags = ZDO_Config_Node_Descriptor.CapabilityFlags;
-   \   00004F   90....       MOV     DPTR,#ZDO_Config_Node_Descriptor + 2
-   \   000052   E0           MOVX    A,@DPTR
-   \   000053   90....       MOV     DPTR,#_NIB + 14
-   \   000056   F0           MOVX    @DPTR,A
+   \   00004F   90....       MOV       DPTR,#ZDO_Config_Node_Descriptor + 2
+   \   000052   E0           MOVX      A,@DPTR
+   \   000053   90....       MOV       DPTR,#_NIB + 14
+   \   000056   F0           MOVX      @DPTR,A
     411          
     412            _NIB.TransactionPersistenceTime = zgIndirectMsgTimeout;
-   \   000057   90....       MOV     DPTR,#zgIndirectMsgTimeout
-   \   00005A   E0           MOVX    A,@DPTR
-   \   00005B   90....       MOV     DPTR,#_NIB + 15
-   \   00005E   F0           MOVX    @DPTR,A
-   \   00005F   A3           INC     DPTR
-   \   000060   E4           CLR     A
-   \   000061   F0           MOVX    @DPTR,A
+   \   000057   90....       MOV       DPTR,#zgIndirectMsgTimeout
+   \   00005A   E0           MOVX      A,@DPTR
+   \   00005B   90....       MOV       DPTR,#_NIB + 15
+   \   00005E   F0           MOVX      @DPTR,A
+   \   00005F   A3           INC       DPTR
+   \   000060   E4           CLR       A
+   \   000061   F0           MOVX      @DPTR,A
     413          
     414            _NIB.RouteDiscoveryTime = zgRouteDiscoveryTime;
-   \   000062   90....       MOV     DPTR,#zgRouteDiscoveryTime
-   \   000065   E0           MOVX    A,@DPTR
-   \   000066   90....       MOV     DPTR,#_NIB + 18
-   \   000069   F0           MOVX    @DPTR,A
+   \   000062   90....       MOV       DPTR,#zgRouteDiscoveryTime
+   \   000065   E0           MOVX      A,@DPTR
+   \   000066   90....       MOV       DPTR,#_NIB + 18
+   \   000069   F0           MOVX      @DPTR,A
     415            _NIB.RouteExpiryTime = zgRouteExpiryTime;
-   \   00006A   90....       MOV     DPTR,#zgRouteExpiryTime
-   \   00006D   E0           MOVX    A,@DPTR
-   \   00006E   90....       MOV     DPTR,#_NIB + 19
-   \   000071   12....       LCALL   ?Subroutine1 & 0xFFFF
+   \   00006A   90....       MOV       DPTR,#zgRouteExpiryTime
+   \   00006D   E0           MOVX      A,@DPTR
+   \   00006E   90....       MOV       DPTR,#_NIB + 19
+   \   000071   12....       LCALL     ?Subroutine1 & 0xFFFF
     416          
     417            _NIB.nwkDevAddress = INVALID_NODE_ADDR;
     418            _NIB.nwkLogicalChannel = 0;
    \                     ??CrossCallReturnLabel_0:
-   \   000074   A3           INC     DPTR
-   \   000075   E4           CLR     A
-   \   000076   12....       LCALL   ?Subroutine1 & 0xFFFF
+   \   000074   A3           INC       DPTR
+   \   000075   E4           CLR       A
+   \   000076   12....       LCALL     ?Subroutine1 & 0xFFFF
     419            _NIB.nwkCoordAddress = INVALID_NODE_ADDR;
     420            osal_memset( _NIB.nwkCoordExtAddress, 0, Z_EXTADDR_LEN );
    \                     ??CrossCallReturnLabel_1:
    \   000079                ; Setup parameters for call to function osal_memset
-   \   000079   7C08         MOV     R4,#0x8
-   \   00007B   7D00         MOV     R5,#0x0
-   \   00007D   7900         MOV     R1,#0x0
-   \   00007F   7A..         MOV     R2,#(_NIB + 25) & 0xff
-   \   000081   7B..         MOV     R3,#((_NIB + 25) >> 8) & 0xff
-   \   000083   12....       LCALL   ??osal_memset?relay
+   \   000079   7C08         MOV       R4,#0x8
+   \   00007B   7D00         MOV       R5,#0x0
+   \   00007D   7900         MOV       R1,#0x0
+   \   00007F   7A..         MOV       R2,#(_NIB + 25) & 0xff
+   \   000081   7B..         MOV       R3,#((_NIB + 25) >> 8) & 0xff
+   \   000083   12....       LCALL     `??osal_memset::?relay`; Banked call to: osal_memset
     421            _NIB.nwkPanId = INVALID_NODE_ADDR;
-   \   000086   90....       MOV     DPTR,#_NIB + 33
-   \   000089   74FE         MOV     A,#-0x2
-   \   00008B   F0           MOVX    @DPTR,A
-   \   00008C   A3           INC     DPTR
-   \   00008D   04           INC     A
-   \   00008E   F0           MOVX    @DPTR,A
+   \   000086   90....       MOV       DPTR,#_NIB + 33
+   \   000089   74FE         MOV       A,#-0x2
+   \   00008B   F0           MOVX      @DPTR,A
+   \   00008C   A3           INC       DPTR
+   \   00008D   04           INC       A
+   \   00008E   F0           MOVX      @DPTR,A
     422          
     423            osal_cpyExtAddr( _NIB.extendedPANID, zgExtendedPANID );
    \   00008F                ; Setup parameters for call to function sAddrExtCpy
-   \   00008F   7C..         MOV     R4,#zgExtendedPANID & 0xff
-   \   000091   7D..         MOV     R5,#(zgExtendedPANID >> 8) & 0xff
-   \   000093   7A..         MOV     R2,#(_NIB + 53) & 0xff
-   \   000095   7B..         MOV     R3,#((_NIB + 53) >> 8) & 0xff
-   \   000097   12....       LCALL   ??sAddrExtCpy?relay
+   \   00008F   7C..         MOV       R4,#zgExtendedPANID & 0xff
+   \   000091   7D..         MOV       R5,#(zgExtendedPANID >> 8) & 0xff
+   \   000093   7A..         MOV       R2,#(_NIB + 53) & 0xff
+   \   000095   7B..         MOV       R3,#((_NIB + 53) >> 8) & 0xff
+   \   000097   12....       LCALL     `??sAddrExtCpy::?relay`; Banked call to: sAddrExtCpy
     424          
     425            _NIB.nwkKeyLoaded = FALSE;
-   \   00009A   90....       MOV     DPTR,#_NIB + 61
-   \   00009D   E4           CLR     A
-   \   00009E   F0           MOVX    @DPTR,A
+   \   00009A   90....       MOV       DPTR,#_NIB + 61
+   \   00009D   E4           CLR       A
+   \   00009E   F0           MOVX      @DPTR,A
     426          
     427          #if defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
     428            _NIB.nwkAddrAlloc  = NWK_ADDRESSING_STOCHASTIC;
-   \   00009F   90....       MOV     DPTR,#_NIB + 96
-   \   0000A2   7402         MOV     A,#0x2
-   \   0000A4   F0           MOVX    @DPTR,A
+   \   00009F   90....       MOV       DPTR,#_NIB + 96
+   \   0000A2   7402         MOV       A,#0x2
+   \   0000A4   F0           MOVX      @DPTR,A
     429            _NIB.nwkUniqueAddr = FALSE;
-   \   0000A5   A3           INC     DPTR
-   \   0000A6   E4           CLR     A
-   \   0000A7   F0           MOVX    @DPTR,A
+   \   0000A5   A3           INC       DPTR
+   \   0000A6   E4           CLR       A
+   \   0000A7   F0           MOVX      @DPTR,A
     430          #else
     431            _NIB.nwkAddrAlloc  = NWK_ADDRESSING_DISTRIBUTED;
     432            _NIB.nwkUniqueAddr = TRUE;
     433          #endif
     434          
     435            _NIB.nwkLinkStatusPeriod = NWK_LINK_STATUS_PERIOD;
-   \   0000A8   A3           INC     DPTR
-   \   0000A9   740F         MOV     A,#0xf
-   \   0000AB   F0           MOVX    @DPTR,A
+   \   0000A8   A3           INC       DPTR
+   \   0000A9   740F         MOV       A,#0xf
+   \   0000AB   F0           MOVX      @DPTR,A
     436            _NIB.nwkRouterAgeLimit = NWK_ROUTE_AGE_LIMIT;
-   \   0000AC   A3           INC     DPTR
-   \   0000AD   7403         MOV     A,#0x3
-   \   0000AF   F0           MOVX    @DPTR,A
+   \   0000AC   A3           INC       DPTR
+   \   0000AD   7403         MOV       A,#0x3
+   \   0000AF   F0           MOVX      @DPTR,A
     437          
     438            //MTO and source routing
     439            _NIB.nwkConcentratorDiscoveryTime = zgConcentratorDiscoveryTime;
-   \   0000B0   90....       MOV     DPTR,#zgConcentratorDiscoveryTime
-   \   0000B3   E0           MOVX    A,@DPTR
-   \   0000B4   90....       MOV     DPTR,#_NIB + 102
-   \   0000B7   F0           MOVX    @DPTR,A
+   \   0000B0   90....       MOV       DPTR,#zgConcentratorDiscoveryTime
+   \   0000B3   E0           MOVX      A,@DPTR
+   \   0000B4   90....       MOV       DPTR,#_NIB + 102
+   \   0000B7   F0           MOVX      @DPTR,A
     440            _NIB.nwkIsConcentrator = zgConcentratorEnable;
-   \   0000B8   90....       MOV     DPTR,#zgConcentratorEnable
-   \   0000BB   E0           MOVX    A,@DPTR
-   \   0000BC   90....       MOV     DPTR,#_NIB + 101
-   \   0000BF   F0           MOVX    @DPTR,A
+   \   0000B8   90....       MOV       DPTR,#zgConcentratorEnable
+   \   0000BB   E0           MOVX      A,@DPTR
+   \   0000BC   90....       MOV       DPTR,#_NIB + 101
+   \   0000BF   F0           MOVX      @DPTR,A
     441            _NIB.nwkConcentratorRadius = zgConcentratorRadius;
-   \   0000C0   90....       MOV     DPTR,#zgConcentratorRadius
-   \   0000C3   E0           MOVX    A,@DPTR
-   \   0000C4   90....       MOV     DPTR,#_NIB + 103
-   \   0000C7   F0           MOVX    @DPTR,A
+   \   0000C0   90....       MOV       DPTR,#zgConcentratorRadius
+   \   0000C3   E0           MOVX      A,@DPTR
+   \   0000C4   90....       MOV       DPTR,#_NIB + 103
+   \   0000C7   F0           MOVX      @DPTR,A
     442          
     443          #if defined ( ZIGBEE_MULTICAST )
     444            _NIB.nwkUseMultiCast = TRUE;
-   \   0000C8   90....       MOV     DPTR,#_NIB + 100
-   \   0000CB   7401         MOV     A,#0x1
-   \   0000CD   F0           MOVX    @DPTR,A
+   \   0000C8   90....       MOV       DPTR,#_NIB + 100
+   \   0000CB   7401         MOV       A,#0x1
+   \   0000CD   F0           MOVX      @DPTR,A
     445          #else
     446            _NIB.nwkUseMultiCast = FALSE;
     447          #endif
@@ -1064,44 +1029,44 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     452          #endif
     453            {
     454              _NIB.nwkManagerAddr = 0x0000;
-   \   0000CE   90....       MOV     DPTR,#_NIB + 105
-   \   0000D1   E4           CLR     A
-   \   0000D2   F0           MOVX    @DPTR,A
-   \   0000D3   A3           INC     DPTR
-   \   0000D4   F0           MOVX    @DPTR,A
+   \   0000CE   90....       MOV       DPTR,#_NIB + 105
+   \   0000D1   E4           CLR       A
+   \   0000D2   F0           MOVX      @DPTR,A
+   \   0000D3   A3           INC       DPTR
+   \   0000D4   F0           MOVX      @DPTR,A
     455            }
     456          
     457            _NIB.nwkUpdateId = 0;
-   \   0000D5   90....       MOV     DPTR,#_NIB + 109
-   \   0000D8   F0           MOVX    @DPTR,A
+   \   0000D5   90....       MOV       DPTR,#_NIB + 109
+   \   0000D8   F0           MOVX      @DPTR,A
     458            _NIB.nwkTotalTransmissions = 0;
-   \   0000D9   90....       MOV     DPTR,#_NIB + 107
-   \   0000DC   F0           MOVX    @DPTR,A
-   \   0000DD   A3           INC     DPTR
-   \   0000DE   F0           MOVX    @DPTR,A
+   \   0000D9   90....       MOV       DPTR,#_NIB + 107
+   \   0000DC   F0           MOVX      @DPTR,A
+   \   0000DD   A3           INC       DPTR
+   \   0000DE   F0           MOVX      @DPTR,A
     459          
     460            if ( ZSTACK_ROUTER_BUILD )
     461            {
     462          #if defined ( ZIGBEE_STOCHASTIC_ADDRESSING )
     463              NLME_InitStochasticAddressing();
    \   0000DF                ; Setup parameters for call to function NLME_InitStochasticAddressing
-   \   0000DF   12....       LCALL   ??NLME_InitStochasticAddressing?relay
+   \   0000DF   12....       LCALL     `??NLME_InitStochasticAddressing::?relay`; Banked call to: NLME_InitStochasticAddressing
     464          #else
     465              NLME_InitTreeAddressing();
     466          #endif
     467            }
     468          }
-   \   0000E2   02....       LJMP    ?Subroutine0 & 0xFFFF
+   \   0000E2   02....       LJMP      ?Subroutine0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
-   \   000000   F0           MOVX    @DPTR,A
-   \   000001   A3           INC     DPTR
-   \   000002   74FE         MOV     A,#-0x2
-   \   000004   F0           MOVX    @DPTR,A
-   \   000005   A3           INC     DPTR
-   \   000006   04           INC     A
-   \   000007   F0           MOVX    @DPTR,A
+   \   000000   F0           MOVX      @DPTR,A
+   \   000001   A3           INC       DPTR
+   \   000002   74FE         MOV       A,#-0x2
+   \   000004   F0           MOVX      @DPTR,A
+   \   000005   A3           INC       DPTR
+   \   000006   04           INC       A
+   \   000007   F0           MOVX      @DPTR,A
    \   000008   22           RET
     469          
     470          /*********************************************************************
@@ -1121,18 +1086,22 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     482          void nwk_Status( uint16 statusCode, uint16 statusValue )
    \                     nwk_Status:
     483          {
-   \   000000   74F4         MOV     A,#-0xc
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000   74F4         MOV       A,#-0xc
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 12
    \   000005                ; Auto size: 0
-   \   000005   8C..         MOV     ?V0 + 0,R4
-   \   000007   8D..         MOV     ?V0 + 1,R5
+   \   000005   8C..         MOV       ?V0,R4
+   \   000007   8D..         MOV       ?V1,R5
     484          #if defined ( LCD_SUPPORTED )
     485            switch ( statusCode )
-   \   000009   8A..         MOV     ?V0 + 2,R2
-   \   00000B   8B..         MOV     ?V0 + 3,R3
-   \   00000D   78..         MOV     R0,#?V0 + 2
-   \   00000F   12....       LCALL   ?US_SWITCH_SPARSE
+   \   000009   8A..         MOV       ?V2,R2
+   \   00000B   8B..         MOV       ?V3,R3
+   \   00000D   78..         MOV       R0,#?V2
+   \   00000F   12....       LCALL     ?US_SWITCH_SPARSE
    \                     `?<Jumptable for nwk_Status>_0`:
    \   000012   0000         DW        0
    \   000014   0800         DW        8
@@ -1160,31 +1129,31 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     490                  HalLcdWriteString( (char*)ZigbeeCoordStr, HAL_LCD_LINE_1 );
    \                     ??nwk_Status_2:
    \   000038                ; Setup parameters for call to function HalLcdWriteString
-   \   000038   7900         MOV     R1,#0x0
-   \   00003A   7A..         MOV     R2,#ZigbeeCoordStr & 0xff
-   \   00003C   7B..         MOV     R3,#(ZigbeeCoordStr >> 8) & 0xff
-   \   00003E   12....       LCALL   ??HalLcdWriteString?relay
+   \   000038   7900         MOV       R1,#0x0
+   \   00003A   7A..         MOV       R2,#ZigbeeCoordStr & 0xff
+   \   00003C   7B..         MOV       R3,#(ZigbeeCoordStr >> 8) & 0xff
+   \   00003E   12....       LCALL     `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
     491                  HalLcdWriteStringValue( (char*)NetworkIDStr, statusValue, 16, HAL_LCD_LINE_2 );
    \   000041                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   000041   E4           CLR     A
-   \   000042   F5..         MOV     ?V0 + 2,A
-   \   000044   F5..         MOV     ?V0 + 3,A
-   \   000046   78..         MOV     R0,#?V0 + 0
-   \   000048   12....       LCALL   ?PUSH_XSTACK_I_FOUR
-   \   00004B   7C01         MOV     R4,#0x1
-   \   00004D   7910         MOV     R1,#0x10
-   \   00004F   7A..         MOV     R2,#NetworkIDStr & 0xff
-   \   000051   7B..         MOV     R3,#(NetworkIDStr >> 8) & 0xff
-   \   000053   12....       LCALL   ??HalLcdWriteStringValue?relay
-   \   000056   7404         MOV     A,#0x4
-   \   000058   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000041   E4           CLR       A
+   \   000042   F5..         MOV       ?V2,A
+   \   000044   F5..         MOV       ?V3,A
+   \   000046   78..         MOV       R0,#?V0
+   \   000048   12....       LCALL     ?PUSH_XSTACK_I_FOUR
+   \   00004B   7C01         MOV       R4,#0x1
+   \   00004D   7910         MOV       R1,#0x10
+   \   00004F   7A..         MOV       R2,#NetworkIDStr & 0xff
+   \   000051   7B..         MOV       R3,#(NetworkIDStr >> 8) & 0xff
+   \   000053   12....       LCALL     `??HalLcdWriteStringValue::?relay`; Banked call to: HalLcdWriteStringValue
+   \   000056   7404         MOV       A,#0x4
+   \   000058   12....       LCALL     ?DEALLOC_XSTACK8
     492                  BuzzerControl( BUZZER_BLIP );
    \   00005B                ; Setup parameters for call to function BuzzerControl
-   \   00005B   7902         MOV     R1,#0x2
-   \   00005D   12....       LCALL   ??BuzzerControl?relay
+   \   00005B   7902         MOV       R1,#0x2
+   \   00005D   12....       LCALL     `??BuzzerControl::?relay`; Banked call to: BuzzerControl
     493                }
     494                break;
-   \   000060   02....       LJMP    ??nwk_Status_8 & 0xFFFF
+   \   000060   02....       LJMP      ??nwk_Status_8 & 0xFFFF
     495          
     496              case NWK_STATUS_ROUTER_ADDR:
     497                if ( ZSTACK_ROUTER_BUILD )
@@ -1192,46 +1161,42 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     499                  HalLcdWriteStringValue( (char*)RouterStr, statusValue, 16, HAL_LCD_LINE_1 );
    \                     ??nwk_Status_3:
    \   000063                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   000063   E4           CLR     A
-   \   000064   F5..         MOV     ?V0 + 2,A
-   \   000066   F5..         MOV     ?V0 + 3,A
-   \   000068   78..         MOV     R0,#?V0 + 0
-   \   00006A   12....       LCALL   ?PUSH_XSTACK_I_FOUR
-   \   00006D   7C00         MOV     R4,#0x0
-   \   00006F   7910         MOV     R1,#0x10
-   \   000071   7A..         MOV     R2,#RouterStr & 0xff
-   \   000073   7B..         MOV     R3,#(RouterStr >> 8) & 0xff
-   \                     ??nwk_Status_9:
-   \   000075   12....       LCALL   ??HalLcdWriteStringValue?relay
-   \   000078   7404         MOV     A,#0x4
-   \   00007A   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000063   E4           CLR       A
+   \   000064   F5..         MOV       ?V2,A
+   \   000066   F5..         MOV       ?V3,A
+   \   000068   78..         MOV       R0,#?V0
+   \   00006A   12....       LCALL     ?PUSH_XSTACK_I_FOUR
+   \   00006D   7C00         MOV       R4,#0x0
+   \   00006F   7910         MOV       R1,#0x10
+   \   000071   7A..         MOV       R2,#RouterStr & 0xff
+   \   000073   7B..         MOV       R3,#(RouterStr >> 8) & 0xff
+   \   000075   802E         SJMP      ??nwk_Status_9
     500                }
     501                break;
-   \   00007D   806A         SJMP    ??nwk_Status_8
     502          
     503              case NWK_STATUS_ORPHAN_RSP:
     504                if ( ZSTACK_ROUTER_BUILD )
     505                {
     506                  if ( statusValue == ZSuccess )
    \                     ??nwk_Status_4:
-   \   00007F   EC           MOV     A,R4
-   \   000080   45..         ORL     A,?V0 + 1
-   \   000082   700A         JNZ     ??nwk_Status_10
+   \   000077   EC           MOV       A,R4
+   \   000078   4D           ORL       A,R5
+   \   000079   7006         JNZ       ??nwk_Status_10
     507                    HalLcdWriteScreen( (char*)OrphanRspStr, (char*)SentStr );
-   \   000084                ; Setup parameters for call to function HalLcdWriteScreen
-   \   000084   7C..         MOV     R4,#SentStr & 0xff
-   \   000086   7D..         MOV     R5,#(SentStr >> 8) & 0xff
-   \                     ??nwk_Status_11:
-   \   000088   7A..         MOV     R2,#OrphanRspStr & 0xff
-   \   00008A   7B..         MOV     R3,#(OrphanRspStr >> 8) & 0xff
-   \   00008C   8058         SJMP    ??nwk_Status_12
+   \   00007B                ; Setup parameters for call to function HalLcdWriteScreen
+   \   00007B   7C..         MOV       R4,#SentStr & 0xff
+   \   00007D   7D..         MOV       R5,#(SentStr >> 8) & 0xff
+   \   00007F   8004         SJMP      ??nwk_Status_11
     508                  else
     509                    HalLcdWriteScreen( (char*)OrphanRspStr, (char*)FailedStr );
    \                     ??nwk_Status_10:
-   \   00008E                ; Setup parameters for call to function HalLcdWriteScreen
-   \   00008E   7C..         MOV     R4,#FailedStr & 0xff
-   \   000090   7D..         MOV     R5,#(FailedStr >> 8) & 0xff
-   \   000092   80F4         SJMP    ??nwk_Status_11
+   \   000081                ; Setup parameters for call to function HalLcdWriteScreen
+   \   000081   7C..         MOV       R4,#FailedStr & 0xff
+   \   000083   7D..         MOV       R5,#(FailedStr >> 8) & 0xff
+   \                     ??nwk_Status_11:
+   \   000085   7A..         MOV       R2,#OrphanRspStr & 0xff
+   \   000087   7B..         MOV       R3,#(OrphanRspStr >> 8) & 0xff
+   \   000089   805A         SJMP      ??nwk_Status_12
     510                }
     511                break;
     512          
@@ -1240,29 +1205,14 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     515                {
     516                  HalLcdWriteString( (char*)AssocRspFailStr, HAL_LCD_LINE_1 );
    \                     ??nwk_Status_5:
-   \   000094                ; Setup parameters for call to function HalLcdWriteString
-   \   000094   7900         MOV     R1,#0x0
-   \   000096   7A..         MOV     R2,#AssocRspFailStr & 0xff
-   \   000098   7B..         MOV     R3,#(AssocRspFailStr >> 8) & 0xff
-   \                     ??nwk_Status_13:
-   \   00009A   12....       LCALL   ??HalLcdWriteString?relay
+   \   00008B                ; Setup parameters for call to function HalLcdWriteString
+   \   00008B   7900         MOV       R1,#0x0
+   \   00008D   7A..         MOV       R2,#AssocRspFailStr & 0xff
+   \   00008F   7B..         MOV       R3,#(AssocRspFailStr >> 8) & 0xff
+   \   000091   802C         SJMP      ??nwk_Status_13
     517                  HalLcdWriteValue( (uint32)(statusValue), 16, HAL_LCD_LINE_2 );
-   \   00009D                ; Setup parameters for call to function HalLcdWriteValue
-   \   00009D   75..01       MOV     ?V0 + 2,#0x1
-   \   0000A0   78..         MOV     R0,#?V0 + 2
-   \   0000A2   12....       LCALL   ?PUSH_XSTACK_I_ONE
-   \   0000A5   7910         MOV     R1,#0x10
-   \   0000A7   AA..         MOV     R2,?V0 + 0
-   \   0000A9   AB..         MOV     R3,?V0 + 1
-   \   0000AB   E4           CLR     A
-   \   0000AC   FC           MOV     R4,A
-   \   0000AD   FD           MOV     R5,A
-   \   0000AE   12....       LCALL   ??HalLcdWriteValue?relay
-   \   0000B1   7401         MOV     A,#0x1
-   \   0000B3   12....       LCALL   ?DEALLOC_XSTACK8
     518                }
     519                break;
-   \   0000B6   8031         SJMP    ??nwk_Status_8
     520          
     521              case NWK_STATUS_ED_ADDR:
     522                if ( ZSTACK_END_DEVICE_BUILD )
@@ -1274,58 +1224,77 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     528              case NWK_STATUS_PARENT_ADDR:
     529                      HalLcdWriteStringValue( (char*)ParentStr, statusValue, 16, HAL_LCD_LINE_2 );
    \                     ??nwk_Status_1:
-   \   0000B8                ; Setup parameters for call to function HalLcdWriteStringValue
-   \   0000B8   E4           CLR     A
-   \   0000B9   F5..         MOV     ?V0 + 2,A
-   \   0000BB   F5..         MOV     ?V0 + 3,A
-   \   0000BD   78..         MOV     R0,#?V0 + 0
-   \   0000BF   12....       LCALL   ?PUSH_XSTACK_I_FOUR
-   \   0000C2   7C01         MOV     R4,#0x1
-   \   0000C4   7910         MOV     R1,#0x10
-   \   0000C6   7A..         MOV     R2,#ParentStr & 0xff
-   \   0000C8   7B..         MOV     R3,#(ParentStr >> 8) & 0xff
-   \   0000CA   80A9         SJMP    ??nwk_Status_9
+   \   000093                ; Setup parameters for call to function HalLcdWriteStringValue
+   \   000093   E4           CLR       A
+   \   000094   F5..         MOV       ?V2,A
+   \   000096   F5..         MOV       ?V3,A
+   \   000098   78..         MOV       R0,#?V0
+   \   00009A   12....       LCALL     ?PUSH_XSTACK_I_FOUR
+   \   00009D   7C01         MOV       R4,#0x1
+   \   00009F   7910         MOV       R1,#0x10
+   \   0000A1   7A..         MOV       R2,#ParentStr & 0xff
+   \   0000A3   7B..         MOV       R3,#(ParentStr >> 8) & 0xff
+   \                     ??nwk_Status_9:
+   \   0000A5   12....       LCALL     `??HalLcdWriteStringValue::?relay`; Banked call to: HalLcdWriteStringValue
+   \   0000A8   7404         MOV       A,#0x4
+   \   0000AA   12....       LCALL     ?DEALLOC_XSTACK8
     530                break;
+   \   0000AD   8039         SJMP      ??nwk_Status_8
     531          
     532              case NWK_STATUS_ASSOC_CNF:
     533                HalLcdWriteScreen( (char*)AssocCnfStr, (char*)SuccessStr );
    \                     ??nwk_Status_0:
-   \   0000CC                ; Setup parameters for call to function HalLcdWriteScreen
-   \   0000CC   7C..         MOV     R4,#SuccessStr & 0xff
-   \   0000CE   7D..         MOV     R5,#(SuccessStr >> 8) & 0xff
-   \   0000D0   7A..         MOV     R2,#AssocCnfStr & 0xff
-   \   0000D2   7B..         MOV     R3,#(AssocCnfStr >> 8) & 0xff
-   \   0000D4   8010         SJMP    ??nwk_Status_12
+   \   0000AF                ; Setup parameters for call to function HalLcdWriteScreen
+   \   0000AF   7C..         MOV       R4,#SuccessStr & 0xff
+   \   0000B1   7D..         MOV       R5,#(SuccessStr >> 8) & 0xff
+   \   0000B3   7A..         MOV       R2,#AssocCnfStr & 0xff
+   \   0000B5   7B..         MOV       R3,#(AssocCnfStr >> 8) & 0xff
+   \   0000B7   802C         SJMP      ??nwk_Status_12
     534                break;
     535          
     536              case NWK_ERROR_ASSOC_CNF_DENIED:
     537                HalLcdWriteString((char*)AssocCnfFailStr, HAL_LCD_LINE_1 );
    \                     ??nwk_Status_6:
-   \   0000D6                ; Setup parameters for call to function HalLcdWriteString
-   \   0000D6   7900         MOV     R1,#0x0
-   \   0000D8   7A..         MOV     R2,#AssocCnfFailStr & 0xff
-   \   0000DA   7B..         MOV     R3,#(AssocCnfFailStr >> 8) & 0xff
-   \   0000DC   80BC         SJMP    ??nwk_Status_13
+   \   0000B9                ; Setup parameters for call to function HalLcdWriteString
+   \   0000B9   7900         MOV       R1,#0x0
+   \   0000BB   7A..         MOV       R2,#AssocCnfFailStr & 0xff
+   \   0000BD   7B..         MOV       R3,#(AssocCnfFailStr >> 8) & 0xff
+   \                     ??nwk_Status_13:
+   \   0000BF   12....       LCALL     `??HalLcdWriteString::?relay`; Banked call to: HalLcdWriteString
     538                HalLcdWriteValue( (uint32)(statusValue), 16, HAL_LCD_LINE_2 );
+   \   0000C2                ; Setup parameters for call to function HalLcdWriteValue
+   \   0000C2   75..01       MOV       ?V2,#0x1
+   \   0000C5   78..         MOV       R0,#?V2
+   \   0000C7   12....       LCALL     ?PUSH_XSTACK_I_ONE
+   \   0000CA   7910         MOV       R1,#0x10
+   \   0000CC   AA..         MOV       R2,?V0
+   \   0000CE   AB..         MOV       R3,?V1
+   \   0000D0   E4           CLR       A
+   \   0000D1   FC           MOV       R4,A
+   \   0000D2   FD           MOV       R5,A
+   \   0000D3   12....       LCALL     `??HalLcdWriteValue::?relay`; Banked call to: HalLcdWriteValue
+   \   0000D6   7401         MOV       A,#0x1
+   \   0000D8   12....       LCALL     ?DEALLOC_XSTACK8
     539                break;
+   \   0000DB   800B         SJMP      ??nwk_Status_8
     540          
     541              case NWK_ERROR_ENERGY_SCAN_FAILED:
     542                HalLcdWriteScreen( (char*)EnergyLevelStr, (char*)ScanFailedStr );
    \                     ??nwk_Status_7:
-   \   0000DE                ; Setup parameters for call to function HalLcdWriteScreen
-   \   0000DE   7C..         MOV     R4,#ScanFailedStr & 0xff
-   \   0000E0   7D..         MOV     R5,#(ScanFailedStr >> 8) & 0xff
-   \   0000E2   7A..         MOV     R2,#EnergyLevelStr & 0xff
-   \   0000E4   7B..         MOV     R3,#(EnergyLevelStr >> 8) & 0xff
+   \   0000DD                ; Setup parameters for call to function HalLcdWriteScreen
+   \   0000DD   7C..         MOV       R4,#ScanFailedStr & 0xff
+   \   0000DF   7D..         MOV       R5,#(ScanFailedStr >> 8) & 0xff
+   \   0000E1   7A..         MOV       R2,#EnergyLevelStr & 0xff
+   \   0000E3   7B..         MOV       R3,#(EnergyLevelStr >> 8) & 0xff
    \                     ??nwk_Status_12:
-   \   0000E6   12....       LCALL   ??HalLcdWriteScreen?relay
+   \   0000E5   12....       LCALL     `??HalLcdWriteScreen::?relay`; Banked call to: HalLcdWriteScreen
     543                break;
     544            }
     545          #endif
     546          }
    \                     ??nwk_Status_8:
-   \   0000E9   7F04         MOV     R7,#0x4
-   \   0000EB   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   0000E8   7F04         MOV       R7,#0x4
+   \   0000EA   02....       LJMP      ?BANKED_LEAVE_XDATA
     547          
     548          /*********************************************************************
     549           * @fn       nwk_UpdateStatistics()
@@ -1365,29 +1334,29 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
     578            }
     579          #endif
     580          }
-   \   000000   02....       LJMP    ?BRET
+   \   000000   02....       LJMP      ?BRET
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for gMIN_TREE_LINK_COST>`:
    \   000000   06           DB 6
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??nwk_globals_init?relay:
+   \                     `??nwk_globals_init::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    nwk_globals_init
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??NIB_init?relay:
+   \                     `??NIB_init::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    NIB_init
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??nwk_Status?relay:
+   \                     `??nwk_Status::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    nwk_Status
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??nwk_UpdateStatistics?relay:
+   \                     `??nwk_UpdateStatistics::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    nwk_UpdateStatistics
     581          
@@ -1396,119 +1365,108 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
 
    Maximum stack usage in bytes:
 
-     Function                       ISTACK PSTACK XSTACK
-     --------                       ------ ------ ------
-     NIB_init                           2      0      0
-       -> osal_rand                     4      0      0
-       -> osal_memset                   4      0      0
-       -> sAddrExtCpy                   4      0      0
-       -> NLME_InitStochasticAddressing
-                                        4      0      0
-     nwk_Status                         0      0     16
-       -> HalLcdWriteString             0      0     24
-       -> HalLcdWriteStringValue        0      0     32
-       -> BuzzerControl                 0      0     24
-       -> HalLcdWriteStringValue        0      0     32
-       -> HalLcdWriteScreen             0      0     24
-       -> HalLcdWriteScreen             0      0     24
-       -> HalLcdWriteString             0      0     24
-       -> HalLcdWriteValue              0      0     26
-       -> HalLcdWriteStringValue        0      0     32
-       -> HalLcdWriteScreen             0      0     24
-       -> HalLcdWriteString             0      0     24
-       -> HalLcdWriteValue              0      0     26
-       -> HalLcdWriteScreen             0      0     24
-     nwk_UpdateStatistics               0      0      0
-     nwk_globals_init                   2      0      0
-       -> AddrMgrInit                   4      0      0
-       -> NLME_InitLinkStatus           4      0      0
-       -> NwkFreqAgilityInit            4      0      0
+   ISTACK XSTACK Function
+   ------ ------ --------
+      2      0   NIB_init
+        2      0   -> NLME_InitStochasticAddressing
+        2      0   -> osal_memset
+        2      0   -> osal_rand
+        2      0   -> sAddrExtCpy
+      0     16   nwk_Status
+        0     12   -> BuzzerControl
+        0     12   -> HalLcdWriteScreen
+        0     12   -> HalLcdWriteString
+        0     16   -> HalLcdWriteStringValue
+        0     13   -> HalLcdWriteValue
+      0      0   nwk_UpdateStatistics
+      2      0   nwk_globals_init
+        2      0   -> AddrMgrInit
+        2      0   -> NLME_InitLinkStatus
+        2      0   -> NwkFreqAgilityInit
 
 
    Segment part sizes:
 
-     Function/Label                         Bytes
-     --------------                         -----
-     gNWK_MAX_DEVICE_LIST                      2
-     gNWK_MAX_SLEEPING_END_DEVICES             1
-     gNWK_MAX_DATABUFS_WAITING                 1
-     gNWK_MAX_DATABUFS_SCHEDULED               1
-     gNWK_MAX_DATABUFS_CONFIRMED               1
-     gNWK_MAX_DATABUFS_TOTAL                   1
-     gNWK_INDIRECT_CNT_RTG_TMR                 1
-     gNWK_INDIRECT_MSG_MAX_PER                 1
-     gNWK_INDIRECT_MSG_MAX_ALL                 1
-     Cskip                                     2
-     CskipRtrs                                 1
-     CskipChldrn                               1
-     gMIN_TREE_LINK_COST                       1
-     AssociatedDevList                       378
-     gNWK_MIN_ROUTER_CHILDREN                  2
-     gNWK_MIN_ENDDEVICE_CHILDREN               2
-     gMAX_RTG_ENTRIES                          2
-     gMAX_RTG_SRC_ENTRIES                      2
-     gMAX_RREQ_ENTRIES                         1
-     gMAX_NEIGHBOR_ENTRIES                     1
-     neighborTable                           368
-     gMAX_SOURCE_ROUTE                         1
-     gMAX_BROADCAST_QUEUED                     1
-     gLINK_DOWN_TRIGGER                        1
-     gMAX_PASSIVE_ACK_CNT                      1
-     rtgTable                                280
-     rtgSrcTable                              72
-     rtgSrcRelayList                          24
-     rtDiscTable                              64
-     bcastTable                               72
-     bcastHoldHandle                           9
-     bcastHoldAckMask                         36
-     gMAX_BCAST                                1
-     gNWK_TREE_ALLOCATE_ROUTERADDR_FOR_ENDDEVICE
-                                               1
-     gNWK_CONFLICTED_ADDR_EXPIRY_TIME
-                                               1
-     gNWK_FREQ_AGILITY_ALL_MAC_ERRS            1
-     gMTO_RREQ_LIMIT_TIME                      2
-     gMTO_ROUTE_EXPIRY_TIME                    1
-     gDEFAULT_ROUTE_REQUEST_RADIUS             1
-     gDEF_NWK_RADIUS                           1
-     gLINK_STATUS_JITTER_MASK                  2
-     gNWK_MAX_BINDING_ENTRIES                  2
-     gMAX_BINDING_CLUSTER_IDS                  1
-     gBIND_REC_SIZE                            2
-     BindingTable                             56
-     gAPS_MAX_GROUPS                           1
-     defaultKey                               16
-     defaultTCLinkKey                         16
-     PingStr                                  15
-     AssocCnfStr                              10
-     SuccessStr                                8
-     EndDeviceStr                             11
-     ParentStr                                 8
-     ZigbeeCoordStr                           13
-     NetworkIDStr                             12
-     RouterStr                                 8
-     OrphanRspStr                             16
-     SentStr                                   5
-     FailedStr                                 7
-     AssocRspFailStr                          15
-     AssocIndStr                              10
-     AssocCnfFailStr                          15
-     EnergyLevelStr                           13
-     ScanFailedStr                            12
-     nwk_globals_init                         17
-     ?Subroutine0                              7
-     NIB_init                                229
-     ?Subroutine1                              9
-     nwk_Status                              238
-     nwk_UpdateStatistics                      3
-     ?<Initializer for gMIN_TREE_LINK_COST>    1
-     ??nwk_globals_init?relay                  6
-     ??NIB_init?relay                          6
-     ??nwk_Status?relay                        6
-     ??nwk_UpdateStatistics?relay              6
+   Bytes  Function/Label
+   -----  --------------
+       1  ?<Initializer for gMIN_TREE_LINK_COST>
+       7  ?Subroutine0
+       9  ?Subroutine1
+      15  AssocCnfFailStr
+      10  AssocCnfStr
+      10  AssocIndStr
+      15  AssocRspFailStr
+     378  AssociatedDevList
+      56  BindingTable
+       2  Cskip
+       1  CskipChldrn
+       1  CskipRtrs
+      11  EndDeviceStr
+      13  EnergyLevelStr
+       7  FailedStr
+     229  NIB_init
+       6  NIB_init::?relay
+      12  NetworkIDStr
+      16  OrphanRspStr
+       8  ParentStr
+      15  PingStr
+       8  RouterStr
+      12  ScanFailedStr
+       5  SentStr
+       8  SuccessStr
+      13  ZigbeeCoordStr
+      36  bcastHoldAckMask
+       9  bcastHoldHandle
+      72  bcastTable
+      16  defaultKey
+      16  defaultTCLinkKey
+       1  gAPS_MAX_GROUPS
+       2  gBIND_REC_SIZE
+       1  gDEFAULT_ROUTE_REQUEST_RADIUS
+       1  gDEF_NWK_RADIUS
+       1  gLINK_DOWN_TRIGGER
+       2  gLINK_STATUS_JITTER_MASK
+       1  gMAX_BCAST
+       1  gMAX_BINDING_CLUSTER_IDS
+       1  gMAX_BROADCAST_QUEUED
+       1  gMAX_NEIGHBOR_ENTRIES
+       1  gMAX_PASSIVE_ACK_CNT
+       1  gMAX_RREQ_ENTRIES
+       2  gMAX_RTG_ENTRIES
+       2  gMAX_RTG_SRC_ENTRIES
+       1  gMAX_SOURCE_ROUTE
+       1  gMIN_TREE_LINK_COST
+       1  gMTO_ROUTE_EXPIRY_TIME
+       2  gMTO_RREQ_LIMIT_TIME
+       1  gNWK_CONFLICTED_ADDR_EXPIRY_TIME
+       1  gNWK_FREQ_AGILITY_ALL_MAC_ERRS
+       1  gNWK_INDIRECT_CNT_RTG_TMR
+       1  gNWK_INDIRECT_MSG_MAX_ALL
+       1  gNWK_INDIRECT_MSG_MAX_PER
+       2  gNWK_MAX_BINDING_ENTRIES
+       1  gNWK_MAX_DATABUFS_CONFIRMED
+       1  gNWK_MAX_DATABUFS_SCHEDULED
+       1  gNWK_MAX_DATABUFS_TOTAL
+       1  gNWK_MAX_DATABUFS_WAITING
+       2  gNWK_MAX_DEVICE_LIST
+       1  gNWK_MAX_SLEEPING_END_DEVICES
+       2  gNWK_MIN_ENDDEVICE_CHILDREN
+       2  gNWK_MIN_ROUTER_CHILDREN
+       1  gNWK_TREE_ALLOCATE_ROUTERADDR_FOR_ENDDEVICE
+     368  neighborTable
+     237  nwk_Status
+       6  nwk_Status::?relay
+       3  nwk_UpdateStatistics
+       6  nwk_UpdateStatistics::?relay
+      17  nwk_globals_init
+       6  nwk_globals_init::?relay
+      64  rtDiscTable
+      24  rtgSrcRelayList
+      72  rtgSrcTable
+     280  rtgTable
 
  
-   503 bytes in segment BANKED_CODE
+   502 bytes in segment BANKED_CODE
     24 bytes in segment BANK_RELAYS
     73 bytes in segment CODE_C
      1 byte  in segment XDATA_I
@@ -1516,9 +1474,10 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\stack\nwk\nwk_globals.c
    178 bytes in segment XDATA_ROM_C
  1 363 bytes in segment XDATA_Z
  
-   601 bytes of CODE  memory
-   178 bytes of CONST memory
- 1 364 bytes of XDATA memory
+    98 bytes of CODE     memory
+   178 bytes of CONST    memory
+   502 bytes of HUGECODE memory
+ 1 364 bytes of XDATA    memory
 
 Errors: none
 Warnings: none

@@ -1,135 +1,100 @@
 ###############################################################################
-#                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         17/Apr/2017  20:19:50 #
-# Copyright 2004-2011 IAR Systems AB.                                         #
-#                                                                             #
-#    Core               =  plain                                              #
-#    Code model         =  banked                                             #
-#    Data model         =  large                                              #
-#    Calling convention =  xdata reentrant                                    #
-#    Constant location  =  data_rom                                           #
-#    Dptr setup         =  1,16                                               #
-#    Source file        =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Components\hal\common\hal_assert.c            #
-#    Command line       =  -f "C:\Users\li\Desktop\ZStack-2.5.1a -            #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\Tools\CC2530DB\f8wCoord.cfg" (-DCPU32MHZ    #
-#                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRU #
-#                          E -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8       #
-#                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
-#                          -f "C:\Users\li\Desktop\ZStack-2.5.1a -            #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\Tools\CC2530DB\f8wConfig.cfg" (-DZIGBEEPRO  #
-#                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
-#                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                       #
-#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
-#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
-#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
-#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
-#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
-#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
-#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
-#                          -DNWK_MAX_DATA_RETRIES=2                           #
-#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
-#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
-#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
-#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
-#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
-#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
-#                          -DMAC_MAX_FRAME_SIZE=116                           #
-#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
-#                          __code" -DGENERIC=__generic                        #
-#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
-#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
-#                          -DREJOIN_POLL_RATE=440 "C:\Users\li\Desktop\ZStack #
-#                          -2.5.1a - 副本\Components\hal\common\hal_assert.c" #
-#                           -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D          #
-#                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\List\" -lA "C:\Users\li\Desktop\ZStack #
-#                          -2.5.1a - 副本\Projects\zstack\Samples\SampleApp\C #
-#                          C2530DB\CoordinatorEB\List\" --diag_suppress       #
-#                          Pe001,Pa010 -o "C:\Users\li\Desktop\ZStack-2.5.1a  #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          CoordinatorEB\Obj\" -e --no_code_motion --debug    #
-#                          --core=plain --dptr=16,1 --data_model=large        #
-#                          --code_model=banked --calling_convention=xdata_ree #
-#                          ntrant --place_constants=data_rom                  #
-#                          --nr_virtual_regs 16 -I "C:\Users\li\Desktop\ZStac #
-#                          k-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\ #
-#                          CC2530DB\" -I "C:\Users\li\Desktop\ZStack-2.5.1a   #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          ..\Source\" -I "C:\Users\li\Desktop\ZStack-2.5.1a  #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          ..\..\..\ZMain\TI2530DB\" -I                       #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\include\" -I           #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\target\CC2530EB\" -I   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\include\" -I           #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\high_level\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\" -I   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\single #
-#                          _chip\" -I "C:\Users\li\Desktop\ZStack-2.5.1a -    #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mt\" -I                    #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\osal\include\" -I          #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\services\saddr\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\services\sdata\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\af\" -I              #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\nwk\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sapi\" -I            #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sec\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sys\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\zdo\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\zmac\" -I                  #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\zmac\f8w\" -Ohz            #
-#                          --require_prototypes                               #
-#    List file          =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\List\hal_assert.lst                    #
-#    Object file        =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\Obj\hal_assert.r51                     #
-#                                                                             #
-#                                                                             #
+#
+# IAR C/C++ Compiler V10.20.1.5333 for 8051               31/May/2018  15:13:15
+# Copyright 2004-2018 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for 8051
+#
+#    Core               =  plain
+#    Code model         =  banked
+#    Data model         =  large
+#    Calling convention =  xdata reentrant
+#    Constant location  =  data_rom
+#    Dptr setup         =  1,16
+#                          
+#    Source file        =  
+#        E:\anti-lost-dev-code\Components\hal\common\hal_assert.c
+#    Command line       =  
+#        -f C:\Users\libx\AppData\Local\Temp\EW6B26.tmp
+#        (E:\anti-lost-dev-code\Components\hal\common\hal_assert.c -D ZTOOL_P1
+#        -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List
+#        -lA
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List
+#        --diag_suppress Pe001,Pa010 -o
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\Obj
+#        -e --debug --core=plain --dptr=16,1 --data_model=large
+#        --code_model=banked --calling_convention=xdata_reentrant
+#        --place_constants=data_rom --nr_virtual_regs 8 -f
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg
+#        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
+#        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
+#        -DZDO_COORDINATOR -DRTR_NWK) -f
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+#        (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+#        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0xFFFF
+#        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+#        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+#        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+#        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+#        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+#        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+#        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+#        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+#        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+#        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+#        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+#        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100
+#        -DREJOIN_POLL_RATE=440) -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\ -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\Source\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ZMain\TI2530DB\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mt\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\osal\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\af\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+#        -Ohz --require_prototypes --no_code_motion)
+#    Locale             =  Chinese (Simplified)_CHN.936
+#    List file          =  
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List\hal_assert.lst
+#    Object file        =  
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\Obj\hal_assert.r51
+#
 ###############################################################################
 
-C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
+E:\anti-lost-dev-code\Components\hal\common\hal_assert.c
       1          /**************************************************************************************************
       2            Filename:       hal_assert.c
       3            Revised:        $Date: 2010-11-22 08:13:43 -0800 (Mon, 22 Nov 2010) $
@@ -254,8 +219,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
      75          void halAssertHandler(void)
    \                     halAssertHandler:
      76          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
+   \   000000   C082         PUSH      DPL
+   \   000002   C083         PUSH      DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 0
      77            /* execute code that handles asserts */
@@ -264,14 +229,14 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
      80          #elif !defined ASSERT_WHILE
      81            halAssertHazardLights();
    \   000004                ; Setup parameters for call to function halAssertHazardLights
-   \   000004   12....       LCALL   ??halAssertHazardLights?relay
+   \   000004   12....       LCALL     `??halAssertHazardLights::?relay`; Banked call to: halAssertHazardLights
      82          #else
      83            while(1);
      84          #endif
      85          }
-   \   000007   D083         POP     DPH
-   \   000009   D082         POP     DPL
-   \   00000B   02....       LJMP    ?BRET
+   \   000007   D083         POP       DPH
+   \   000009   D082         POP       DPL
+   \   00000B   02....       LJMP      ?BRET
      86          
      87          #if !defined ASSERT_WHILE
      88          /**************************************************************************************************
@@ -289,12 +254,16 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
      98          void halAssertHazardLights(void)
    \                     halAssertHazardLights:
      99          {
-   \   000000   74F4         MOV     A,#-0xc
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000   74F4         MOV       A,#-0xc
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 12
    \   000005                ; Auto size: 10
-   \   000005   74F6         MOV     A,#-0xa
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   000005   74F6         MOV       A,#-0xa
+   \   000007   12....       LCALL     ?ALLOC_XSTACK8
     100            enum
     101            {
     102              DEBUG_DATA_RSTACK_HIGH_OFS,
@@ -317,55 +286,55 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
     119          
     120            /* disable all interrupts before anything else */
     121            HAL_DISABLE_INTERRUPTS();
-   \   00000A   C2AF         CLR     0xa8.7
+   \   00000A   C2AF         CLR       0xa8.7
     122          
     123            /*-------------------------------------------------------------------------------
     124             *  Initialize LEDs and turn them off.
     125             */
     126            HAL_BOARD_INIT();
-   \   00000C   53BEFB       ANL     0xbe,#0xfb
+   \   00000C   53BEFB       ANL       0xbe,#0xfb
    \                     ??halAssertHazardLights_0:
-   \   00000F   E59D         MOV     A,0x9d
-   \   000011   A2E6         MOV     C,0xE0 /* A   */.6
-   \   000013   50FA         JNC     ??halAssertHazardLights_0
+   \   00000F   E59D         MOV       A,0x9d
+   \   000011   A2E6         MOV       C,0xE0 /* A   */.6
+   \   000013   50FA         JNC       ??halAssertHazardLights_0
    \   000015   00           NOP
-   \   000016   78F8         MOV     R0,#-0x8
-   \   000018   7901         MOV     R1,#0x1
+   \   000016   78F8         MOV       R0,#-0x8
+   \   000018   7901         MOV       R1,#0x1
    \                     ??halAssertHazardLights_1:
    \   00001A   00           NOP
-   \   00001B   E8           MOV     A,R0
-   \   00001C   24FF         ADD     A,#-0x1
-   \   00001E   18           DEC     R0
-   \   00001F   E9           MOV     A,R1
-   \   000020   34FF         ADDC    A,#-0x1
-   \   000022   F9           MOV     R1,A
-   \   000023   E8           MOV     A,R0
-   \   000024   49           ORL     A,R1
-   \   000025   70F3         JNZ     ??halAssertHazardLights_1
-   \   000027   75C600       MOV     0xc6,#0x0
+   \   00001B   E8           MOV       A,R0
+   \   00001C   24FF         ADD       A,#-0x1
+   \   00001E   18           DEC       R0
+   \   00001F   E9           MOV       A,R1
+   \   000020   34FF         ADDC      A,#-0x1
+   \   000022   F9           MOV       R1,A
+   \   000023   E8           MOV       A,R0
+   \   000024   49           ORL       A,R1
+   \   000025   70F3         JNZ       ??halAssertHazardLights_1
+   \   000027   75C600       MOV       0xc6,#0x0
    \                     ??halAssertHazardLights_2:
-   \   00002A   E59E         MOV     A,0x9e
-   \   00002C   70FC         JNZ     ??halAssertHazardLights_2
-   \   00002E   43BE04       ORL     0xbe,#0x4
-   \   000031   906270       MOV     DPTR,#0x6270
-   \   000034   7408         MOV     A,#0x8
-   \   000036   F0           MOVX    @DPTR,A
-   \   000037   C290         CLR     0x90.0
-   \   000039   43FE01       ORL     0xfe,#0x1
-   \   00003C   C291         CLR     0x90.1
-   \   00003E   43FE02       ORL     0xfe,#0x2
-   \   000041   C294         CLR     0x90.4
-   \   000043   43FE10       ORL     0xfe,#0x10
-   \   000046   438F01       ORL     0x8f,#0x1
+   \   00002A   E59E         MOV       A,0x9e
+   \   00002C   70FC         JNZ       ??halAssertHazardLights_2
+   \   00002E   43BE04       ORL       0xbe,#0x4
+   \   000031   906270       MOV       DPTR,#0x6270
+   \   000034   7408         MOV       A,#0x8
+   \   000036   F0           MOVX      @DPTR,A
+   \   000037   C290         CLR       0x90.0
+   \   000039   43FE01       ORL       0xfe,#0x1
+   \   00003C   C291         CLR       0x90.1
+   \   00003E   43FE02       ORL       0xfe,#0x2
+   \   000041   C294         CLR       0x90.4
+   \   000043   43FE10       ORL       0xfe,#0x10
+   \   000046   438F01       ORL       0x8f,#0x1
     127          
     128            HAL_TURN_OFF_LED1();
-   \   000049   C290         CLR     0x90.0
+   \   000049   C290         CLR       0x90.0
     129            HAL_TURN_OFF_LED2();
-   \   00004B   C291         CLR     0x90.1
+   \   00004B   C291         CLR       0x90.1
     130            HAL_TURN_OFF_LED3();
-   \   00004D   C294         CLR     0x90.4
+   \   00004D   C294         CLR       0x90.4
     131            HAL_TURN_OFF_LED4();
-   \   00004F   8017         SJMP    ??halAssertHazardLights_3
+   \   00004F   8017         SJMP      ??halAssertHazardLights_3
     132          
     133            /*-------------------------------------------------------------------------------
     134             *  Master infinite loop.
@@ -506,29 +475,29 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
     269                  {
     270                    HAL_TURN_OFF_LED1();
    \                     ??halAssertHazardLights_4:
-   \   000051   C290         CLR     0x90.0
+   \   000051   C290         CLR       0x90.0
     271                  }
     272          
     273                  /* advance to next bit */
     274                  iBit++;
    \                     ??halAssertHazardLights_5:
-   \   000053   0B           INC     R3
+   \   000053   09           INC       R1
     275                  if (iBit == 8)
-   \   000054   7408         MOV     A,#0x8
-   \   000056   6B           XRL     A,R3
-   \   000057   6003         JZ      $+5
-   \   000059   02....       LJMP    ??halAssertHazardLights_6 & 0xFFFF
+   \   000054   7408         MOV       A,#0x8
+   \   000056   69           XRL       A,R1
+   \   000057   6003         JZ        $+5
+   \   000059   02....       LJMP      ??halAssertHazardLights_6 & 0xFFFF
     276                  {
     277                    iBit = 0;
-   \   00005C   7B00         MOV     R3,#0x0
+   \   00005C   7900         MOV       R1,#0x0
     278                    iByte++;
-   \   00005E   0A           INC     R2
+   \   00005E   0C           INC       R4
     279                  }
-   \   00005F   EA           MOV     A,R2
-   \   000060   C3           CLR     C
-   \   000061   9406         SUBB    A,#0x6
-   \   000063   5003         JNC     $+5
-   \   000065   02....       LJMP    ??halAssertHazardLights_6 & 0xFFFF
+   \   00005F   EC           MOV       A,R4
+   \   000060   C3           CLR       C
+   \   000061   9406         SUBB      A,#0x6
+   \   000063   5003         JNC       $+5
+   \   000065   02....       LJMP      ??halAssertHazardLights_6 & 0xFFFF
     280                }
     281              }
     282          
@@ -539,207 +508,207 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
     287               */
     288              HAL_TURN_OFF_LED1();
    \                     ??halAssertHazardLights_3:
-   \   000068   C290         CLR     0x90.0
+   \   000068   C290         CLR       0x90.0
    \                     ??halAssertHazardLights_7:
-   \   00006A   7900         MOV     R1,#0x0
+   \   00006A   7900         MOV       R1,#0x0
    \                     ??halAssertHazardLights_8:
-   \   00006C   90....       MOV     DPTR,#__Constant_0
-   \   00006F   12....       LCALL   ?XLOAD_R2345
-   \   000072   7406         MOV     A,#0x6
-   \   000074   12....       LCALL   ?XSTACK_DISP0_8
-   \   000077   12....       LCALL   ?XSTORE_R2345
-   \   00007A   8012         SJMP    ??halAssertHazardLights_9
+   \   00006C   7406         MOV       A,#0x6
+   \   00006E   12....       LCALL     ?XSTACK_DISP0_8
+   \   000071   E4           CLR       A
+   \   000072   F0           MOVX      @DPTR,A
+   \   000073   A3           INC       DPTR
+   \   000074   F0           MOVX      @DPTR,A
+   \   000075   A3           INC       DPTR
+   \   000076   F0           MOVX      @DPTR,A
+   \   000077   A3           INC       DPTR
+   \   000078   F0           MOVX      @DPTR,A
+   \   000079   8012         SJMP      ??halAssertHazardLights_9
    \                     ??halAssertHazardLights_10:
-   \   00007C   90....       MOV     DPTR,#__Constant_1
-   \   00007F   78..         MOV     R0,#?V0 + 0
-   \   000081   12....       LCALL   ?L_MOV_X
-   \   000084   7406         MOV     A,#0x6
-   \   000086   12....       LCALL   ?XSTACK_DISP0_8
-   \   000089   78..         MOV     R0,#?V0 + 0
-   \   00008B   12....       LCALL   ?L_ADD_TO_X
+   \   00007B   90....       MOV       DPTR,#__Constant_1
+   \   00007E   78..         MOV       R0,#?V0
+   \   000080   12....       LCALL     ?L_MOV_X
+   \   000083   7406         MOV       A,#0x6
+   \   000085   12....       LCALL     ?XSTACK_DISP0_8
+   \   000088   78..         MOV       R0,#?V0
+   \   00008A   12....       LCALL     ?L_ADD_TO_X
    \                     ??halAssertHazardLights_9:
-   \   00008E   7406         MOV     A,#0x6
-   \   000090   12....       LCALL   ?XSTACK_DISP0_8
-   \   000093   C082         PUSH    DPL
-   \   000095   C083         PUSH    DPH
-   \   000097   90....       MOV     DPTR,#__Constant_5800
-   \   00009A   78..         MOV     R0,#?V0 + 0
-   \   00009C   12....       LCALL   ?L_MOV_X
-   \   00009F   D083         POP     DPH
-   \   0000A1   D082         POP     DPL
-   \   0000A3   78..         MOV     R0,#?V0 + 0
-   \   0000A5   12....       LCALL   ?UL_GT_X
-   \   0000A8   40D2         JC      ??halAssertHazardLights_10
-   \   0000AA   A290         MOV     C,0x90.0
-   \   0000AC   5004         JNC     ??halAssertHazardLights_11
-   \   0000AE   C290         CLR     0x90.0
-   \   0000B0   8002         SJMP    ??halAssertHazardLights_12
+   \   00008D   90....       MOV       DPTR,#__Constant_5800
+   \   000090   78..         MOV       R0,#?V0
+   \   000092   12....       LCALL     ?L_MOV_X
+   \   000095   7406         MOV       A,#0x6
+   \   000097   12....       LCALL     ?XSTACK_DISP0_8
+   \   00009A   78..         MOV       R0,#?V0
+   \   00009C   12....       LCALL     ?UL_GT_X
+   \   00009F   40DA         JC        ??halAssertHazardLights_10
+   \   0000A1   A290         MOV       C,0x90.0
+   \   0000A3   5004         JNC       ??halAssertHazardLights_11
+   \   0000A5   C290         CLR       0x90.0
+   \   0000A7   8002         SJMP      ??halAssertHazardLights_12
    \                     ??halAssertHazardLights_11:
-   \   0000B2   D290         SETB    0x90.0
+   \   0000A9   D290         SETB      0x90.0
    \                     ??halAssertHazardLights_12:
-   \   0000B4   A291         MOV     C,0x90.1
-   \   0000B6   5004         JNC     ??halAssertHazardLights_13
-   \   0000B8   C291         CLR     0x90.1
-   \   0000BA   8002         SJMP    ??halAssertHazardLights_14
+   \   0000AB   A291         MOV       C,0x90.1
+   \   0000AD   5004         JNC       ??halAssertHazardLights_13
+   \   0000AF   C291         CLR       0x90.1
+   \   0000B1   8002         SJMP      ??halAssertHazardLights_14
    \                     ??halAssertHazardLights_13:
-   \   0000BC   D291         SETB    0x90.1
+   \   0000B3   D291         SETB      0x90.1
    \                     ??halAssertHazardLights_14:
-   \   0000BE   A294         MOV     C,0x90.4
-   \   0000C0   5004         JNC     ??halAssertHazardLights_15
-   \   0000C2   C294         CLR     0x90.4
-   \   0000C4   8002         SJMP    ??halAssertHazardLights_16
+   \   0000B5   A294         MOV       C,0x90.4
+   \   0000B7   5004         JNC       ??halAssertHazardLights_15
+   \   0000B9   C294         CLR       0x90.4
+   \   0000BB   8002         SJMP      ??halAssertHazardLights_16
    \                     ??halAssertHazardLights_15:
-   \   0000C6   D294         SETB    0x90.4
+   \   0000BD   D294         SETB      0x90.4
    \                     ??halAssertHazardLights_16:
-   \   0000C8   90....       MOV     DPTR,#??escape
-   \   0000CB   E0           MOVX    A,@DPTR
-   \   0000CC   600C         JZ      ??halAssertHazardLights_17
-   \   0000CE   E4           CLR     A
-   \   0000CF   F0           MOVX    @DPTR,A
-   \   0000D0   740A         MOV     A,#0xa
-   \   0000D2   12....       LCALL   ?DEALLOC_XSTACK8
-   \   0000D5   7F04         MOV     R7,#0x4
-   \   0000D7   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   0000BF   90....       MOV       DPTR,#??escape
+   \   0000C2   E0           MOVX      A,@DPTR
+   \   0000C3   600C         JZ        ??halAssertHazardLights_17
+   \   0000C5   E4           CLR       A
+   \   0000C6   F0           MOVX      @DPTR,A
+   \   0000C7   740A         MOV       A,#0xa
+   \   0000C9   12....       LCALL     ?DEALLOC_XSTACK8
+   \   0000CC   7F04         MOV       R7,#0x4
+   \   0000CE   02....       LJMP      ?BANKED_LEAVE_XDATA
    \                     ??halAssertHazardLights_17:
-   \   0000DA   A281         MOV     C,0x80.1
-   \   0000DC   508C         JNC     ??halAssertHazardLights_7
-   \   0000DE   09           INC     R1
-   \   0000DF   740A         MOV     A,#0xa
-   \   0000E1   69           XRL     A,R1
-   \   0000E2   7088         JNZ     ??halAssertHazardLights_8
-   \   0000E4   C290         CLR     0x90.0
-   \   0000E6   C291         CLR     0x90.1
-   \   0000E8   C294         CLR     0x90.4
-   \   0000EA   C290         CLR     0x90.0
-   \   0000EC   7800         MOV     R0,#0x0
-   \   0000EE   7900         MOV     R1,#0x0
+   \   0000D1   A281         MOV       C,0x80.1
+   \   0000D3   5095         JNC       ??halAssertHazardLights_7
+   \   0000D5   09           INC       R1
+   \   0000D6   740A         MOV       A,#0xa
+   \   0000D8   69           XRL       A,R1
+   \   0000D9   7091         JNZ       ??halAssertHazardLights_8
+   \   0000DB   C290         CLR       0x90.0
+   \   0000DD   C291         CLR       0x90.1
+   \   0000DF   C294         CLR       0x90.4
+   \   0000E1   C290         CLR       0x90.0
+   \   0000E3   7800         MOV       R0,#0x0
+   \   0000E5   7900         MOV       R1,#0x0
    \                     ??halAssertHazardLights_18:
-   \   0000F0   A281         MOV     C,0x80.1
-   \   0000F2   5004         JNC     ??halAssertHazardLights_19
-   \   0000F4   7800         MOV     R0,#0x0
-   \   0000F6   7900         MOV     R1,#0x0
+   \   0000E7   A281         MOV       C,0x80.1
+   \   0000E9   5004         JNC       ??halAssertHazardLights_19
+   \   0000EB   7800         MOV       R0,#0x0
+   \   0000ED   7900         MOV       R1,#0x0
    \                     ??halAssertHazardLights_19:
-   \   0000F8   12....       LCALL   ?Subroutine0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_0:
-   \   0000FB   40F3         JC      ??halAssertHazardLights_18
-   \   0000FD   9061A3       MOV     DPTR,#0x61a3
-   \   000100   E0           MOVX    A,@DPTR
-   \   000101   C0E0         PUSH    A
-   \   000103   7404         MOV     A,#0x4
-   \   000105   12....       LCALL   ?XSTACK_DISP0_8
-   \   000108   D0E0         POP     A
-   \   00010A   F0           MOVX    @DPTR,A
-   \   00010B   9061A4       MOV     DPTR,#0x61a4
-   \   00010E   E0           MOVX    A,@DPTR
-   \   00010F   C0E0         PUSH    A
-   \   000111   7405         MOV     A,#0x5
-   \   000113   12....       LCALL   ?XSTACK_DISP0_8
-   \   000116   D0E0         POP     A
-   \   000118   F0           MOVX    @DPTR,A
-   \   000119   90....       MOV     DPTR,#macTxActive
-   \   00011C   E0           MOVX    A,@DPTR
-   \   00011D   C0E0         PUSH    A
-   \   00011F   7402         MOV     A,#0x2
-   \   000121   12....       LCALL   ?XSTACK_DISP0_8
-   \   000124   D0E0         POP     A
-   \   000126   F0           MOVX    @DPTR,A
-   \   000127   90....       MOV     DPTR,#macRxActive
-   \   00012A   E0           MOVX    A,@DPTR
-   \   00012B   C0E0         PUSH    A
-   \   00012D   7403         MOV     A,#0x3
-   \   00012F   12....       LCALL   ?XSTACK_DISP0_8
-   \   000132   D0E0         POP     A
-   \   000134   F0           MOVX    @DPTR,A
-   \   000135   7B00         MOV     R3,#0x0
-   \   000137   7A00         MOV     R2,#0x0
-   \                     ??halAssertHazardLights_6:
-   \   000139   A281         MOV     C,0x80.1
-   \   00013B   50FC         JNC     ??halAssertHazardLights_6
-   \   00013D   D290         SETB    0x90.0
-   \   00013F   D291         SETB    0x90.1
-   \   000141   D294         SETB    0x90.4
-   \   000143   EB           MOV     A,R3
-   \   000144   7004         JNZ     ??halAssertHazardLights_20
-   \   000146   D290         SETB    0x90.0
-   \   000148   8002         SJMP    ??halAssertHazardLights_21
+   \   0000EF   08           INC       R0
+   \   0000F0   E8           MOV       A,R0
+   \   0000F1   7001         JNZ       ??halAssertHazardLights_20
+   \   0000F3   09           INC       R1
    \                     ??halAssertHazardLights_20:
-   \   00014A   C290         CLR     0x90.0
+   \   0000F4   C3           CLR       C
+   \   0000F5   94F4         SUBB      A,#-0xc
+   \   0000F7   E9           MOV       A,R1
+   \   0000F8   9401         SUBB      A,#0x1
+   \   0000FA   A2D2         MOV       C,0xD0 /* PSW */.2
+   \   0000FC   65D0         XRL       A,PSW
+   \   0000FE   33           RLC       A
+   \   0000FF   40E6         JC        ??halAssertHazardLights_18
+   \   000101   9061A3       MOV       DPTR,#0x61a3
+   \   000104   E0           MOVX      A,@DPTR
+   \   000105   C0E0         PUSH      A
+   \   000107   7404         MOV       A,#0x4
+   \   000109   12....       LCALL     ?XSTACK_DISP0_8
+   \   00010C   D0E0         POP       A
+   \   00010E   F0           MOVX      @DPTR,A
+   \   00010F   9061A4       MOV       DPTR,#0x61a4
+   \   000112   E0           MOVX      A,@DPTR
+   \   000113   C0E0         PUSH      A
+   \   000115   7405         MOV       A,#0x5
+   \   000117   12....       LCALL     ?XSTACK_DISP0_8
+   \   00011A   D0E0         POP       A
+   \   00011C   F0           MOVX      @DPTR,A
+   \   00011D   90....       MOV       DPTR,#macTxActive
+   \   000120   E0           MOVX      A,@DPTR
+   \   000121   C0E0         PUSH      A
+   \   000123   7402         MOV       A,#0x2
+   \   000125   12....       LCALL     ?XSTACK_DISP0_8
+   \   000128   D0E0         POP       A
+   \   00012A   F0           MOVX      @DPTR,A
+   \   00012B   90....       MOV       DPTR,#macRxActive
+   \   00012E   E0           MOVX      A,@DPTR
+   \   00012F   C0E0         PUSH      A
+   \   000131   7403         MOV       A,#0x3
+   \   000133   12....       LCALL     ?XSTACK_DISP0_8
+   \   000136   D0E0         POP       A
+   \   000138   F0           MOVX      @DPTR,A
+   \   000139   7900         MOV       R1,#0x0
+   \   00013B   7C00         MOV       R4,#0x0
+   \                     ??halAssertHazardLights_6:
+   \   00013D   A281         MOV       C,0x80.1
+   \   00013F   50FC         JNC       ??halAssertHazardLights_6
+   \   000141   D290         SETB      0x90.0
+   \   000143   D291         SETB      0x90.1
+   \   000145   D294         SETB      0x90.4
+   \   000147   E9           MOV       A,R1
+   \   000148   7004         JNZ       ??halAssertHazardLights_21
+   \   00014A   D290         SETB      0x90.0
+   \   00014C   8002         SJMP      ??halAssertHazardLights_22
    \                     ??halAssertHazardLights_21:
-   \   00014C   7800         MOV     R0,#0x0
-   \   00014E   7900         MOV     R1,#0x0
+   \   00014E   C290         CLR       0x90.0
    \                     ??halAssertHazardLights_22:
-   \   000150   A281         MOV     C,0x80.1
-   \   000152   5004         JNC     ??halAssertHazardLights_23
-   \   000154   7800         MOV     R0,#0x0
-   \   000156   7900         MOV     R1,#0x0
+   \   000150   7A00         MOV       R2,#0x0
+   \   000152   7B00         MOV       R3,#0x0
    \                     ??halAssertHazardLights_23:
-   \   000158   12....       LCALL   ?Subroutine0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_1:
-   \   00015B   40F3         JC      ??halAssertHazardLights_22
-   \   00015D   C290         CLR     0x90.0
-   \   00015F   C291         CLR     0x90.1
-   \   000161   C294         CLR     0x90.4
-   \   000163   C290         CLR     0x90.0
-   \   000165   75..01       MOV     ?V0 + 0,#0x1
-   \   000168   75..00       MOV     ?V0 + 1,#0x0
-   \   00016B   7407         MOV     A,#0x7
-   \   00016D   C3           CLR     C
-   \   00016E   9B           SUBB    A,R3
-   \   00016F   78..         MOV     R0,#?V0 + 0
-   \   000171   12....       LCALL   ?S_SHL
-   \   000174   8A..         MOV     ?V0 + 2,R2
-   \   000176   85..82       MOV     DPL,?XSP + 0
-   \   000179   85..83       MOV     DPH,?XSP + 1
-   \   00017C   E582         MOV     A,DPL
-   \   00017E   25..         ADD     A,?V0 + 2
-   \   000180   F582         MOV     DPL,A
-   \   000182   E583         MOV     A,DPH
-   \   000184   3400         ADDC    A,#0x0
-   \   000186   F583         MOV     DPH,A
-   \   000188   E0           MOVX    A,@DPTR
-   \   000189   55..         ANL     A,?V0 + 0
-   \   00018B   7003         JNZ     $+5
-   \   00018D   02....       LJMP    ??halAssertHazardLights_4 & 0xFFFF
-   \   000190   D290         SETB    0x90.0
-   \   000192   02....       LJMP    ??halAssertHazardLights_5 & 0xFFFF
-   \   000195                REQUIRE _A_IEN0
-   \   000195                REQUIRE SLEEPCMD
-   \   000195                REQUIRE SLEEPSTA
-   \   000195                REQUIRE CLKCONCMD
-   \   000195                REQUIRE CLKCONSTA
-   \   000195                REQUIRE _A_P1
-   \   000195                REQUIRE P1DIR
-   \   000195                REQUIRE P0INP
-   \   000195                REQUIRE _A_P0
+   \   000154   A281         MOV       C,0x80.1
+   \   000156   5004         JNC       ??halAssertHazardLights_24
+   \   000158   7A00         MOV       R2,#0x0
+   \   00015A   7B00         MOV       R3,#0x0
+   \                     ??halAssertHazardLights_24:
+   \   00015C   0A           INC       R2
+   \   00015D   EA           MOV       A,R2
+   \   00015E   7001         JNZ       ??halAssertHazardLights_25
+   \   000160   0B           INC       R3
+   \                     ??halAssertHazardLights_25:
+   \   000161   C3           CLR       C
+   \   000162   94F4         SUBB      A,#-0xc
+   \   000164   EB           MOV       A,R3
+   \   000165   9401         SUBB      A,#0x1
+   \   000167   A2D2         MOV       C,0xD0 /* PSW */.2
+   \   000169   65D0         XRL       A,PSW
+   \   00016B   33           RLC       A
+   \   00016C   40E6         JC        ??halAssertHazardLights_23
+   \   00016E   C290         CLR       0x90.0
+   \   000170   C291         CLR       0x90.1
+   \   000172   C294         CLR       0x90.4
+   \   000174   C290         CLR       0x90.0
+   \   000176   75..01       MOV       ?V0,#0x1
+   \   000179   75..00       MOV       ?V1,#0x0
+   \   00017C   7407         MOV       A,#0x7
+   \   00017E   C3           CLR       C
+   \   00017F   99           SUBB      A,R1
+   \   000180   78..         MOV       R0,#?V0
+   \   000182   12....       LCALL     ?S_SHL
+   \   000185   EC           MOV       A,R4
+   \   000186   FA           MOV       R2,A
+   \   000187   85..82       MOV       DPL,?XSP + 0
+   \   00018A   85..83       MOV       DPH,?XSP + 1
+   \   00018D   E582         MOV       A,DPL
+   \   00018F   2A           ADD       A,R2
+   \   000190   F582         MOV       DPL,A
+   \   000192   E4           CLR       A
+   \   000193   3583         ADDC      A,DPH
+   \   000195   F583         MOV       DPH,A
+   \   000197   E0           MOVX      A,@DPTR
+   \   000198   55..         ANL       A,?V0
+   \   00019A   7003         JNZ       $+5
+   \   00019C   02....       LJMP      ??halAssertHazardLights_4 & 0xFFFF
+   \   00019F   D290         SETB      0x90.0
+   \   0001A1   02....       LJMP      ??halAssertHazardLights_5 & 0xFFFF
+   \   0001A4                REQUIRE _A_IEN0
+   \   0001A4                REQUIRE SLEEPCMD
+   \   0001A4                REQUIRE SLEEPSTA
+   \   0001A4                REQUIRE CLKCONCMD
+   \   0001A4                REQUIRE CLKCONSTA
+   \   0001A4                REQUIRE _A_P1
+   \   0001A4                REQUIRE P1DIR
+   \   0001A4                REQUIRE P0INP
+   \   0001A4                REQUIRE _A_P0
     289            }
     290          }
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine0:
-   \   000000   E8           MOV     A,R0
-   \   000001   2401         ADD     A,#0x1
-   \   000003   08           INC     R0
-   \   000004   E9           MOV     A,R1
-   \   000005   3400         ADDC    A,#0x0
-   \   000007   F9           MOV     R1,A
-   \   000008   C3           CLR     C
-   \   000009   E8           MOV     A,R0
-   \   00000A   94F4         SUBB    A,#-0xc
-   \   00000C   E9           MOV     A,R1
-   \   00000D   9401         SUBB    A,#0x1
-   \   00000F   A2D2         MOV     C,0xD0 /* PSW */.2
-   \   000011   65D0         XRL     A,PSW
-   \   000013   33           RLC     A
-   \   000014   22           RET
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
    \                     ??escape:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-
-   \                                 In  segment XDATA_ROM_C, align 1
-   \                     __Constant_0:
-   \   000000   00000000     DD 0
 
    \                                 In  segment XDATA_ROM_C, align 1
    \                     __Constant_1:
@@ -750,12 +719,12 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
    \   000000   00580000     DD 22528
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??halAssertHandler?relay:
+   \                     `??halAssertHandler::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    halAssertHandler
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??halAssertHazardLights?relay:
+   \                     `??halAssertHazardLights::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    halAssertHazardLights
     291          #endif
@@ -779,47 +748,46 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\common\hal_assert.c
 
    Maximum stack usage in bytes:
 
-     Function                   ISTACK PSTACK XSTACK
-     --------                   ------ ------ ------
-     halAssertHandler               2      0      0
-       -> halAssertHazardLights     4      0      0
-     halAssertHazardLights          2      0     22
+   ISTACK XSTACK Function
+   ------ ------ --------
+      2      0   halAssertHandler
+        2      0   -> halAssertHazardLights
+      1     22   halAssertHazardLights
 
 
    Segment part sizes:
 
-     Function/Label                Bytes
-     --------------                -----
-     _A_P0                            1
-     P0INP                            1
-     _A_P1                            1
-     SLEEPSTA                         1
-     CLKCONSTA                        1
-     _A_IEN0                          1
-     SLEEPCMD                         1
-     CLKCONCMD                        1
-     P1DIR                            1
-     halAssertHandler                14
-     halAssertHazardLights          405
-     ?Subroutine0                    21
-     escape                           1
-     __Constant_0                     4
-     __Constant_1                     4
-     __Constant_5800                  4
-     ??halAssertHandler?relay         6
-     ??halAssertHazardLights?relay    6
+   Bytes  Function/Label
+   -----  --------------
+       1  CLKCONCMD
+       1  CLKCONSTA
+       1  P0INP
+       1  P1DIR
+       1  SLEEPCMD
+       1  SLEEPSTA
+       1  _A_IEN0
+       1  _A_P0
+       1  _A_P1
+       4  __Constant_1
+       4  __Constant_5800
+       1  escape
+      14  halAssertHandler
+       6  halAssertHandler::?relay
+     420  halAssertHazardLights
+       6  halAssertHazardLights::?relay
 
  
- 440 bytes in segment BANKED_CODE
+ 434 bytes in segment BANKED_CODE
   12 bytes in segment BANK_RELAYS
    9 bytes in segment SFR_AN
-  12 bytes in segment XDATA_ROM_C
+   8 bytes in segment XDATA_ROM_C
    1 byte  in segment XDATA_Z
  
- 452 bytes of CODE  memory
-   0 bytes of CONST memory (+ 12 bytes shared)
-   0 bytes of DATA  memory (+  9 bytes shared)
-   1 byte  of XDATA memory
+  12 bytes of CODE     memory
+   0 bytes of CONST    memory (+ 8 bytes shared)
+   0 bytes of DATA     memory (+ 9 bytes shared)
+ 434 bytes of HUGECODE memory
+   1 byte  of XDATA    memory
 
 Errors: none
 Warnings: none

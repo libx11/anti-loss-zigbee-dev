@@ -1,135 +1,101 @@
 ###############################################################################
-#                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         17/Apr/2017  20:23:09 #
-# Copyright 2004-2011 IAR Systems AB.                                         #
-#                                                                             #
-#    Core               =  plain                                              #
-#    Code model         =  banked                                             #
-#    Data model         =  large                                              #
-#    Calling convention =  xdata reentrant                                    #
-#    Constant location  =  data_rom                                           #
-#    Dptr setup         =  1,16                                               #
-#    Source file        =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Components\hal\target\CC2530EB\hal_flash.c    #
-#    Command line       =  -f "C:\Users\li\Desktop\ZStack-2.5.1a -            #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\Tools\CC2530DB\f8wRouter.cfg" (-DCPU32MHZ   #
-#                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRU #
-#                          E -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8       #
-#                          -DMAC_CFG_RX_MAX=5 -DRTR_NWK) -f                   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\Tools\CC2530DB\f8wConfig.cfg" (-DZIGBEEPRO  #
-#                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
-#                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                       #
-#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
-#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
-#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
-#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
-#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
-#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
-#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
-#                          -DNWK_MAX_DATA_RETRIES=2                           #
-#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
-#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
-#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
-#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
-#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
-#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
-#                          -DMAC_MAX_FRAME_SIZE=116                           #
-#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
-#                          __code" -DGENERIC=__generic                        #
-#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
-#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
-#                          -DREJOIN_POLL_RATE=440 "C:\Users\li\Desktop\ZStack #
-#                          -2.5.1a - 副本\Components\hal\target\CC2530EB\hal_ #
-#                          flash.c" -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D  #
-#                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Ro #
-#                          uterEB\List\" -lA "C:\Users\li\Desktop\ZStack-2.5. #
-#                          1a - 副本\Projects\zstack\Samples\SampleApp\CC2530 #
-#                          DB\RouterEB\List\" --diag_suppress Pe001,Pa010 -o  #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Ro #
-#                          uterEB\Obj\" -e --no_code_motion --debug           #
-#                          --core=plain --dptr=16,1 --data_model=large        #
-#                          --code_model=banked --calling_convention=xdata_ree #
-#                          ntrant --place_constants=data_rom                  #
-#                          --nr_virtual_regs 16 -I "C:\Users\li\Desktop\ZStac #
-#                          k-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\ #
-#                          CC2530DB\" -I "C:\Users\li\Desktop\ZStack-2.5.1a   #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          ..\Source\" -I "C:\Users\li\Desktop\ZStack-2.5.1a  #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          ..\..\..\ZMain\TI2530DB\" -I                       #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\include\" -I           #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\target\CC2530EB\" -I   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\include\" -I           #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\high_level\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\" -I   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\single #
-#                          _chip\" -I "C:\Users\li\Desktop\ZStack-2.5.1a -    #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mt\" -I                    #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\osal\include\" -I          #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\services\saddr\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\services\sdata\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\af\" -I              #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\nwk\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sapi\" -I            #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sec\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sys\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\zdo\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\zmac\" -I                  #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\zmac\f8w\" -Ohz            #
-#                          --require_prototypes                               #
-#    List file          =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Ro #
-#                          uterEB\List\hal_flash.lst                          #
-#    Object file        =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Ro #
-#                          uterEB\Obj\hal_flash.r51                           #
-#                                                                             #
-#                                                                             #
+#
+# IAR C/C++ Compiler V10.20.1.5333 for 8051               31/May/2018  15:16:22
+# Copyright 2004-2018 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for 8051
+#
+#    Core               =  plain
+#    Code model         =  banked
+#    Data model         =  large
+#    Calling convention =  xdata reentrant
+#    Constant location  =  data_rom
+#    Dptr setup         =  1,16
+#                          
+#    Source file        =  
+#        E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_flash.c
+#    Command line       =  
+#        -f C:\Users\libx\AppData\Local\Temp\EW4505.tmp
+#        (E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_flash.c -D
+#        ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
+#        LCD_SUPPORTED=DEBUG -lC
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\RouterEB\List
+#        -lA
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\RouterEB\List
+#        --diag_suppress Pe001,Pa010 -o
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\RouterEB\Obj
+#        -e --debug --core=plain --dptr=16,1 --data_model=large
+#        --code_model=banked --calling_convention=xdata_reentrant
+#        --place_constants=data_rom --nr_virtual_regs 8 -f
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wRouter.cfg
+#        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
+#        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
+#        -DRTR_NWK) -f
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+#        (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+#        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0xFFFF
+#        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+#        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+#        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+#        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+#        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+#        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+#        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+#        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+#        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+#        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+#        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+#        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100
+#        -DREJOIN_POLL_RATE=440) -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\ -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\Source\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ZMain\TI2530DB\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mt\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\osal\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\af\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+#        -Ohz --require_prototypes --no_code_motion)
+#    Locale             =  Chinese (Simplified)_CHN.936
+#    List file          =  
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\RouterEB\List\hal_flash.lst
+#    Object file        =  
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\RouterEB\Obj\hal_flash.r51
+#
 ###############################################################################
 
-C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_flash.c
+E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_flash.c
       1          /**************************************************************************************************
       2            Filename:       hal_flash.c
       3            Revised:        $Date: 2010-10-07 02:19:52 -0700 (Thu, 07 Oct 2010) $
@@ -224,42 +190,38 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_flas
      70          void HalFlashRead(uint8 pg, uint16 offset, uint8 *buf, uint16 cnt)
    \                     HalFlashRead:
      71          {
-   \   000000   74F4         MOV     A,#-0xc
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 12
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000   74F5         MOV       A,#-0xb
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 11
    \   000005                ; Auto size: 0
-   \   000005   89..         MOV     ?V0 + 0,R1
-   \   000007   740C         MOV     A,#0xc
-   \   000009   12....       LCALL   ?XSTACK_DISP0_8
-   \   00000C   E0           MOVX    A,@DPTR
-   \   00000D   FE           MOV     R6,A
-   \   00000E   A3           INC     DPTR
-   \   00000F   E0           MOVX    A,@DPTR
-   \   000010   FF           MOV     R7,A
+   \   000005   E9           MOV       A,R1
+   \   000006   FE           MOV       R6,A
      72            // Calculate the offset into the containing flash bank as it gets mapped into XDATA.
      73            uint8 *pData = (uint8 *)(offset + HAL_FLASH_PAGE_MAP) +
      74                           ((pg % HAL_FLASH_PAGE_PER_BANK) * HAL_FLASH_PAGE_SIZE);
-   \   000011   740F         MOV     A,#0xf
-   \   000013   55..         ANL     A,?V0 + 0
-   \   000015   F5..         MOV     ?V0 + 2,A
-   \   000017   75..00       MOV     ?V0 + 3,#0x0
-   \   00001A   740B         MOV     A,#0xb
-   \   00001C   78..         MOV     R0,#?V0 + 2
-   \   00001E   12....       LCALL   ?S_SHL
-   \   000021   EA           MOV     A,R2
-   \   000022   2400         ADD     A,#0x0
-   \   000024   F8           MOV     R0,A
-   \   000025   EB           MOV     A,R3
-   \   000026   3480         ADDC    A,#-0x80
-   \   000028   F9           MOV     R1,A
-   \   000029   E8           MOV     A,R0
-   \   00002A   2400         ADD     A,#0x0
-   \   00002C   E9           MOV     A,R1
-   \   00002D   35..         ADDC    A,?V0 + 3
-   \   00002F   F9           MOV     R1,A
+   \   000007   740F         MOV       A,#0xf
+   \   000009   5E           ANL       A,R6
+   \   00000A   F5..         MOV       ?V0,A
+   \   00000C   75..00       MOV       ?V1,#0x0
+   \   00000F   740B         MOV       A,#0xb
+   \   000011   78..         MOV       R0,#?V0
+   \   000013   12....       LCALL     ?S_SHL
+   \   000016   EA           MOV       A,R2
+   \   000017   2400         ADD       A,#0x0
+   \   000019   F8           MOV       R0,A
+   \   00001A   EB           MOV       A,R3
+   \   00001B   3480         ADDC      A,#-0x80
+   \   00001D   F9           MOV       R1,A
+   \   00001E   EA           MOV       A,R2
+   \   00001F   2400         ADD       A,#0x0
+   \   000021   E9           MOV       A,R1
+   \   000022   35..         ADDC      A,?V1
+   \   000024   F9           MOV       R1,A
      75            uint8 memctr = MEMCTR;  // Save to restore.
-   \   000030   E5C7         MOV     A,0xc7
-   \   000032   F5..         MOV     ?V0 + 1,A
+   \   000025   AFC7         MOV       R7,0xc7+0x0
      76          
      77          #if (!defined HAL_OAD_BOOT_CODE) && (!defined HAL_OTA_BOOT_CODE)
      78            halIntState_t is;
@@ -269,75 +231,80 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_flas
      82          
      83          #if (!defined HAL_OAD_BOOT_CODE) && (!defined HAL_OTA_BOOT_CODE)
      84            HAL_ENTER_CRITICAL_SECTION(is);
-   \   000034   A2AF         MOV     C,0xa8.7
-   \   000036   E4           CLR     A
-   \   000037   33           RLC     A
-   \   000038   F5..         MOV     ?V0 + 2,A
-   \   00003A   C2AF         CLR     0xa8.7
+   \   000027   A2AF         MOV       C,0xa8.7
+   \   000029   E4           CLR       A
+   \   00002A   33           RLC       A
+   \   00002B   F5..         MOV       ?V2,A
+   \   00002D   C2AF         CLR       0xa8.7
      85          #endif
      86          
      87            // Calculate and map the containing flash bank into XDATA.
      88            MEMCTR = (MEMCTR & 0xF8) | pg;
-   \   00003C   E5..         MOV     A,?V0 + 0
-   \   00003E   C4           SWAP    A
-   \   00003F   540F         ANL     A,#0xf
-   \   000041   FA           MOV     R2,A
-   \   000042   E5C7         MOV     A,0xc7
-   \   000044   54F8         ANL     A,#0xf8
-   \   000046   4A           ORL     A,R2
-   \   000047   F5C7         MOV     0xc7,A
-   \   000049   801C         SJMP    ??HalFlashRead_0
+   \   00002F   EE           MOV       A,R6
+   \   000030   C4           SWAP      A
+   \   000031   540F         ANL       A,#0xf
+   \   000033   FA           MOV       R2,A
+   \   000034   E5C7         MOV       A,0xc7
+   \   000036   54F8         ANL       A,#0xf8
+   \   000038   4A           ORL       A,R2
+   \   000039   F5C7         MOV       0xc7,A
+   \   00003B   740B         MOV       A,#0xb
+   \   00003D   12....       LCALL     ?XSTACK_DISP0_8
+   \   000040   E0           MOVX      A,@DPTR
+   \   000041   FA           MOV       R2,A
+   \   000042   A3           INC       DPTR
+   \   000043   E0           MOVX      A,@DPTR
+   \   000044   FB           MOV       R3,A
+   \   000045   801C         SJMP      ??HalFlashRead_0
      89          
      90            while (cnt--)
      91            {
      92              *buf++ = *pData++;
    \                     ??HalFlashRead_1:
-   \   00004B   8882         MOV     DPL,R0
-   \   00004D   8983         MOV     DPH,R1
-   \   00004F   E0           MOVX    A,@DPTR
-   \   000050   8C82         MOV     DPL,R4
-   \   000052   8D83         MOV     DPH,R5
-   \   000054   F0           MOVX    @DPTR,A
-   \   000055   8882         MOV     DPL,R0
-   \   000057   8983         MOV     DPH,R1
-   \   000059   A3           INC     DPTR
-   \   00005A   A882         MOV     R0,DPL
-   \   00005C   A983         MOV     R1,DPH
-   \   00005E   8C82         MOV     DPL,R4
-   \   000060   8D83         MOV     DPH,R5
-   \   000062   A3           INC     DPTR
-   \   000063   AC82         MOV     R4,DPL
-   \   000065   AD83         MOV     R5,DPH
+   \   000047   8882         MOV       DPL,R0
+   \   000049   8983         MOV       DPH,R1
+   \   00004B   E0           MOVX      A,@DPTR
+   \   00004C   8C82         MOV       DPL,R4
+   \   00004E   8D83         MOV       DPH,R5
+   \   000050   F0           MOVX      @DPTR,A
+   \   000051   8882         MOV       DPL,R0
+   \   000053   8983         MOV       DPH,R1
+   \   000055   A3           INC       DPTR
+   \   000056   A882         MOV       R0,DPL
+   \   000058   A983         MOV       R1,DPH
+   \   00005A   8C82         MOV       DPL,R4
+   \   00005C   8D83         MOV       DPH,R5
+   \   00005E   A3           INC       DPTR
+   \   00005F   AC82         MOV       R4,DPL
+   \   000061   AD83         MOV       R5,DPH
      93            }
    \                     ??HalFlashRead_0:
-   \   000067   EE           MOV     A,R6
-   \   000068   FA           MOV     R2,A
-   \   000069   EF           MOV     A,R7
-   \   00006A   FB           MOV     R3,A
-   \   00006B   EA           MOV     A,R2
-   \   00006C   24FF         ADD     A,#-0x1
-   \   00006E   1E           DEC     R6
-   \   00006F   EB           MOV     A,R3
-   \   000070   34FF         ADDC    A,#-0x1
-   \   000072   FF           MOV     R7,A
-   \   000073   EA           MOV     A,R2
-   \   000074   4B           ORL     A,R3
-   \   000075   70D4         JNZ     ??HalFlashRead_1
+   \   000063   8A..         MOV       ?V0,R2
+   \   000065   8B..         MOV       ?V1,R3
+   \   000067   E5..         MOV       A,?V0
+   \   000069   24FF         ADD       A,#-0x1
+   \   00006B   1A           DEC       R2
+   \   00006C   E5..         MOV       A,?V1
+   \   00006E   34FF         ADDC      A,#-0x1
+   \   000070   FB           MOV       R3,A
+   \   000071   E5..         MOV       A,?V0
+   \   000073   45..         ORL       A,?V1
+   \   000075   70D0         JNZ       ??HalFlashRead_1
      94          
      95            MEMCTR = memctr;
-   \   000077   85..C7       MOV     0xc7,?V0 + 1
+   \   000077   8FC7         MOV       0xc7,R7
      96          
      97          #if (!defined HAL_OAD_BOOT_CODE) && (!defined HAL_OTA_BOOT_CODE)
      98            HAL_EXIT_CRITICAL_SECTION(is);
-   \   00007A   E5..         MOV     A,?V0 + 2
-   \   00007C   A2E0         MOV     C,0xE0 /* A   */.0
-   \   00007E   92AF         MOV     0xa8.7,C
+   \   000079   E5..         MOV       A,?V2
+   \   00007B   A2E0         MOV       C,0xE0 /* A   */.0
+   \   00007D   92AF         MOV       0xa8.7,C
      99          #endif
     100          }
-   \   000080   7F04         MOV     R7,#0x4
-   \   000082   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   000085                REQUIRE MEMCTR
-   \   000085                REQUIRE _A_IEN0
+   \   00007F   7F03         MOV       R7,#0x3
+   \   000081   02....       LJMP      ?BANKED_LEAVE_XDATA
+   \   000084                REQUIRE MEMCTR
+   \   000084                REQUIRE _A_IEN0
     101          
     102          /**************************************************************************************************
     103           * @fn          HalFlashWrite
@@ -362,96 +329,98 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_flas
     120          void HalFlashWrite(uint16 addr, uint8 *buf, uint16 cnt)
    \                     HalFlashWrite:
     121          {
-   \   000000   74F6         MOV     A,#-0xa
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000   74F6         MOV       A,#-0xa
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 0
-   \   000005   740A         MOV     A,#0xa
-   \   000007   12....       LCALL   ?XSTACK_DISP0_8
-   \   00000A   E0           MOVX    A,@DPTR
-   \   00000B   F5..         MOV     ?V0 + 0,A
-   \   00000D   A3           INC     DPTR
-   \   00000E   E0           MOVX    A,@DPTR
-   \   00000F   F5..         MOV     ?V0 + 1,A
     122          #if (defined HAL_DMA) && (HAL_DMA == TRUE)
     123            halDMADesc_t *ch = HAL_NV_DMA_GET_DESC();
     124          
     125            HAL_DMA_SET_SOURCE(ch, buf);
-   \   000011   ED           MOV     A,R5
-   \   000012   90....       MOV     DPTR,#dmaCh0
-   \   000015   F0           MOVX    @DPTR,A
-   \   000016   EC           MOV     A,R4
-   \   000017   A3           INC     DPTR
-   \   000018   F0           MOVX    @DPTR,A
+   \   000005   ED           MOV       A,R5
+   \   000006   90....       MOV       DPTR,#dmaCh0
+   \   000009   F0           MOVX      @DPTR,A
+   \   00000A   EC           MOV       A,R4
+   \   00000B   A3           INC       DPTR
+   \   00000C   F0           MOVX      @DPTR,A
     126            HAL_DMA_SET_DEST(ch, &FWDATA);
-   \   000019   A3           INC     DPTR
-   \   00001A   7462         MOV     A,#0x62
-   \   00001C   F0           MOVX    @DPTR,A
-   \   00001D   A3           INC     DPTR
-   \   00001E   7473         MOV     A,#0x73
-   \   000020   F0           MOVX    @DPTR,A
+   \   00000D   A3           INC       DPTR
+   \   00000E   7462         MOV       A,#0x62
+   \   000010   F0           MOVX      @DPTR,A
+   \   000011   A3           INC       DPTR
+   \   000012   7473         MOV       A,#0x73
+   \   000014   F0           MOVX      @DPTR,A
     127            HAL_DMA_SET_VLEN(ch, HAL_DMA_VLEN_USE_LEN);
-   \   000021   A3           INC     DPTR
-   \   000022   E0           MOVX    A,@DPTR
-   \   000023   541F         ANL     A,#0x1f
-   \   000025   F0           MOVX    @DPTR,A
+   \   000015   A3           INC       DPTR
+   \   000016   E0           MOVX      A,@DPTR
+   \   000017   541F         ANL       A,#0x1f
+   \   000019   F0           MOVX      @DPTR,A
+   \   00001A   740A         MOV       A,#0xa
+   \   00001C   12....       LCALL     ?XSTACK_DISP0_8
+   \   00001F   E0           MOVX      A,@DPTR
+   \   000020   F5..         MOV       ?V0,A
+   \   000022   A3           INC       DPTR
+   \   000023   E0           MOVX      A,@DPTR
+   \   000024   F5..         MOV       ?V1,A
     128            HAL_DMA_SET_LEN(ch, (cnt * HAL_FLASH_WORD_SIZE));
-   \   000026   E5..         MOV     A,?V0 + 0
-   \   000028   33           RLC     A
-   \   000029   33           RLC     A
-   \   00002A   54FC         ANL     A,#0xfc
-   \   00002C   A3           INC     DPTR
-   \   00002D   F0           MOVX    @DPTR,A
-   \   00002E   7406         MOV     A,#0x6
-   \   000030   78..         MOV     R0,#?V0 + 0
-   \   000032   12....       LCALL   ?US_SHR
-   \   000035   E5..         MOV     A,?V0 + 0
-   \   000037   90....       MOV     DPTR,#dmaCh0 + 4
-   \   00003A   F0           MOVX    @DPTR,A
+   \   000026   E5..         MOV       A,?V0
+   \   000028   33           RLC       A
+   \   000029   33           RLC       A
+   \   00002A   54FC         ANL       A,#0xfc
+   \   00002C   90....       MOV       DPTR,#dmaCh0 + 5
+   \   00002F   F0           MOVX      @DPTR,A
+   \   000030   7406         MOV       A,#0x6
+   \   000032   78..         MOV       R0,#?V0
+   \   000034   12....       LCALL     ?US_SHR
+   \   000037   E5..         MOV       A,?V0
+   \   000039   90....       MOV       DPTR,#dmaCh0 + 4
+   \   00003C   F0           MOVX      @DPTR,A
     129            HAL_DMA_SET_WORD_SIZE(ch, HAL_DMA_WORDSIZE_BYTE);
     130            HAL_DMA_SET_TRIG_MODE(ch, HAL_DMA_TMODE_SINGLE);
     131            HAL_DMA_SET_TRIG_SRC(ch, HAL_DMA_TRIG_FLASH);
-   \   00003B   90....       MOV     DPTR,#dmaCh0 + 6
-   \   00003E   7412         MOV     A,#0x12
-   \   000040   F0           MOVX    @DPTR,A
+   \   00003D   90....       MOV       DPTR,#dmaCh0 + 6
+   \   000040   7412         MOV       A,#0x12
+   \   000042   F0           MOVX      @DPTR,A
     132            HAL_DMA_SET_SRC_INC(ch, HAL_DMA_SRCINC_1);
     133            HAL_DMA_SET_DST_INC(ch, HAL_DMA_DSTINC_0);
     134            // The DMA is to be polled and shall not issue an IRQ upon completion.
     135            HAL_DMA_SET_IRQ(ch, HAL_DMA_IRQMASK_DISABLE);
     136            HAL_DMA_SET_M8( ch, HAL_DMA_M8_USE_8_BITS);
     137            HAL_DMA_SET_PRIORITY(ch, HAL_DMA_PRI_HIGH);
-   \   000041   A3           INC     DPTR
-   \   000042   7442         MOV     A,#0x42
-   \   000044   F0           MOVX    @DPTR,A
+   \   000043   A3           INC       DPTR
+   \   000044   7442         MOV       A,#0x42
+   \   000046   F0           MOVX      @DPTR,A
     138            HAL_DMA_CLEAR_IRQ(HAL_NV_DMA_CH);
-   \   000045   75D1FE       MOV     0xd1,#-0x2
+   \   000047   75D1FE       MOV       0xd1,#-0x2
     139            HAL_DMA_ARM_CH(HAL_NV_DMA_CH);
-   \   000048   75D601       MOV     0xd6,#0x1
+   \   00004A   75D601       MOV       0xd6,#0x1
     140          
     141            FADDRL = (uint8)addr;
-   \   00004B   EA           MOV     A,R2
-   \   00004C   906271       MOV     DPTR,#0x6271
-   \   00004F   F0           MOVX    @DPTR,A
+   \   00004D   EA           MOV       A,R2
+   \   00004E   906271       MOV       DPTR,#0x6271
+   \   000051   F0           MOVX      @DPTR,A
     142            FADDRH = (uint8)(addr >> 8);
-   \   000050   EB           MOV     A,R3
-   \   000051   A3           INC     DPTR
-   \   000052   F0           MOVX    @DPTR,A
+   \   000052   EB           MOV       A,R3
+   \   000053   A3           INC       DPTR
+   \   000054   F0           MOVX      @DPTR,A
     143            FCTL |= 0x02;         // Trigger the DMA writes.
-   \   000053   906270       MOV     DPTR,#0x6270
-   \   000056   E0           MOVX    A,@DPTR
-   \   000057   D2E1         SETB    0xE0 /* A   */.1
-   \   000059   F0           MOVX    @DPTR,A
+   \   000055   906270       MOV       DPTR,#0x6270
+   \   000058   E0           MOVX      A,@DPTR
+   \   000059   D2E1         SETB      0xE0 /* A   */.1
+   \   00005B   F0           MOVX      @DPTR,A
     144            while (FCTL & 0x80);  // Wait until writing is done.
    \                     ??HalFlashWrite_0:
-   \   00005A   E0           MOVX    A,@DPTR
-   \   00005B   A2E7         MOV     C,0xE0 /* A   */.7
-   \   00005D   40FB         JC      ??HalFlashWrite_0
+   \   00005C   E0           MOVX      A,@DPTR
+   \   00005D   A2E7         MOV       C,0xE0 /* A   */.7
+   \   00005F   40FB         JC        ??HalFlashWrite_0
     145          #endif
     146          }
-   \   00005F   7F02         MOV     R7,#0x2
-   \   000061   02....       LJMP    ?BANKED_LEAVE_XDATA
-   \   000064                REQUIRE DMAIRQ
-   \   000064                REQUIRE DMAARM
+   \   000061   7F02         MOV       R7,#0x2
+   \   000063   02....       LJMP      ?BANKED_LEAVE_XDATA
+   \   000066                REQUIRE DMAIRQ
+   \   000066                REQUIRE DMAARM
     147          
     148          /**************************************************************************************************
     149           * @fn          HalFlashErase
@@ -474,38 +443,38 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_flas
     164          void HalFlashErase(uint8 pg)
    \                     HalFlashErase:
     165          {
-   \   000000   C082         PUSH    DPL
-   \   000002   C083         PUSH    DPH
+   \   000000   C082         PUSH      DPL
+   \   000002   C083         PUSH      DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 0
     166            FADDRH = pg * (HAL_FLASH_PAGE_SIZE / HAL_FLASH_WORD_SIZE / 256);
-   \   000004   E9           MOV     A,R1
-   \   000005   C3           CLR     C
-   \   000006   33           RLC     A
-   \   000007   906272       MOV     DPTR,#0x6272
-   \   00000A   F0           MOVX    @DPTR,A
+   \   000004   E9           MOV       A,R1
+   \   000005   C3           CLR       C
+   \   000006   33           RLC       A
+   \   000007   906272       MOV       DPTR,#0x6272
+   \   00000A   F0           MOVX      @DPTR,A
     167            FCTL |= 0x01;
-   \   00000B   906270       MOV     DPTR,#0x6270
-   \   00000E   E0           MOVX    A,@DPTR
-   \   00000F   D2E0         SETB    0xE0 /* A   */.0
-   \   000011   F0           MOVX    @DPTR,A
+   \   00000B   906270       MOV       DPTR,#0x6270
+   \   00000E   E0           MOVX      A,@DPTR
+   \   00000F   D2E0         SETB      0xE0 /* A   */.0
+   \   000011   F0           MOVX      @DPTR,A
     168          }
-   \   000012   D083         POP     DPH
-   \   000014   D082         POP     DPL
-   \   000016   02....       LJMP    ?BRET
+   \   000012   D083         POP       DPH
+   \   000014   D082         POP       DPL
+   \   000016   02....       LJMP      ?BRET
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??HalFlashRead?relay:
+   \                     `??HalFlashRead::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    HalFlashRead
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??HalFlashWrite?relay:
+   \                     `??HalFlashWrite::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    HalFlashWrite
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??HalFlashErase?relay:
+   \                     `??HalFlashErase::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    HalFlashErase
     169          
@@ -514,35 +483,36 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_flas
 
    Maximum stack usage in bytes:
 
-     Function      ISTACK PSTACK XSTACK
-     --------      ------ ------ ------
-     HalFlashErase     2      0      0
-     HalFlashRead      1      0     14
-     HalFlashWrite     0      0     12
+   ISTACK XSTACK Function
+   ------ ------ --------
+      2      0   HalFlashErase
+      1     13   HalFlashRead
+      0     12   HalFlashWrite
 
 
    Segment part sizes:
 
-     Function/Label        Bytes
-     --------------        -----
-     _A_IEN0                  1
-     MEMCTR                   1
-     DMAIRQ                   1
-     DMAARM                   1
-     HalFlashRead           133
-     HalFlashWrite          100
-     HalFlashErase           25
-     ??HalFlashRead?relay     6
-     ??HalFlashWrite?relay    6
-     ??HalFlashErase?relay    6
+   Bytes  Function/Label
+   -----  --------------
+       1  DMAARM
+       1  DMAIRQ
+      25  HalFlashErase
+       6  HalFlashErase::?relay
+     132  HalFlashRead
+       6  HalFlashRead::?relay
+     102  HalFlashWrite
+       6  HalFlashWrite::?relay
+       1  MEMCTR
+       1  _A_IEN0
 
  
- 258 bytes in segment BANKED_CODE
+ 259 bytes in segment BANKED_CODE
   18 bytes in segment BANK_RELAYS
    4 bytes in segment SFR_AN
  
- 276 bytes of CODE memory
-   0 bytes of DATA memory (+ 4 bytes shared)
+  18 bytes of CODE     memory
+   0 bytes of DATA     memory (+ 4 bytes shared)
+ 259 bytes of HUGECODE memory
 
 Errors: none
 Warnings: none

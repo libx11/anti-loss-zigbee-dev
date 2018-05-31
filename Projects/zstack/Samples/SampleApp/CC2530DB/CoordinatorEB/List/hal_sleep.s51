@@ -1,131 +1,96 @@
 ///////////////////////////////////////////////////////////////////////////////
-//                                                                            /
-// IAR C/C++ Compiler V8.10.3.10338/W32 for 8051        17/Apr/2017  20:20:02 /
-// Copyright 2004-2011 IAR Systems AB.                                        /
-//                                                                            /
-//    Core               =  plain                                             /
-//    Code model         =  banked                                            /
-//    Data model         =  large                                             /
-//    Calling convention =  xdata reentrant                                   /
-//    Constant location  =  data_rom                                          /
-//    Dptr setup         =  1,16                                              /
-//    Source file        =  C:\Users\li\Desktop\ZStack-2.5.1a -               /
-//                          副本\Components\hal\target\CC2530EB\hal_sleep.c   /
-//    Command line       =  -f "C:\Users\li\Desktop\ZStack-2.5.1a -           /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\Tools\CC2530DB\f8wCoord.cfg" (-DCPU32MHZ  /
-//                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TR /
-//                          UE -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8     /
-//                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)   /
-//                          -f "C:\Users\li\Desktop\ZStack-2.5.1a -           /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\Tools\CC2530DB\f8wConfig.cfg"             /
-//                          (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0     /
-//                          -DREFLECTOR -DDEFAULT_CHANLIST=0x00000800         /
-//                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                      /
-//                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_M /
-//                          ASK=0x007F -DBEACON_REQUEST_DELAY=100             /
-//                          -DBEACON_REQ_DELAY_MASK=0x00FF                    /
-//                          -DLINK_STATUS_JITTER_MASK=0x007F                  /
-//                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_P /
-//                          OLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7           /
-//                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3   /
-//                          -DNWK_MAX_DATA_RETRIES=2                          /
-//                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9        /
-//                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40          /
-//                          -DNWK_MAX_BINDING_ENTRIES=4                       /
-//                          -DMAX_BINDING_CLUSTER_IDS=4                       /
-//                          "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07, 0x09,     /
-//                          0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08,   /
-//                          0x0A, 0x0C, 0x0D}" -DMAC_MAX_FRAME_SIZE=116       /
-//                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const    /
-//                          __code" -DGENERIC=__generic                       /
-//                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000       /
-//                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)  /
-//                          -DREJOIN_POLL_RATE=440 "C:\Users\li\Desktop\ZStac /
-//                          k-2.5.1a - 副本\Components\hal\target\CC2530EB\ha /
-//                          l_sleep.c" -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC  /
-//                          -D MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC         /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\C /
-//                          oordinatorEB\List\" -lA                           /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\C /
-//                          oordinatorEB\List\" --diag_suppress Pe001,Pa010   /
-//                          -o "C:\Users\li\Desktop\ZStack-2.5.1a -           /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\C /
-//                          oordinatorEB\Obj\" -e --no_code_motion --debug    /
-//                          --core=plain --dptr=16,1 --data_model=large       /
-//                          --code_model=banked --calling_convention=xdata_re /
-//                          entrant --place_constants=data_rom                /
-//                          --nr_virtual_regs 16 -I                           /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\" /
-//                           -I "C:\Users\li\Desktop\ZStack-2.5.1a -          /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\Source\" -I "C:\Users\li\Desktop\ZStack-2.5.1a  /
-//                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB /
-//                          \..\..\..\ZMain\TI2530DB\" -I                     /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\hal\include\" -I         /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\hal\target\CC2530EB\"    /
-//                          -I "C:\Users\li\Desktop\ZStack-2.5.1a -           /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\mac\include\" -I         /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\mac\high_level\" -I      /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\mac\low_level\srf04\"    /
-//                          -I "C:\Users\li\Desktop\ZStack-2.5.1a -           /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\mac\low_level\srf04\sing /
-//                          le_chip\" -I "C:\Users\li\Desktop\ZStack-2.5.1a   /
-//                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB /
-//                          \..\..\..\..\..\Components\mt\" -I                /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\osal\include\" -I        /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\services\saddr\" -I      /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\services\sdata\" -I      /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\stack\af\" -I            /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\stack\nwk\" -I           /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\stack\sapi\" -I          /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\stack\sec\" -I           /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\stack\sys\" -I           /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\stack\zdo\" -I           /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\zmac\" -I                /
-//                          "C:\Users\li\Desktop\ZStack-2.5.1a -              /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\. /
-//                          .\..\..\..\..\Components\zmac\f8w\" -Ohz          /
-//                          --require_prototypes                              /
-//    List file          =  C:\Users\li\Desktop\ZStack-2.5.1a -               /
-//                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\C /
-//                          oordinatorEB\List\hal_sleep.s51                   /
-//                                                                            /
-//                                                                            /
+//
+// IAR C/C++ Compiler V10.20.1.5333 for 8051              31/May/2018  15:13:16
+// Copyright 2004-2018 IAR Systems AB.
+// PC-locked license - IAR Embedded Workbench for 8051
+//
+//    Core               =  plain
+//    Code model         =  banked
+//    Data model         =  large
+//    Calling convention =  xdata reentrant
+//    Constant location  =  data_rom
+//    Dptr setup         =  1,16
+//                          
+//    Source file        =  
+//        E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_sleep.c
+//    Command line       =  
+//        -f C:\Users\libx\AppData\Local\Temp\EW6FE0.tmp
+//        (E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_sleep.c -D
+//        ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
+//        LCD_SUPPORTED=DEBUG -lC
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List
+//        -lA
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List
+//        --diag_suppress Pe001,Pa010 -o
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\Obj
+//        -e --debug --core=plain --dptr=16,1 --data_model=large
+//        --code_model=banked --calling_convention=xdata_reentrant
+//        --place_constants=data_rom --nr_virtual_regs 8 -f
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg
+//        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
+//        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
+//        -DZDO_COORDINATOR -DRTR_NWK) -f
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+//        (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+//        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0xFFFF
+//        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+//        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+//        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+//        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+//        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+//        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+//        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+//        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+//        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+//        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+//        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+//        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100
+//        -DREJOIN_POLL_RATE=440) -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\ -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\Source\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ZMain\TI2530DB\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\include\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\include\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mt\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\osal\include\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\af\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\
+//        -I
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+//        -Ohz --require_prototypes --no_code_motion)
+//    Locale             =  Chinese (Simplified)_CHN.936
+//    List file          =  
+//        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List\hal_sleep.s51
+//
 ///////////////////////////////////////////////////////////////////////////////
 
         NAME hal_sleep
@@ -139,6 +104,7 @@
         RTMODEL "__extended_stack", "disabled"
         RTMODEL "__location_for_constants", "data"
         RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__register_banks", "*"
         RTMODEL "__rt_version", "1"
 
         RSEG DOVERLAY:DATA:NOROOT(0)
@@ -147,6 +113,14 @@
         RSEG PSTACK:XDATA:NOROOT(0)
         RSEG XSTACK:XDATA:NOROOT(0)
 
+        EXTERN ?V0
+        EXTERN ?V1
+        EXTERN ?V2
+        EXTERN ?V3
+        EXTERN ?V4
+        EXTERN ?V5
+        EXTERN ?V6
+        EXTERN ?V7
         EXTERN ?ALLOC_XSTACK8
         EXTERN ?BANKED_ENTER_XDATA
         EXTERN ?BANKED_LEAVE_XDATA
@@ -162,7 +136,6 @@
         EXTERN ?UL_GT
         EXTERN ?UL_GT_X
         EXTERN ?UL_SHR
-        EXTERN ?V0
         EXTERN ?XLOAD_R2345
         EXTERN ?XSP
         EXTERN ?XSTACK_DISP0_8
@@ -170,19 +143,19 @@
         EXTERN __INIT_XDATA_I
         EXTERN __INIT_XDATA_Z
 
-        PUBLIC ??TimerElapsed?relay
-        FUNCTION ??TimerElapsed?relay,0203H
-        PUBLIC ??halRestoreSleepLevel?relay
-        FUNCTION ??halRestoreSleepLevel?relay,0203H
-        PUBLIC ??halSetMaxSleepLoopTime?relay
-        FUNCTION ??halSetMaxSleepLoopTime?relay,0203H
-        PUBLIC ??halSetSleepMode?relay
-        FUNCTION ??halSetSleepMode?relay,0203H
-        PUBLIC ??halSleep?relay
-        FUNCTION ??halSleep?relay,0203H
-        PUBLIC ??halSleepSetTimer?relay
-        FUNCTION ??halSleepSetTimer?relay,0203H
-        PUBWEAK `??halSleepTimerIsr??INTVEC 43`
+        PUBLIC `??TimerElapsed::?relay`
+        FUNCTION `??TimerElapsed::?relay`,0203H
+        PUBLIC `??halRestoreSleepLevel::?relay`
+        FUNCTION `??halRestoreSleepLevel::?relay`,0203H
+        PUBLIC `??halSetMaxSleepLoopTime::?relay`
+        FUNCTION `??halSetMaxSleepLoopTime::?relay`,0203H
+        PUBLIC `??halSetSleepMode::?relay`
+        FUNCTION `??halSetSleepMode::?relay`,0203H
+        PUBLIC `??halSleep::?relay`
+        FUNCTION `??halSleep::?relay`,0203H
+        PUBLIC `??halSleepSetTimer::?relay`
+        FUNCTION `??halSleepSetTimer::?relay`,0203H
+        PUBWEAK `??halSleepTimerIsr::??INTVEC 43`
         PUBWEAK IEN2
         PUBWEAK PCON
         PUBWEAK SLEEPCMD
@@ -208,7 +181,7 @@
         FUNCTION halRestoreSleepLevel,0203H
         ARGFRAME XSTACK, 0, STACK
         PUBLIC halSetMaxSleepLoopTime
-        FUNCTION halSetMaxSleepLoopTime,0203H
+        FUNCTION halSetMaxSleepLoopTime,080203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME XSTACK, 12, STACK
         PUBLIC halSetSleepMode
@@ -217,12 +190,12 @@
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
         PUBLIC halSleep
-        FUNCTION halSleep,021203H
+        FUNCTION halSleep,0a1203H
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME XSTACK, 16, STACK
         PUBLIC halSleepPconValue
         PUBLIC halSleepSetTimer
-        FUNCTION halSleepSetTimer,0203H
+        FUNCTION halSleepSetTimer,080203H
         ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
@@ -233,217 +206,204 @@
         ARGFRAME XSTACK, 0, STACK
         LOCFRAME ISTACK, 3, STACK
         
-        CFI Names cfiNames0
-        CFI StackFrame CFA_SP SP IDATA
-        CFI StackFrame CFA_PSP16 PSP16 XDATA
-        CFI StackFrame CFA_XSP16 XSP16 XDATA
-        CFI StaticOverlayFrame CFA_IOVERLAY IOVERLAY
-        CFI StaticOverlayFrame CFA_DOVERLAY DOVERLAY
-        CFI Resource `PSW.CY`:1, `B.BR0`:1, `B.BR1`:1, `B.BR2`:1, `B.BR3`:1
-        CFI Resource `B.BR4`:1, `B.BR5`:1, `B.BR6`:1, `B.BR7`:1, `VB.BR8`:1
-        CFI Resource `VB.BR9`:1, `VB.BR10`:1, `VB.BR11`:1, `VB.BR12`:1
-        CFI Resource `VB.BR13`:1, `VB.BR14`:1, `VB.BR15`:1, VB:8, B:8, A:8
-        CFI Resource PSW:8, DPL0:8, DPH0:8, R0:8, R1:8, R2:8, R3:8, R4:8, R5:8
-        CFI Resource R6:8, R7:8, V0:8, V1:8, V2:8, V3:8, V4:8, V5:8, V6:8, V7:8
-        CFI Resource V8:8, V9:8, V10:8, V11:8, V12:8, V13:8, V14:8, V15:8, SP:8
-        CFI Resource PSPH:8, PSPL:8, PSP16:16, XSPH:8, XSPL:8, XSP16:16
-        CFI VirtualResource ?RET:24
-        CFI Resource ?BRET_EXT:8
-        CFI VirtualResource ?RET_HIGH:8, ?RET_LOW:8
-        CFI ResourceParts PSP16 PSPH, PSPL
-        CFI ResourceParts XSP16 XSPH, XSPL
-        CFI ResourceParts ?RET ?BRET_EXT, ?RET_HIGH, ?RET_LOW
-        CFI EndNames cfiNames0
+          CFI Names cfiNames0
+          CFI StackFrame CFA_SP SP IDATA
+          CFI StackFrame CFA_PSP16 PSP16 XDATA
+          CFI StackFrame CFA_XSP16 XSP16 XDATA
+          CFI StaticOverlayFrame CFA_IOVERLAY IOVERLAY
+          CFI StaticOverlayFrame CFA_DOVERLAY DOVERLAY
+          CFI Resource `PSW.CY`:1, `B.BR0`:1, `B.BR1`:1, `B.BR2`:1, `B.BR3`:1
+          CFI Resource `B.BR4`:1, `B.BR5`:1, `B.BR6`:1, `B.BR7`:1, `VB.BR8`:1
+          CFI Resource `VB.BR9`:1, `VB.BR10`:1, `VB.BR11`:1, `VB.BR12`:1
+          CFI Resource `VB.BR13`:1, `VB.BR14`:1, `VB.BR15`:1, VB:8, B:8, A:8
+          CFI Resource PSW:8, DPL0:8, DPH0:8, R0:8, R1:8, R2:8, R3:8, R4:8, R5:8
+          CFI Resource R6:8, R7:8, V0:8, V1:8, V2:8, V3:8, V4:8, V5:8, V6:8, V7:8
+          CFI Resource SP:8, PSPH:8, PSPL:8, PSP16:16, XSPH:8, XSPL:8, XSP16:16
+          CFI VirtualResource ?RET:24
+          CFI Resource ?BRET_EXT:8
+          CFI VirtualResource ?RET_HIGH:8, ?RET_LOW:8
+          CFI ResourceParts PSP16 PSPH, PSPL
+          CFI ResourceParts XSP16 XSPH, XSPL
+          CFI ResourceParts ?RET ?BRET_EXT, ?RET_HIGH, ?RET_LOW
+          CFI EndNames cfiNames0
         
-        CFI Common cfiCommon0 Using cfiNames0
-        CFI CodeAlign 1
-        CFI DataAlign -1
-        CFI ReturnAddress ?RET CODE
-        CFI CFA_DOVERLAY Used
-        CFI CFA_IOVERLAY Used
-        CFI CFA_SP SP+-3
-        CFI CFA_PSP16 PSP16+0
-        CFI CFA_XSP16 XSP16+0
-        CFI `PSW.CY` SameValue
-        CFI `B.BR0` SameValue
-        CFI `B.BR1` SameValue
-        CFI `B.BR2` SameValue
-        CFI `B.BR3` SameValue
-        CFI `B.BR4` SameValue
-        CFI `B.BR5` SameValue
-        CFI `B.BR6` SameValue
-        CFI `B.BR7` SameValue
-        CFI `VB.BR8` SameValue
-        CFI `VB.BR9` SameValue
-        CFI `VB.BR10` SameValue
-        CFI `VB.BR11` SameValue
-        CFI `VB.BR12` SameValue
-        CFI `VB.BR13` SameValue
-        CFI `VB.BR14` SameValue
-        CFI `VB.BR15` SameValue
-        CFI VB SameValue
-        CFI B Undefined
-        CFI A Undefined
-        CFI PSW SameValue
-        CFI DPL0 SameValue
-        CFI DPH0 SameValue
-        CFI R0 Undefined
-        CFI R1 Undefined
-        CFI R2 Undefined
-        CFI R3 Undefined
-        CFI R4 Undefined
-        CFI R5 Undefined
-        CFI R6 SameValue
-        CFI R7 SameValue
-        CFI V0 SameValue
-        CFI V1 SameValue
-        CFI V2 SameValue
-        CFI V3 SameValue
-        CFI V4 SameValue
-        CFI V5 SameValue
-        CFI V6 SameValue
-        CFI V7 SameValue
-        CFI V8 SameValue
-        CFI V9 SameValue
-        CFI V10 SameValue
-        CFI V11 SameValue
-        CFI V12 SameValue
-        CFI V13 SameValue
-        CFI V14 SameValue
-        CFI V15 SameValue
-        CFI PSPH Undefined
-        CFI PSPL Undefined
-        CFI XSPH Undefined
-        CFI XSPL Undefined
-        CFI ?RET Concat
-        CFI ?BRET_EXT Frame(CFA_SP, 3)
-        CFI ?RET_HIGH Frame(CFA_SP, 2)
-        CFI ?RET_LOW Frame(CFA_SP, 1)
-        CFI EndCommon cfiCommon0
+          CFI Common cfiCommon0 Using cfiNames0
+          CFI CodeAlign 1
+          CFI DataAlign -1
+          CFI ReturnAddress ?RET CODE
+          CFI CFA_DOVERLAY Used
+          CFI CFA_IOVERLAY Used
+          CFI CFA_SP SP+-3
+          CFI CFA_PSP16 PSP16+0
+          CFI CFA_XSP16 XSP16+0
+          CFI `PSW.CY` SameValue
+          CFI `B.BR0` SameValue
+          CFI `B.BR1` SameValue
+          CFI `B.BR2` SameValue
+          CFI `B.BR3` SameValue
+          CFI `B.BR4` SameValue
+          CFI `B.BR5` SameValue
+          CFI `B.BR6` SameValue
+          CFI `B.BR7` SameValue
+          CFI `VB.BR8` SameValue
+          CFI `VB.BR9` SameValue
+          CFI `VB.BR10` SameValue
+          CFI `VB.BR11` SameValue
+          CFI `VB.BR12` SameValue
+          CFI `VB.BR13` SameValue
+          CFI `VB.BR14` SameValue
+          CFI `VB.BR15` SameValue
+          CFI VB SameValue
+          CFI B Undefined
+          CFI A Undefined
+          CFI PSW SameValue
+          CFI DPL0 SameValue
+          CFI DPH0 SameValue
+          CFI R0 Undefined
+          CFI R1 Undefined
+          CFI R2 Undefined
+          CFI R3 Undefined
+          CFI R4 Undefined
+          CFI R5 Undefined
+          CFI R6 SameValue
+          CFI R7 SameValue
+          CFI V0 SameValue
+          CFI V1 SameValue
+          CFI V2 SameValue
+          CFI V3 SameValue
+          CFI V4 SameValue
+          CFI V5 SameValue
+          CFI V6 SameValue
+          CFI V7 SameValue
+          CFI PSPH Undefined
+          CFI PSPL Undefined
+          CFI XSPH Undefined
+          CFI XSPL Undefined
+          CFI ?RET Concat
+          CFI ?BRET_EXT Frame(CFA_SP, 3)
+          CFI ?RET_HIGH Frame(CFA_SP, 2)
+          CFI ?RET_LOW Frame(CFA_SP, 1)
+          CFI EndCommon cfiCommon0
         
         
-        CFI Common cfiCommon1 Using cfiNames0
-        CFI CodeAlign 1
-        CFI DataAlign -1
-        CFI ReturnAddress ?RET CODE
-        CFI CFA_DOVERLAY Used
-        CFI CFA_IOVERLAY Used
-        CFI CFA_SP SP+-2
-        CFI CFA_PSP16 PSP16+0
-        CFI CFA_XSP16 XSP16+0
-        CFI `PSW.CY` SameValue
-        CFI `B.BR0` SameValue
-        CFI `B.BR1` SameValue
-        CFI `B.BR2` SameValue
-        CFI `B.BR3` SameValue
-        CFI `B.BR4` SameValue
-        CFI `B.BR5` SameValue
-        CFI `B.BR6` SameValue
-        CFI `B.BR7` SameValue
-        CFI `VB.BR8` SameValue
-        CFI `VB.BR9` SameValue
-        CFI `VB.BR10` SameValue
-        CFI `VB.BR11` SameValue
-        CFI `VB.BR12` SameValue
-        CFI `VB.BR13` SameValue
-        CFI `VB.BR14` SameValue
-        CFI `VB.BR15` SameValue
-        CFI VB SameValue
-        CFI B SameValue
-        CFI A SameValue
-        CFI PSW SameValue
-        CFI DPL0 SameValue
-        CFI DPH0 SameValue
-        CFI R0 SameValue
-        CFI R1 SameValue
-        CFI R2 SameValue
-        CFI R3 SameValue
-        CFI R4 SameValue
-        CFI R5 SameValue
-        CFI R6 SameValue
-        CFI R7 SameValue
-        CFI V0 SameValue
-        CFI V1 SameValue
-        CFI V2 SameValue
-        CFI V3 SameValue
-        CFI V4 SameValue
-        CFI V5 SameValue
-        CFI V6 SameValue
-        CFI V7 SameValue
-        CFI V8 SameValue
-        CFI V9 SameValue
-        CFI V10 SameValue
-        CFI V11 SameValue
-        CFI V12 SameValue
-        CFI V13 SameValue
-        CFI V14 SameValue
-        CFI V15 SameValue
-        CFI PSPH Undefined
-        CFI PSPL Undefined
-        CFI XSPH Undefined
-        CFI XSPL Undefined
-        CFI ?RET Concat
-        CFI ?BRET_EXT SameValue
-        CFI ?RET_HIGH Frame(CFA_SP, 2)
-        CFI ?RET_LOW Frame(CFA_SP, 1)
-        CFI EndCommon cfiCommon1
+          CFI Common cfiCommon1 Using cfiNames0
+          CFI CodeAlign 1
+          CFI DataAlign -1
+          CFI ReturnAddress ?RET CODE
+          CFI CFA_DOVERLAY Used
+          CFI CFA_IOVERLAY Used
+          CFI CFA_SP SP+-2
+          CFI CFA_PSP16 PSP16+0
+          CFI CFA_XSP16 XSP16+0
+          CFI `PSW.CY` SameValue
+          CFI `B.BR0` SameValue
+          CFI `B.BR1` SameValue
+          CFI `B.BR2` SameValue
+          CFI `B.BR3` SameValue
+          CFI `B.BR4` SameValue
+          CFI `B.BR5` SameValue
+          CFI `B.BR6` SameValue
+          CFI `B.BR7` SameValue
+          CFI `VB.BR8` SameValue
+          CFI `VB.BR9` SameValue
+          CFI `VB.BR10` SameValue
+          CFI `VB.BR11` SameValue
+          CFI `VB.BR12` SameValue
+          CFI `VB.BR13` SameValue
+          CFI `VB.BR14` SameValue
+          CFI `VB.BR15` SameValue
+          CFI VB SameValue
+          CFI B SameValue
+          CFI A SameValue
+          CFI PSW SameValue
+          CFI DPL0 SameValue
+          CFI DPH0 SameValue
+          CFI R0 SameValue
+          CFI R1 SameValue
+          CFI R2 SameValue
+          CFI R3 SameValue
+          CFI R4 SameValue
+          CFI R5 SameValue
+          CFI R6 SameValue
+          CFI R7 SameValue
+          CFI V0 SameValue
+          CFI V1 SameValue
+          CFI V2 SameValue
+          CFI V3 SameValue
+          CFI V4 SameValue
+          CFI V5 SameValue
+          CFI V6 SameValue
+          CFI V7 SameValue
+          CFI PSPH Undefined
+          CFI PSPL Undefined
+          CFI XSPH Undefined
+          CFI XSPL Undefined
+          CFI ?RET Concat
+          CFI ?BRET_EXT SameValue
+          CFI ?RET_HIGH Frame(CFA_SP, 2)
+          CFI ?RET_LOW Frame(CFA_SP, 1)
+          CFI EndCommon cfiCommon1
         
-MAC_PwrNextTimeout  SYMBOL "MAC_PwrNextTimeout"
-halAssertHandler    SYMBOL "halAssertHandler"
-MAC_PwrOffReq       SYMBOL "MAC_PwrOffReq"
 HalKeyEnterSleep    SYMBOL "HalKeyEnterSleep"
-HalLedEnterSleep    SYMBOL "HalLedEnterSleep"
-HalLedExitSleep     SYMBOL "HalLedExitSleep"
+`??HalKeyEnterSleep::?relay` SYMBOL "?relay", HalKeyEnterSleep
 HalKeyExitSleep     SYMBOL "HalKeyExitSleep"
+`??HalKeyExitSleep::?relay` SYMBOL "?relay", HalKeyExitSleep
+HalLedEnterSleep    SYMBOL "HalLedEnterSleep"
+`??HalLedEnterSleep::?relay` SYMBOL "?relay", HalLedEnterSleep
+HalLedExitSleep     SYMBOL "HalLedExitSleep"
+`??HalLedExitSleep::?relay` SYMBOL "?relay", HalLedExitSleep
+MAC_PwrNextTimeout  SYMBOL "MAC_PwrNextTimeout"
+`??MAC_PwrNextTimeout::?relay` SYMBOL "?relay", MAC_PwrNextTimeout
+MAC_PwrOffReq       SYMBOL "MAC_PwrOffReq"
+`??MAC_PwrOffReq::?relay` SYMBOL "?relay", MAC_PwrOffReq
 MAC_PwrOnReq        SYMBOL "MAC_PwrOnReq"
+`??MAC_PwrOnReq::?relay` SYMBOL "?relay", MAC_PwrOnReq
+halAssertHandler    SYMBOL "halAssertHandler"
+`??halAssertHandler::?relay` SYMBOL "?relay", halAssertHandler
 macMcuTimer2OverflowWorkaround SYMBOL "macMcuTimer2OverflowWorkaround"
-??HalKeyEnterSleep?relay SYMBOL "?relay", HalKeyEnterSleep
-??HalKeyExitSleep?relay SYMBOL "?relay", HalKeyExitSleep
-??HalLedEnterSleep?relay SYMBOL "?relay", HalLedEnterSleep
-??HalLedExitSleep?relay SYMBOL "?relay", HalLedExitSleep
-??MAC_PwrNextTimeout?relay SYMBOL "?relay", MAC_PwrNextTimeout
-??MAC_PwrOffReq?relay SYMBOL "?relay", MAC_PwrOffReq
-??MAC_PwrOnReq?relay SYMBOL "?relay", MAC_PwrOnReq
-??halAssertHandler?relay SYMBOL "?relay", halAssertHandler
-??macMcuTimer2OverflowWorkaround?relay SYMBOL "?relay", macMcuTimer2OverflowWorkaround
+`??macMcuTimer2OverflowWorkaround::?relay` SYMBOL "?relay", macMcuTimer2OverflowWorkaround
 TimerElapsed        SYMBOL "TimerElapsed"
-??TimerElapsed?relay SYMBOL "?relay", TimerElapsed
+`??TimerElapsed::?relay` SYMBOL "?relay", TimerElapsed
 halRestoreSleepLevel SYMBOL "halRestoreSleepLevel"
-??halRestoreSleepLevel?relay SYMBOL "?relay", halRestoreSleepLevel
+`??halRestoreSleepLevel::?relay` SYMBOL "?relay", halRestoreSleepLevel
 halSetMaxSleepLoopTime SYMBOL "halSetMaxSleepLoopTime"
-??halSetMaxSleepLoopTime?relay SYMBOL "?relay", halSetMaxSleepLoopTime
+`??halSetMaxSleepLoopTime::?relay` SYMBOL "?relay", halSetMaxSleepLoopTime
 halSetSleepMode     SYMBOL "halSetSleepMode"
-??halSetSleepMode?relay SYMBOL "?relay", halSetSleepMode
+`??halSetSleepMode::?relay` SYMBOL "?relay", halSetSleepMode
 halSleep            SYMBOL "halSleep"
-??halSleep?relay    SYMBOL "?relay", halSleep
+`??halSleep::?relay` SYMBOL "?relay", halSleep
 halSleepSetTimer    SYMBOL "halSleepSetTimer"
-??halSleepSetTimer?relay SYMBOL "?relay", halSleepSetTimer
+`??halSleepSetTimer::?relay` SYMBOL "?relay", halSleepSetTimer
 halSleepTimerIsr    SYMBOL "halSleepTimerIsr"
-`??halSleepTimerIsr??INTVEC 43` SYMBOL "??INTVEC 43", halSleepTimerIsr
+`??halSleepTimerIsr::??INTVEC 43` SYMBOL "??INTVEC 43", halSleepTimerIsr
 
-        EXTERN MAC_PwrNextTimeout
-        FUNCTION MAC_PwrNextTimeout,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 16, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN halAssertHandler
-        FUNCTION halAssertHandler,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 16, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN MAC_PwrOffReq
-        FUNCTION MAC_PwrOffReq,0202H
-        ARGFRAME ISTACK, 0, STACK
-        ARGFRAME PSTACK, 0, STACK
-        ARGFRAME XSTACK, 16, STACK
-        ARGFRAME IOVERLAY, 0, STATIC
-        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN `??HalKeyEnterSleep::?relay`
+        FUNCTION `??HalKeyEnterSleep::?relay`,00H
+        EXTERN `??HalKeyExitSleep::?relay`
+        FUNCTION `??HalKeyExitSleep::?relay`,00H
+        EXTERN `??HalLedEnterSleep::?relay`
+        FUNCTION `??HalLedEnterSleep::?relay`,00H
+        EXTERN `??HalLedExitSleep::?relay`
+        FUNCTION `??HalLedExitSleep::?relay`,00H
+        EXTERN `??MAC_PwrNextTimeout::?relay`
+        FUNCTION `??MAC_PwrNextTimeout::?relay`,00H
+        EXTERN `??MAC_PwrOffReq::?relay`
+        FUNCTION `??MAC_PwrOffReq::?relay`,00H
+        EXTERN `??MAC_PwrOnReq::?relay`
+        FUNCTION `??MAC_PwrOnReq::?relay`,00H
+        EXTERN `??halAssertHandler::?relay`
+        FUNCTION `??halAssertHandler::?relay`,00H
+        EXTERN `??macMcuTimer2OverflowWorkaround::?relay`
+        FUNCTION `??macMcuTimer2OverflowWorkaround::?relay`,00H
         EXTERN HalKeyEnterSleep
         FUNCTION HalKeyEnterSleep,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 16, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN HalKeyExitSleep
+        FUNCTION HalKeyExitSleep,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 16, STACK
@@ -463,8 +423,15 @@ halSleepTimerIsr    SYMBOL "halSleepTimerIsr"
         ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN HalKeyExitSleep
-        FUNCTION HalKeyExitSleep,0202H
+        EXTERN MAC_PwrNextTimeout
+        FUNCTION MAC_PwrNextTimeout,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 16, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN MAC_PwrOffReq
+        FUNCTION MAC_PwrOffReq,0202H
         ARGFRAME ISTACK, 0, STACK
         ARGFRAME PSTACK, 0, STACK
         ARGFRAME XSTACK, 16, STACK
@@ -477,6 +444,13 @@ halSleepTimerIsr    SYMBOL "halSleepTimerIsr"
         ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
+        EXTERN halAssertHandler
+        FUNCTION halAssertHandler,0202H
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 16, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
         EXTERN macMcuTimer2OverflowWorkaround
         FUNCTION macMcuTimer2OverflowWorkaround,0202H
         ARGFRAME ISTACK, 0, STACK
@@ -484,26 +458,8 @@ halSleepTimerIsr    SYMBOL "halSleepTimerIsr"
         ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        EXTERN ??HalKeyEnterSleep?relay
-        FUNCTION ??HalKeyEnterSleep?relay,00H
-        EXTERN ??HalKeyExitSleep?relay
-        FUNCTION ??HalKeyExitSleep?relay,00H
-        EXTERN ??HalLedEnterSleep?relay
-        FUNCTION ??HalLedEnterSleep?relay,00H
-        EXTERN ??HalLedExitSleep?relay
-        FUNCTION ??HalLedExitSleep?relay,00H
-        EXTERN ??MAC_PwrNextTimeout?relay
-        FUNCTION ??MAC_PwrNextTimeout?relay,00H
-        EXTERN ??MAC_PwrOffReq?relay
-        FUNCTION ??MAC_PwrOffReq?relay,00H
-        EXTERN ??MAC_PwrOnReq?relay
-        FUNCTION ??MAC_PwrOnReq?relay,00H
-        EXTERN ??halAssertHandler?relay
-        FUNCTION ??halAssertHandler?relay,00H
-        EXTERN ??macMcuTimer2OverflowWorkaround?relay
-        FUNCTION ??macMcuTimer2OverflowWorkaround?relay,00H
 
-// C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_sleep.c
+// E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_sleep.c
 //    1 /**************************************************************************************************
 //    2   Filename:       hal_sleep.c
 //    3   Revised:        $Date: 2012-03-07 11:55:12 -0800 (Wed, 07 Mar 2012) $
@@ -813,22 +769,22 @@ halPwrMgtMode:
 //  227  **************************************************************************************************
 //  228  */
 
-        RSEG SLEEP_CODE:CODE:NOROOT(0)
+        RSEG SLEEP_CODE:HUGECODE:NOROOT(0)
 //  229 void halSetSleepMode(void)
 halSetSleepMode:
-        CFI Block cfiBlock0 Using cfiCommon0
-        CFI Function halSetSleepMode
+          CFI Block cfiBlock0 Using cfiCommon0
+          CFI Function halSetSleepMode
         CODE
 //  230 {
         ; Saved register size: 0
         ; Auto size: 0
 //  231   PCON = halSleepPconValue;
-        MOV     0x87,halSleepPconValue
+        MOV       0x87,halSleepPconValue
 //  232   HAL_DISABLE_INTERRUPTS();
-        CLR     0xa8.7
+        CLR       0xa8.7
 //  233 }
-        LJMP    ?BRET
-        CFI EndBlock cfiBlock0
+        LJMP      ?BRET
+          CFI EndBlock cfiBlock0
         REQUIRE PCON
         REQUIRE _A_IEN0
 //  234 
@@ -852,50 +808,54 @@ halSetSleepMode:
 //  252  **************************************************************************************************
 //  253  */
 
-        RSEG BANKED_CODE:CODE:NOROOT(0)
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  254 void halSetMaxSleepLoopTime(uint32 rolloverTime)
 halSetMaxSleepLoopTime:
-        CFI Block cfiBlock1 Using cfiCommon0
-        CFI Function halSetMaxSleepLoopTime
+          CFI Block cfiBlock1 Using cfiCommon0
+          CFI Function halSetMaxSleepLoopTime
         CODE
 //  255 {
-        MOV     A,#-0xc
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 12)
+        REQUIRE ?V0
+        REQUIRE ?V1
+        REQUIRE ?V2
+        REQUIRE ?V3
+        MOV       A,#-0xc
+        LCALL     ?BANKED_ENTER_XDATA
+          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-11)))
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+          CFI CFA_SP SP+0
+          CFI CFA_XSP16 add(XSP16, 12)
         ; Saved register size: 12
         ; Auto size: 0
-        MOV     ?V0 + 0,R2
-        MOV     ?V0 + 1,R3
-        MOV     ?V0 + 2,R4
-        MOV     ?V0 + 3,R5
+        MOV       ?V0,R2
+        MOV       ?V1,R3
+        MOV       ?V2,R4
+        MOV       ?V3,R5
 //  256   if( rolloverTime > HAL_SLEEP_MS_TO_320US(MAX_SLEEP_TIME) )
 //  257   {
 //  258     maxSleepLoopTime = HAL_SLEEP_MS_TO_320US(MAX_SLEEP_TIME);
 //  259   }
 //  260   maxSleepLoopTime = (rolloverTime - TICKS_SUBTRACTED);
-        MOV     DPTR,#__Constant_fffffffe
-        MOV     R0,#?V0 + 0
-        LCALL   ?L_ADD_X
-        MOV     DPTR,#maxSleepLoopTime
-        MOV     R0,#?V0 + 0
-        LCALL   ?L_MOV_TO_X
+        MOV       DPTR,#__Constant_fffffffe
+        MOV       R0,#?V0
+        LCALL     ?L_ADD_X
+        MOV       DPTR,#maxSleepLoopTime
+        MOV       R0,#?V0
+        LCALL     ?L_MOV_TO_X
 //  261 }
-        MOV     R7,#0x4
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock1
+        MOV       R7,#0x4
+        LJMP      ?BANKED_LEAVE_XDATA
+          CFI EndBlock cfiBlock1
 //  262 
 //  263 /**************************************************************************************************
 //  264  * @fn          halSleep
@@ -915,11 +875,11 @@ halSetMaxSleepLoopTime:
 //  278  **************************************************************************************************
 //  279  */
 
-        RSEG BANKED_CODE:CODE:NOROOT(0)
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  280 void halSleep( uint16 osal_timeout )
 halSleep:
-        CFI Block cfiBlock2 Using cfiCommon0
-        CFI Function halSleep
+          CFI Block cfiBlock2 Using cfiCommon0
+          CFI Function halSleep
         CODE
 //  281 {
         FUNCALL halSleep, MAC_PwrNextTimeout
@@ -1065,26 +1025,34 @@ halSleep:
         ARGFRAME XSTACK, 16, STACK
         ARGFRAME IOVERLAY, 0, STATIC
         ARGFRAME DOVERLAY, 0, STATIC
-        MOV     A,#-0x10
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 16)
+        REQUIRE ?V0
+        REQUIRE ?V1
+        REQUIRE ?V2
+        REQUIRE ?V3
+        REQUIRE ?V4
+        REQUIRE ?V5
+        REQUIRE ?V6
+        REQUIRE ?V7
+        MOV       A,#-0x10
+        LCALL     ?BANKED_ENTER_XDATA
+          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+          CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+          CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+          CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+          CFI CFA_SP SP+0
+          CFI CFA_XSP16 add(XSP16, 16)
         ; Saved register size: 16
         ; Auto size: 0
 //  282   uint32        timeout;
@@ -1092,35 +1060,35 @@ halSleep:
 //  284 
 //  285   /* get next OSAL timer expiration converted to 320 usec units */
 //  286   timeout = HAL_SLEEP_MS_TO_320US(osal_timeout);
-        MOV     ?V0 + 0,R2
-        MOV     ?V0 + 1,R3
-        CLR     A
-        MOV     ?V0 + 2,A
-        MOV     ?V0 + 3,A
-        MOV     DPTR,#__Constant_64
-        MOV     R0,#?V0 + 4
-        LCALL   ?L_MOV_X
-        MOV     R0,#?V0 + 0
-        MOV     R1,#?V0 + 4
-        LCALL   ?L_MUL
-        MOV     DPTR,#__Constant_1f
-        MOV     R0,#?V0 + 0
-        LCALL   ?L_ADD_X
-        MOV     A,#0x5
-        MOV     R0,#?V0 + 0
-        LCALL   ?UL_SHR
+        MOV       ?V0,R2
+        MOV       ?V1,R3
+        CLR       A
+        MOV       ?V2,A
+        MOV       ?V3,A
+        MOV       DPTR,#__Constant_64
+        MOV       R0,#?V4
+        LCALL     ?L_MOV_X
+        MOV       R0,#?V0
+        MOV       R1,#?V4
+        LCALL     ?L_MUL
+        MOV       DPTR,#__Constant_1f
+        MOV       R0,#?V0
+        LCALL     ?L_ADD_X
+        MOV       A,#0x5
+        MOV       R0,#?V0
+        LCALL     ?UL_SHR
 //  287   if (timeout == 0)
-        LCALL   ?Subroutine1 & 0xFFFF
-??CrossCallReturnLabel_1:
-        JNZ     ??halSleep_0
+        LCALL     ?Subroutine1 & 0xFFFF
+??CrossCallReturnLabel_0:
+        JNZ       ??halSleep_0
 //  288   {
 //  289     timeout = MAC_PwrNextTimeout();
         ; Setup parameters for call to function MAC_PwrNextTimeout
-        LCALL   ??MAC_PwrNextTimeout?relay
-        MOV     ?V0 + 0,R2
-        MOV     ?V0 + 1,R3
-        MOV     ?V0 + 2,R4
-        MOV     ?V0 + 3,R5
+        LCALL     `??MAC_PwrNextTimeout::?relay`; Banked call to: MAC_PwrNextTimeout
+        MOV       ?V0,R2
+        MOV       ?V1,R3
+        MOV       ?V2,R4
+        MOV       ?V3,R5
 //  290   }
 //  291   else
 //  292   {
@@ -1138,38 +1106,39 @@ halSleep:
 //  304    * the device is a stimulated device.
 //  305    */
 //  306   halPwrMgtMode = (timeout == 0) ? HAL_SLEEP_DEEP : HAL_SLEEP_TIMER;
-        MOV     A,R2
-        LCALL   ??Subroutine2_0 & 0xFFFF
-??CrossCallReturnLabel_0:
-        JNZ     ??halSleep_1
-        MOV     DPTR,#halPwrMgtMode
-        MOV     A,#0x3
-        MOVX    @DPTR,A
-        SJMP    ??halSleep_2
+        MOV       A,R2
+        ORL       A,R3
+        ORL       A,R4
+        ORL       A,R5
+        JNZ       ??halSleep_1
+        MOV       DPTR,#halPwrMgtMode
+        MOV       A,#0x3
+        MOVX      @DPTR,A
+        SJMP      ??halSleep_2
 ??halSleep_0:
         ; Setup parameters for call to function MAC_PwrNextTimeout
-        LCALL   ??MAC_PwrNextTimeout?relay
-        MOV     ?V0 + 4,R2
-        MOV     ?V0 + 5,R3
-        MOV     ?V0 + 6,R4
-        MOV     ?V0 + 7,R5
-        MOV     A,R2
-        ORL     A,?V0 + 5
-        ORL     A,?V0 + 6
-        ORL     A,?V0 + 7
-        JZ      ??halSleep_1
-        MOV     R0,#?V0 + 0
-        MOV     R1,#?V0 + 4
-        LCALL   ?UL_GT
-        JNC     ??halSleep_1
-        MOV     ?V0 + 0,R2
-        MOV     ?V0 + 1,R3
-        MOV     ?V0 + 2,R4
-        MOV     ?V0 + 3,R5
+        LCALL     `??MAC_PwrNextTimeout::?relay`; Banked call to: MAC_PwrNextTimeout
+        MOV       ?V4,R2
+        MOV       ?V5,R3
+        MOV       ?V6,R4
+        MOV       ?V7,R5
+        MOV       A,R2
+        ORL       A,R3
+        ORL       A,R4
+        ORL       A,R5
+        JZ        ??halSleep_1
+        MOV       R0,#?V0
+        MOV       R1,#?V4
+        LCALL     ?UL_GT
+        JNC       ??halSleep_1
+        MOV       ?V0,R2
+        MOV       ?V1,R3
+        MOV       ?V2,R4
+        MOV       ?V3,R5
 ??halSleep_1:
-        MOV     DPTR,#halPwrMgtMode
-        MOV     A,#0x2
-        MOVX    @DPTR,A
+        MOV       DPTR,#halPwrMgtMode
+        MOV       A,#0x2
+        MOVX      @DPTR,A
 //  307 
 //  308   /* DEEP sleep can only be entered when zgPollRate == 0.
 //  309    * This is to eliminate any possibility of entering PM3 between
@@ -1181,39 +1150,38 @@ halSleep:
 //  315 #else
 //  316   if ((timeout > HAL_SLEEP_MS_TO_320US(PM_MIN_SLEEP_TIME)) ||
 //  317       (timeout == 0))
-        MOV     DPTR,#__Constant_2d
-        MOV     R0,#?V0 + 0
-        LCALL   ?UL_GE_X
-        JC      ??halSleep_2
-        LCALL   ?Subroutine1 & 0xFFFF
-??CrossCallReturnLabel_2:
-        JZ      $+5
-        LJMP    ??halSleep_3 & 0xFFFF
+        MOV       DPTR,#__Constant_2d
+        MOV       R0,#?V0
+        LCALL     ?UL_GE_X
+        JC        ??halSleep_2
+        LCALL     ?Subroutine1 & 0xFFFF
+??CrossCallReturnLabel_1:
+        JZ        $+5
+        LJMP      ??halSleep_3 & 0xFFFF
 //  318 #endif
 //  319   {
 //  320     halIntState_t ien0, ien1, ien2;
 //  321 
 //  322     HAL_ASSERT(HAL_INTERRUPTS_ARE_ENABLED());
 ??halSleep_2:
-        MOV     C,0xa8.7
-        JC      ??halSleep_4
+        MOV       C,0xa8.7
+        JC        ??halSleep_4
         ; Setup parameters for call to function halAssertHandler
-        LCALL   ??halAssertHandler?relay
+        LCALL     `??halAssertHandler::?relay`; Banked call to: halAssertHandler
 //  323     HAL_DISABLE_INTERRUPTS();
 ??halSleep_4:
-        CLR     0xa8.7
+        CLR       0xa8.7
 //  324 
 //  325     /* always use "deep sleep" to turn off radio VREG on CC2530 */
 //  326     if (halSleepPconValue != 0 && MAC_PwrOffReq(MAC_PWR_SLEEP_DEEP) == MAC_SUCCESS)
-        MOV     A,halSleepPconValue
-        JNZ     $+5
-        LJMP    ??halSleep_5 & 0xFFFF
+        MOV       A,halSleepPconValue
+        JNZ       $+5
+        LJMP      ??halSleep_5 & 0xFFFF
         ; Setup parameters for call to function MAC_PwrOffReq
-        MOV     R1,#0x2
-        LCALL   ??MAC_PwrOffReq?relay
-        MOV     A,R1
-        JZ      $+5
-        LJMP    ??halSleep_5 & 0xFFFF
+        MOV       R1,#0x2
+        LCALL     `??MAC_PwrOffReq::?relay`; Banked call to: MAC_PwrOffReq
+        MOV       A,R1
+        JNZ       ??halSleep_5
 //  327     {
 //  328       /* The PCON value is not zero. There is no interrupt overriding the 
 //  329        * sleep decision. Also, the radio granted the sleep request.
@@ -1223,7 +1191,7 @@ halSleep:
 //  333       /* get peripherals ready for sleep */
 //  334       HalKeyEnterSleep();
         ; Setup parameters for call to function HalKeyEnterSleep
-        LCALL   ??HalKeyEnterSleep?relay
+        LCALL     `??HalKeyEnterSleep::?relay`; Banked call to: HalKeyEnterSleep
 //  335 #endif
 //  336 
 //  337 #ifdef HAL_SLEEP_DEBUG_LED
@@ -1232,40 +1200,40 @@ halSleep:
 //  340       /* use this to turn LEDs off during sleep */
 //  341       HalLedEnterSleep();
         ; Setup parameters for call to function HalLedEnterSleep
-        LCALL   ??HalLedEnterSleep?relay
+        LCALL     `??HalLedEnterSleep::?relay`; Banked call to: HalLedEnterSleep
 //  342 #endif
 //  343 
 //  344       if(timeout > maxSleepLoopTime)
-        MOV     DPTR,#maxSleepLoopTime
-        MOV     R0,#?V0 + 0
-        LCALL   ?UL_GT_X
-        JNC     ??halSleep_6
+        MOV       DPTR,#maxSleepLoopTime
+        MOV       R0,#?V0
+        LCALL     ?UL_GT_X
+        JNC       ??halSleep_6
 //  345       {
 //  346         timeout = maxSleepLoopTime;
-        MOV     DPTR,#maxSleepLoopTime
-        MOV     R0,#?V0 + 0
-        LCALL   ?L_MOV_X
+        MOV       DPTR,#maxSleepLoopTime
+        MOV       R0,#?V0
+        LCALL     ?L_MOV_X
 //  347       }  
 //  348 
 //  349       /* enable sleep timer interrupt */
 //  350       if (timeout != 0)
 ??halSleep_6:
-        LCALL   ?Subroutine1 & 0xFFFF
-??CrossCallReturnLabel_3:
-        JZ      ??halSleep_7
+        LCALL     ?Subroutine1 & 0xFFFF
+??CrossCallReturnLabel_2:
+        JZ        ??halSleep_7
 //  351       {
 //  352         if (timeout > HAL_SLEEP_MS_TO_320US( MAX_SLEEP_TIME ))
-        MOV     DPTR,#__Constant_185197
-        MOV     R0,#?V0 + 0
-        LCALL   ?UL_GE_X
-        JNC     ??halSleep_8
+        MOV       DPTR,#__Constant_185197
+        MOV       R0,#?V0
+        LCALL     ?UL_GE_X
+        JNC       ??halSleep_8
 //  353         {
 //  354           timeout -= HAL_SLEEP_MS_TO_320US( MAX_SLEEP_TIME );
 //  355           halSleepSetTimer(HAL_SLEEP_MS_TO_320US( MAX_SLEEP_TIME ));
         ; Setup parameters for call to function halSleepSetTimer
-        MOV     DPTR,#__Constant_185196
-        LCALL   ?XLOAD_R2345
-        SJMP    ??halSleep_9
+        MOV       DPTR,#__Constant_185196
+        LCALL     ?XLOAD_R2345
+        SJMP      ??halSleep_9
 //  356         }
 //  357         else
 //  358         {
@@ -1273,19 +1241,19 @@ halSleep:
 //  360           halSleepSetTimer(timeout);
 ??halSleep_8:
         ; Setup parameters for call to function halSleepSetTimer
-        MOV     R2,?V0 + 0
-        MOV     R3,?V0 + 1
-        MOV     R4,?V0 + 2
-        MOV     R5,?V0 + 3
+        MOV       R2,?V0
+        MOV       R3,?V1
+        MOV       R4,?V2
+        MOV       R5,?V3
 ??halSleep_9:
-        LCALL   ??halSleepSetTimer?relay
+        LCALL     `??halSleepSetTimer::?relay`; Banked call to: halSleepSetTimer
 //  361         }
 //  362 
 //  363         /* set up sleep timer interrupt */
 //  364         HAL_SLEEP_TIMER_CLEAR_INT();
-        CLR     0xc0.7
+        CLR       0xc0.7
 //  365         HAL_SLEEP_TIMER_ENABLE_INT();
-        SETB    0xa8.5
+        SETB      0xa8.5
 //  366       }
 //  367 
 //  368 #ifdef HAL_SLEEP_DEBUG_LED
@@ -1302,29 +1270,26 @@ halSleep:
 //  379       /* Prep CC2530 power mode */
 //  380       HAL_SLEEP_PREP_POWER_MODE(halPwrMgtMode);
 ??halSleep_7:
-        ANL     0xbe,#0xfc
-        MOV     DPTR,#halPwrMgtMode
-        MOVX    A,@DPTR
-        ORL     0xbe,A
+        ANL       0xbe,#0xfc
+        MOV       DPTR,#halPwrMgtMode
+        MOVX      A,@DPTR
+        ORL       0xbe,A
 ??halSleep_10:
-        MOV     A,0xad
-        MOV     C,0xE0 /* A   */.0
-        JNC     ??halSleep_10
-        MOV     halSleepPconValue,#0x1
+        MOV       A,0xad
+        MOV       C,0xE0 /* A   */.0
+        JNC       ??halSleep_10
+        MOV       halSleepPconValue,#0x1
 //  381 
 //  382       /* save interrupt enable registers and disable all interrupts */
 //  383       HAL_SLEEP_IE_BACKUP_AND_DISABLE(ien0, ien1, ien2);
-        MOV     A,0xa8
-        MOV     R6,A
-        MOV     A,0xb8
-        MOV     R7,A
-        MOV     A,0x9a
-        MOV     ?V0 + 0,A
-        ANL     0xa8,#0x20
-        ANL     0xb8,#0x20
-        ANL     0x9a,#0x12
+        MOV       ?V0,0xa8+0x0
+        MOV       R7,0xb8+0x0
+        MOV       R6,0x9a+0x0
+        ANL       0xa8,#0x20
+        ANL       0xb8,#0x20
+        ANL       0x9a,#0x12
 //  384       HAL_ENABLE_INTERRUPTS();
-        SETB    0xa8.7
+        SETB      0xa8.7
 //  385 
 //  386       /* set CC2530 power mode, interrupt is disabled after this function
 //  387        * Note that an ISR (that could wake up from power mode) which runs
@@ -1334,19 +1299,19 @@ halSleep:
 //  391        */
 //  392       HAL_SLEEP_SET_POWER_MODE();
         ; Setup parameters for call to function halSetSleepMode
-        LCALL   ??halSetSleepMode?relay
+        LCALL     `??halSetSleepMode::?relay`; Banked call to: halSetSleepMode
 //  393 
 //  394       /* the interrupt is disabled - see halSetSleepMode() */
 //  395 
 //  396       /* restore interrupt enable registers */
 //  397       HAL_SLEEP_IE_RESTORE(ien0, ien1, ien2);
-        MOV     0xa8,R6
-        MOV     0xb8,R7
-        MOV     0x9a,?V0 + 0
+        MOV       0xa8,?V0
+        MOV       0xb8,R7
+        MOV       0x9a,R6
 //  398 
 //  399       /* disable sleep timer interrupt */
 //  400       HAL_SLEEP_TIMER_DISABLE_INT();
-        CLR     0xa8.5
+        CLR       0xa8.5
 //  401 
 //  402 #ifdef HAL_SLEEP_DEBUG_LED
 //  403       HAL_TURN_ON_LED3();
@@ -1354,23 +1319,23 @@ halSleep:
 //  405       /* use this to turn LEDs back on after sleep */
 //  406       HalLedExitSleep();
         ; Setup parameters for call to function HalLedExitSleep
-        LCALL   ??HalLedExitSleep?relay
+        LCALL     `??HalLedExitSleep::?relay`; Banked call to: HalLedExitSleep
 //  407 #endif
 //  408 
 //  409 #if ((defined HAL_KEY) && (HAL_KEY == TRUE))
 //  410       /* handle peripherals */
 //  411       (void)HalKeyExitSleep();
         ; Setup parameters for call to function HalKeyExitSleep
-        LCALL   ??HalKeyExitSleep?relay
+        LCALL     `??HalKeyExitSleep::?relay`; Banked call to: HalKeyExitSleep
 //  412 #endif
 //  413 
 //  414       /* power on the MAC; blocks until completion */
 //  415       MAC_PwrOnReq();
         ; Setup parameters for call to function MAC_PwrOnReq
-        LCALL   ??MAC_PwrOnReq?relay
+        LCALL     `??MAC_PwrOnReq::?relay`; Banked call to: MAC_PwrOnReq
 //  416 
 //  417       HAL_ENABLE_INTERRUPTS();
-        SETB    0xa8.7
+        SETB      0xa8.7
 //  418 
 //  419       /* For CC2530, T2 interrupt won抰 be generated when the current count is greater than
 //  420        * the comparator. The interrupt is only generated when the current count is equal to
@@ -1382,8 +1347,8 @@ halSleep:
 //  426        */
 //  427       macMcuTimer2OverflowWorkaround();
         ; Setup parameters for call to function macMcuTimer2OverflowWorkaround
-        LCALL   ??macMcuTimer2OverflowWorkaround?relay
-        SJMP    ??halSleep_3
+        LCALL     `??macMcuTimer2OverflowWorkaround::?relay`; Banked call to: macMcuTimer2OverflowWorkaround
+        SJMP      ??halSleep_3
 //  428     }
 //  429     else
 //  430     {
@@ -1392,12 +1357,12 @@ halSleep:
 //  433        */
 //  434       HAL_ENABLE_INTERRUPTS();
 ??halSleep_5:
-        SETB    0xa8.7
-        CFI EndBlock cfiBlock2
+        SETB      0xa8.7
 //  435     }
 //  436   }
 //  437 }
 ??halSleep_3:
+          CFI EndBlock cfiBlock2
         REQUIRE ?Subroutine0
         REQUIRE _A_IEN0
         REQUIRE _A_IRCON
@@ -1407,206 +1372,109 @@ halSleep:
         REQUIRE IEN2
         ; // Fall through to label ?Subroutine0
 
-        RSEG BANKED_CODE:CODE:NOROOT(0)
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 ?Subroutine0:
-        CFI Block cfiBlock3 Using cfiCommon0
-        CFI NoFunction
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 16)
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        MOV     R7,#0x8
-        LJMP    ?BANKED_LEAVE_XDATA
-        CFI EndBlock cfiBlock3
+          CFI Block cfiBlock3 Using cfiCommon0
+          CFI NoFunction
+          CFI CFA_SP SP+0
+          CFI CFA_XSP16 add(XSP16, 16)
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
+          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+          CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+          CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+          CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+          CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+          CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+        MOV       R7,#0x8
+        LJMP      ?BANKED_LEAVE_XDATA
+          CFI EndBlock cfiBlock3
 
-        RSEG BANKED_CODE:CODE:NOROOT(0)
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 ?Subroutine1:
-        CFI Block cfiCond4 Using cfiCommon0
-        CFI NoFunction
-        CFI Conditional ??CrossCallReturnLabel_1
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 16)
-        CFI Block cfiCond5 Using cfiCommon0
-        CFI (cfiCond5) NoFunction
-        CFI (cfiCond5) Conditional ??CrossCallReturnLabel_2
-        CFI (cfiCond5) R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI (cfiCond5) VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI (cfiCond5) V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI (cfiCond5) V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI (cfiCond5) V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI (cfiCond5) V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI (cfiCond5) V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI (cfiCond5) V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI (cfiCond5) V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI (cfiCond5) V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI (cfiCond5) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI (cfiCond5) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI (cfiCond5) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI (cfiCond5) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI (cfiCond5) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI (cfiCond5) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI (cfiCond5) CFA_SP SP+0
-        CFI (cfiCond5) CFA_XSP16 add(XSP16, 16)
-        CFI Block cfiCond6 Using cfiCommon0
-        CFI (cfiCond6) NoFunction
-        CFI (cfiCond6) Conditional ??CrossCallReturnLabel_3
-        CFI (cfiCond6) R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI (cfiCond6) VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI (cfiCond6) V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI (cfiCond6) V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI (cfiCond6) V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI (cfiCond6) V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI (cfiCond6) V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI (cfiCond6) V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI (cfiCond6) V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI (cfiCond6) V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI (cfiCond6) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI (cfiCond6) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI (cfiCond6) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI (cfiCond6) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI (cfiCond6) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI (cfiCond6) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI (cfiCond6) CFA_SP SP+0
-        CFI (cfiCond6) CFA_XSP16 add(XSP16, 16)
-        CFI Block cfiPicker7 Using cfiCommon1
-        CFI (cfiPicker7) NoFunction
-        CFI (cfiPicker7) Picker
-        MOV     A,?V0 + 0
-        CFI EndBlock cfiCond4
-        CFI EndBlock cfiCond5
-        CFI EndBlock cfiCond6
-        CFI EndBlock cfiPicker7
-        REQUIRE ??Subroutine2_0
-        ; // Fall through to label ??Subroutine2_0
-
-        RSEG BANKED_CODE:CODE:NOROOT(0)
-??Subroutine2_0:
-        CFI Block cfiCond8 Using cfiCommon0
-        CFI NoFunction
-        CFI Conditional ??CrossCallReturnLabel_0
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 16)
-        CFI Block cfiCond9 Using cfiCommon0
-        CFI (cfiCond9) NoFunction
-        CFI (cfiCond9) Conditional ??CrossCallReturnLabel_1
-        CFI (cfiCond9) R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI (cfiCond9) VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI (cfiCond9) V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI (cfiCond9) V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI (cfiCond9) V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI (cfiCond9) V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI (cfiCond9) V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI (cfiCond9) V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI (cfiCond9) V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI (cfiCond9) V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI (cfiCond9) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI (cfiCond9) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI (cfiCond9) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI (cfiCond9) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI (cfiCond9) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI (cfiCond9) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI (cfiCond9) CFA_SP SP+0
-        CFI (cfiCond9) CFA_XSP16 add(XSP16, 16)
-        CFI Block cfiCond10 Using cfiCommon0
-        CFI (cfiCond10) NoFunction
-        CFI (cfiCond10) Conditional ??CrossCallReturnLabel_2
-        CFI (cfiCond10) R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI (cfiCond10) VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI (cfiCond10) V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI (cfiCond10) V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI (cfiCond10) V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI (cfiCond10) V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI (cfiCond10) V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI (cfiCond10) V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI (cfiCond10) V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI (cfiCond10) V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI (cfiCond10) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI (cfiCond10) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI (cfiCond10) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI (cfiCond10) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI (cfiCond10) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI (cfiCond10) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI (cfiCond10) CFA_SP SP+0
-        CFI (cfiCond10) CFA_XSP16 add(XSP16, 16)
-        CFI Block cfiCond11 Using cfiCommon0
-        CFI (cfiCond11) NoFunction
-        CFI (cfiCond11) Conditional ??CrossCallReturnLabel_3
-        CFI (cfiCond11) R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI (cfiCond11) VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI (cfiCond11) V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI (cfiCond11) V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI (cfiCond11) V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI (cfiCond11) V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI (cfiCond11) V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI (cfiCond11) V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI (cfiCond11) V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI (cfiCond11) V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI (cfiCond11) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI (cfiCond11) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI (cfiCond11) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI (cfiCond11) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI (cfiCond11) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI (cfiCond11) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI (cfiCond11) CFA_SP SP+0
-        CFI (cfiCond11) CFA_XSP16 add(XSP16, 16)
-        CFI Block cfiPicker12 Using cfiCommon1
-        CFI (cfiPicker12) NoFunction
-        CFI (cfiPicker12) Picker
-        ORL     A,?V0 + 1
-        ORL     A,?V0 + 2
-        ORL     A,?V0 + 3
+          CFI Block cfiCond4 Using cfiCommon0
+          CFI Function halSleep
+          CFI Conditional ??CrossCallReturnLabel_0
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+          CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+          CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+          CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+          CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+          CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI CFA_SP SP+-2
+          CFI CFA_XSP16 add(XSP16, 16)
+          CFI Block cfiCond5 Using cfiCommon0
+          CFI (cfiCond5) Function halSleep
+          CFI (cfiCond5) Conditional ??CrossCallReturnLabel_1
+          CFI (cfiCond5) R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+          CFI (cfiCond5) VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
+          CFI (cfiCond5) V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+          CFI (cfiCond5) V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+          CFI (cfiCond5) V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+          CFI (cfiCond5) V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+          CFI (cfiCond5) V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+          CFI (cfiCond5) V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI (cfiCond5) V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI (cfiCond5) V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI (cfiCond5) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI (cfiCond5) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI (cfiCond5) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI (cfiCond5) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI (cfiCond5) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI (cfiCond5) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI (cfiCond5) CFA_SP SP+-2
+          CFI (cfiCond5) CFA_XSP16 add(XSP16, 16)
+          CFI Block cfiCond6 Using cfiCommon0
+          CFI (cfiCond6) Function halSleep
+          CFI (cfiCond6) Conditional ??CrossCallReturnLabel_2
+          CFI (cfiCond6) R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+          CFI (cfiCond6) VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
+          CFI (cfiCond6) V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+          CFI (cfiCond6) V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+          CFI (cfiCond6) V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+          CFI (cfiCond6) V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+          CFI (cfiCond6) V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+          CFI (cfiCond6) V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI (cfiCond6) V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI (cfiCond6) V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI (cfiCond6) R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI (cfiCond6) ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI (cfiCond6) ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI (cfiCond6) ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI (cfiCond6) DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI (cfiCond6) DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI (cfiCond6) CFA_SP SP+-2
+          CFI (cfiCond6) CFA_XSP16 add(XSP16, 16)
+          CFI Block cfiPicker7 Using cfiCommon1
+          CFI (cfiPicker7) NoFunction
+          CFI (cfiPicker7) Picker
+        MOV       A,?V0
+        ORL       A,?V1
+        ORL       A,?V2
+        ORL       A,?V3
         RET
-        CFI EndBlock cfiCond8
-        CFI EndBlock cfiCond9
-        CFI EndBlock cfiCond10
-        CFI EndBlock cfiCond11
-        CFI EndBlock cfiPicker12
+          CFI EndBlock cfiCond4
+          CFI EndBlock cfiCond5
+          CFI EndBlock cfiCond6
+          CFI EndBlock cfiPicker7
 //  438 
 //  439 /**************************************************************************************************
 //  440  * @fn          halSleepSetTimer
@@ -1629,73 +1497,81 @@ halSleep:
 //  457  **************************************************************************************************
 //  458  */
 
-        RSEG BANKED_CODE:CODE:NOROOT(0)
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  459 void halSleepSetTimer(uint32 timeout)
 halSleepSetTimer:
-        CFI Block cfiBlock13 Using cfiCommon0
-        CFI Function halSleepSetTimer
+          CFI Block cfiBlock8 Using cfiCommon0
+          CFI Function halSleepSetTimer
         CODE
 //  460 {
-        MOV     A,#-0x10
-        LCALL   ?BANKED_ENTER_XDATA
-        CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
-        CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
-        CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
-        CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
-        CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
-        CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
-        CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
-        CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
-        CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
-        CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
-        CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
-        CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
-        CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
-        CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
-        CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
-        CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
-        CFI CFA_SP SP+0
-        CFI CFA_XSP16 add(XSP16, 16)
+        REQUIRE ?V0
+        REQUIRE ?V1
+        REQUIRE ?V2
+        REQUIRE ?V3
+        REQUIRE ?V4
+        REQUIRE ?V5
+        REQUIRE ?V6
+        REQUIRE ?V7
+        MOV       A,#-0x10
+        LCALL     ?BANKED_ENTER_XDATA
+          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI V7 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI V6 load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI V5 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI V4 load(1, XDATA, add(CFA_XSP16, literal(-10)))
+          CFI V3 load(1, XDATA, add(CFA_XSP16, literal(-11)))
+          CFI V2 load(1, XDATA, add(CFA_XSP16, literal(-12)))
+          CFI V1 load(1, XDATA, add(CFA_XSP16, literal(-13)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-14)))
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-15)))
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-16)))
+          CFI CFA_SP SP+0
+          CFI CFA_XSP16 add(XSP16, 16)
         ; Saved register size: 16
         ; Auto size: 4
-        MOV     A,#-0x4
-        LCALL   ?ALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 20)
-        MOV     ?V0 + 0,R2
-        MOV     ?V0 + 1,R3
-        MOV     ?V0 + 2,R4
-        MOV     ?V0 + 3,R5
+        MOV       A,#-0x4
+        LCALL     ?ALLOC_XSTACK8
+          CFI CFA_XSP16 add(XSP16, 20)
+        MOV       ?V0,R2
+        MOV       ?V1,R3
+        MOV       ?V2,R4
+        MOV       ?V3,R5
 //  461   uint32 ticks;
 //  462 
 //  463   /* read the sleep timer; ST0 must be read first */
 //  464   ((uint8 *) &ticks)[UINT32_NDX0] = ST0;
-        MOV     A,0x95
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    @DPTR,A
+        MOV       A,0x95
+        MOV       DPL,?XSP + 0
+        MOV       DPH,?XSP + 1
+        MOVX      @DPTR,A
 //  465   ((uint8 *) &ticks)[UINT32_NDX1] = ST1;
-        MOV     A,0x96
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,#0x1
-        LCALL   ?XSTACK_DISP0_8
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
+        MOV       A,0x96
+        PUSH      A
+          CFI CFA_SP SP+-1
+        MOV       A,#0x1
+        LCALL     ?XSTACK_DISP0_8
+        POP       A
+          CFI CFA_SP SP+0
+        MOVX      @DPTR,A
 //  466   ((uint8 *) &ticks)[UINT32_NDX2] = ST2;
-        MOV     A,0x97
-        PUSH    A
-        CFI CFA_SP SP+-1
-        MOV     A,#0x2
-        LCALL   ?XSTACK_DISP0_8
-        POP     A
-        CFI CFA_SP SP+0
-        MOVX    @DPTR,A
+        MOV       A,0x97
+        PUSH      A
+          CFI CFA_SP SP+-1
+        MOV       A,#0x2
+        LCALL     ?XSTACK_DISP0_8
+        POP       A
+          CFI CFA_SP SP+0
+        MOVX      @DPTR,A
 //  467   ((uint8 *) &ticks)[UINT32_NDX3] = 0;
-        MOV     A,#0x3
-        LCALL   ?XSTACK_DISP0_8
-        CLR     A
-        MOVX    @DPTR,A
+        MOV       A,#0x3
+        LCALL     ?XSTACK_DISP0_8
+        CLR       A
+        MOVX      @DPTR,A
 //  468 
 //  469   /* Compute sleep timer compare value.  The ratio of 32 kHz ticks to 320 usec ticks
 //  470    * is 32768/3125 = 10.48576.  This is nearly 671/64 = 10.484375.
@@ -1704,45 +1580,45 @@ halSleepSetTimer:
 //  473 
 //  474   /* subtract the processing time spent in function halSleep() */
 //  475   ticks -= HAL_SLEEP_ADJ_TICKS;
-        MOV     DPTR,#__Constant_29f
-        MOV     R0,#?V0 + 4
-        LCALL   ?L_MOV_X
-        MOV     R0,#?V0 + 0
-        MOV     R1,#?V0 + 4
-        LCALL   ?L_MUL
-        MOV     A,#0x6
-        MOV     R0,#?V0 + 0
-        LCALL   ?UL_SHR
-        MOV     DPTR,#__Constant_ffffffe9
-        MOV     R0,#?V0 + 0
-        LCALL   ?L_ADD_X
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOV     R0,#?V0 + 0
-        LCALL   ?L_ADD_TO_X
+        MOV       DPTR,#__Constant_29f
+        MOV       R0,#?V4
+        LCALL     ?L_MOV_X
+        MOV       R0,#?V0
+        MOV       R1,#?V4
+        LCALL     ?L_MUL
+        MOV       A,#0x6
+        MOV       R0,#?V0
+        LCALL     ?UL_SHR
+        MOV       DPTR,#__Constant_ffffffe9
+        MOV       R0,#?V0
+        LCALL     ?L_ADD_X
+        MOV       DPL,?XSP + 0
+        MOV       DPH,?XSP + 1
+        MOV       R0,#?V0
+        LCALL     ?L_ADD_TO_X
 //  476 
 //  477   /* set sleep timer compare; ST0 must be written last */
 //  478   ST2 = ((uint8 *) &ticks)[UINT32_NDX2];
-        MOV     A,#0x2
-        LCALL   ?XSTACK_DISP0_8
-        MOVX    A,@DPTR
-        MOV     0x97,A
+        MOV       A,#0x2
+        LCALL     ?XSTACK_DISP0_8
+        MOVX      A,@DPTR
+        MOV       0x97,A
 //  479   ST1 = ((uint8 *) &ticks)[UINT32_NDX1];
-        MOV     A,#0x1
-        LCALL   ?XSTACK_DISP0_8
-        MOVX    A,@DPTR
-        MOV     0x96,A
+        MOV       A,#0x1
+        LCALL     ?XSTACK_DISP0_8
+        MOVX      A,@DPTR
+        MOV       0x96,A
 //  480   ST0 = ((uint8 *) &ticks)[UINT32_NDX0];
-        MOV     DPL,?XSP + 0
-        MOV     DPH,?XSP + 1
-        MOVX    A,@DPTR
-        MOV     0x95,A
+        MOV       DPL,?XSP + 0
+        MOV       DPH,?XSP + 1
+        MOVX      A,@DPTR
+        MOV       0x95,A
 //  481 }
-        MOV     A,#0x4
-        LCALL   ?DEALLOC_XSTACK8
-        CFI CFA_XSP16 add(XSP16, 16)
-        LJMP    ?Subroutine0 & 0xFFFF
-        CFI EndBlock cfiBlock13
+        MOV       A,#0x4
+        LCALL     ?DEALLOC_XSTACK8
+          CFI CFA_XSP16 add(XSP16, 16)
+        LJMP      ?Subroutine0 & 0xFFFF
+          CFI EndBlock cfiBlock8
         REQUIRE ST0
         REQUIRE ST1
         REQUIRE ST2
@@ -1765,24 +1641,24 @@ halSleepSetTimer:
 //  498  **************************************************************************************************
 //  499  */
 
-        RSEG BANKED_CODE:CODE:NOROOT(0)
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  500 uint32 TimerElapsed( void )
 TimerElapsed:
-        CFI Block cfiBlock14 Using cfiCommon0
-        CFI Function TimerElapsed
+          CFI Block cfiBlock9 Using cfiCommon0
+          CFI Function TimerElapsed
         CODE
 //  501 {
         ; Saved register size: 0
         ; Auto size: 0
 //  502   /* Stubs */
 //  503   return (0);
-        MOV     R2,#0x0
-        MOV     R3,#0x0
-        MOV     R4,#0x0
-        MOV     R5,#0x0
-        LJMP    ?BRET
-        CFI EndBlock cfiBlock14
+        MOV       R2,#0x0
+        MOV       R3,#0x0
+        MOV       R4,#0x0
+        MOV       R5,#0x0
+        LJMP      ?BRET
 //  504 }
+          CFI EndBlock cfiBlock9
 //  505 
 //  506 /**************************************************************************************************
 //  507  * @fn          halRestoreSleepLevel
@@ -1801,19 +1677,19 @@ TimerElapsed:
 //  520  **************************************************************************************************
 //  521  */
 
-        RSEG BANKED_CODE:CODE:NOROOT(0)
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
 //  522 void halRestoreSleepLevel( void )
 halRestoreSleepLevel:
-        CFI Block cfiBlock15 Using cfiCommon0
-        CFI Function halRestoreSleepLevel
+          CFI Block cfiBlock10 Using cfiCommon0
+          CFI Function halRestoreSleepLevel
         CODE
 //  523 {
         ; Saved register size: 0
         ; Auto size: 0
 //  524   /* Stubs */
 //  525 }
-        LJMP    ?BRET
-        CFI EndBlock cfiBlock15
+        LJMP      ?BRET
+          CFI EndBlock cfiBlock10
 //  526 
 //  527 /**************************************************************************************************
 //  528  * @fn          halSleepTimerIsr
@@ -1835,28 +1711,28 @@ halRestoreSleepLevel:
         RSEG NEAR_CODE:CODE:NOROOT(0)
 //  543 HAL_ISR_FUNCTION(halSleepTimerIsr, ST_VECTOR)
 halSleepTimerIsr:
-        CFI Block cfiBlock16 Using cfiCommon1
-        CFI Function halSleepTimerIsr
+          CFI Block cfiBlock11 Using cfiCommon1
+          CFI Function halSleepTimerIsr
         CODE
 //  544 {
-        PUSH    A
-        CFI A Frame(CFA_SP, 3)
-        CFI CFA_SP SP+-3
-        PUSH    PSW
-        CFI PSW Frame(CFA_SP, 4)
-        CFI CFA_SP SP+-4
-        MOV     A,R0
-        CFI R0 A
-        PUSH    A
-        CFI R0 Frame(CFA_SP, 5)
-        CFI CFA_SP SP+-5
+        PUSH      A
+          CFI A Frame(CFA_SP, 3)
+          CFI CFA_SP SP+-3
+        PUSH      PSW
+          CFI PSW Frame(CFA_SP, 4)
+          CFI CFA_SP SP+-4
+        MOV       A,R0
+          CFI R0 A
+        PUSH      A
+          CFI R0 Frame(CFA_SP, 5)
+          CFI CFA_SP SP+-5
         ; Saved register size: 3
         ; Auto size: 0
 //  545   HAL_ENTER_ISR();
-        MOV     A,0xa8
-        SETB    0xa8.7
+        MOV       R0,0xa8+0x0
+        SETB      0xa8.7
 //  546   HAL_SLEEP_TIMER_CLEAR_INT();
-        CLR     0xc0.7
+        CLR       0xc0.7
 //  547 
 //  548 #ifdef HAL_SLEEP_DEBUG_POWER_MODE
 //  549   halSleepInt = TRUE;
@@ -1864,28 +1740,29 @@ halSleepTimerIsr:
 //  551   
 //  552   CLEAR_SLEEP_MODE();
 //  553   HAL_EXIT_ISR();
-        MOV     C,0xE0 /* A   */.7
-        MOV     0xa8.7,C
+        MOV       A,R0
+        MOV       C,0xE0 /* A   */.7
+        MOV       0xa8.7,C
 //  554 }
-        POP     A
-        CFI R0 A
-        CFI CFA_SP SP+-4
-        MOV     R0,A
-        CFI R0 SameValue
-        POP     PSW
-        CFI PSW SameValue
-        CFI CFA_SP SP+-3
-        POP     A
-        CFI A SameValue
-        CFI CFA_SP SP+-2
+        POP       A
+          CFI R0 A
+          CFI CFA_SP SP+-4
+        MOV       R0,A
+          CFI R0 SameValue
+        POP       PSW
+          CFI PSW SameValue
+          CFI CFA_SP SP+-3
+        POP       A
+          CFI A SameValue
+          CFI CFA_SP SP+-2
         RETI
-        CFI EndBlock cfiBlock16
+          CFI EndBlock cfiBlock11
         REQUIRE _A_IEN0
         REQUIRE _A_IRCON
 
         COMMON INTVEC:CODE:ROOT(0)
         ORG 43
-`??halSleepTimerIsr??INTVEC 43`:
+`??halSleepTimerIsr::??INTVEC 43`:
         LJMP       (halSleepTimerIsr)
 
         RSEG XDATA_ID:CODE:NOROOT(0)
@@ -1939,50 +1816,56 @@ __Constant_ffffffe9:
         DD 4294967273
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??halSetSleepMode?relay:
+`??halSetSleepMode::?relay`:
+        CODE
         LCALL   ?BDISPATCH
-        DATA
+        DATA24
         DC24    halSetSleepMode
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??halSetMaxSleepLoopTime?relay:
+`??halSetMaxSleepLoopTime::?relay`:
+        CODE
         LCALL   ?BDISPATCH
-        DATA
+        DATA24
         DC24    halSetMaxSleepLoopTime
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??halSleep?relay:
+`??halSleep::?relay`:
+        CODE
         LCALL   ?BDISPATCH
-        DATA
+        DATA24
         DC24    halSleep
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??halSleepSetTimer?relay:
+`??halSleepSetTimer::?relay`:
+        CODE
         LCALL   ?BDISPATCH
-        DATA
+        DATA24
         DC24    halSleepSetTimer
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??TimerElapsed?relay:
+`??TimerElapsed::?relay`:
+        CODE
         LCALL   ?BDISPATCH
-        DATA
+        DATA24
         DC24    TimerElapsed
 
         RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
-??halRestoreSleepLevel?relay:
+`??halRestoreSleepLevel::?relay`:
+        CODE
         LCALL   ?BDISPATCH
-        DATA
+        DATA24
         DC24    halRestoreSleepLevel
 
         END
 //  555 
 // 
-// 487 bytes in segment BANKED_CODE
+// 478 bytes in segment BANKED_CODE
 //  36 bytes in segment BANK_RELAYS
 //   1 byte  in segment DATA_I
 //   1 byte  in segment DATA_ID
 //   3 bytes in segment INTVEC
-//  25 bytes in segment NEAR_CODE
+//  26 bytes in segment NEAR_CODE
 //  10 bytes in segment SFR_AN
 //   8 bytes in segment SLEEP_CODE
 //   4 bytes in segment XDATA_I
@@ -1990,10 +1873,11 @@ __Constant_ffffffe9:
 //  32 bytes in segment XDATA_ROM_C
 //   1 byte  in segment XDATA_Z
 // 
-// 561 bytes of CODE  memory (+  3 bytes shared)
-//   0 bytes of CONST memory (+ 32 bytes shared)
-//   1 byte  of DATA  memory (+ 10 bytes shared)
-//   5 bytes of XDATA memory
+//  67 bytes of CODE     memory (+  3 bytes shared)
+//   0 bytes of CONST    memory (+ 32 bytes shared)
+//   1 byte  of DATA     memory (+ 10 bytes shared)
+// 486 bytes of HUGECODE memory
+//   5 bytes of XDATA    memory
 //
 //Errors: none
 //Warnings: none

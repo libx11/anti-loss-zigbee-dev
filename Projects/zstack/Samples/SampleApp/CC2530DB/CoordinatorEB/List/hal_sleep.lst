@@ -1,135 +1,101 @@
 ###############################################################################
-#                                                                             #
-# IAR C/C++ Compiler V8.10.3.10338/W32 for 8051         17/Apr/2017  20:20:02 #
-# Copyright 2004-2011 IAR Systems AB.                                         #
-#                                                                             #
-#    Core               =  plain                                              #
-#    Code model         =  banked                                             #
-#    Data model         =  large                                              #
-#    Calling convention =  xdata reentrant                                    #
-#    Constant location  =  data_rom                                           #
-#    Dptr setup         =  1,16                                               #
-#    Source file        =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Components\hal\target\CC2530EB\hal_sleep.c    #
-#    Command line       =  -f "C:\Users\li\Desktop\ZStack-2.5.1a -            #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\Tools\CC2530DB\f8wCoord.cfg" (-DCPU32MHZ    #
-#                          -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRU #
-#                          E -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8       #
-#                          -DMAC_CFG_RX_MAX=5 -DZDO_COORDINATOR -DRTR_NWK)    #
-#                          -f "C:\Users\li\Desktop\ZStack-2.5.1a -            #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\Tools\CC2530DB\f8wConfig.cfg" (-DZIGBEEPRO  #
-#                          -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR       #
-#                          -DDEFAULT_CHANLIST=0x00000800                      #
-#                          -DZDAPP_CONFIG_PAN_ID=0xFFFF                       #
-#                          -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MA #
-#                          SK=0x007F -DBEACON_REQUEST_DELAY=100               #
-#                          -DBEACON_REQ_DELAY_MASK=0x00FF                     #
-#                          -DLINK_STATUS_JITTER_MASK=0x007F                   #
-#                          -DROUTE_EXPIRY_TIME=30 -DAPSC_ACK_WAIT_DURATION_PO #
-#                          LLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7             #
-#                          -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3    #
-#                          -DNWK_MAX_DATA_RETRIES=2                           #
-#                          -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9         #
-#                          -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40           #
-#                          -DNWK_MAX_BINDING_ENTRIES=4                        #
-#                          -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01,  #
-#                          0x03, 0x05, 0x07, 0x09, 0x0B, 0x0D, 0x0F, 0x00,    #
-#                          0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C, 0x0D}"         #
-#                          -DMAC_MAX_FRAME_SIZE=116                           #
-#                          -DZDNWKMGR_MIN_TRANSMISSIONS=20 "-DCONST=const     #
-#                          __code" -DGENERIC=__generic                        #
-#                          -DRFD_RCVC_ALWAYS_ON=FALSE -DPOLL_RATE=1000        #
-#                          -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100)   #
-#                          -DREJOIN_POLL_RATE=440 "C:\Users\li\Desktop\ZStack #
-#                          -2.5.1a - 副本\Components\hal\target\CC2530EB\hal_ #
-#                          sleep.c" -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D  #
-#                          MT_ZDO_FUNC -D LCD_SUPPORTED=DEBUG -lC             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\List\" -lA "C:\Users\li\Desktop\ZStack #
-#                          -2.5.1a - 副本\Projects\zstack\Samples\SampleApp\C #
-#                          C2530DB\CoordinatorEB\List\" --diag_suppress       #
-#                          Pe001,Pa010 -o "C:\Users\li\Desktop\ZStack-2.5.1a  #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          CoordinatorEB\Obj\" -e --no_code_motion --debug    #
-#                          --core=plain --dptr=16,1 --data_model=large        #
-#                          --code_model=banked --calling_convention=xdata_ree #
-#                          ntrant --place_constants=data_rom                  #
-#                          --nr_virtual_regs 16 -I "C:\Users\li\Desktop\ZStac #
-#                          k-2.5.1a - 副本\Projects\zstack\Samples\SampleApp\ #
-#                          CC2530DB\" -I "C:\Users\li\Desktop\ZStack-2.5.1a   #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          ..\Source\" -I "C:\Users\li\Desktop\ZStack-2.5.1a  #
-#                          - 副本\Projects\zstack\Samples\SampleApp\CC2530DB\ #
-#                          ..\..\..\ZMain\TI2530DB\" -I                       #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\include\" -I           #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\hal\target\CC2530EB\" -I   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\include\" -I           #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\high_level\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\" -I   #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mac\low_level\srf04\single #
-#                          _chip\" -I "C:\Users\li\Desktop\ZStack-2.5.1a -    #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\mt\" -I                    #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\osal\include\" -I          #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\services\saddr\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\services\sdata\" -I        #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\af\" -I              #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\nwk\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sapi\" -I            #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sec\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\sys\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\stack\zdo\" -I             #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\zmac\" -I                  #
-#                          "C:\Users\li\Desktop\ZStack-2.5.1a -               #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\.. #
-#                          \..\..\..\..\Components\zmac\f8w\" -Ohz            #
-#                          --require_prototypes                               #
-#    List file          =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\List\hal_sleep.lst                     #
-#    Object file        =  C:\Users\li\Desktop\ZStack-2.5.1a -                #
-#                          副本\Projects\zstack\Samples\SampleApp\CC2530DB\Co #
-#                          ordinatorEB\Obj\hal_sleep.r51                      #
-#                                                                             #
-#                                                                             #
+#
+# IAR C/C++ Compiler V10.20.1.5333 for 8051               31/May/2018  15:13:16
+# Copyright 2004-2018 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for 8051
+#
+#    Core               =  plain
+#    Code model         =  banked
+#    Data model         =  large
+#    Calling convention =  xdata reentrant
+#    Constant location  =  data_rom
+#    Dptr setup         =  1,16
+#                          
+#    Source file        =  
+#        E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_sleep.c
+#    Command line       =  
+#        -f C:\Users\libx\AppData\Local\Temp\EW6FE0.tmp
+#        (E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_sleep.c -D
+#        ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
+#        LCD_SUPPORTED=DEBUG -lC
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List
+#        -lA
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List
+#        --diag_suppress Pe001,Pa010 -o
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\Obj
+#        -e --debug --core=plain --dptr=16,1 --data_model=large
+#        --code_model=banked --calling_convention=xdata_reentrant
+#        --place_constants=data_rom --nr_virtual_regs 8 -f
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wCoord.cfg
+#        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_APP_PENDING_QUEUE=TRUE
+#        -DMAC_CFG_TX_DATA_MAX=5 -DMAC_CFG_TX_MAX=8 -DMAC_CFG_RX_MAX=5
+#        -DZDO_COORDINATOR -DRTR_NWK) -f
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+#        (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+#        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0xFFFF
+#        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+#        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+#        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+#        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+#        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+#        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+#        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+#        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+#        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+#        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+#        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+#        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100
+#        -DREJOIN_POLL_RATE=440) -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\ -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\Source\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\ZMain\TI2530DB\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\mt\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\osal\include\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\af\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\
+#        -I
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+#        -Ohz --require_prototypes --no_code_motion)
+#    Locale             =  Chinese (Simplified)_CHN.936
+#    List file          =  
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\List\hal_sleep.lst
+#    Object file        =  
+#        E:\anti-lost-dev-code\Projects\zstack\Samples\SampleApp\CC2530DB\CoordinatorEB\Obj\hal_sleep.r51
+#
 ###############################################################################
 
-C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_sleep.c
+E:\anti-lost-dev-code\Components\hal\target\CC2530EB\hal_sleep.c
       1          /**************************************************************************************************
       2            Filename:       hal_sleep.c
       3            Revised:        $Date: 2012-03-07 11:55:12 -0800 (Wed, 07 Mar 2012) $
@@ -433,11 +399,11 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
    \   000000                ; Saved register size: 0
    \   000000                ; Auto size: 0
     231            PCON = halSleepPconValue;
-   \   000000   85..87       MOV     0x87,halSleepPconValue
+   \   000000   85..87       MOV       0x87,halSleepPconValue
     232            HAL_DISABLE_INTERRUPTS();
-   \   000003   C2AF         CLR     0xa8.7
+   \   000003   C2AF         CLR       0xa8.7
     233          }
-   \   000005   02....       LJMP    ?BRET
+   \   000005   02....       LJMP      ?BRET
    \   000008                REQUIRE PCON
    \   000008                REQUIRE _A_IEN0
     234          
@@ -465,28 +431,32 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     254          void halSetMaxSleepLoopTime(uint32 rolloverTime)
    \                     halSetMaxSleepLoopTime:
     255          {
-   \   000000   74F4         MOV     A,#-0xc
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000   74F4         MOV       A,#-0xc
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 12
    \   000005                ; Auto size: 0
-   \   000005   8A..         MOV     ?V0 + 0,R2
-   \   000007   8B..         MOV     ?V0 + 1,R3
-   \   000009   8C..         MOV     ?V0 + 2,R4
-   \   00000B   8D..         MOV     ?V0 + 3,R5
+   \   000005   8A..         MOV       ?V0,R2
+   \   000007   8B..         MOV       ?V1,R3
+   \   000009   8C..         MOV       ?V2,R4
+   \   00000B   8D..         MOV       ?V3,R5
     256            if( rolloverTime > HAL_SLEEP_MS_TO_320US(MAX_SLEEP_TIME) )
     257            {
     258              maxSleepLoopTime = HAL_SLEEP_MS_TO_320US(MAX_SLEEP_TIME);
     259            }
     260            maxSleepLoopTime = (rolloverTime - TICKS_SUBTRACTED);
-   \   00000D   90....       MOV     DPTR,#__Constant_fffffffe
-   \   000010   78..         MOV     R0,#?V0 + 0
-   \   000012   12....       LCALL   ?L_ADD_X
-   \   000015   90....       MOV     DPTR,#maxSleepLoopTime
-   \   000018   78..         MOV     R0,#?V0 + 0
-   \   00001A   12....       LCALL   ?L_MOV_TO_X
+   \   00000D   90....       MOV       DPTR,#__Constant_fffffffe
+   \   000010   78..         MOV       R0,#?V0
+   \   000012   12....       LCALL     ?L_ADD_X
+   \   000015   90....       MOV       DPTR,#maxSleepLoopTime
+   \   000018   78..         MOV       R0,#?V0
+   \   00001A   12....       LCALL     ?L_MOV_TO_X
     261          }
-   \   00001D   7F04         MOV     R7,#0x4
-   \   00001F   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   00001D   7F04         MOV       R7,#0x4
+   \   00001F   02....       LJMP      ?BANKED_LEAVE_XDATA
     262          
     263          /**************************************************************************************************
     264           * @fn          halSleep
@@ -510,8 +480,16 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     280          void halSleep( uint16 osal_timeout )
    \                     halSleep:
     281          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000                REQUIRE ?V4
+   \   000000                REQUIRE ?V5
+   \   000000                REQUIRE ?V6
+   \   000000                REQUIRE ?V7
+   \   000000   74F0         MOV       A,#-0x10
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 16
    \   000005                ; Auto size: 0
     282            uint32        timeout;
@@ -519,35 +497,35 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     284          
     285            /* get next OSAL timer expiration converted to 320 usec units */
     286            timeout = HAL_SLEEP_MS_TO_320US(osal_timeout);
-   \   000005   8A..         MOV     ?V0 + 0,R2
-   \   000007   8B..         MOV     ?V0 + 1,R3
-   \   000009   E4           CLR     A
-   \   00000A   F5..         MOV     ?V0 + 2,A
-   \   00000C   F5..         MOV     ?V0 + 3,A
-   \   00000E   90....       MOV     DPTR,#__Constant_64
-   \   000011   78..         MOV     R0,#?V0 + 4
-   \   000013   12....       LCALL   ?L_MOV_X
-   \   000016   78..         MOV     R0,#?V0 + 0
-   \   000018   79..         MOV     R1,#?V0 + 4
-   \   00001A   12....       LCALL   ?L_MUL
-   \   00001D   90....       MOV     DPTR,#__Constant_1f
-   \   000020   78..         MOV     R0,#?V0 + 0
-   \   000022   12....       LCALL   ?L_ADD_X
-   \   000025   7405         MOV     A,#0x5
-   \   000027   78..         MOV     R0,#?V0 + 0
-   \   000029   12....       LCALL   ?UL_SHR
+   \   000005   8A..         MOV       ?V0,R2
+   \   000007   8B..         MOV       ?V1,R3
+   \   000009   E4           CLR       A
+   \   00000A   F5..         MOV       ?V2,A
+   \   00000C   F5..         MOV       ?V3,A
+   \   00000E   90....       MOV       DPTR,#__Constant_64
+   \   000011   78..         MOV       R0,#?V4
+   \   000013   12....       LCALL     ?L_MOV_X
+   \   000016   78..         MOV       R0,#?V0
+   \   000018   79..         MOV       R1,#?V4
+   \   00001A   12....       LCALL     ?L_MUL
+   \   00001D   90....       MOV       DPTR,#__Constant_1f
+   \   000020   78..         MOV       R0,#?V0
+   \   000022   12....       LCALL     ?L_ADD_X
+   \   000025   7405         MOV       A,#0x5
+   \   000027   78..         MOV       R0,#?V0
+   \   000029   12....       LCALL     ?UL_SHR
     287            if (timeout == 0)
-   \   00002C   12....       LCALL   ?Subroutine1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_1:
-   \   00002F   7019         JNZ     ??halSleep_0
+   \   00002C   12....       LCALL     ?Subroutine1 & 0xFFFF
+   \                     ??CrossCallReturnLabel_0:
+   \   00002F   7019         JNZ       ??halSleep_0
     288            {
     289              timeout = MAC_PwrNextTimeout();
    \   000031                ; Setup parameters for call to function MAC_PwrNextTimeout
-   \   000031   12....       LCALL   ??MAC_PwrNextTimeout?relay
-   \   000034   8A..         MOV     ?V0 + 0,R2
-   \   000036   8B..         MOV     ?V0 + 1,R3
-   \   000038   8C..         MOV     ?V0 + 2,R4
-   \   00003A   8D..         MOV     ?V0 + 3,R5
+   \   000031   12....       LCALL     `??MAC_PwrNextTimeout::?relay`; Banked call to: MAC_PwrNextTimeout
+   \   000034   8A..         MOV       ?V0,R2
+   \   000036   8B..         MOV       ?V1,R3
+   \   000038   8C..         MOV       ?V2,R4
+   \   00003A   8D..         MOV       ?V3,R5
     290            }
     291            else
     292            {
@@ -565,38 +543,39 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     304             * the device is a stimulated device.
     305             */
     306            halPwrMgtMode = (timeout == 0) ? HAL_SLEEP_DEEP : HAL_SLEEP_TIMER;
-   \   00003C   EA           MOV     A,R2
-   \   00003D   12....       LCALL   ??Subroutine2_0 & 0xFFFF
-   \                     ??CrossCallReturnLabel_0:
-   \   000040   702D         JNZ     ??halSleep_1
-   \   000042   90....       MOV     DPTR,#halPwrMgtMode
-   \   000045   7403         MOV     A,#0x3
-   \   000047   F0           MOVX    @DPTR,A
-   \   000048   803D         SJMP    ??halSleep_2
+   \   00003C   EA           MOV       A,R2
+   \   00003D   4B           ORL       A,R3
+   \   00003E   4C           ORL       A,R4
+   \   00003F   4D           ORL       A,R5
+   \   000040   702A         JNZ       ??halSleep_1
+   \   000042   90....       MOV       DPTR,#halPwrMgtMode
+   \   000045   7403         MOV       A,#0x3
+   \   000047   F0           MOVX      @DPTR,A
+   \   000048   803A         SJMP      ??halSleep_2
    \                     ??halSleep_0:
    \   00004A                ; Setup parameters for call to function MAC_PwrNextTimeout
-   \   00004A   12....       LCALL   ??MAC_PwrNextTimeout?relay
-   \   00004D   8A..         MOV     ?V0 + 4,R2
-   \   00004F   8B..         MOV     ?V0 + 5,R3
-   \   000051   8C..         MOV     ?V0 + 6,R4
-   \   000053   8D..         MOV     ?V0 + 7,R5
-   \   000055   EA           MOV     A,R2
-   \   000056   45..         ORL     A,?V0 + 5
-   \   000058   45..         ORL     A,?V0 + 6
-   \   00005A   45..         ORL     A,?V0 + 7
-   \   00005C   6011         JZ      ??halSleep_1
-   \   00005E   78..         MOV     R0,#?V0 + 0
-   \   000060   79..         MOV     R1,#?V0 + 4
-   \   000062   12....       LCALL   ?UL_GT
-   \   000065   5008         JNC     ??halSleep_1
-   \   000067   8A..         MOV     ?V0 + 0,R2
-   \   000069   8B..         MOV     ?V0 + 1,R3
-   \   00006B   8C..         MOV     ?V0 + 2,R4
-   \   00006D   8D..         MOV     ?V0 + 3,R5
+   \   00004A   12....       LCALL     `??MAC_PwrNextTimeout::?relay`; Banked call to: MAC_PwrNextTimeout
+   \   00004D   8A..         MOV       ?V4,R2
+   \   00004F   8B..         MOV       ?V5,R3
+   \   000051   8C..         MOV       ?V6,R4
+   \   000053   8D..         MOV       ?V7,R5
+   \   000055   EA           MOV       A,R2
+   \   000056   4B           ORL       A,R3
+   \   000057   4C           ORL       A,R4
+   \   000058   4D           ORL       A,R5
+   \   000059   6011         JZ        ??halSleep_1
+   \   00005B   78..         MOV       R0,#?V0
+   \   00005D   79..         MOV       R1,#?V4
+   \   00005F   12....       LCALL     ?UL_GT
+   \   000062   5008         JNC       ??halSleep_1
+   \   000064   8A..         MOV       ?V0,R2
+   \   000066   8B..         MOV       ?V1,R3
+   \   000068   8C..         MOV       ?V2,R4
+   \   00006A   8D..         MOV       ?V3,R5
    \                     ??halSleep_1:
-   \   00006F   90....       MOV     DPTR,#halPwrMgtMode
-   \   000072   7402         MOV     A,#0x2
-   \   000074   F0           MOVX    @DPTR,A
+   \   00006C   90....       MOV       DPTR,#halPwrMgtMode
+   \   00006F   7402         MOV       A,#0x2
+   \   000071   F0           MOVX      @DPTR,A
     307          
     308            /* DEEP sleep can only be entered when zgPollRate == 0.
     309             * This is to eliminate any possibility of entering PM3 between
@@ -608,39 +587,38 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     315          #else
     316            if ((timeout > HAL_SLEEP_MS_TO_320US(PM_MIN_SLEEP_TIME)) ||
     317                (timeout == 0))
-   \   000075   90....       MOV     DPTR,#__Constant_2d
-   \   000078   78..         MOV     R0,#?V0 + 0
-   \   00007A   12....       LCALL   ?UL_GE_X
-   \   00007D   4008         JC      ??halSleep_2
-   \   00007F   12....       LCALL   ?Subroutine1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_2:
-   \   000082   6003         JZ      $+5
-   \   000084   02....       LJMP    ??halSleep_3 & 0xFFFF
+   \   000072   90....       MOV       DPTR,#__Constant_2d
+   \   000075   78..         MOV       R0,#?V0
+   \   000077   12....       LCALL     ?UL_GE_X
+   \   00007A   4008         JC        ??halSleep_2
+   \   00007C   12....       LCALL     ?Subroutine1 & 0xFFFF
+   \                     ??CrossCallReturnLabel_1:
+   \   00007F   6003         JZ        $+5
+   \   000081   02....       LJMP      ??halSleep_3 & 0xFFFF
     318          #endif
     319            {
     320              halIntState_t ien0, ien1, ien2;
     321          
     322              HAL_ASSERT(HAL_INTERRUPTS_ARE_ENABLED());
    \                     ??halSleep_2:
-   \   000087   A2AF         MOV     C,0xa8.7
-   \   000089   4003         JC      ??halSleep_4
-   \   00008B                ; Setup parameters for call to function halAssertHandler
-   \   00008B   12....       LCALL   ??halAssertHandler?relay
+   \   000084   A2AF         MOV       C,0xa8.7
+   \   000086   4003         JC        ??halSleep_4
+   \   000088                ; Setup parameters for call to function halAssertHandler
+   \   000088   12....       LCALL     `??halAssertHandler::?relay`; Banked call to: halAssertHandler
     323              HAL_DISABLE_INTERRUPTS();
    \                     ??halSleep_4:
-   \   00008E   C2AF         CLR     0xa8.7
+   \   00008B   C2AF         CLR       0xa8.7
     324          
     325              /* always use "deep sleep" to turn off radio VREG on CC2530 */
     326              if (halSleepPconValue != 0 && MAC_PwrOffReq(MAC_PWR_SLEEP_DEEP) == MAC_SUCCESS)
-   \   000090   E5..         MOV     A,halSleepPconValue
-   \   000092   7003         JNZ     $+5
-   \   000094   02....       LJMP    ??halSleep_5 & 0xFFFF
-   \   000097                ; Setup parameters for call to function MAC_PwrOffReq
-   \   000097   7902         MOV     R1,#0x2
-   \   000099   12....       LCALL   ??MAC_PwrOffReq?relay
-   \   00009C   E9           MOV     A,R1
-   \   00009D   6003         JZ      $+5
-   \   00009F   02....       LJMP    ??halSleep_5 & 0xFFFF
+   \   00008D   E5..         MOV       A,halSleepPconValue
+   \   00008F   7003         JNZ       $+5
+   \   000091   02....       LJMP      ??halSleep_5 & 0xFFFF
+   \   000094                ; Setup parameters for call to function MAC_PwrOffReq
+   \   000094   7902         MOV       R1,#0x2
+   \   000096   12....       LCALL     `??MAC_PwrOffReq::?relay`; Banked call to: MAC_PwrOffReq
+   \   000099   E9           MOV       A,R1
+   \   00009A   707E         JNZ       ??halSleep_5
     327              {
     328                /* The PCON value is not zero. There is no interrupt overriding the 
     329                 * sleep decision. Also, the radio granted the sleep request.
@@ -649,8 +627,8 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     332          #if ((defined HAL_KEY) && (HAL_KEY == TRUE))
     333                /* get peripherals ready for sleep */
     334                HalKeyEnterSleep();
-   \   0000A2                ; Setup parameters for call to function HalKeyEnterSleep
-   \   0000A2   12....       LCALL   ??HalKeyEnterSleep?relay
+   \   00009C                ; Setup parameters for call to function HalKeyEnterSleep
+   \   00009C   12....       LCALL     `??HalKeyEnterSleep::?relay`; Banked call to: HalKeyEnterSleep
     335          #endif
     336          
     337          #ifdef HAL_SLEEP_DEBUG_LED
@@ -658,61 +636,61 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     339          #else
     340                /* use this to turn LEDs off during sleep */
     341                HalLedEnterSleep();
-   \   0000A5                ; Setup parameters for call to function HalLedEnterSleep
-   \   0000A5   12....       LCALL   ??HalLedEnterSleep?relay
+   \   00009F                ; Setup parameters for call to function HalLedEnterSleep
+   \   00009F   12....       LCALL     `??HalLedEnterSleep::?relay`; Banked call to: HalLedEnterSleep
     342          #endif
     343          
     344                if(timeout > maxSleepLoopTime)
-   \   0000A8   90....       MOV     DPTR,#maxSleepLoopTime
-   \   0000AB   78..         MOV     R0,#?V0 + 0
-   \   0000AD   12....       LCALL   ?UL_GT_X
-   \   0000B0   5008         JNC     ??halSleep_6
+   \   0000A2   90....       MOV       DPTR,#maxSleepLoopTime
+   \   0000A5   78..         MOV       R0,#?V0
+   \   0000A7   12....       LCALL     ?UL_GT_X
+   \   0000AA   5008         JNC       ??halSleep_6
     345                {
     346                  timeout = maxSleepLoopTime;
-   \   0000B2   90....       MOV     DPTR,#maxSleepLoopTime
-   \   0000B5   78..         MOV     R0,#?V0 + 0
-   \   0000B7   12....       LCALL   ?L_MOV_X
+   \   0000AC   90....       MOV       DPTR,#maxSleepLoopTime
+   \   0000AF   78..         MOV       R0,#?V0
+   \   0000B1   12....       LCALL     ?L_MOV_X
     347                }  
     348          
     349                /* enable sleep timer interrupt */
     350                if (timeout != 0)
    \                     ??halSleep_6:
-   \   0000BA   12....       LCALL   ?Subroutine1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_3:
-   \   0000BD   6021         JZ      ??halSleep_7
+   \   0000B4   12....       LCALL     ?Subroutine1 & 0xFFFF
+   \                     ??CrossCallReturnLabel_2:
+   \   0000B7   6021         JZ        ??halSleep_7
     351                {
     352                  if (timeout > HAL_SLEEP_MS_TO_320US( MAX_SLEEP_TIME ))
-   \   0000BF   90....       MOV     DPTR,#__Constant_185197
-   \   0000C2   78..         MOV     R0,#?V0 + 0
-   \   0000C4   12....       LCALL   ?UL_GE_X
-   \   0000C7   5008         JNC     ??halSleep_8
+   \   0000B9   90....       MOV       DPTR,#__Constant_185197
+   \   0000BC   78..         MOV       R0,#?V0
+   \   0000BE   12....       LCALL     ?UL_GE_X
+   \   0000C1   5008         JNC       ??halSleep_8
     353                  {
     354                    timeout -= HAL_SLEEP_MS_TO_320US( MAX_SLEEP_TIME );
     355                    halSleepSetTimer(HAL_SLEEP_MS_TO_320US( MAX_SLEEP_TIME ));
-   \   0000C9                ; Setup parameters for call to function halSleepSetTimer
-   \   0000C9   90....       MOV     DPTR,#__Constant_185196
-   \   0000CC   12....       LCALL   ?XLOAD_R2345
-   \   0000CF   8008         SJMP    ??halSleep_9
+   \   0000C3                ; Setup parameters for call to function halSleepSetTimer
+   \   0000C3   90....       MOV       DPTR,#__Constant_185196
+   \   0000C6   12....       LCALL     ?XLOAD_R2345
+   \   0000C9   8008         SJMP      ??halSleep_9
     356                  }
     357                  else
     358                  {
     359                    /* set sleep timer */
     360                    halSleepSetTimer(timeout);
    \                     ??halSleep_8:
-   \   0000D1                ; Setup parameters for call to function halSleepSetTimer
-   \   0000D1   AA..         MOV     R2,?V0 + 0
-   \   0000D3   AB..         MOV     R3,?V0 + 1
-   \   0000D5   AC..         MOV     R4,?V0 + 2
-   \   0000D7   AD..         MOV     R5,?V0 + 3
+   \   0000CB                ; Setup parameters for call to function halSleepSetTimer
+   \   0000CB   AA..         MOV       R2,?V0
+   \   0000CD   AB..         MOV       R3,?V1
+   \   0000CF   AC..         MOV       R4,?V2
+   \   0000D1   AD..         MOV       R5,?V3
    \                     ??halSleep_9:
-   \   0000D9   12....       LCALL   ??halSleepSetTimer?relay
+   \   0000D3   12....       LCALL     `??halSleepSetTimer::?relay`; Banked call to: halSleepSetTimer
     361                  }
     362          
     363                  /* set up sleep timer interrupt */
     364                  HAL_SLEEP_TIMER_CLEAR_INT();
-   \   0000DC   C2C7         CLR     0xc0.7
+   \   0000D6   C2C7         CLR       0xc0.7
     365                  HAL_SLEEP_TIMER_ENABLE_INT();
-   \   0000DE   D2AD         SETB    0xa8.5
+   \   0000D8   D2AD         SETB      0xa8.5
     366                }
     367          
     368          #ifdef HAL_SLEEP_DEBUG_LED
@@ -729,29 +707,26 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     379                /* Prep CC2530 power mode */
     380                HAL_SLEEP_PREP_POWER_MODE(halPwrMgtMode);
    \                     ??halSleep_7:
-   \   0000E0   53BEFC       ANL     0xbe,#0xfc
-   \   0000E3   90....       MOV     DPTR,#halPwrMgtMode
-   \   0000E6   E0           MOVX    A,@DPTR
-   \   0000E7   42BE         ORL     0xbe,A
+   \   0000DA   53BEFC       ANL       0xbe,#0xfc
+   \   0000DD   90....       MOV       DPTR,#halPwrMgtMode
+   \   0000E0   E0           MOVX      A,@DPTR
+   \   0000E1   42BE         ORL       0xbe,A
    \                     ??halSleep_10:
-   \   0000E9   E5AD         MOV     A,0xad
-   \   0000EB   A2E0         MOV     C,0xE0 /* A   */.0
-   \   0000ED   50FA         JNC     ??halSleep_10
-   \   0000EF   75..01       MOV     halSleepPconValue,#0x1
+   \   0000E3   E5AD         MOV       A,0xad
+   \   0000E5   A2E0         MOV       C,0xE0 /* A   */.0
+   \   0000E7   50FA         JNC       ??halSleep_10
+   \   0000E9   75..01       MOV       halSleepPconValue,#0x1
     381          
     382                /* save interrupt enable registers and disable all interrupts */
     383                HAL_SLEEP_IE_BACKUP_AND_DISABLE(ien0, ien1, ien2);
-   \   0000F2   E5A8         MOV     A,0xa8
-   \   0000F4   FE           MOV     R6,A
-   \   0000F5   E5B8         MOV     A,0xb8
-   \   0000F7   FF           MOV     R7,A
-   \   0000F8   E59A         MOV     A,0x9a
-   \   0000FA   F5..         MOV     ?V0 + 0,A
-   \   0000FC   53A820       ANL     0xa8,#0x20
-   \   0000FF   53B820       ANL     0xb8,#0x20
-   \   000102   539A12       ANL     0x9a,#0x12
+   \   0000EC   85A8..       MOV       ?V0,0xa8+0x0
+   \   0000EF   AFB8         MOV       R7,0xb8+0x0
+   \   0000F1   AE9A         MOV       R6,0x9a+0x0
+   \   0000F3   53A820       ANL       0xa8,#0x20
+   \   0000F6   53B820       ANL       0xb8,#0x20
+   \   0000F9   539A12       ANL       0x9a,#0x12
     384                HAL_ENABLE_INTERRUPTS();
-   \   000105   D2AF         SETB    0xa8.7
+   \   0000FC   D2AF         SETB      0xa8.7
     385          
     386                /* set CC2530 power mode, interrupt is disabled after this function
     387                 * Note that an ISR (that could wake up from power mode) which runs
@@ -760,44 +735,44 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     390                 * power mode shall not be entered in such a case. 
     391                 */
     392                HAL_SLEEP_SET_POWER_MODE();
-   \   000107                ; Setup parameters for call to function halSetSleepMode
-   \   000107   12....       LCALL   ??halSetSleepMode?relay
+   \   0000FE                ; Setup parameters for call to function halSetSleepMode
+   \   0000FE   12....       LCALL     `??halSetSleepMode::?relay`; Banked call to: halSetSleepMode
     393          
     394                /* the interrupt is disabled - see halSetSleepMode() */
     395          
     396                /* restore interrupt enable registers */
     397                HAL_SLEEP_IE_RESTORE(ien0, ien1, ien2);
-   \   00010A   8EA8         MOV     0xa8,R6
-   \   00010C   8FB8         MOV     0xb8,R7
-   \   00010E   85..9A       MOV     0x9a,?V0 + 0
+   \   000101   85..A8       MOV       0xa8,?V0
+   \   000104   8FB8         MOV       0xb8,R7
+   \   000106   8E9A         MOV       0x9a,R6
     398          
     399                /* disable sleep timer interrupt */
     400                HAL_SLEEP_TIMER_DISABLE_INT();
-   \   000111   C2AD         CLR     0xa8.5
+   \   000108   C2AD         CLR       0xa8.5
     401          
     402          #ifdef HAL_SLEEP_DEBUG_LED
     403                HAL_TURN_ON_LED3();
     404          #else
     405                /* use this to turn LEDs back on after sleep */
     406                HalLedExitSleep();
-   \   000113                ; Setup parameters for call to function HalLedExitSleep
-   \   000113   12....       LCALL   ??HalLedExitSleep?relay
+   \   00010A                ; Setup parameters for call to function HalLedExitSleep
+   \   00010A   12....       LCALL     `??HalLedExitSleep::?relay`; Banked call to: HalLedExitSleep
     407          #endif
     408          
     409          #if ((defined HAL_KEY) && (HAL_KEY == TRUE))
     410                /* handle peripherals */
     411                (void)HalKeyExitSleep();
-   \   000116                ; Setup parameters for call to function HalKeyExitSleep
-   \   000116   12....       LCALL   ??HalKeyExitSleep?relay
+   \   00010D                ; Setup parameters for call to function HalKeyExitSleep
+   \   00010D   12....       LCALL     `??HalKeyExitSleep::?relay`; Banked call to: HalKeyExitSleep
     412          #endif
     413          
     414                /* power on the MAC; blocks until completion */
     415                MAC_PwrOnReq();
-   \   000119                ; Setup parameters for call to function MAC_PwrOnReq
-   \   000119   12....       LCALL   ??MAC_PwrOnReq?relay
+   \   000110                ; Setup parameters for call to function MAC_PwrOnReq
+   \   000110   12....       LCALL     `??MAC_PwrOnReq::?relay`; Banked call to: MAC_PwrOnReq
     416          
     417                HAL_ENABLE_INTERRUPTS();
-   \   00011C   D2AF         SETB    0xa8.7
+   \   000113   D2AF         SETB      0xa8.7
     418          
     419                /* For CC2530, T2 interrupt won抰 be generated when the current count is greater than
     420                 * the comparator. The interrupt is only generated when the current count is equal to
@@ -808,9 +783,9 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     425                 * drives the chip in sleep and SYNC start is used.
     426                 */
     427                macMcuTimer2OverflowWorkaround();
-   \   00011E                ; Setup parameters for call to function macMcuTimer2OverflowWorkaround
-   \   00011E   12....       LCALL   ??macMcuTimer2OverflowWorkaround?relay
-   \   000121   8002         SJMP    ??halSleep_3
+   \   000115                ; Setup parameters for call to function macMcuTimer2OverflowWorkaround
+   \   000115   12....       LCALL     `??macMcuTimer2OverflowWorkaround::?relay`; Banked call to: macMcuTimer2OverflowWorkaround
+   \   000118   8002         SJMP      ??halSleep_3
     428              }
     429              else
     430              {
@@ -819,37 +794,32 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     433                 */
     434                HAL_ENABLE_INTERRUPTS();
    \                     ??halSleep_5:
-   \   000123   D2AF         SETB    0xa8.7
+   \   00011A   D2AF         SETB      0xa8.7
     435              }
     436            }
     437          }
    \                     ??halSleep_3:
-   \   000125                REQUIRE ?Subroutine0
-   \   000125                REQUIRE _A_IEN0
-   \   000125                REQUIRE _A_IRCON
-   \   000125                REQUIRE SLEEPCMD
-   \   000125                REQUIRE STLOAD
-   \   000125                REQUIRE _A_IEN1
-   \   000125                REQUIRE IEN2
-   \   000125                ; // Fall through to label ?Subroutine0
+   \   00011C                REQUIRE ?Subroutine0
+   \   00011C                REQUIRE _A_IEN0
+   \   00011C                REQUIRE _A_IRCON
+   \   00011C                REQUIRE SLEEPCMD
+   \   00011C                REQUIRE STLOAD
+   \   00011C                REQUIRE _A_IEN1
+   \   00011C                REQUIRE IEN2
+   \   00011C                ; // Fall through to label ?Subroutine0
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine0:
-   \   000000   7F08         MOV     R7,#0x8
-   \   000002   02....       LJMP    ?BANKED_LEAVE_XDATA
+   \   000000   7F08         MOV       R7,#0x8
+   \   000002   02....       LJMP      ?BANKED_LEAVE_XDATA
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
    \                     ?Subroutine1:
-   \   000000   E5..         MOV     A,?V0 + 0
-   \   000002                REQUIRE ??Subroutine2_0
-   \   000002                ; // Fall through to label ??Subroutine2_0
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ??Subroutine2_0:
-   \   000000   45..         ORL     A,?V0 + 1
-   \   000002   45..         ORL     A,?V0 + 2
-   \   000004   45..         ORL     A,?V0 + 3
-   \   000006   22           RET
+   \   000000   E5..         MOV       A,?V0
+   \   000002   45..         ORL       A,?V1
+   \   000004   45..         ORL       A,?V2
+   \   000006   45..         ORL       A,?V3
+   \   000008   22           RET
     438          
     439          /**************************************************************************************************
     440           * @fn          halSleepSetTimer
@@ -876,43 +846,51 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     459          void halSleepSetTimer(uint32 timeout)
    \                     halSleepSetTimer:
     460          {
-   \   000000   74F0         MOV     A,#-0x10
-   \   000002   12....       LCALL   ?BANKED_ENTER_XDATA
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000                REQUIRE ?V2
+   \   000000                REQUIRE ?V3
+   \   000000                REQUIRE ?V4
+   \   000000                REQUIRE ?V5
+   \   000000                REQUIRE ?V6
+   \   000000                REQUIRE ?V7
+   \   000000   74F0         MOV       A,#-0x10
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 16
    \   000005                ; Auto size: 4
-   \   000005   74FC         MOV     A,#-0x4
-   \   000007   12....       LCALL   ?ALLOC_XSTACK8
-   \   00000A   8A..         MOV     ?V0 + 0,R2
-   \   00000C   8B..         MOV     ?V0 + 1,R3
-   \   00000E   8C..         MOV     ?V0 + 2,R4
-   \   000010   8D..         MOV     ?V0 + 3,R5
+   \   000005   74FC         MOV       A,#-0x4
+   \   000007   12....       LCALL     ?ALLOC_XSTACK8
+   \   00000A   8A..         MOV       ?V0,R2
+   \   00000C   8B..         MOV       ?V1,R3
+   \   00000E   8C..         MOV       ?V2,R4
+   \   000010   8D..         MOV       ?V3,R5
     461            uint32 ticks;
     462          
     463            /* read the sleep timer; ST0 must be read first */
     464            ((uint8 *) &ticks)[UINT32_NDX0] = ST0;
-   \   000012   E595         MOV     A,0x95
-   \   000014   85..82       MOV     DPL,?XSP + 0
-   \   000017   85..83       MOV     DPH,?XSP + 1
-   \   00001A   F0           MOVX    @DPTR,A
+   \   000012   E595         MOV       A,0x95
+   \   000014   85..82       MOV       DPL,?XSP + 0
+   \   000017   85..83       MOV       DPH,?XSP + 1
+   \   00001A   F0           MOVX      @DPTR,A
     465            ((uint8 *) &ticks)[UINT32_NDX1] = ST1;
-   \   00001B   E596         MOV     A,0x96
-   \   00001D   C0E0         PUSH    A
-   \   00001F   7401         MOV     A,#0x1
-   \   000021   12....       LCALL   ?XSTACK_DISP0_8
-   \   000024   D0E0         POP     A
-   \   000026   F0           MOVX    @DPTR,A
+   \   00001B   E596         MOV       A,0x96
+   \   00001D   C0E0         PUSH      A
+   \   00001F   7401         MOV       A,#0x1
+   \   000021   12....       LCALL     ?XSTACK_DISP0_8
+   \   000024   D0E0         POP       A
+   \   000026   F0           MOVX      @DPTR,A
     466            ((uint8 *) &ticks)[UINT32_NDX2] = ST2;
-   \   000027   E597         MOV     A,0x97
-   \   000029   C0E0         PUSH    A
-   \   00002B   7402         MOV     A,#0x2
-   \   00002D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000030   D0E0         POP     A
-   \   000032   F0           MOVX    @DPTR,A
+   \   000027   E597         MOV       A,0x97
+   \   000029   C0E0         PUSH      A
+   \   00002B   7402         MOV       A,#0x2
+   \   00002D   12....       LCALL     ?XSTACK_DISP0_8
+   \   000030   D0E0         POP       A
+   \   000032   F0           MOVX      @DPTR,A
     467            ((uint8 *) &ticks)[UINT32_NDX3] = 0;
-   \   000033   7403         MOV     A,#0x3
-   \   000035   12....       LCALL   ?XSTACK_DISP0_8
-   \   000038   E4           CLR     A
-   \   000039   F0           MOVX    @DPTR,A
+   \   000033   7403         MOV       A,#0x3
+   \   000035   12....       LCALL     ?XSTACK_DISP0_8
+   \   000038   E4           CLR       A
+   \   000039   F0           MOVX      @DPTR,A
     468          
     469            /* Compute sleep timer compare value.  The ratio of 32 kHz ticks to 320 usec ticks
     470             * is 32768/3125 = 10.48576.  This is nearly 671/64 = 10.484375.
@@ -921,43 +899,43 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     473          
     474            /* subtract the processing time spent in function halSleep() */
     475            ticks -= HAL_SLEEP_ADJ_TICKS;
-   \   00003A   90....       MOV     DPTR,#__Constant_29f
-   \   00003D   78..         MOV     R0,#?V0 + 4
-   \   00003F   12....       LCALL   ?L_MOV_X
-   \   000042   78..         MOV     R0,#?V0 + 0
-   \   000044   79..         MOV     R1,#?V0 + 4
-   \   000046   12....       LCALL   ?L_MUL
-   \   000049   7406         MOV     A,#0x6
-   \   00004B   78..         MOV     R0,#?V0 + 0
-   \   00004D   12....       LCALL   ?UL_SHR
-   \   000050   90....       MOV     DPTR,#__Constant_ffffffe9
-   \   000053   78..         MOV     R0,#?V0 + 0
-   \   000055   12....       LCALL   ?L_ADD_X
-   \   000058   85..82       MOV     DPL,?XSP + 0
-   \   00005B   85..83       MOV     DPH,?XSP + 1
-   \   00005E   78..         MOV     R0,#?V0 + 0
-   \   000060   12....       LCALL   ?L_ADD_TO_X
+   \   00003A   90....       MOV       DPTR,#__Constant_29f
+   \   00003D   78..         MOV       R0,#?V4
+   \   00003F   12....       LCALL     ?L_MOV_X
+   \   000042   78..         MOV       R0,#?V0
+   \   000044   79..         MOV       R1,#?V4
+   \   000046   12....       LCALL     ?L_MUL
+   \   000049   7406         MOV       A,#0x6
+   \   00004B   78..         MOV       R0,#?V0
+   \   00004D   12....       LCALL     ?UL_SHR
+   \   000050   90....       MOV       DPTR,#__Constant_ffffffe9
+   \   000053   78..         MOV       R0,#?V0
+   \   000055   12....       LCALL     ?L_ADD_X
+   \   000058   85..82       MOV       DPL,?XSP + 0
+   \   00005B   85..83       MOV       DPH,?XSP + 1
+   \   00005E   78..         MOV       R0,#?V0
+   \   000060   12....       LCALL     ?L_ADD_TO_X
     476          
     477            /* set sleep timer compare; ST0 must be written last */
     478            ST2 = ((uint8 *) &ticks)[UINT32_NDX2];
-   \   000063   7402         MOV     A,#0x2
-   \   000065   12....       LCALL   ?XSTACK_DISP0_8
-   \   000068   E0           MOVX    A,@DPTR
-   \   000069   F597         MOV     0x97,A
+   \   000063   7402         MOV       A,#0x2
+   \   000065   12....       LCALL     ?XSTACK_DISP0_8
+   \   000068   E0           MOVX      A,@DPTR
+   \   000069   F597         MOV       0x97,A
     479            ST1 = ((uint8 *) &ticks)[UINT32_NDX1];
-   \   00006B   7401         MOV     A,#0x1
-   \   00006D   12....       LCALL   ?XSTACK_DISP0_8
-   \   000070   E0           MOVX    A,@DPTR
-   \   000071   F596         MOV     0x96,A
+   \   00006B   7401         MOV       A,#0x1
+   \   00006D   12....       LCALL     ?XSTACK_DISP0_8
+   \   000070   E0           MOVX      A,@DPTR
+   \   000071   F596         MOV       0x96,A
     480            ST0 = ((uint8 *) &ticks)[UINT32_NDX0];
-   \   000073   85..82       MOV     DPL,?XSP + 0
-   \   000076   85..83       MOV     DPH,?XSP + 1
-   \   000079   E0           MOVX    A,@DPTR
-   \   00007A   F595         MOV     0x95,A
+   \   000073   85..82       MOV       DPL,?XSP + 0
+   \   000076   85..83       MOV       DPH,?XSP + 1
+   \   000079   E0           MOVX      A,@DPTR
+   \   00007A   F595         MOV       0x95,A
     481          }
-   \   00007C   7404         MOV     A,#0x4
-   \   00007E   12....       LCALL   ?DEALLOC_XSTACK8
-   \   000081   02....       LJMP    ?Subroutine0 & 0xFFFF
+   \   00007C   7404         MOV       A,#0x4
+   \   00007E   12....       LCALL     ?DEALLOC_XSTACK8
+   \   000081   02....       LJMP      ?Subroutine0 & 0xFFFF
    \   000084                REQUIRE ST0
    \   000084                REQUIRE ST1
    \   000084                REQUIRE ST2
@@ -988,11 +966,11 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
    \   000000                ; Auto size: 0
     502            /* Stubs */
     503            return (0);
-   \   000000   7A00         MOV     R2,#0x0
-   \   000002   7B00         MOV     R3,#0x0
-   \   000004   7C00         MOV     R4,#0x0
-   \   000006   7D00         MOV     R5,#0x0
-   \   000008   02....       LJMP    ?BRET
+   \   000000   7A00         MOV       R2,#0x0
+   \   000002   7B00         MOV       R3,#0x0
+   \   000004   7C00         MOV       R4,#0x0
+   \   000006   7D00         MOV       R5,#0x0
+   \   000008   02....       LJMP      ?BRET
     504          }
     505          
     506          /**************************************************************************************************
@@ -1020,7 +998,7 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
    \   000000                ; Auto size: 0
     524            /* Stubs */
     525          }
-   \   000000   02....       LJMP    ?BRET
+   \   000000   02....       LJMP      ?BRET
     526          
     527          /**************************************************************************************************
     528           * @fn          halSleepTimerIsr
@@ -1043,17 +1021,17 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     543          HAL_ISR_FUNCTION(halSleepTimerIsr, ST_VECTOR)
    \                     halSleepTimerIsr:
     544          {
-   \   000000   C0E0         PUSH    A
-   \   000002   C0D0         PUSH    PSW
-   \   000004   E8           MOV     A,R0
-   \   000005   C0E0         PUSH    A
+   \   000000   C0E0         PUSH      A
+   \   000002   C0D0         PUSH      PSW
+   \   000004   E8           MOV       A,R0
+   \   000005   C0E0         PUSH      A
    \   000007                ; Saved register size: 3
    \   000007                ; Auto size: 0
     545            HAL_ENTER_ISR();
-   \   000007   E5A8         MOV     A,0xa8
-   \   000009   D2AF         SETB    0xa8.7
+   \   000007   A8A8         MOV       R0,0xa8+0x0
+   \   000009   D2AF         SETB      0xa8.7
     546            HAL_SLEEP_TIMER_CLEAR_INT();
-   \   00000B   C2C7         CLR     0xc0.7
+   \   00000B   C2C7         CLR       0xc0.7
     547          
     548          #ifdef HAL_SLEEP_DEBUG_POWER_MODE
     549            halSleepInt = TRUE;
@@ -1061,19 +1039,20 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
     551            
     552            CLEAR_SLEEP_MODE();
     553            HAL_EXIT_ISR();
-   \   00000D   A2E7         MOV     C,0xE0 /* A   */.7
-   \   00000F   92AF         MOV     0xa8.7,C
+   \   00000D   E8           MOV       A,R0
+   \   00000E   A2E7         MOV       C,0xE0 /* A   */.7
+   \   000010   92AF         MOV       0xa8.7,C
     554          }
-   \   000011   D0E0         POP     A
-   \   000013   F8           MOV     R0,A
-   \   000014   D0D0         POP     PSW
-   \   000016   D0E0         POP     A
-   \   000018   32           RETI
-   \   000019                REQUIRE _A_IEN0
-   \   000019                REQUIRE _A_IRCON
+   \   000012   D0E0         POP       A
+   \   000014   F8           MOV       R0,A
+   \   000015   D0D0         POP       PSW
+   \   000017   D0E0         POP       A
+   \   000019   32           RETI
+   \   00001A                REQUIRE _A_IEN0
+   \   00001A                REQUIRE _A_IRCON
 
    \                                 In  segment INTVEC, offset 0x2b, root
-   \                     `??halSleepTimerIsr??INTVEC 43`:
+   \                     `??halSleepTimerIsr::??INTVEC 43`:
    \   00002B   02....       LJMP       (halSleepTimerIsr)
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
@@ -1117,115 +1096,111 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
    \   000000   E9FFFFFF     DD 4294967273
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??halSetSleepMode?relay:
+   \                     `??halSetSleepMode::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    halSetSleepMode
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??halSetMaxSleepLoopTime?relay:
+   \                     `??halSetMaxSleepLoopTime::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    halSetMaxSleepLoopTime
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??halSleep?relay:
+   \                     `??halSleep::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    halSleep
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??halSleepSetTimer?relay:
+   \                     `??halSleepSetTimer::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    halSleepSetTimer
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??TimerElapsed?relay:
+   \                     `??TimerElapsed::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    TimerElapsed
 
    \                                 In  segment BANK_RELAYS, align 1
-   \                     ??halRestoreSleepLevel?relay:
+   \                     `??halRestoreSleepLevel::?relay`:
    \   000000   12....       LCALL   ?BDISPATCH
    \   000003   ......       DC24    halRestoreSleepLevel
     555          
 
    Maximum stack usage in bytes:
 
-     Function                       ISTACK PSTACK XSTACK
-     --------                       ------ ------ ------
-     TimerElapsed                       0      0      0
-     halRestoreSleepLevel               0      0      0
-     halSetMaxSleepLoopTime             0      0     12
-     halSetSleepMode                    0      0     16
-     halSleep                           0      0     16
-       -> MAC_PwrNextTimeout            0      0     32
-       -> MAC_PwrNextTimeout            0      0     32
-       -> halAssertHandler              0      0     32
-       -> MAC_PwrOffReq                 0      0     32
-       -> HalKeyEnterSleep              0      0     32
-       -> HalLedEnterSleep              0      0     32
-       -> halSleepSetTimer              0      0     32
-       -> halSleepSetTimer              0      0     32
-       -> halSetSleepMode               0      0     32
-       -> HalLedExitSleep               0      0     32
-       -> HalKeyExitSleep               0      0     32
-       -> MAC_PwrOnReq                  0      0     32
-       -> macMcuTimer2OverflowWorkaround
-                                        0      0     32
-     halSleepSetTimer                   1      0     36
-     halSleepTimerIsr                   3      0      0
+   ISTACK XSTACK Function
+   ------ ------ --------
+      0      0   TimerElapsed
+      0      0   halRestoreSleepLevel
+      0     12   halSetMaxSleepLoopTime
+      0     16   halSetSleepMode
+      0     16   halSleep
+        0     16   -> HalKeyEnterSleep
+        0     16   -> HalKeyExitSleep
+        0     16   -> HalLedEnterSleep
+        0     16   -> HalLedExitSleep
+        0     16   -> MAC_PwrNextTimeout
+        0     16   -> MAC_PwrOffReq
+        0     16   -> MAC_PwrOnReq
+        0     16   -> halAssertHandler
+        0     16   -> halSetSleepMode
+        0     16   -> halSleepSetTimer
+        0     16   -> macMcuTimer2OverflowWorkaround
+      1     36   halSleepSetTimer
+      3      0   halSleepTimerIsr
 
 
    Segment part sizes:
 
-     Function/Label                       Bytes
-     --------------                       -----
-     PCON                                    1
-     ST0                                     1
-     ST1                                     1
-     ST2                                     1
-     IEN2                                    1
-     _A_IEN0                                 1
-     STLOAD                                  1
-     _A_IEN1                                 1
-     SLEEPCMD                                1
-     _A_IRCON                                1
-     maxSleepLoopTime                        4
-     halSleepPconValue                       1
-     halPwrMgtMode                           1
-     halSetSleepMode                         8
-     halSetMaxSleepLoopTime                 34
-     halSleep                              293
-     ?Subroutine0                            5
-     ?Subroutine1                            2
-     ??Subroutine2_0                         7
-     halSleepSetTimer                      132
-     TimerElapsed                           11
-     halRestoreSleepLevel                    3
-     halSleepTimerIsr                       25
-     ??halSleepTimerIsr??INTVEC 43           3
-     ?<Initializer for maxSleepLoopTime>     4
-     ?<Initializer for halSleepPconValue>    1
-     __Constant_fffffffe                     4
-     __Constant_64                           4
-     __Constant_1f                           4
-     __Constant_2d                           4
-     __Constant_185197                       4
-     __Constant_185196                       4
-     __Constant_29f                          4
-     __Constant_ffffffe9                     4
-     ??halSetSleepMode?relay                 6
-     ??halSetMaxSleepLoopTime?relay          6
-     ??halSleep?relay                        6
-     ??halSleepSetTimer?relay                6
-     ??TimerElapsed?relay                    6
-     ??halRestoreSleepLevel?relay            6
+   Bytes  Function/Label
+   -----  --------------
+       1  ?<Initializer for halSleepPconValue>
+       4  ?<Initializer for maxSleepLoopTime>
+       5  ?Subroutine0
+       9  ?Subroutine1
+       1  IEN2
+       1  PCON
+       1  SLEEPCMD
+       1  ST0
+       1  ST1
+       1  ST2
+       1  STLOAD
+      11  TimerElapsed
+       6  TimerElapsed::?relay
+       1  _A_IEN0
+       1  _A_IEN1
+       1  _A_IRCON
+       4  __Constant_185196
+       4  __Constant_185197
+       4  __Constant_1f
+       4  __Constant_29f
+       4  __Constant_2d
+       4  __Constant_64
+       4  __Constant_ffffffe9
+       4  __Constant_fffffffe
+       1  halPwrMgtMode
+       3  halRestoreSleepLevel
+       6  halRestoreSleepLevel::?relay
+      34  halSetMaxSleepLoopTime
+       6  halSetMaxSleepLoopTime::?relay
+       8  halSetSleepMode
+       6  halSetSleepMode::?relay
+     284  halSleep
+       6  halSleep::?relay
+       1  halSleepPconValue
+     132  halSleepSetTimer
+       6  halSleepSetTimer::?relay
+      26  halSleepTimerIsr
+       3  halSleepTimerIsr::??INTVEC 43
+       4  maxSleepLoopTime
 
  
- 487 bytes in segment BANKED_CODE
+ 478 bytes in segment BANKED_CODE
   36 bytes in segment BANK_RELAYS
    1 byte  in segment DATA_I
    1 byte  in segment DATA_ID
    3 bytes in segment INTVEC
-  25 bytes in segment NEAR_CODE
+  26 bytes in segment NEAR_CODE
   10 bytes in segment SFR_AN
    8 bytes in segment SLEEP_CODE
    4 bytes in segment XDATA_I
@@ -1233,10 +1208,11 @@ C:\Users\li\Desktop\ZStack-2.5.1a - 副本\Components\hal\target\CC2530EB\hal_slee
   32 bytes in segment XDATA_ROM_C
    1 byte  in segment XDATA_Z
  
- 561 bytes of CODE  memory (+  3 bytes shared)
-   0 bytes of CONST memory (+ 32 bytes shared)
-   1 byte  of DATA  memory (+ 10 bytes shared)
-   5 bytes of XDATA memory
+  67 bytes of CODE     memory (+  3 bytes shared)
+   0 bytes of CONST    memory (+ 32 bytes shared)
+   1 byte  of DATA     memory (+ 10 bytes shared)
+ 486 bytes of HUGECODE memory
+   5 bytes of XDATA    memory
 
 Errors: none
 Warnings: none

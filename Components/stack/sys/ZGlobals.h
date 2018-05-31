@@ -157,7 +157,7 @@ extern "C" {
   #define PASSIVE_ACK_TIMEOUT      5
 #endif
 #if !defined ( BCAST_DELIVERY_TIME )
-  #define BCAST_DELIVERY_TIME      30
+  #define BCAST_DELIVERY_TIME      2
 #endif
 
 #if !defined ( ROUTE_DISCOVERY_TIME )

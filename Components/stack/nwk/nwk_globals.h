@@ -262,7 +262,7 @@ extern "C" {
 #endif
 
 #if !defined( MAX_BCAST )
-  #define MAX_BCAST 4
+  #define MAX_BCAST 10
 #endif
 
 // Maxiumum number of secure partners(Commercial mode only).
